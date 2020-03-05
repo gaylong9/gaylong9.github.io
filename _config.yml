@@ -99,7 +99,9 @@ theme: lite
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:gaylong9/gaylong9.github.io.git
+  repo: 
+    github: git@github.com:gaylong9/gaylong9.github.io.git
+    coding: git@e.coding.net:gaylong9/gaylong9.git
   branch: master
 
 # Live2D
