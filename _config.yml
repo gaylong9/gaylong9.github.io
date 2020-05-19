@@ -126,3 +126,5 @@ live2d:
   react:
     opacityDefault: 0.7
     opacityOnHover: 0.2
+
+# 渲染器
