@@ -128,3 +128,8 @@ live2d:
     opacityOnHover: 0.2
 
 # 渲染器
+
+# 目录
+toc:
+  maxDepth: 5
+
