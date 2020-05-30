@@ -8,11 +8,13 @@ Deeper and Wider Siamese Networks for Real-Time Visual Tracking
 
 <!--more-->
 
+<!-- toc -->
+
 [toc]
 
 [作者讲解视频&PPT](https://www.bilibili.com/video/av52113951)
 
-
+<br/>
 
 # siam特点
 
@@ -21,6 +23,8 @@ Deeper and Wider Siamese Networks for Real-Time Visual Tracking
 3. 以pair对形式进入网络，两两组合，相当于增加数据量
 
 ![simple_siam](SiamDW/simple_siam.png)
+
+<br/>
 
 # Siam历史
 
@@ -38,7 +42,7 @@ Deeper and Wider Siamese Networks for Real-Time Visual Tracking
 
 
 
-
+<br/>
 
 # Motivation
 
@@ -51,7 +55,7 @@ Deeper and Wider Siamese Networks for Real-Time Visual Tracking
 
 ![motivation](SiamDW/motivation.png)
 
-
+<br/>
 
 # Analysis & Guidelines
 
@@ -117,6 +121,8 @@ padding导致掉点（但输出尺寸不一致，不能说完全都是padding影
 1. 步长：小，4或8，捕捉运动变化（4较慢）
 2. 感受野：feature与输入的尺寸比在60%~80%
 3. 步长、感受野、输出尺寸，应作为整体考虑，最终performance是每个环节共同决定。实验中不去掉padding，而通过CIR修改输出尺寸，也能获得不错的效果
+
+<br/>
 
 # Method
 
