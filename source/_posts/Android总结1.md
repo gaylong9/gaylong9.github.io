@@ -143,7 +143,7 @@ mediaPlayer.start();
 
 easypermissions
 
-www.jianshu.com/p/41b093d213fb
+[参考博客](www.jianshu.com/p/41b093d213fb)
 
 <br/>
 
