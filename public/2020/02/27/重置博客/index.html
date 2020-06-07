@@ -1,1 +1,262 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel="shortcut icon" href=/static/favicon.ico><title>gaylong9`s blog</title><link href=/static/css/app.c64eadfc8d3abfc9d85514dba4054813.css rel=stylesheet><meta name="generator" content="Hexo 4.2.0"></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.992b63bf2abbf3194771.js></script><script type=text/javascript src=/static/js/vendor.e12dc8c9af1f7aa12436.js></script><script type=text/javascript src=/static/js/app.bc036f9167871d39aecf.js></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>重置博客 | gaylong9`s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">重置博客</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 27, 2020&nbsp;&nbsp;11:41:54</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>更换硬盘后原有hexo本地文件丢失，重置博客后的小结。</p>
+<a id="more"></a>
+<p><a href="https://blog.csdn.net/ZWX2445205419/article/details/66970640?utm_source=blogxgwz5" target="_blank" rel="noopener">参考博客</a></p>
+<ol>
+<li>文中存在问题：<code>clone</code>后<code>init</code>，会报错非空文件夹不能执行，可<code>init</code>后将<code>clone</code>到的文件存入</li>
+<li>github仓库应配置两个branch：master用于存放blog页面内容；hexo分支用于存放hexo（本地）内容</li>
+<li><code>hexo d</code>后会自动部署到master分支；hexo分支需手动<code>git add . -f</code>、 <code>git commit</code>、 <code>git push origin hexo</code><s>、<code>git push origin_coding hexo</code>。因为有两个remote，一个github、一个coding，所以push要在origin和origin_coding各做一次。</s>
+<ol>
+<li><code>.git/config</code>中，<code>[remote &quot;origin&quot;]</code>添加以下两句，即可一次 push，两个上传
+<ol>
+<li><code>pushurl = git@github.com:gaylong9/gaylong9.github.io.git</code></li>
+<li><code>pushurl = git@e.coding.net:gaylong9/gaylong9.git</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>后续换机、或异地管理，只需clone仓库即可</li>
+<li>文中提到异地管理时，需将<code>.deploy_git</code>删除，否则部署时会将博客部署到master分支，因为此次只是重建，并未涉及到博客复原（异地管理），故未尝试，存疑（两个分支不就是为了部署到master，备份到hexo吗）</li>
+<li>图片问题：要使用<code>npm install https://github.com/CodeFalling/hexo-asset-image --save</code>命令安装hexo-asset-image插件，否则版本号不对，图片显示有些问题 <a href="https://blog.csdn.net/Strong997/article/details/97767929" target="_blank" rel="noopener">参考博客</a></li>
+<li>换行：<code>&lt;br/&gt;</code></li>
+<li>目录：安装<code>hexo-toc</code>，在<code>_config.yaml</code>中添加<code>toc: maxDepth: 5</code>，文章中添加 <code>&lt;!-- t_o_c --&gt;</code> ，没有下划线，<strong>注意空格</strong></li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>gaylong9</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://yoursite.com/2020/02/27/%E9%87%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2/">http://yoursite.com/2020/02/27/%E9%87%8D%E7%BD%AE%E5%8D%9A%E5%AE%A2/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%9D%82%E9%A1%B9/"># 杂项</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/03/04/SiamDW/">SiamDW</a>
+            
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
