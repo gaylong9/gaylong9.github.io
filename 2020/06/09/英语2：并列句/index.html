@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>英语2：并列句 | gaylong9`s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">英语2：并列句</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 09, 2020&nbsp;&nbsp;20:52:30</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>《刘晓艳语法长难句》第二章笔记</p>
+<a id="more"></a>
+<br>
+<h1><span id="并列句"> 并列句</span></h1>
+<p><strong>由并列连词连接的两个或多个句子。</strong></p>
+<p>eg：I love you, you love the dog. ❌</p>
+<p>不能由逗号连接两个句子，可改为：</p>
+<ol>
+<li>I love you but you love the dog.（并列连词）</li>
+<li>Although I love you, you love the dog.（从句）</li>
+</ol>
+<br>
+<h2><span id="1-并列连词与逻辑关系词"> 1. 并列连词与逻辑关系词</span></h2>
+<h3><span id="11-并列连词"> 1.1 并列连词</span></h3>
+<ol>
+<li>平行：and, not only… but also…, both … and …, either … or …, neither … nor …</li>
+<li>转折：but, while, yet, whereas</li>
+<li>选择：or, whether … or …</li>
+<li>因果：for, so</li>
+<li>递进：then</li>
+</ol>
+<br>
+<h3><span id="12-同义的逻辑关系词副词与介词短语"> 1.2 同义的逻辑关系词（副词与介词短语）</span></h3>
+<ol>
+<li>平行：similarly, equally, likewise, at the same time, in the meanwhile</li>
+<li>转折：however, nevertheless, nonetheless, conversely, contrarily, unexpectedly, unfortunately, on the contrary, in contrast</li>
+<li>选择：alternatively</li>
+<li>因果：therefore, thus, consequently, as a result, as a consequence</li>
+<li>递进：besides, additionally, subsequently, in addition</li>
+</ol>
+<br>
+<h3><span id="13-三者区别"> 1.3 三者区别</span></h3>
+<ol>
+<li>连词时，逗号可加可不加</li>
+<li>副词与介词短语时，要把逗号变句号，或加连词and（<strong>即副词和介词短语不承担连接句子的功能</strong>）
+<ol>
+<li>I love you. However you love the dog.</li>
+<li>I love you, and however you love the dog.</li>
+</ol>
+</li>
+<li>使用副词与介词短语更出彩。</li>
+</ol>
+<br>
+<h2><span id="2-应用"> 2. 应用</span></h2>
+<h3><span id="21-写作"> 2.1 写作</span></h3>
+<p>以常用于原因分析的not only … but also …为例</p>
+<ol>
+<li>Pets not <strong>only can</strong> bite others especially our neighbors or strangers <strong>but also</strong> usually make our living environment rather nasty.</li>
+<li>Respecting parents <strong>not only keeps</strong> a Chinese traditional virtue <strong>but also proves</strong> the duty of their offspring.（系动词替换）</li>
+</ol>
+<br>
+<h3><span id="22-长难句分析并列句省略"> 2.2 长难句分析（并列句省略）</span></h3>
+<ol>
+<li>
+<p>并列句对称原则：</p>
+<ol>
+<li>
+<p>并列连词前后的词性、单复数、时态、语态保持一致；</p>
+<p>He went shopping, bought some gifts and visited his friend.</p>
+</li>
+<li>
+<p>连接三个及以上词时，前面用逗号，最后用and；</p>
+</li>
+<li>
+<p>结构一致</p>
+<p>On that day, a friend got married, then I realized the fleeting time.（主谓 主谓宾）</p>
+</li>
+</ol>
+</li>
+<li>
+<p>并列句的省略现象：因为要保持对称，同时避免重复，所以会省略部分内容</p>
+<ol>
+<li>主谓一致可省略：He is not only a nice teacher but a friend to his students.（后句省略he is）</li>
+<li>省略be动词：Disease A can be replaced, B controlled, and C removed. 三句主语不同但是谓语动词都是be，可省略</li>
+<li>省略主语：He is rich, but leads a modest life.</li>
+<li>省略重复部分：Do you remember all those years when scientists argued that smoking would kill us <strong>but</strong> the doubters insisted that we did not konw for sure?（but连接两个由that引导的从句，后句know的宾语是smoking would kill us，省略）</li>
+</ol>
+</li>
+<li>
+<p>省略现象的查找判断</p>
+<ol>
+<li>省略位于连词之后</li>
+<li>后句有，前句也有</li>
+<li>前句有，后句无，即为省略内容</li>
+</ol>
+</li>
+<li>
+<p>eg: Under modern conditions, this requires varying measures of centralized control and hence the help of specialized scientists such as economists and operational research experts.</p>
+<ol>
+<li>找动词：requires</li>
+<li>从而确定主谓：这项事情 需要 多种措施</li>
+<li>找连词：and</li>
+<li>连词后句：名词+定语 the help of … experts</li>
+<li>所以前句也应是名词+定语：varying measures of centralized control</li>
+<li>可见，后句省略了主谓：this requires</li>
+<li>翻译：目前，这需要中央控制的各种措施，所以这也需要诸如经济学家和运筹学家等专业科学家的帮助。</li>
+</ol>
+</li>
+<li>
+<p>书中仍有很多例子。</p>
+</li>
+</ol>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E8%8B%B1%E8%AF%AD/"># 英语</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/06/06/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%A9%BA%E9%97%B4%E8%A7%92%E5%BA%A6%E7%90%86%E8%A7%A3/">线性代数空间角度理解</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
