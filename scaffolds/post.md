@@ -1,6 +1,6 @@
 ---
 title: {{ title }}
 date: {{ date }}
-math: true
+mathjax: true
 tags:
 ---
