@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>RT-MDNet | gaylong9`s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">RT-MDNet</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 18, 2020&nbsp;&nbsp;20:04:20</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <a id="more"></a>
+<!-- toc -->
+<ul>
+<li><a href="#real-time-mdnet">Real-Time MDNet</a>
+<ul>
+<li><a href="#adaptive-roialign">Adaptive RoIAlign</a>
+<ul>
+<li><a href="#roipooling">RoIPooling</a></li>
+<li><a href="#roialign">RoIAlign</a></li>
+<li><a href="#adaptive-roialign-1">Adaptive RoIAlign</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%85%E5%B5%8C%E5%88%A4%E5%88%AB%E5%AE%9E%E4%BE%8B%E7%9A%84%E9%A2%84%E8%AE%AD%E7%BB%83">内嵌判别实例的预训练</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E5%8D%9A%E5%AE%A2">参考博客</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<br>
+<h1><span id="real-time-mdnet"> Real-Time MDNet</span></h1>
+<h2><span id="adaptive-roialign"> Adaptive RoIAlign</span></h2>
+<p>​    对于前面的全卷积特征映射，用RoIAlign层提取对象表示：构建高分辨率特征图，扩大每个激活的感受野。</p>
+<br>
+<h3><span id="roipooling"> RoIPooling</span></h3>
+<p>​    用于Faster RCNN，使生成的候选框region proposal映射产生固定大小的feature map。</p>
+<p><img src="/2020/06/18/RT-MDNet/RoIPooling.png" alt="RoIPooling"></p>
+<ol>
+<li>800*800的原图经过VGG16，stride=32，得到800/32=25.</li>
+<li>原图中一个665*665的候选框，变为655/32=20.78。此处有一次取整（量化），变为20.</li>
+<li>此处，对RoI继续池化，变为7*7。即从400格变为49格。20/7=2.86，此处进行第二次量化，为2.</li>
+<li>即，最终从RoI的每2*2的部分中取max作为代表组成7 * 7的结果（池化）。</li>
+</ol>
+<p>​    两次量化自然会带来很大的偏差，影响后面的回归定位。</p>
+<br>
+<h3><span id="roialign"> RoIAlign</span></h3>
+<p>​    Mask RCNN中使用，目的相同。</p>
+<ol>
+<li>类似上图，对于20.78*20.78，不取整，保留。</li>
+<li>池化时，20.78/7=2.97，得到每2.97*2.97部分，选一个代表。</li>
+<li>假定一个超参数——采样点数为4，表示对上述小部分，平分为4份，每份取中心点的像素，max则作为代表被选中。</li>
+<li>每份中心点的像素，采用双线性插值法进行计算。</li>
+</ol>
+<p><img src="/2020/06/18/RT-MDNet/RoIAlign.png" alt="RoIAlign"></p>
+<p>​    因小目标相较大目标对于偏差更敏感，故小目标上效果更好。</p>
+<br>
+<h3><span id="adaptive-roialign"> Adaptive RoIAlign</span></h3>
+<p>​    RT-MDnet提出，以解决原始RoIAlign提取特征粗略，和双线性差值仅使用临近格点计算导致大目标的信息损失的问题。</p>
+<p>![](RT-MDNet/Adaptive RoIAlign.png)</p>
+<ul>
+<li>移除MaxPool层，以r=3的空洞卷积得到两倍于原尺寸的conv3。</li>
+<li>双线性差值的带宽由RoI的siaze决定（自适应），与<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mi>w</mi><mrow><mi>w</mi><mi mathvariant="normal">‘</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{w}{w`}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.040392em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.695392em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span><span class="mord mtight">‘</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>成比例。
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span>：conv3后的RoI宽度</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi><mi mathvariant="normal">‘</mi></mrow><annotation encoding="application/x-tex">w`</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord">‘</span></span></span></span>：RoIAlign后的RoI宽度</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mo separator="true">⋅</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[·]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mclose">]</span></span></span></span>：舍入算子</li>
+</ul>
+</li>
+<li>Adaptive RoIAlign输出7*7的map，后接一最大池化层生成3 * 3map。</li>
+</ul>
+<p>​    feature map放大， 提高了特征质量，避免了跟踪过程中的错误累计。</p>
+<hr>
+<br>
+<h2><span id="内嵌判别实例的预训练"> 内嵌判别实例的预训练</span></h2>
+<p>​    MDNet<strong>无法区分</strong>其具有<strong>相似语义信息</strong>的<strong>前景目标</strong>。本文中在预训练阶段引入嵌入损失，并聚合到原MDNet中二分类损失中。</p>
+<p>​    在共享特征空间中，不同域中的目标嵌入时互相远离。将多个视频中的前景对象嵌入进去。即，使得不同域的目标在特征空间的距离相互更远，loss中嵌入了其他视频中的目标来使相互之间更有判别力。</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>=</mo><msub><mi>L</mi><mrow><mi>c</mi><mi>l</mi><mi>s</mi></mrow></msub><mo>+</mo><mi>α</mi><mo separator="true">⋅</mo><msub><mi>L</mi><mrow><mi>i</mi><mi>n</mi><mi>s</mi><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">L = L_{cls} + \alpha·L_{inst}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">s</span><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>L</mi><mrow><mi>c</mi><mi>l</mi><mi>s</mi></mrow></msub></mrow><annotation encoding="application/x-tex">L_{cls}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>：判断前景、背景的二分类得分（原始Loss）</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>L</mi><mrow><mi>i</mi><mi>n</mi><mi>s</mi><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">L_{inst}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">s</span><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>：判别损失</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span></span></span></span>：权重，0.1</li>
+</ul>
+<p><img src="/2020/06/18/RT-MDNet/inst_loss.png" alt></p>
+<hr>
+<br>
+<h2><span id="参考博客"> 参考博客</span></h2>
+<p><a href="https://www.cnblogs.com/wangyong/p/8523814.html" target="_blank" rel="noopener" title="RoIPooling、RoIAlign笔记">RoIPooling、RoIAlign笔记</a></p>
+<p><a href="https://blog.csdn.net/weixin_39467358/article/details/84990609" target="_blank" rel="noopener">RT-MDNet深度跟踪网络</a></p>
+<p><a href="https://blog.csdn.net/sinat_27318881/article/details/83622344" target="_blank" rel="noopener">【小白笔记】目标跟踪 Real-Time MDNet</a></p>
+<p><a href="https://blog.csdn.net/qinhuai1994/article/details/82663107" target="_blank" rel="noopener">【目标跟踪】Real-Time MDNet</a></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/AI/"># AI</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/06/18/Siamese%E7%B3%BB%E5%88%97/">Siamese系列</a>
+            
+            
+            <a class="next" rel="next" href="/2020/06/16/%E8%8B%B1%E8%AF%AD3%EF%BC%9A%E5%90%8D%E8%AF%8D%E4%BB%8E%E5%8F%A5/">英语3：名词从句</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
