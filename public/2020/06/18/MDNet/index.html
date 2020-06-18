@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>MDNet | gaylong9`s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">MDNet</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 18, 2020&nbsp;&nbsp;20:11:11</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <a id="more"></a>
+<!-- toc -->
+<ul>
+<li><a href="#mdnet">MDNet</a>
+<ul>
+<li><a href="#%E8%83%8C%E6%99%AF">背景</a></li>
+<li><a href="#multi-domain-learning%E5%A4%9A%E5%8C%BA%E5%9F%9F%E5%AD%A6%E4%B9%A0">multi-domain learning/多区域学习</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84">网络结构</a></li>
+<li><a href="#%E5%B0%8F%E7%BD%91%E7%BB%9C%E5%9C%A8tracking%E4%B8%AD%E7%9A%84%E9%80%82%E7%94%A8%E6%80%A7">小网络在tracking中的适用性：</a></li>
+<li><a href="#domain-specific-layers">Domain-specific layers</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%9C%A8%E7%BA%BF%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5">网络在线更新策略</a></li>
+<li><a href="#%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA%E8%BF%87%E7%A8%8B">目标跟踪过程</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<br>
+<h1><span id="mdnet"> MDNet</span></h1>
+<p>Learning Multi-Domain Convolutional Neural Networks for Visual Tracking</p>
+<br>
+<h2><span id="背景"> 背景</span></h2>
+<ul>
+<li>对于跟踪问题来说，CNN应该是由视频跟踪的数据训练得到的更为合理。所有的跟踪目标，虽然类别各不相同，但其实他们应该都存在某种共性，这是需要网络去学的。</li>
+<li>用跟踪数据来训练很难，因为同一个object，在某个序列中是目标，在另外一个序列中可能就是背景，而且每个序列的目标存在相当大的差异，而且会经历各种挑战，比如遮挡、形变等等。</li>
+<li>现有的很多训练好的网络主要针对的任务比如目标检测、分类、分割等的网络很大，因为他们要分出很多类别的目标。而在跟踪问题中，一个网络只需要分两类：目标和背景。而且目标一般都相对比较小，那么其实不需要这么大的网络，会增加计算负担。</li>
+</ul>
+<br>
+<h2><span id="multi-domain-learning多区域学习"> multi-domain learning/多区域学习</span></h2>
+<p>​    训练数据来源于多个domain，domain information被纳入学习过程。是自然语言处理领域一个常见的学习方法（例如用在多个产品的情感分类和多个用户的垃圾邮件过滤等课题中），但很少有人应在计算机视觉领域。</p>
+<br>
+<h2><span id="网络结构"> 网络结构</span></h2>
+<p><img src="/2020/06/18/MDNet/MDNet_struct.png" alt="img"></p>
+<ul>
+<li>Input: 网络的输入是107x107的Bounding box，设置为这个尺寸是为了在卷积层conv3能够得到3x3的feature map。</li>
+<li>Convolutional layers: 网络的卷积层conv1-conv3来自于VGG-M [1]网络，只是输入的大小做了改变。</li>
+<li>Fully connected layers: 接下来的两个全连接层fc4,fc5各有512个输出单元，并设计有ReLUs和Dropouts。fc6是一个二分类层**（Domain-specific layers）**，softmax cross-entropy loss，一共有K个，对应K个Branches(即K个不同的视频)，每次训练的时候只有对应该视频的fc6被使用，前面的层都是共享的。<strong>这个二分类层是online的更新。这个二分类层是用来判定一些candidate windows （随机的从上一帧target附近采样出来的） 是否为目标。</strong></li>
+</ul>
+<p><strong>卷积层是一个相对通用的特征提取器，而fc层更多的是针对task和数据集的不同进行自适应调整</strong></p>
+<br>
+<h2><span id="小网络在tracking中的适用性"> 小网络在tracking中的适用性：</span></h2>
+<ul>
+<li>tracking旨在区分目标和背景两个类别，这比目前一般的视觉识别问题（如1000类的ImageNet分类）要求的模型复杂程度少得多。</li>
+<li>深度CNN对于精确目标定位的效果较差，因为随着网络的深入，空间信息往往会被淡化。</li>
+<li>在跟踪任务中通常目标较小，所以输入大小（input size）也就小，网络结构自然也就更浅。</li>
+<li>跟踪通常是一个实时任务，一个较小的网络在跟踪问题上明显更有效率，训练和测试都可以在线进行的。 当我们测试更大的网络时，算法不太准确，并且变得更慢。</li>
+</ul>
+<br>
+<h2><span id="domain-specific-layers"> Domain-specific layers</span></h2>
+<ul>
+<li>学习共性：算法的目标是训练一个 multi-domain CNN 以在任何 domain 辨别 target 和 background。这并非很直观，因为来源不同 domain的 train data 拥有不同的 target 和 background 的定义。但是，这其中仍然存在着一些共同的属性，如：对光照变化，运动模糊，尺寸变化的鲁棒性等等。为了提取出满足上述属性的特征，作者通过 multi-domain learning framework，从 domain-specific 的信息中分离出 domain-independent 的信息。</li>
+<li>训练方式：为了学到不同视频中目标的共性，采用Domain-specific的训练方式：假设用K个视频来做训练，一共做N次循环。在每一次循环中，会做K次迭代，依次用K个视频的mini-batch来做训练。每一个mini-batch的构成是从某一视频中随机采8帧图片，在这8帧图片上随机采32个正样本和96个负样本，即每个mini-batch由某一个视频的128个框来构成。用SGD进行训练，<strong>每个视频会对应自己的fc6层</strong>。通过这样的训练来学得各个视频中目标的共性。</li>
+<li>在第k次迭代中，mini-batch中只包含来自第（k mod K）个video的样本，K个domain-specific layers也只激活第（k mod K）个分支。</li>
+<li>通过这个学习过程，跟特定domain无关的信息就被学习到并保存在共享层中，这些信息是非常有用的泛化特征表示。</li>
+<li><strong>test的时候，会新建一个fc6层，在线fine-tune fc4-fc6层，卷积层保持不变。</strong></li>
+</ul>
+<br>
+<h2><span id="网络在线更新策略"> 网络在线更新策略</span></h2>
+<p>采用long-term和short-term两种更新方式。对应robustness 和 adaptiveness。</p>
+<ul>
+<li>long-term update：按照常规间隔后使用较长时间内的正样本进行更新。</li>
+<li>short-term updates：当出现潜在的跟踪失败（预测目标的positive score 小于 0.5）的时候使用短期内收集到的正样本进行更新。</li>
+<li>这两种更新的执行依赖于物体外观变化的速度。</li>
+<li>long-term对应历史的100个样本（超过100个抛弃最早的），固定时间间隔做一次网络的更新（程序中设置为每8帧更新一次）。</li>
+<li>short-term对应20个（超过20个抛弃最早的），在目标得分低于0.5进行更新。</li>
+<li>负样本都是用short-term的方式收集的，因为旧的负样本往往是冗余的或与当前帧无关。</li>
+<li>另外在训练中负样本的生成用到了<strong>hard negative mining</strong>，就是让负样本越来越难分，从而使得网络的判别能力越来越强。作者把hard negative mining 的过程融入到minibatch选择阶段：在训练阶段的每一次迭代中，一个mini-batch包含n个正样本和p个困难负样本。如何选择困难负样本？ 用模型测试 M（M &gt;&gt; p）个负样本，sort之后取top p个最困难负样本。</li>
+</ul>
+<p><img src="/2020/06/18/MDNet/MDNet_neg_mining.png" alt></p>
+<br>
+<h2><span id="目标跟踪过程"> 目标跟踪过程</span></h2>
+<ul>
+<li>每次新来一帧图片，以上一帧的目标位置为中心，用多维高斯分布（宽，高，尺度三个维度）的形式进行采样256个candidates，将他们大小统一为107x107后，分别作为网络的输入进行计算。</li>
+<li>网络的输出是一个二维的向量，分别表示输入的bounding box对应目标和背景的概率。目标最终是确定为目标得分概率最高的那个bounding box：</li>
+<li>最后得到的candidate其实不是直接作为目标，还要做一步<strong>bounding box regression</strong>（矫正）。作者说bounding box regression涉及到的细节与R-CNN一样。</li>
+</ul>
+<p><img src="/2020/06/18/MDNet/MDnet_algorithm.png" alt="img"></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/AI/"># AI</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/06/18/AdaBound/">AdaBound</a>
+            
+            
+            <a class="next" rel="next" href="/2020/06/18/Siamese%E7%B3%BB%E5%88%97/">Siamese系列</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
