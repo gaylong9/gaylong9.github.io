@@ -1,6 +1,7 @@
 ---
 title: SiamDW
 date: 2020-03-04 23:22:25
+mathjax: true
 tags: AI
 ---
 
