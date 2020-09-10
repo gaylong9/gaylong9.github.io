@@ -126,7 +126,7 @@ mediaPlayer.start();
 
 <br/>
 
-## LinearLayout的动态增删控件
+# LinearLayout的动态增删控件
 
 增：addView时需要index参数，getChildCount、getChildAt、indexOfChild是很常用的方法。
 
@@ -134,13 +134,13 @@ mediaPlayer.start();
 
 <br/>
 
-## 控件嵌套的parent
+# 控件嵌套的parent
 
 控件嵌套，同时只能点击到某个子控件，要通过子控件获取父级控件甚至更高级控件，可以使用onClick的参数view，一路getParent获取，同时使用getClass判断类型。多层嵌套时可能要使用多次getParent。
 
 <br/>
 
-## 权限框架
+# 权限框架
 
 easypermissions
 
@@ -148,7 +148,7 @@ easypermissions
 
 <br/>
 
-## ImageView 上下空白区域
+# ImageView 上下空白区域
 
 图片像素大于屏幕像素时，显示有问题。尝试以下设置：android:adjustViewBounds="true" 。
 
@@ -156,7 +156,7 @@ Glide注入图片，与androidx/android10可能兼容性较差，出现了奇怪
 
 <br/>
 
-## createNewFile()
+# createNewFile()
 
 要在手动建立的文件夹下，才可create
 
@@ -184,7 +184,7 @@ try {
 
 <br/>
 
-## 数据库升级
+# 数据库升级
 
 ```java
 dbHelper = new MyDBHelper(this, "Course.db", null, 2);
@@ -215,7 +215,7 @@ java.lang.SecurityException: Permission Denial: opening provider ... that is not
 
 <br/>
 
-## intent向前传递的顺序问题
+# intent向前传递的顺序问题
 
 子活动返回result，即setResult()是在被finish()之前。
 
@@ -225,9 +225,15 @@ java.lang.SecurityException: Permission Denial: opening provider ... that is not
 
 <br/>
 
-## 录音设置
+# 录音设置
 
 编码器、输出文件、文件后缀之间的协调：最终采用文件指定后缀、输出文件Default、编码器与文件后缀匹配
+
+
+
+# ImageView的修改图片
+
+xml中设置src后，若代码setBackground，则src图片不消失，会重叠。统一使用src或background。
 
 
 
