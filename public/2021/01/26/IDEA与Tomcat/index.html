@@ -14,7 +14,7 @@
 
 
 
-<title>重置博客 | gaylong9`s blog</title>
+<title>IDEA与Tomcat | gaylong9`s blog</title>
 
 
 
@@ -142,11 +142,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">重置博客</h1>
+            <h1 class="post-title">IDEA与Tomcat</h1>
             
                 <div class="post-meta">
                     
@@ -155,7 +217,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">February 27, 2020&nbsp;&nbsp;11:41:54</a>
+                        Date: <a href="#">January 26, 2021&nbsp;&nbsp;12:44:32</a>
                         </span>
                     
                     
@@ -164,37 +226,28 @@
         </header>
 
         <div class="post-content">
-            <p>更换硬盘后原有hexo本地文件丢失，重置博客后的小结。</p>
+            <br>
 <a id="more"></a>
-<p><a href="https://blog.csdn.net/ZWX2445205419/article/details/66970640?utm_source=blogxgwz5" target="_blank" rel="noopener">参考博客</a></p>
-<ol>
-<li>文中存在问题：<code>clone</code>后<code>init</code>，会报错非空文件夹不能执行，可<code>init</code>后将<code>clone</code>到的文件存入</li>
-<li>github仓库应配置两个branch：master用于存放blog页面内容；hexo分支用于存放hexo（本地）内容</li>
-<li><code>hexo d</code>后会自动部署到master分支；hexo分支需手动<code>git add . -f</code>、 <code>git commit</code>、 <code>git push origin hexo</code><s>、<code>git push origin_coding hexo</code>。因为有两个remote，一个github、一个coding，所以push要在origin和origin_coding各做一次。</s>
-<ol>
-<li><code>.git/config</code>中，<code>[remote &quot;origin&quot;]</code>添加以下两句，即可一次 push，两个上传
-<ol>
-<li><code>pushurl = git@github.com:gaylong9/gaylong9.github.io.git</code></li>
-<li><code>pushurl = git@e.coding.net:gaylong9/gaylong9.git</code></li>
-</ol>
+<!-- toc -->
+<ul>
+<li><a href="#idea%E4%B8%8Etomcat">IDEA与Tomcat</a>
+<ul>
+<li><a href="#1-idea%E9%9B%86%E6%88%90tomcat">1. IDEA集成Tomcat</a></li>
+<li><a href="#2-%E6%97%A7%E7%89%88idea%E6%96%B0%E5%BB%BAweb%E9%A1%B9%E7%9B%AE">2. 旧版IDEA新建Web项目</a></li>
+<li><a href="#3-%E6%96%B0%E7%89%88idea%E6%96%B0%E5%BB%BAweb%E9%A1%B9%E7%9B%AE">3. 新版IDEA新建Web项目</a></li>
+</ul>
 </li>
-</ol>
-</li>
-<li>后续换机、或异地管理，只需clone仓库即可</li>
-<li>文中提到异地管理时，需将<code>.deploy_git</code>删除，否则部署时会将博客部署到master分支，因为此次只是重建，并未涉及到博客复原（异地管理），故未尝试，存疑（两个分支不就是为了部署到master，备份到hexo吗）</li>
-<li>图片问题：要使用<code>npm install https://github.com/CodeFalling/hexo-asset-image --save</code>命令安装hexo-asset-image插件，否则版本号不对，图片显示有些问题 <a href="https://blog.csdn.net/Strong997/article/details/97767929" target="_blank" rel="noopener">参考博客</a></li>
-<li>换行：<code>&lt;br/&gt;</code></li>
-<li>目录：安装<code>hexo-toc</code>，在<code>_config.yaml</code>中添加<code>toc: maxDepth: 5</code>，文章中添加 <code>&lt;!-- t_o_c --&gt;</code> ，没有下划线，<strong>注意空格</strong></li>
-<li>本地库与远程库的链接：
-<ol>
-<li>本地已有项目内<code>git init</code>，即会创建.git文件夹，将当前文件夹建为本地仓库。</li>
-<li><code>git remote add origin address</code> 将远程库以origin命名，添加至链接的远程库</li>
-<li><code>git pull origin master</code> 先pull，合并文件</li>
-<li>随后add、commit后<code>git push --set-upstream origin master</code>，初次push，设置推送流。</li>
-</ol>
-</li>
-<li><code>scaffolds/post</code>是博客文章模板</li>
-</ol>
+</ul>
+<!-- tocstop -->
+<br>
+<h1><span id="idea与tomcat"> IDEA与Tomcat</span></h1>
+<h2><span id="1-idea集成tomcat"> 1. IDEA集成Tomcat</span></h2>
+<p>File | Settings | Build, Execution, Deployment | Application Servers | +</p>
+<p> </p>
+<h2><span id="2-旧版idea新建web项目"> 2. 旧版IDEA新建Web项目</span></h2>
+<p>Java Enterprise | Web Application</p>
+<p> </p>
+<h2><span id="3-新版idea新建web项目"> 3. 新版IDEA新建Web项目</span></h2>
 
         </div>
 
@@ -205,7 +258,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/%E6%9D%82%E9%A1%B9/"># 杂项</a>
+                        <a href="/tags/%E5%90%8E%E7%AB%AF/"># 后端</a>
                     
                         
                 </span>
@@ -218,8 +271,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/03/04/SiamDW/">SiamDW</a>
             
+            <a class="next" rel="next" href="/2020/11/11/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
             
         </section>
 

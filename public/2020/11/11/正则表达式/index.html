@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>正则表达式 | gaylong9`s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">正则表达式</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">November 11, 2020&nbsp;&nbsp;22:45:15</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <br>
+<a id="more"></a>
+<!-- toc -->
+<ul>
+<li><a href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">正则表达式</a>
+<ul>
+<li><a href="#1-%E6%99%AE%E9%80%9A%E5%AD%97%E7%AC%A6">1. 普通字符</a></li>
+<li><a href="#2-%E9%9D%9E%E6%89%93%E5%8D%B0%E5%AD%97%E7%AC%A6">2. 非打印字符</a></li>
+<li><a href="#3-%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6">3. 特殊字符</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<br>
+<p>[toc]</p>
+<h1><span id="正则表达式"> 正则表达式</span></h1>
+<p>检查一个串是否含有某种子串</p>
+<p><a href="http://c.runoob.com/front-end/854" target="_blank" rel="noopener">菜鸟正则表达式在线测试</a></p>
+<p><a href="https://www.runoob.com/regexp/regexp-syntax.html" target="_blank" rel="noopener">菜鸟正则表达式语法</a></p>
+<p> </p>
+<h2><span id="1-普通字符"> 1. 普通字符</span></h2>
+<p>如正则<code>123</code>，则可在<strong>123</strong>4<strong>123</strong>匹配到两处</p>
+<p> </p>
+<h2><span id="2-非打印字符"> 2. 非打印字符</span></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字符</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">\cx</td>
+<td style="text-align:left">匹配由x指明的控制字符。例如，\cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 ‘c’ 字符。</td>
+</tr>
+<tr>
+<td style="text-align:left">\f</td>
+<td style="text-align:left">匹配一个换页符。等价于 \x0c 和 \cL。</td>
+</tr>
+<tr>
+<td style="text-align:left">\n</td>
+<td style="text-align:left">匹配一个换行符。等价于 \x0a 和 \cJ。</td>
+</tr>
+<tr>
+<td style="text-align:left">\r</td>
+<td style="text-align:left">匹配一个回车符。等价于 \x0d 和 \cM。</td>
+</tr>
+<tr>
+<td style="text-align:left">\s</td>
+<td style="text-align:left">匹配任何空白字符，包括空格、制表符、换页符等等。等价于<code>[\f\n\r\t\v]</code>。注意 Unicode 正则表达式会匹配全角空格符。</td>
+</tr>
+<tr>
+<td style="text-align:left">\S</td>
+<td style="text-align:left">匹配任何非空白字符。等价于<code>[^\f\n\r\t\v]</code></td>
+</tr>
+<tr>
+<td style="text-align:left">\t</td>
+<td style="text-align:left">匹配一个制表符。等价于 \x09 和 \cI。</td>
+</tr>
+<tr>
+<td style="text-align:left">\v</td>
+<td style="text-align:left">匹配一个垂直制表符。等价于 \x0b 和 \cK。</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<h2><span id="3-特殊字符"> 3. 特殊字符</span></h2>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$</td>
+<td>匹配输入字符串的结尾位置。如果设置了RegExp对象的Multiline属性，则$也匹配 ‘\n’ 或 ‘\r’。要匹配$字符本身，请使用$。</td>
+</tr>
+<tr>
+<td>( )</td>
+<td>标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 ( 和 )。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或多次。要匹配 * 字符，请使用 *。</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 +。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 . 。</td>
+</tr>
+<tr>
+<td>[</td>
+<td>标记一个中括号表达式的开始。要匹配 [，请使用 [。</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 ?。</td>
+</tr>
+<tr>
+<td>\</td>
+<td>将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， ‘n’ 匹配字符 ‘n’。’\n’ 匹配换行符。序列 ‘\’ 匹配 “”，而 ‘(’ 则匹配 “(”。</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合。要匹配 ^ 字符本身，请使用 ^。</td>
+</tr>
+<tr>
+<td>{</td>
+<td>标记限定符表达式的开始。要匹配 {，请使用 {。</td>
+</tr>
+<tr>
+<td>|</td>
+<td>指明两项之间的一个选择。要匹配 |，请使用 |。</td>
+</tr>
+</tbody>
+</table>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/01/26/IDEA%E4%B8%8ETomcat/">IDEA与Tomcat</a>
+            
+            
+            <a class="next" rel="next" href="/2020/08/28/Servlet/">Servlet</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

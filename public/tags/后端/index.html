@@ -14,7 +14,7 @@
 
 
 
-<title>重置博客 | gaylong9`s blog</title>
+<title>Tag: 后端 | gaylong9`s blog</title>
 
 
 
@@ -139,92 +139,29 @@
     }
 </script>
         <div class="main">
-            <div class="container">
-    
-    
-
-    
-    <article class="post-wrap">
-        <header class="post-header">
-            <h1 class="post-title">重置博客</h1>
             
-                <div class="post-meta">
-                    
-                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
-                    
 
-                    
-                        <span class="post-time">
-                        Date: <a href="#">February 27, 2020&nbsp;&nbsp;11:41:54</a>
-                        </span>
-                    
-                    
-                </div>
-            
-        </header>
-
-        <div class="post-content">
-            <p>更换硬盘后原有hexo本地文件丢失，重置博客后的小结。</p>
-<a id="more"></a>
-<p><a href="https://blog.csdn.net/ZWX2445205419/article/details/66970640?utm_source=blogxgwz5" target="_blank" rel="noopener">参考博客</a></p>
-<ol>
-<li>文中存在问题：<code>clone</code>后<code>init</code>，会报错非空文件夹不能执行，可<code>init</code>后将<code>clone</code>到的文件存入</li>
-<li>github仓库应配置两个branch：master用于存放blog页面内容；hexo分支用于存放hexo（本地）内容</li>
-<li><code>hexo d</code>后会自动部署到master分支；hexo分支需手动<code>git add . -f</code>、 <code>git commit</code>、 <code>git push origin hexo</code><s>、<code>git push origin_coding hexo</code>。因为有两个remote，一个github、一个coding，所以push要在origin和origin_coding各做一次。</s>
-<ol>
-<li><code>.git/config</code>中，<code>[remote &quot;origin&quot;]</code>添加以下两句，即可一次 push，两个上传
-<ol>
-<li><code>pushurl = git@github.com:gaylong9/gaylong9.github.io.git</code></li>
-<li><code>pushurl = git@e.coding.net:gaylong9/gaylong9.git</code></li>
-</ol>
-</li>
-</ol>
-</li>
-<li>后续换机、或异地管理，只需clone仓库即可</li>
-<li>文中提到异地管理时，需将<code>.deploy_git</code>删除，否则部署时会将博客部署到master分支，因为此次只是重建，并未涉及到博客复原（异地管理），故未尝试，存疑（两个分支不就是为了部署到master，备份到hexo吗）</li>
-<li>图片问题：要使用<code>npm install https://github.com/CodeFalling/hexo-asset-image --save</code>命令安装hexo-asset-image插件，否则版本号不对，图片显示有些问题 <a href="https://blog.csdn.net/Strong997/article/details/97767929" target="_blank" rel="noopener">参考博客</a></li>
-<li>换行：<code>&lt;br/&gt;</code></li>
-<li>目录：安装<code>hexo-toc</code>，在<code>_config.yaml</code>中添加<code>toc: maxDepth: 5</code>，文章中添加 <code>&lt;!-- t_o_c --&gt;</code> ，没有下划线，<strong>注意空格</strong></li>
-<li>本地库与远程库的链接：
-<ol>
-<li>本地已有项目内<code>git init</code>，即会创建.git文件夹，将当前文件夹建为本地仓库。</li>
-<li><code>git remote add origin address</code> 将远程库以origin命名，添加至链接的远程库</li>
-<li><code>git pull origin master</code> 先pull，合并文件</li>
-<li>随后add、commit后<code>git push --set-upstream origin master</code>，初次push，设置推送流。</li>
-</ol>
-</li>
-<li><code>scaffolds/post</code>是博客文章模板</li>
-</ol>
-
-        </div>
+    
+<div class="container">
+    <div class="post-wrap tags">
+        <h2 class="post-title">-&nbsp;Tag&nbsp;·&nbsp;后端-</h2>
+    </div>
+    <div class="post-wrap archive">
+    
+    
+        
 
         
-        <section class="post-tags">
-            <div>
-                <span>Tag(s):</span>
-                <span class="tag">
-                    
-                    
-                        <a href="/tags/%E6%9D%82%E9%A1%B9/"># 杂项</a>
-                    
-                        
-                </span>
-            </div>
-            <div>
-                <a href="javascript:window.history.back();">back</a>
-                <span>· </span>
-                <a href="/">home</a>
-            </div>
-        </section>
-        <section class="post-nav">
-            
-                <a class="prev" rel="prev" href="/2020/03/04/SiamDW/">SiamDW</a>
-            
-            
-        </section>
+            <h3>2021</h3>
+        
 
-
-    </article>
+        <article class="archive-item">
+            <a class="archive-item-link" href="/2021/01/26/IDEA%E4%B8%8ETomcat/">IDEA与Tomcat</a>
+            <span class="archive-item-date">January 26, 2021</span>
+        </article>
+    
+    
+</div>
 </div>
 
         </div>
