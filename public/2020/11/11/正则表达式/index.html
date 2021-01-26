@@ -226,30 +226,38 @@
         </header>
 
         <div class="post-content">
-            <br>
+            <p><br></p>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">正则表达式</a>
-<ul>
-<li><a href="#1-%E6%99%AE%E9%80%9A%E5%AD%97%E7%AC%A6">1. 普通字符</a></li>
-<li><a href="#2-%E9%9D%9E%E6%89%93%E5%8D%B0%E5%AD%97%E7%AC%A6">2. 非打印字符</a></li>
-<li><a href="#3-%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6">3. 特殊字符</a></li>
+<li><a href="#正则表达式">正则表达式</a><ul>
+<li><a href="#1-普通字符">1. 普通字符</a></li>
+<li><a href="#2-非打印字符">2. 非打印字符</a></li>
+<li><a href="#3-特殊字符">3. 特殊字符</a><ul>
+<li><a href="#31-一些需要说明的特殊字符">3.1 一些需要说明的特殊字符</a></li>
+</ul>
+</li>
+<li><a href="#4-限定符">4. 限定符</a></li>
+<li><a href="#5-定位符">5. 定位符</a></li>
+<li><a href="#6-选择">6. 选择</a><ul>
+<li><a href="#61-非捕获元">6.1 非捕获元</a></li>
+</ul>
+</li>
+<li><a href="#7-修饰符标记">7. 修饰符/标记</a></li>
+<li><a href="#8-优先级">8. 优先级</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<br>
+<p><br></p>
 <p>[toc]</p>
-<h1><span id="正则表达式"> 正则表达式</span></h1>
-<p>检查一个串是否含有某种子串</p>
+<h1><span id="正则表达式">正则表达式</span></h1><p>检查一个串是否含有某种子串</p>
 <p><a href="http://c.runoob.com/front-end/854" target="_blank" rel="noopener">菜鸟正则表达式在线测试</a></p>
 <p><a href="https://www.runoob.com/regexp/regexp-syntax.html" target="_blank" rel="noopener">菜鸟正则表达式语法</a></p>
-<p> </p>
-<h2><span id="1-普通字符"> 1. 普通字符</span></h2>
-<p>如正则<code>123</code>，则可在<strong>123</strong>4<strong>123</strong>匹配到两处</p>
-<p> </p>
-<h2><span id="2-非打印字符"> 2. 非打印字符</span></h2>
+<p>&nbsp;</p>
+<h2><span id="1-普通字符">1. 普通字符</span></h2><p>如正则<code>123</code>，则可在<strong>123</strong>4<strong>123</strong>匹配到两处</p>
+<p>&nbsp;</p>
+<h2><span id="2-非打印字符">2. 非打印字符</span></h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -292,8 +300,9 @@
 </tr>
 </tbody>
 </table>
-<p> </p>
-<h2><span id="3-特殊字符"> 3. 特殊字符</span></h2>
+</div>
+<p>&nbsp;</p>
+<h2><span id="3-特殊字符">3. 特殊字符</span></h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -304,50 +313,221 @@
 <tbody>
 <tr>
 <td>$</td>
-<td>匹配输入字符串的结尾位置。如果设置了RegExp对象的Multiline属性，则$也匹配 ‘\n’ 或 ‘\r’。要匹配$字符本身，请使用$。</td>
+<td>匹配输入字符串的结尾位置。如果设置了RegExp对象的Multiline属性，则$也匹配<code>\n</code> 或<code>\r</code>。要匹配$字符本身，使用<code>\$</code>。</td>
 </tr>
 <tr>
 <td>( )</td>
-<td>标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 ( 和 )。</td>
+<td>标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，使用<code>\(</code> 和<code>\)</code>。</td>
 </tr>
 <tr>
 <td>*</td>
-<td>匹配前面的子表达式零次或多次。要匹配 * 字符，请使用 *。</td>
+<td>匹配前面的子表达式零次或多次。要匹配 <em> 字符，使用`\</em>`。</td>
 </tr>
 <tr>
 <td>+</td>
-<td>匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 +。</td>
+<td>匹配前面的子表达式一次或多次。要匹配 + 字符，使用<code>\+</code>。</td>
 </tr>
 <tr>
 <td>.</td>
-<td>匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 . 。</td>
+<td>匹配除换行符<code>\n</code>之外的任何单字符。要匹配.，使用<code>\.</code>。</td>
 </tr>
 <tr>
 <td>[</td>
-<td>标记一个中括号表达式的开始。要匹配 [，请使用 [。</td>
+<td>标记一个中括号表达式的开始。要匹配 [，使用<code>\[</code>。</td>
 </tr>
 <tr>
 <td>?</td>
-<td>匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 ?。</td>
+<td>匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，使用<code>\?</code>。</td>
 </tr>
 <tr>
 <td>\</td>
-<td>将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， ‘n’ 匹配字符 ‘n’。’\n’ 匹配换行符。序列 ‘\’ 匹配 “”，而 ‘(’ 则匹配 “(”。</td>
+<td>将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。 <code>\\</code> 匹配 <code>\</code>。</td>
 </tr>
 <tr>
 <td>^</td>
-<td>匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合。要匹配 ^ 字符本身，请使用 ^。</td>
+<td>匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合。要匹配 ^ 字符本身，使用<code>\^</code>。</td>
 </tr>
 <tr>
 <td>{</td>
-<td>标记限定符表达式的开始。要匹配 {，请使用 {。</td>
+<td>标记限定符表达式的开始。要匹配 {，使用<code>\{</code>。</td>
 </tr>
 <tr>
-<td>|</td>
-<td>指明两项之间的一个选择。要匹配 |，请使用 |。</td>
+<td>\</td>
+<td></td>
+<td>指明两项之间的一个选择。要匹配 \</td>
+<td>，使用`\</td>
+<td>`。</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母、数字、下划线。等价于 [A-Za-z0-9_]</td>
 </tr>
 </tbody>
 </table>
+</div>
+<p>&nbsp;</p>
+<h3><span id="31-一些需要说明的特殊字符">3.1 一些需要说明的特殊字符</span></h3><ol>
+<li><code>[]</code>：字符簇，用于<strong>匹配单个字符</strong>，若单个字符属于方括号内的字符集合，则匹配成功<ol>
+<li><code>[^123]</code> 表示匹配除123外的字符</li>
+<li><code>[a-z]</code> 区间</li>
+</ol>
+</li>
+<li><code>()</code>：用于匹配多个字符（或称为子串），内部格式和无括号一样。</li>
+<li>贪婪限定符：<code>*</code> 和 <code>+</code> 限定符都是贪婪的，会尽可能多地匹配文字，只有在它们的后面加上一个 ? 就可以实现非贪婪或最小匹配。如<code>&lt;.*?&gt;</code>就可以在<code>&lt;h1&gt; title &lt;/h1&gt;</code>中仅匹配到<code>&lt;h1&gt;</code>而非整句了。</li>
+</ol>
+<p>&nbsp;</p>
+<h2><span id="4-限定符">4. 限定符</span></h2><p>用于指定某些字符/组件出现次数的符号</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或多次。例如，zo<em> 能匹配 “z” 以及 “zoo”。</em> 等价于{0,}。</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 、 “does” 中的 “does” 、 “doxy” 中的 “do” 。? 等价于 {0,1}。</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>n 是一个非负整数。匹配确定的n次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>n 是一个非负整数。至少匹配n次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’。</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 ‘o?’。<strong>注意在逗号和两个数之间不能有空格。</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&nbsp;</p>
+<h2><span id="5-定位符">5. 定位符</span></h2><p>描述字符串或单词的边界，<code>^</code> 和 <code>$</code> 分别指字符串的开始与结束，<code>\b</code> 描述单词的前或后边界，<code>\B</code> 表示非单词边界。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字符</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">^</td>
+<td style="text-align:left">匹配输入字符串开始的位置。如果设置了 RegExp 对象的 Multiline 属性，^ 还会与 \n 或 \r 之后的位置匹配。</td>
+</tr>
+<tr>
+<td style="text-align:left">$</td>
+<td style="text-align:left">匹配输入字符串结尾的位置。如果设置了 RegExp 对象的 Multiline 属性，$ 还会与 \n 或 \r 之前的位置匹配。</td>
+</tr>
+<tr>
+<td style="text-align:left">\b</td>
+<td style="text-align:left">匹配一个单词边界，即字与空格间的位置。</td>
+</tr>
+<tr>
+<td style="text-align:left">\B</td>
+<td style="text-align:left">非单词边界匹配。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>不能将限定符与定位符一起使用。由于在紧靠换行或者单词边界的前面或后面不能有一个以上位置，因此不允许诸如<code>^*</code> 之类的表达式。</p>
+<p>&nbsp;</p>
+<h2><span id="6-选择">6. 选择</span></h2><ol>
+<li><code>()</code>表示捕获分组，会导致相关匹配存储到一个临时缓冲区中，所捕获的每个子匹配都按照在正则表达式模式中从左到右出现的顺序存储。缓冲区编号从 1 开始，最多可存储 99 个捕获的子表达式，可用<code>\num</code>查看/调用。如<code>(.)\1</code>匹配两个连续的相同字符。</li>
+<li>eg：<code>\b([a-z]+) \1\b\i</code> 表示搜索相邻两单词，在<code>Is is the cost of of gasoline going up up</code>中可搜索到三组结果。</li>
+</ol>
+<h3><span id="61-非捕获元">6.1 非捕获元</span></h3><p><code>()</code>会导致匹配项缓存，可用非捕获元消除此副作用。</p>
+<ol>
+<li><code>?:</code>：放在第一个选项前，单纯消除缓存</li>
+<li><code>?=</code>：正向预查，在任何开始匹配圆括号内的正则表达式模式的位置来匹配搜索字符串。<ol>
+<li><code>exp1(?=exp2)</code>，搜索exp2前的exp1。如<code>hi(?=[\d+])</code>即为搜索数字前的hi，在<code>hi123hi</code>中仅能搜索到前一个hi</li>
+<li><code>(?&lt;=exp2)exp1</code>查找exp2后面的exp1。</li>
+</ol>
+</li>
+<li><code>?!</code>：负向预查，在任何开始不匹配该正则表达式模式的位置来匹配搜索字符串。<ol>
+<li><code>exp1(?!exp2)</code>：查找后面不是exp2的exp1。</li>
+<li><code>(?&lt;!exp2)exp1</code>：查找前面不是exp2的exp1。</li>
+</ol>
+</li>
+</ol>
+<p>&nbsp;</p>
+<h2><span id="7-修饰符标记">7. 修饰符/标记</span></h2><p>用于指定额外的匹配策略。标记位于表达式之外。格式<code>/pattern/flags</code>。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i</td>
+<td>ignore 不区分大小写</td>
+</tr>
+<tr>
+<td>g</td>
+<td>global 全局匹配，否则只匹配第一个结果</td>
+</tr>
+<tr>
+<td>m</td>
+<td>multi line 多行匹配，使边界字符<code>^</code>和<code>$</code>匹配每一行的开头和结尾</td>
+</tr>
+<tr>
+<td>s</td>
+<td>特殊字符圆点<code>.</code>中包含换行符\n，默认<code>.</code>匹配除换行符外的所有字符</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&nbsp;</p>
+<h2><span id="8-优先级">8. 优先级</span></h2><p>下表从最高到最低说明了各种正则表达式运算符的优先级顺序：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">\</td>
+<td style="text-align:left">转义符</td>
+</tr>
+<tr>
+<td style="text-align:left">(), (?:), (?=), []</td>
+<td style="text-align:left">圆括号和方括号</td>
+</tr>
+<tr>
+<td style="text-align:left">*, +, ?, {n}, {n,}, {n,m}</td>
+<td style="text-align:left">限定符</td>
+</tr>
+<tr>
+<td style="text-align:left">^, $, \任何元字符、任何字符</td>
+<td style="text-align:left">定位点和序列（即：位置和顺序）</td>
+</tr>
+<tr>
+<td style="text-align:left">\</td>
+<td style="text-align:left"></td>
+<td>替换，”或”操作</td>
+</tr>
+</tbody>
+</table>
+</div>
 
         </div>
 
