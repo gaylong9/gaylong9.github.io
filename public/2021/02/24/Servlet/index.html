@@ -298,6 +298,7 @@
 <li><a href="#19-对请求的异步处理">19. 对请求的异步处理</a><ul>
 <li><a href="#191-servlet中的异步">19.1 Servlet中的异步</a></li>
 <li><a href="#192-异步流程">19.2 异步流程</a></li>
+<li><a href="#193-异步监听器asynclistener">19.3 异步监听器AsyncListener</a></li>
 <li><a href="#194-非阻塞io">19.4 非阻塞I/O</a></li>
 </ul>
 </li>
@@ -963,17 +964,26 @@
 </li>
 <li><p><code>new Thread(Runnable).start()</code> 此法亲自创建新线程，并发访问量大时导致创建大量新线程，降低运行性能</p>
 </li>
-<li><p>```java<br> private static ThreadPoolExecutor executor = new ThreadPoolExecutor(100, 200, 50000L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue&lt;&gt;(100));<br> // 代表池中最少100线程，最多200，允许的线程空闲时间，空闲时间单位，池使用的缓冲队列</p>
-<p> service() {</p>
-<pre><code> ...
- executor.execute(Runnable);    // 从池中取出一个空闲线程执行任务
-</code></pre><p> }</p>
-<p> destory() {</p>
-<pre><code> executor.shutdownNow();    // 需显式关闭
-</code></pre><p> }</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">		利用Java API的线程池ThreadPoolExecutor类创建一个线程池，所有异步线程都放在此池中。此法可灵活设定池。</span><br><span class="line"></span><br><span class="line">5. 调用AsyncContext对象的complete方法，通知容器已完成任务，或dispatch方法，把请求转发给其他Web组件</span><br><span class="line"></span><br><span class="line">### 19.3 异步监听器AsyncListener</span><br><span class="line"></span><br><span class="line">1. 可用AsyncListener捕获并处理异步线程运行中的特定事件</span><br><span class="line"></span><br><span class="line">	1. &#96;onStartAsync(AsyncEvent event)&#96; 异步线程开始时调用</span><br><span class="line">	2. &#96;onError(event)&#96; 异步线程出错时调用</span><br><span class="line">	3. &#96;onTimeout(event)&#96; 异步线程执行超时时调用</span><br><span class="line">	4. &#96;onComplete(event)&#96; 异步线程执行完毕时调用</span><br><span class="line"></span><br><span class="line">2. &#96;&#96;&#96;java</span><br><span class="line">	AsyncContext asyncContext &#x3D; req.getAsyncContext();</span><br><span class="line">	asyncContext.setTimeout(60 * 1000);</span><br><span class="line">	asyncContext.addListener(new AsyncListener() &#123;</span><br><span class="line">	    &#x2F;&#x2F; 复写四个监听方法</span><br><span class="line">	&#125;);</span><br><span class="line">	asyncContext.start(Runnable);</span><br></pre></td></tr></table></figure>
+<li><p>利用Java API的线程池ThreadPoolExecutor类创建一个线程池，所有异步线程都放在此池中。此法可灵活设定池。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> ThreadPoolExecutor executor = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">100</span>, <span class="number">200</span>, <span class="number">50000L</span>, TimeUnit.MILLISECONDS, <span class="keyword">new</span> ArrayBlockingQueue&lt;&gt;(<span class="number">100</span>));</span><br><span class="line">	<span class="comment">// 代表池中最少100线程，最多200，允许的线程空闲时间，空闲时间单位，池使用的缓冲队列</span></span><br><span class="line">	</span><br><span class="line">	service() &#123;</span><br><span class="line">	    ...</span><br><span class="line">	    executor.execute(Runnable);	<span class="comment">// 从池中取出一个空闲线程执行任务</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	destory() &#123;</span><br><span class="line">	    executor.shutdownNow();	<span class="comment">// 需显式关闭</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+</li>
+</ol>
+<ol>
+<li>调用AsyncContext对象的complete方法，通知容器已完成任务，或dispatch方法，把请求转发给其他Web组件</li>
+</ol>
+<h3><span id="193-异步监听器asynclistener">19.3 异步监听器AsyncListener</span></h3><ol>
+<li><p>可用AsyncListener捕获并处理异步线程运行中的特定事件</p>
+<ol>
+<li><code>onStartAsync(AsyncEvent event)</code> 异步线程开始时调用</li>
+<li><code>onError(event)</code> 异步线程出错时调用</li>
+<li><code>onTimeout(event)</code> 异步线程执行超时时调用</li>
+<li><code>onComplete(event)</code> 异步线程执行完毕时调用</li>
+</ol>
+</li>
+<li><p>如例</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">AsyncContext asyncContext = req.getAsyncContext();</span><br><span class="line">asyncContext.setTimeout(<span class="number">60</span> * <span class="number">1000</span>);</span><br><span class="line">asyncContext.addListener(<span class="keyword">new</span> AsyncListener() &#123;</span><br><span class="line">    <span class="comment">// 复写四个监听方法</span></span><br><span class="line">&#125;);</span><br><span class="line">asyncContext.start(Runnable);</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3><span id="194-非阻塞io">19.4 非阻塞I/O</span></h3><ol>
@@ -1102,6 +1112,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/02/25/JSP/">JSP</a>
             
             
             <a class="next" rel="next" href="/2021/01/26/IDEA%E4%B8%8ETomcat/">IDEA与Tomcat</a>
