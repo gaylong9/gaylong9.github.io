@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>JavaWeb与MySQL | gaylong9`s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">JavaWeb与MySQL</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 27, 2021&nbsp;&nbsp;20:47:01</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p> </p>
+<a id="more"></a>
+<!-- toc -->
+<ul>
+<li><a href="#javaweb%E4%B8%8Emysql">JavaWeb与MySQL</a>
+<ul>
+<li><a href="#1-jdbc">1. JDBC</a>
+<ul>
+<li><a href="#11-%E7%AE%80%E4%BB%8B">1.1 简介</a></li>
+<li><a href="#12-javasql%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3%E5%92%8C%E7%B1%BB">1.2 java.sql中的接口和类</a></li>
+<li><a href="#13-%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E7%A8%8B%E5%BA%8F">1.3 访问数据库程序</a></li>
+<li><a href="#14-%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86">1.4 事务处理</a></li>
+</ul>
+</li>
+<li><a href="#2-%E6%95%B0%E6%8D%AE%E6%BA%90-datasource">2. 数据源 DataSource</a>
+<ul>
+<li><a href="#21-%E7%AE%80%E4%BB%8B">2.1 简介</a></li>
+<li><a href="#22-%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90">2.2 配置数据源</a></li>
+<li><a href="#23-%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E6%BA%90">2.3 程序中访问数据源</a></li>
+</ul>
+</li>
+<li><a href="#3-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A0%81">3. 数据库编码</a></li>
+<li><a href="#4-%E5%88%86%E9%A1%B5%E6%98%BE%E7%A4%BA%E6%89%B9%E9%87%8F%E6%95%B0%E6%8D%AE">4. 分页显示批量数据</a></li>
+<li><a href="#5%E5%8F%AF%E6%BB%9A%E5%8A%A8%E7%BB%93%E6%9E%9C%E9%9B%86%E5%88%86%E9%A1%B5%E6%98%BE%E7%A4%BA%E6%89%B9%E9%87%8F%E6%95%B0%E6%8D%AE">5.可滚动结果集分页显示批量数据</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p> </p>
+<p>[toc]</p>
+<h1><span id="javaweb与mysql"> JavaWeb与MySQL</span></h1>
+<h2><span id="1-jdbc"> 1. JDBC</span></h2>
+<p>Java Database Connectivity，连接Java程序和数据库服务器的纽带。</p>
+<h3><span id="11-简介"> 1.1 简介</span></h3>
+<ol>
+<li>JDBC API主要位于java.sql包，此外javax.sql中包含了一些高级特性</li>
+<li>实现包括三部分：
+<ol>
+<li>驱动管理器：java.sql.DriverManager类，由Oracle公司实现，负责注册特定JDBC驱动器，以及根据特定驱动器建立与数据库的连接</li>
+<li>驱动器API：由Oracle公司制定，最主要的接口是java.sql.Driver接口</li>
+<li>驱动器：由数据库供应商或其他第三方工具提供商创建，实现了JDBC驱动器API，负责与特定数据库连接，以及处理通信细节；驱动器可以注册到驱动管理器中</li>
+</ol>
+</li>
+<li>API共两组：JDBC API负责Java应用程序与数据库连接，JDBC驱动器API则是第三方创建驱动器时要实现的API</li>
+<li>实际上JDBC驱动器才是真正连接Java程序与特定数据库的纽带；程序若要访问某种数据库，需要先获得相应JDBC驱动器的类库，注册到JDBC驱动管理器中</li>
+<li>JDBC驱动器分为四类：
+<ol>
+<li>JDBC-ODBC驱动器：Open Database Connectivity是微软为应用程序提供的访问任何一种数据库的标准API；本驱动器使Java程序能间接访问ODBC API，是唯一由Oracle公司实现的驱动器，属于JDK一部分，默认已在驱动管理器注册；但速度慢，JDK8开始已删除</li>
+<li>部分Java程序代码和部分本地代码组成的驱动器：用于与数据库客户端API通信，使用时不仅需要Java类库，还要安装平台相关的本地代码</li>
+<li>完全由Java语言编写的类库：用与具体数据库服务器无关的协议将请求发送给服务器的特定组件，由该组件按照特定数据库协议对请求进行翻译，发送给数据库服务器</li>
+<li>完全由Java语言编写的类库：直接按照特定数据协议，把请求发送给数据库服务器</li>
+<li>以上速度由慢到快</li>
+</ol>
+</li>
+</ol>
+<p> </p>
+<h3><span id="12-javasql中的接口和类"> 1.2 java.sql中的接口和类</span></h3>
+<p>JDBC API主要位于本包。</p>
+<ol>
+<li>
+<p>Driver接口和DriverManager类：</p>
+<ol>
+<li>所有JDBC驱动器都要实现Driver接口，编写访问数据库的Java程序时，要先将特定数据库的JDBC驱动器的类库加入到clsspath中</li>
+<li>DriverManager类用来建立和数据库的联机以及管理JDBC驱动器，方法均静态：</li>
+<li><code>registerDriver(Driver)</code> 在DriverManager中注册JDBC驱动器</li>
+<li><code>deregisterDriver(Driver)</code> 注销驱动器</li>
+<li><code>getConnection(String url, String user, String pwd)</code> 建立和数据库的连接，返回表示连接的Connection对象</li>
+<li><code>setLoginTimeOut(int sec)</code> 等待连接超时时间</li>
+<li><code>setLogWriter(PrintWriter out)</code> 设定输出JDBC日志的对象</li>
+</ol>
+</li>
+<li>
+<p>Connection接口：</p>
+<ol>
+<li>代表程序和数据库的连接</li>
+<li><code>getMetaData()</code> 返回表示数据库原数据的DatabaseMetaData对象；原数据包含了数据库的相关信息</li>
+<li><code>createStatement()</code> 创建返回Statement对象</li>
+<li><code>prepareStatement(String sql)</code> 创建返回PreparedStatement对象</li>
+</ol>
+</li>
+<li>
+<p>Statement接口：</p>
+<ol>
+<li>执行SQL语句的方法</li>
+<li><code>execute(String sql)</code> 执行各种SQL，返回boolean，true表示有查询结果，通过Statement的<code>getResultSet()</code>获得结果</li>
+<li><code>executeUpdata(String sql)</code> 执行insert、update、delete，返回int表示库中受影响的记录的数目</li>
+<li><code>executeQuery(String sql)</code> 执行select，返回表示查询结果的ResultSet对象</li>
+</ol>
+</li>
+<li>
+<p>PreparedStatement接口</p>
+<ol>
+<li>
+<p>继承自Statement接口，用于执行预准备的SQL语句（相同格式，参数不同的SQL语句），简化代码，提高访问性能，只需编译一次SQL语句，多次执行，而Statement需多次编译</p>
+</li>
+<li>
+<p>用法：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String selectStatement = <span class="string">"select * from BOOKS where NAME = ? and PRICE = ?"</span>;</span><br><span class="line">PreparedStatement predStmt = connection.prepaedStatement(selectStatement);</span><br><span class="line">prepStmt.setString(<span class="number">1</span>, <span class="string">"Tom"</span>);	<span class="comment">// 替换第一个?</span></span><br><span class="line">prepStmt.setFloat(<span class="number">2</span>, <span class="number">50</span>);		<span class="comment">// 替换第二个?</span></span><br><span class="line">ResultSet rs = perpStmt.executeQuery();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li>
+<p>ResultSet接口</p>
+<ol>
+<li>
+<p>表示select结果集，next()方法使游标定位到结果集的下一条记录，get方法获取一条记录中某个字段的值</p>
+</li>
+<li>
+<p><code>getString(int columnIndex)</code> 返回参数指定字段的String类型的值</p>
+</li>
+<li>
+<p><code>getString(String columnName)</code> 返回参数指定字段的String类型的值</p>
+</li>
+<li>
+<p><code>getInt(int / String)</code> 返回指定字段int类型的值</p>
+</li>
+<li>
+<p><code>getFloat(int / String)</code> 返回指定字段float类型的值</p>
+</li>
+<li>
+<p>索引从1开始</p>
+</li>
+<li>
+<p>next方法：结果集中游标初始在第一个记录之前，需next才能指向第一个记录；最终在最后一个记录之后，返回false</p>
+</li>
+<li>
+<p>访问所有结果：</p>
+</li>
+</ol>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (rs.next()) &#123;</span><br><span class="line">    String col1 = rs.getString(<span class="number">1</span>);</span><br><span class="line">    String col2 = rs.getString(<span class="number">2</span>);</span><br><span class="line">    String col3 = rs.getString(<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">float</span> col4 = rs.getFloat(<span class="number">4</span>);</span><br><span class="line">    System.out.println(<span class="string">"ID:"</span> + col1 + <span class="string">" NAME:"</span> + col2 + <span class="string">" TITLE:"</span> + col3 + <span class="string">" PRICE:"</span> + col4);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p> </p>
+<h3><span id="13-访问数据库程序"> 1.3 访问数据库程序</span></h3>
+<ol>
+<li><s>获得数据库JDBC驱动器类库，放在classpath下（IDEA可根据MySQL版本选择驱动器下载放置，或手动下载后从IDEA打开驱动器位置更换），但操作中发现新建lib放入jar包，右键add as library更稳定（普通Java程序）</s> jar放在<code>webapp/WEB-INF/lib</code>下，或放在<code>&lt;CATALINA_HOME&gt;/lib</code>下（Web项目）</li>
+<li>程序中加载注册驱动器，部分驱动器类加载时自动注册，MySQL即是</li>
+<li>connection的url <code>jdbc:mysql://parameters</code> 后可接<code>?useUnicode=true&amp;characterEncoding=GB2312</code>等参数</li>
+<li><code>useUnicode</code>默认false</li>
+<li><code>characterEncoding</code>默认false</li>
+<li><code>autoReconnect</code> 数据库连接异常中断时是否自动重连，默认false</li>
+<li><code>autoReconnectForPools</code> 针对数据库连接池的重连策略，默认false</li>
+<li><code>failOverReadOnly</code> 自动重连后是否设置为只读，默认true</li>
+<li><code>maxReconnetx</code> 自动重连尝试次数，默认3</li>
+<li><code>initialTimeout</code> 自动重连间隔，默认2s</li>
+<li><code>connectTimeout</code> 和库服务器建立socket连接时的超时时间ms，0表示永不超时，默认0</li>
+<li><code>useSSL</code> 是否进行SSL安全验证，默认true</li>
+<li>参数各版本或有改动</li>
+<li>MySQL驱动程序会自动运行“Abandoned Connection Cleanup Thread”线程，当Web应用终止时，本线程可能未终止，为防止内存泄漏，可设置一个MyServletContextListener，它的<code>contextDestroyed()</code>方法调用<code>AbadonedConnectionCleanupThread.checkedShutdown()</code>方法，确保线程关闭。（下有例子）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个简单的访问数据库例子</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 加载MySQL Driver类</span></span><br><span class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line"><span class="comment">// java.sql.DriverManager.registerDriver(new com.mysql.jdbc.Driver());</span></span><br><span class="line"><span class="comment">// 建立与数据库的连接</span></span><br><span class="line">Connection connection = DriverManager.getConnection(</span><br><span class="line">        <span class="string">"jdbc:mysql://localhost:3306/bookdb"</span>, <span class="string">"jsy"</span>, <span class="string">"jiumima1870353-"</span>);</span><br><span class="line"><span class="comment">// 创建Statement对象，准备执行SQL语句</span></span><br><span class="line">Statement statement = connection.createStatement();</span><br><span class="line"><span class="comment">// 执行SQL语句</span></span><br><span class="line">String sql = <span class="string">"select ID, NAME, TITILE, PRICE from books"</span>;</span><br><span class="line">ResultSet resultSet = statement.executeQuery(sql);</span><br><span class="line"><span class="comment">// 访问记录集</span></span><br><span class="line"><span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">    String id = resultSet.getString(<span class="number">1</span>);</span><br><span class="line">    String name = resultSet.getString(<span class="number">2</span>);</span><br><span class="line">    String title = resultSet.getString(<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">float</span> price = resultSet.getFloat(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"ID:"</span> + id + <span class="string">", name:"</span> + name + <span class="string">", title:"</span></span><br><span class="line">            + title + <span class="string">", price:"</span> + price);</span><br><span class="line">    req.setAttribute(<span class="string">"id"</span>, id);</span><br><span class="line">    req.setAttribute(<span class="string">"name"</span>, name);</span><br><span class="line">    req.setAttribute(<span class="string">"title"</span>, title);</span><br><span class="line">    req.setAttribute(<span class="string">"price"</span>, price);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 依次关闭对象</span></span><br><span class="line">resultSet.close();</span><br><span class="line">statement.close();</span><br><span class="line">connection.close();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用于关闭线程的监听器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyServletContextListener</span> <span class="keyword">implements</span> <span class="title">ServletContextListener</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextDestroyed</span><span class="params">(ServletContextEvent sce)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"bookstore app is Destroyed."</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 关闭MySQL的AbandonedConnectionCleanupThread</span></span><br><span class="line">            com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.checkedShutdown();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Enumeration&lt;Driver&gt; drivers = DriverManager.getDrivers();</span><br><span class="line">            <span class="keyword">while</span> (drivers.hasMoreElements()) &#123;</span><br><span class="line">                <span class="comment">// 注销jdbc驱动程序</span></span><br><span class="line">                DriverManager.deregisterDriver(drivers.nextElement());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> </p>
+<h3><span id="14-事务处理"> 1.4 事务处理</span></h3>
+<p>事务：由一条或多条SQL语句组成的不可分割的工作单元。</p>
+<ol>
+<li>只有当一个事务中的所有操作都正常完成，整个事务才能被提交到数据库，否则必须撤销整个事务</li>
+<li>Connection接口中三个相关方法：
+<ol>
+<li><code>setAutoCommit(boolean)</code> 是否自动提交事务，默认开启</li>
+<li><code>commit()</code> 提交事务</li>
+<li><code>rollback()</code> 撤销事务</li>
+</ol>
+</li>
+<li>JDBC中默认自动提交，将每个SQL语句看作一个事务</li>
+<li>可先set方法关掉自动提交，事务操作完成后手动commit；若某条SQL操作失败，会产生相应SQLException，catch中rollback即可</li>
+</ol>
+<p> </p>
+<h2><span id="2-数据源-datasource"> 2. 数据源 DataSource</span></h2>
+<h3><span id="21-简介"> 2.1 简介</span></h3>
+<p>JDBC API提供了<code>javax.sql.DataSource</code>接口，负责建立与数据库的连接；在应用程序中连接数据库不必编写连接库的代码，可直接从数据源获得数据库连接。</p>
+<ol>
+<li>数据源和数据库连接池：数据源中事先建立了多个数据库连接，保存在连接池中。Java程序访问数据库时，只需从连接池中取出空闲状态的数据库连接；访问结束，再将数据库连接放回连接池，可以提高访问库效率；如每次收到前台请求，都与库新建连接，访问结束断开连接，则耗费大量资源（连接时，库验证用户名和密码，为连接分配资源，Java要把Connection对象加载入内存等）</li>
+<li>数据源和JNDI资源：DataSource对象通常由Servlet容器提供，程序无需自己创建，获取容器创建的对象的引用，要依赖Java的JNDI（Java Naming and Directory Interface）技术，将对象和名字绑定，对象工厂负责生产和唯一名字绑定的对象，外部程序通过名字获得某个对象的引用。<code>javax.naming</code>包中有Context接口，提供了将对象和名字绑定，通过名字检索对象的方法
+<ol>
+<li><code>bind(String name, Object obj)</code></li>
+<li><code>lookup(String name)</code> 返回名字绑定的对象</li>
+</ol>
+</li>
+<li>Tomcat把DataSource作为一种可配置的JNDI资源来处理。生成DataSource对象的工厂是<code>org.apache.commons.BasicDataSourceFactory</code></li>
+<li>数据源容器维护，故用此方法连接数据库时，驱动器jar包应放在Tomcat的lib下，不能放在应用的lib下</li>
+</ol>
+<p> </p>
+<h3><span id="22-配置数据源"> 2.2 配置数据源</span></h3>
+<p>修改<code>context.xml</code>和<code>web.xml</code></p>
+<ol>
+<li>
+<p>context.xml中加入<code>&lt;Resource&gt;</code>元素，用来定义JNDI资源。Tomcat中数据源是JNDI资源的一种。context.xml在META-INF目录下创建。本元素具有以下属性：</p>
+<ol>
+<li><code>name</code>：指定Resource的JNDI名字</li>
+<li><code>auth</code>：指定管理Resource的Manager，可选值Container表示有容器创建和管理，Application表示有Web应用创建和管理</li>
+<li><code>type</code>：指定Resource所属Java类名</li>
+<li><code>maxActive</code>：指定数据库连接池中处于活动状态的数据库连接的最大数目，0表示不受限制</li>
+<li><code>maxIdle</code>：处于空闲状态的最大数目，0表示不受限制</li>
+<li><code>maxWait</code>：处于空闲状态的最长时间ms，超时抛出异常，-1表示无限期等待</li>
+<li><code>username</code>：连接数据库的用户名</li>
+<li><code>password</code></li>
+<li><code>driverClassName</code>：连接数据库的JDBC驱动器的Driver实现类的名字</li>
+<li><code>url</code>：连接数据库的URL，如有多个参数要用&amp;连接时，xml中的&amp;用转义字符<code>&amp;amp;</code>表示，如下例</li>
+</ol>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">reloadable</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Resource</span> <span class="attr">name</span>=<span class="string">"jdbc/BookDB"</span> </span></span><br><span class="line"><span class="tag">              <span class="attr">auth</span>=<span class="string">"Container"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">type</span>=<span class="string">"javax.sql.DataSource"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">maxActive</span>=<span class="string">"100"</span> <span class="attr">maxIdle</span>=<span class="string">"30"</span> <span class="attr">maxWait</span>=<span class="string">"10000"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">username</span>=<span class="string">"dbuser"</span> <span class="attr">password</span>=<span class="string">"1234"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">driverClassName</span>=<span class="string">"com.mysql.jdbc.Driver"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">url</span>=<span class="string">"jdbc:mysql://localhost:3306/BookDB?autoReconnect=true<span class="symbol">&amp;amp;</span>useUnicode=true<span class="symbol">&amp;amp;</span>characterEncoding=GB2312<span class="symbol">&amp;amp;</span>useSSL=false"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>若需数据源被容器内一个虚拟主机中的多个Web应用访问，可以在<code>&lt;CATALINA_HOME&gt;/conf/server.xml</code>的<code>&lt;Host&gt;</code>元素中配置<code>&lt;Resource&gt;</code>子元素</p>
+</li>
+<li>
+<p>web.xml中加入<code>&lt;resource-ref&gt;</code>元素：</p>
+<ol>
+<li>若Web应用访问了由容器管理的JNDi资源，就要在web.xml中声明对这个JNDI资源的引用</li>
+<li>子元素：
+<ol>
+<li><code>description</code>：所引用资源的说明</li>
+<li><code>res-ref-name</code>：所引用资源的JNDI名字，与<code>&lt;Resource&gt;</code>中的name属性对应</li>
+<li><code>res-type</code>：所引用资源的类名字，与<code>&lt;Resource&gt;</code>中的type属性对应</li>
+<li><code>res-auth</code>：所引用资源的Manager，与<code>&lt;Resource&gt;</code>中的auth属性对应</li>
+</ol>
+</li>
+</ol>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">webapp</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">resource-ref</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">description</span>&gt;</span>DB connection<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">res-ref-name</span>&gt;</span>jdbc/BookDB<span class="tag">&lt;/<span class="name">res-ref-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">res-type</span>&gt;</span>javax.sql.DataSource<span class="tag">&lt;/<span class="name">res-type</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">res-auth</span>&gt;</span>Container<span class="tag">&lt;/<span class="name">res-auth</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resource-ref</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">webapp</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p> </p>
+<h3><span id="23-程序中访问数据源"> 2.3 程序中访问数据源</span></h3>
+<ol>
+<li>
+<p>获得数据源的引用：<code>javax.naming.Context</code></p>
+</li>
+<li>
+<p>通过DataSource对象的getConnection方法获得数据库连接</p>
+</li>
+<li>
+<p>访问结束后，调用Connection对象的close方法，将Connection对象返回连接池，并恢复到空闲状态</p>
+</li>
+<li>
+<p>DataSource接口的多数实现类，其getConnection方法返回的是Connection代理对象，也实现了<code>java.sql.Connection</code>接口，为真正的代表数据库连接的Connection对象提供代理。代理对象的close方法并不会关闭连接，而是把真正连接对象放回数据库连接池，回到空闲状态</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Context context = <span class="keyword">new</span> InitialContext();</span><br><span class="line">DataSouce ds = (DataSource) context.lookup(<span class="string">"java:comp/env/jdbc/BookDB"</span>);</span><br><span class="line"><span class="comment">// jdbc/BookDB是数据源的名字</span></span><br><span class="line">Connection connection = ds.getConnection();</span><br><span class="line"><span class="comment">// 访问库</span></span><br><span class="line">connection.close();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<p> </p>
+<h2><span id="3-数据库编码"> 3. 数据库编码</span></h2>
+<p>数据库字符编码与网页编码不一致时出现乱码，可以在连接数据库时URL内就指定编码方式，或对取到的数据进行编码转换<code>col = new String(col.getBytes(&quot;ISO-8859-1&quot;), &quot;GB2313&quot;);</code>。</p>
+<p>不同数据库/不同版本，编码都可能不同，若后法，需要提前了解当前库的编码。</p>
+<p> </p>
+<h2><span id="4-分页显示批量数据"> 4. 分页显示批量数据</span></h2>
+<p>页面显示数据过多时，用户操作繁琐，并且后台读取数据库时大量数据加载到内存，耗时。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;%-- dbaccess.jsp 网页公共部分，连接数据库 --%&gt;</span><br><span class="line"></span><br><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;database&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Connection connection;</span><br><span class="line">            Statement statement;</span><br><span class="line">            ResultSet resultSet;</span><br><span class="line">            <span class="comment">// 连接数据库</span></span><br><span class="line">            Context context = <span class="keyword">new</span> InitialContext();</span><br><span class="line">            DataSource ds = (DataSource) context.lookup(<span class="string">"java:comp/env/jdbc/BOOKDB"</span>);</span><br><span class="line">            connection = ds.getConnection();</span><br><span class="line">            <span class="comment">// 创建SQL</span></span><br><span class="line">            statement = connection.createStatement();</span><br><span class="line">    %&gt;</span><br><span class="line">    &lt;%@ include file=<span class="string">"pages.jsp"</span> %&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">        statement.close();</span><br><span class="line">        connection.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception exception)&#123;</span><br><span class="line">            out.println(exception.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    %&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">&lt;%-- pages.jsp 具体显示数据与分页链接 --%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;%</span><br><span class="line">    <span class="comment">//分页用变量</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> e = <span class="number">3</span>;    <span class="comment">// 每页显示记录数</span></span><br><span class="line">    <span class="keyword">int</span> totalPages = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> currentPage = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> totalCount = <span class="number">0</span>; <span class="comment">// 库中总记录数</span></span><br><span class="line">    <span class="keyword">int</span> p = <span class="number">1</span>;          <span class="comment">// 当前页面所显示的第一条记录的游标</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 读取当前待显示的页面编号</span></span><br><span class="line">    String tempStr = request.getParameter(<span class="string">"currentPage"</span>);</span><br><span class="line">    <span class="keyword">if</span> (tempStr != <span class="keyword">null</span> &amp;&amp; !tempStr.equals(<span class="string">""</span>))</span><br><span class="line">        currentPage = Integer.parseInt(tempStr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算总记录数</span></span><br><span class="line">    resultSet = statement.executeQuery(<span class="string">"select count(*) from books;"</span>)</span><br><span class="line">    <span class="keyword">if</span> (resultSet.next())</span><br><span class="line">        totalCount = resultSet.getInt(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算总页数</span></span><br><span class="line">    totalPages = (totalCount % e == <span class="number">0</span>)? totalCount / e: totalCount / e + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (totalPages == <span class="number">0</span>)</span><br><span class="line">        totalPages = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修正当前页面编号，确保 1 &lt;= currentPage &lt;= totalPage</span></span><br><span class="line">    <span class="keyword">if</span> (currentPage &gt; totalPages)</span><br><span class="line">        currentPage = totalPages;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (currentPage &lt; <span class="number">1</span>)</span><br><span class="line">        currentPage = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算当前页面所显示的第一条记录的游标</span></span><br><span class="line">    p = (currentPage - <span class="number">1</span>) * e + <span class="number">1</span>;</span><br><span class="line">    String sql = <span class="string">"select ID, NAME, TITLE, PRICE from books order by ID limit "</span> + (p - <span class="number">1</span>) + <span class="string">","</span> + e;</span><br><span class="line">    resultSet = statement.executeQuery(sql);</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;%-- 显示数据 --%&gt;</span><br><span class="line">&lt;table border=<span class="string">"1"</span> width=<span class="string">"400"</span>&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td bgcolor="#008b8b"&gt;&lt;b&gt;编号&lt;/b&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td bgcolor="#008b8b"&gt;&lt;b&gt;作者&lt;/b&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td bgcolor="#008b8b"&gt;&lt;b&gt;书名&lt;/b&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td bgcolor="#008b8b"&gt;&lt;b&gt;价格&lt;/b&gt;&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line"></span><br><span class="line">    &lt;%</span><br><span class="line">        <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">            String id = resultSet.getString(<span class="number">1</span>);</span><br><span class="line">            String name = resultSet.getString(<span class="number">2</span>);</span><br><span class="line">            String title = resultSet.getString(<span class="number">3</span>);</span><br><span class="line">            <span class="keyword">float</span> price = resultSet.getFloat(<span class="number">4</span>);</span><br><span class="line">    %&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;&lt;%=id%&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;%=name%&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;%=title%&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;%=price%&gt;&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line"></span><br><span class="line">    &lt;%</span><br><span class="line">        &#125;</span><br><span class="line">    %&gt;</span><br><span class="line"></span><br><span class="line">&lt;/table&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;%-- 显示页标签 --%&gt;</span><br><span class="line">页码：</span><br><span class="line">&lt;%</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= totalPages; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == currentPage) &#123;</span><br><span class="line">%&gt;</span><br><span class="line">            &lt;%=i%&gt;</span><br><span class="line">&lt;%      &#125; <span class="keyword">else</span> &#123; %&gt;</span><br><span class="line">            &lt;a href="dbaccess.jsp?currentPage=&lt;%=i%&gt;"&gt;&lt;%=i%&gt; &lt;/a&gt;</span><br><span class="line">        &lt;%&#125;%&gt;   <span class="comment">// #if else</span></span><br><span class="line">&lt;%  &#125; %&gt;    <span class="comment">// #for</span></span><br></pre></td></tr></table></figure>
+<p> </p>
+<h2><span id="5可滚动结果集分页显示批量数据"> 5.可滚动结果集分页显示批量数据</span></h2>
+<p>默认的结果集只能顺序读，不能更新内容。</p>
+<ol>
+<li>
+<p>获得可移动游标的结果集</p>
+<p><code>createStatement(int type, int concurrency)</code></p>
+<p><code>createPreparedStatement(String sql, int type, int concurrency)</code></p>
+</li>
+<li>
+<p>type：</p>
+<ol>
+<li><code>ResultSet.TYPE_FORWARD_ONLY</code>：游标只能从上往下移动，默认值</li>
+<li><code>ResultSet.TYPE_SCROLL_INSENSITIVE</code>：可以上下滚动；程序对结果集做了修改，游标不变</li>
+<li><code>ResultSet.TYPE_SCROLL_SENSITIVE</code>：可以滚动；修改结果集后游标位置相应变化（如插入删除，游标前后移动）</li>
+</ol>
+</li>
+<li>
+<p>concurrency：</p>
+<ol>
+<li><code>CONCUR_READ_ONLY</code>：结果集不能被更新</li>
+<li><code>CONCUR_UPDATABLE</code>：结果集可以被更新</li>
+</ol>
+</li>
+<li>
+<p>结果集可以滚动时，移动游标方法：</p>
+<ol>
+<li><code>first()</code>：游标定位到第一条记录</li>
+<li><code>last()</code>：定位到末尾记录</li>
+<li><code>next()</code>：移动到下一条记录</li>
+<li><code>previous()</code>：移动到上一条记录</li>
+<li><code>absolute(int row)</code>：移动到row行的记录</li>
+</ol>
+</li>
+</ol>
+<p> </p>
+<p>​	<br>
+​	<br>
+​</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%90%8E%E7%AB%AF/"># 后端</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/02/27/JavaBean/">JavaBean</a>
+            
+            
+            <a class="next" rel="next" href="/2021/02/27/%E4%BC%9A%E8%AF%9DSession/">会话Session</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
