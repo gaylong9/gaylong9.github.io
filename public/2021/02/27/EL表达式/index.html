@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>EL表达式 | gaylong9`s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">EL表达式</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 27, 2021&nbsp;&nbsp;20:53:04</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p> </p>
+<a id="more"></a>
+<!-- toc -->
+<ul>
+<li><a href="#el%E8%A1%A8%E8%BE%BE%E5%BC%8F">EL表达式</a>
+<ul>
+<li><a href="#1-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95">1. 基本语法</a>
+<ul>
+<li><a href="#11-%E8%AE%BF%E9%97%AE%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%8F%8A%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0">1.1 访问对象属性及数组元素</a></li>
+<li><a href="#12-el%E8%BF%90%E7%AE%97%E7%AC%A6">1.2 EL运算符</a></li>
+<li><a href="#13-%E9%9A%90%E5%90%AB%E5%AF%B9%E8%B1%A1">1.3 隐含对象</a></li>
+<li><a href="#14-%E5%91%BD%E5%90%8D%E5%8F%98%E9%87%8F">1.4 命名变量</a></li>
+</ul>
+</li>
+<li><a href="#2-el%E5%87%BD%E6%95%B0">2. EL函数</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p> </p>
+<p>[toc]</p>
+<h1><span id="el表达式"> EL表达式</span></h1>
+<p>Expression Language是JSP 2中引入的新特性，用于JSP文件中的数据访问，简化代码，替代传统<code>&lt;%= %&gt;</code>的Java表达式，以及部分<code>&lt;% %&gt;</code>Java程序片段。</p>
+<h2><span id="1-基本语法"> 1. 基本语法</span></h2>
+<ol>
+<li>基本形式<code>${ }</code>，若在JSP模板文本中使用EL表达式，会输出到网页上</li>
+<li>和Java表达式一样，既能直接插入到JSP文件的模板文本中输出到网页，也能作为JSP标签的属性的值</li>
+<li><code>\${}</code> 转义输出</li>
+<li>主要操作域对象的数据，不可操作局部变量</li>
+<li>命名变量默认从小范围起找，若域对象全找完仍没有，返回空字符串</li>
+</ol>
+<h3><span id="11-访问对象属性及数组元素"> 1.1 访问对象属性及数组元素</span></h3>
+<ol>
+<li><code>.</code> 访问对象属性，如<code>${customer.name}</code>表示customer对象的name属性</li>
+<li>也可用<code>[]</code>访问对象属性，如<code>${customer[&quot;name&quot;]}</code>；如属性中有特殊字符，如<code>-</code>则必须用<code>[]</code>访问</li>
+<li><code>[]</code>还可访问数组元素，如<code>${customers[0]}</code></li>
+</ol>
+<h3><span id="12-el运算符"> 1.2 EL运算符</span></h3>
+<ol>
+<li>
+<p>支持以下运算符：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>+</mo><mo>−</mo><mo>∗</mo><mspace width="1em"><mi mathvariant="normal">/</mi><mi>d</mi><mi>i</mi><mi>v</mi><mspace width="1em"><mi mathvariant="normal">%</mi><mi>m</mi><mi>o</mi><mi>d</mi><mspace width="1em"><mo>=</mo><mo>=</mo><mi>e</mi><mi>q</mi><mspace width="1em"><mo stretchy="false">!</mo><mo>=</mo><mi>n</mi><mi>e</mi><mspace width="1em"><mo>&lt;</mo><mi>l</mi><mi>t</mi><mspace width="1em"><mo>&gt;</mo><mi>g</mi><mi>t</mi><mspace width="1em"><mo>≤</mo><mi>l</mi><mi>e</mi><mspace width="1em"><mo>≥</mo><mi>g</mi><mi>e</mi></mspace></mspace></mspace></mspace></mspace></mspace></mspace></mspace></mrow><annotation encoding="application/x-tex">+-*\quad/div\quad\%mod\quad==eq\quad!=ne\quad&lt;lt\quad&gt;gt\quad \le le \quad \ge ge</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∗</span><span class="mspace" style="margin-right:1em;"></span><span class="mord">/</span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:1em;"></span><span class="mord">%</span><span class="mord mathdefault">m</span><span class="mord mathdefault">o</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:1em;"></span><span class="mclose">!</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8304100000000001em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83041em;vertical-align:-0.13597em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">e</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">&amp;</mi><mi mathvariant="normal">&amp;</mi><mi>a</mi><mi>n</mi><mi>d</mi><mspace width="1em"><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>o</mi><mi>r</mi><mspace width="1em"><mo stretchy="false">!</mo><mi>n</mi><mi>o</mi><mi>t</mi><mspace width="1em"><mi>e</mi><mi>m</mi><mi>p</mi><mi>t</mi><mi>y</mi><mspace width="1em"><mo stretchy="false">?</mo><mo>:</mo></mspace></mspace></mspace></mspace></mrow><annotation encoding="application/x-tex">\&amp;\&amp;and\quad||or\quad!not\quad empty\quad ?:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">&amp;</span><span class="mord">&amp;</span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:1em;"></span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:1em;"></span><span class="mclose">!</span><span class="mord mathdefault">n</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">m</span><span class="mord mathdefault">p</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:1em;"></span><span class="mclose">?</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span></p>
+</li>
+<li>
+<p>特殊运算符<code>${empty obj}</code>，判断obj对象是否为空：</p>
+<ol>
+<li>obj不存在，没有被定义，返回true</li>
+<li>obj为null，返回true</li>
+<li>obj引用集合类型对象，并且集合中不包含元素，返回true</li>
+<li>可于<code>!</code>连用，<code>${! empty obj}</code>，不空则true</li>
+</ol>
+</li>
+</ol>
+<h3><span id="13-隐含对象"> 1.3 隐含对象</span></h3>
+<ol>
+<li>
+<p>EL定义了11个隐含对象，10个都是Map类型，用于访问Web应用中的特定数据</p>
+<ol>
+<li>
+<p>header：Map，HTTP请求头部的项目名和项目值映射，如<code>${header.host}</code>等价于<code>&lt;%=request.getHeader(&quot;host&quot;)%&gt;</code></p>
+</li>
+<li>
+<p>headerValues：Map，HTTP请求头部的项目名和所有匹配的项目值的数组映射，如<code>${headerValues[&quot;accept-language&quot;]}</code>等价于<code>&lt;%=request.getHeaders(&quot;accept-language&quot;)%&gt;</code></p>
+</li>
+<li>
+<p>param：Map，请求中的请求参数名和参数值映射</p>
+</li>
+<li>
+<p>paramValues：Map，请求中的请求参数名和所有匹配的参数值数组映射</p>
+</li>
+<li>
+<p>cookie：Map，请求中的Cookie名和Cookie对象映射，如<code>${cookie.username.value}</code>等价于调用名为username的Cookie对象的getValue()方法</p>
+</li>
+<li>
+<p>pageScope：Map，页面范围内的属性名和属性值映射，如<code>${pageScope.obj.total}</code>表示页面范围内的属性名为obj的对象的getTotal()方法</p>
+</li>
+<li>
+<p>requestScope：Map，请求范围内的属性名和属性值映射</p>
+</li>
+<li>
+<p>sessionScope：Map，会话范围内的属性名和属性值映射</p>
+</li>
+<li>
+<p>applicationScope：Map，Web应用范围内的属性名和属性值映射</p>
+</li>
+<li>
+<p>initParam：Map，Web应用的初始化参数名和参数值映射，如<code>${initParam.driver}</code>等价于<code>&lt;%=application.getInitParameter(&quot;driver&quot;)%&gt;</code></p>
+</li>
+<li>
+<p>pageContext：PageContext对象，如<code>${pageContext.request.requestURL}</code>等价于<code>&lt;%=request.getRequestURL()%&gt;</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>EL表达式中无法直接访问JSP的隐含对象，可用pageContext获取，如<code>${pageContext.request.requestURL}</code></p>
+</li>
+</ol>
+<h3><span id="14-命名变量"> 1.4 命名变量</span></h3>
+<p>EL表达式中的变量称为命名变量，不是JSP文件中的局部变量或实例变量，是存放在特定范围内的属性；命名变量的名字和特定范围内的属性名字对应，如<code>${username}</code>表示从page到application范围寻找username这一属性attribute。</p>
+<p> </p>
+<h2><span id="2-el函数"> 2. EL函数</span></h2>
+<ol>
+<li>
+<p>EL表达式可以访问EL函数；<strong>EL函数实际上与Java类中的方法对应，此Java类要为public，作为函数的方法要为public static</strong>；Java类定义后应在标签库描述符TLD文件中把类的方法映射为函数</p>
+</li>
+<li>
+<p>步骤：</p>
+<ol>
+<li>
+<p>编译java文件，把编译生成的类文件放到<code>webapp/WEB-INF/classes/mypack/</code>下</p>
+</li>
+<li>
+<p>在标签库描述符TLD文件中，把类的方法映射为函数，在<code>WEB-INF</code>目录下创建mytaglib.tld文件</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">taglib</span>&gt;</span></span><br><span class="line">	...</span><br><span class="line">    <span class="tag">&lt;<span class="name">function</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">description</span>&gt;</span>...<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>起名<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">function-class</span>&gt;</span>mypack.XX<span class="tag">&lt;/<span class="name">function-class</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">function-signature</span>&gt;</span></span><br><span class="line">        	int func(int a, int b)</span><br><span class="line">        <span class="tag">&lt;/<span class="name">function-signature</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">function</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">taglib</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>在web.xml中加入<code>&lt;taglib&gt;</code>元素</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">jsp-config</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">taglib</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">taglib-uri</span>&gt;</span>/mytaglib<span class="tag">&lt;/<span class="name">taglib-uri</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">taglib-location</span>&gt;</span>/WEB-INF/mytaglib.tld<span class="tag">&lt;/<span class="name">taglib-location</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">taglib</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">jsp-config</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%90%8E%E7%AB%AF/"># 后端</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/02/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E6%9D%BF/">设计模板</a>
+            
+            
+            <a class="next" rel="next" href="/2021/02/27/%E8%87%AA%E5%AE%9A%E4%B9%89JSP%E6%A0%87%E7%AD%BE/">自定义JSP标签</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
