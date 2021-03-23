@@ -238,6 +238,7 @@
 <!-- tocstop -->
 <p> </p>
 <p><a href="https://blog.csdn.net/Ikaros_521/article/details/106483311" target="_blank" rel="noopener">参考项目</a></p>
+<p><a href="https://github.com/gaylong9/Bilibili_draw_luckydog/releases/download/v1.0/draw.js" target="_blank" rel="noopener">下载本代码</a></p>
 <p> </p>
 <p>语言：JavaScript</p>
 <p>实现过程：使用Set逐页存储用户ID和昵称，随后生成随机数，输出对应用户信息。</p>
@@ -262,8 +263,8 @@
 <ul>
 <li><code>luckySum</code>：中奖总人数，即要抽出几个中奖者；默认0表示不设置，会在运行过程中弹窗提示输入；若修改则随后不会弹窗询问</li>
 <li><code>showId</code>：中奖结果是否显示ID；默认<code>true</code>显示，改为<code>false</code>不显示；<strong>但不可改为其他值</strong></li>
-<li><code>showLink</code>：中奖结果是否显示发送私信连接；默认<code>true</code>显示，改为<code>false</code>不显示；<strong>但不可改为其他值</strong></li>
-<li><code>storeInfoIntervalTime</code>：逐页读取用户信息时，每隔一段时间进行换页读取操作，换页、加载本页评论、程序读取计算存储都要消耗时间；本设置就是间隔时间，毫秒为单位，<strong>建议1000以上；默认1500</strong></li>
+<li><code>showLink</code>：中奖结果是否显示发送私信链接；默认<code>true</code>显示，改为<code>false</code>不显示；<strong>但不可改为其他值</strong></li>
+<li><code>storeInfoIntervalTime</code>：逐页读取用户信息时，每隔一段时间换页，换页、加载本页评论、程序读取计算存储都要消耗时间；本设置就是间隔时间，毫秒为单位，<strong>建议1000以上；默认1500</strong></li>
 <li><code>waitIntervalNum</code>：展示结果前有一个等待过程，输出几句<code>抽出的*名用户是...</code>，本设置项就是设置等待过程中输出次数；默认3</li>
 <li><code>waitIntervalTime</code>：上述等待过程，每次输出间隔多少毫秒；默认1500</li>
 </ul>
@@ -275,7 +276,7 @@
 <p>同一页面连续多次运行本程序可能造成出错，建议刷新</p>
 </li>
 <li>
-<p>运行一开始出现的<code>undefined</code>是正常现象 ​~~（是Interval的原因吗，不太懂）~~</p>
+<p>运行一开始出现的<code>undefined</code>是正常现象 <s>（是Interval的原因吗，不太懂）</s></p>
 </li>
 <li>
 <p><code>storeInfoIntervalTime</code>设置过低时，页面读取顺序混乱，视网速与浏览器处理速度不同，应保证在1000或1500以上（默认1500）</p>
@@ -308,6 +309,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/03/23/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">Java设计模式</a>
             
             
             <a class="next" rel="next" href="/2021/03/10/%E8%AE%A4%E8%AF%86SSM%E5%92%8CRedis/">认识SSM和Redis</a>
