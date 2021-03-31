@@ -142,7 +142,7 @@ public Object reflect() {
 3. 故代理分两步：代理对象和真实对象建立代理关系、实现代理对象的代理逻辑方法
 4. Java有多种动态代理技术，Spring常用JDK（JDK自带功能）和CGLIB（第三方），MyBatis还使用了Javassist
 
-### 2.1  JDK动态代理
+### 2.1 JDK动态代理
 
 是JDK自带功能，java.lang.reflect.\*提供的方式，必须**借助一个接口**才能产生代理对象：
 
@@ -164,7 +164,7 @@ public class HelloWorldImp implements HelloWorld {
 接下来需要将代理对象和真实对象绑定，并实现代理对象的代理逻辑方法。JDK动态代理中，要实现代理类必须实现java.lang.reflect.InvocationHandler接口，定义了invoke方法，并提供接口数组用于下挂代理对象：
 
 ```java
-// 代理类
+// 工具类
 public class JdkProxyExample implements InvocationHandler {
     // 真实对象
     private Object target = null;
