@@ -226,38 +226,43 @@
         </header>
 
         <div class="post-content">
-            <p><br></p>
+            <br>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#正则表达式">正则表达式</a><ul>
-<li><a href="#1-普通字符">1. 普通字符</a></li>
-<li><a href="#2-非打印字符">2. 非打印字符</a></li>
-<li><a href="#3-特殊字符">3. 特殊字符</a><ul>
-<li><a href="#31-一些需要说明的特殊字符">3.1 一些需要说明的特殊字符</a></li>
+<li><a href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">正则表达式</a>
+<ul>
+<li><a href="#1-%E6%99%AE%E9%80%9A%E5%AD%97%E7%AC%A6">1. 普通字符</a></li>
+<li><a href="#2-%E9%9D%9E%E6%89%93%E5%8D%B0%E5%AD%97%E7%AC%A6">2. 非打印字符</a></li>
+<li><a href="#3-%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6">3. 特殊字符</a>
+<ul>
+<li><a href="#31-%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E8%AF%B4%E6%98%8E%E7%9A%84%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6">3.1 一些需要说明的特殊字符</a></li>
 </ul>
 </li>
-<li><a href="#4-限定符">4. 限定符</a></li>
-<li><a href="#5-定位符">5. 定位符</a></li>
-<li><a href="#6-选择">6. 选择</a><ul>
-<li><a href="#61-非捕获元">6.1 非捕获元</a></li>
+<li><a href="#4-%E9%99%90%E5%AE%9A%E7%AC%A6">4. 限定符</a></li>
+<li><a href="#5-%E5%AE%9A%E4%BD%8D%E7%AC%A6">5. 定位符</a></li>
+<li><a href="#6-%E9%80%89%E6%8B%A9">6. 选择</a>
+<ul>
+<li><a href="#61-%E9%9D%9E%E6%8D%95%E8%8E%B7%E5%85%83">6.1 非捕获元</a></li>
 </ul>
 </li>
-<li><a href="#7-修饰符标记">7. 修饰符/标记</a></li>
-<li><a href="#8-优先级">8. 优先级</a></li>
+<li><a href="#7-%E4%BF%AE%E9%A5%B0%E7%AC%A6%E6%A0%87%E8%AE%B0">7. 修饰符/标记</a></li>
+<li><a href="#8-%E4%BC%98%E5%85%88%E7%BA%A7">8. 优先级</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p><br></p>
+<br>
 <p>[toc]</p>
-<h1><span id="正则表达式">正则表达式</span></h1><p>检查一个串是否含有某种子串</p>
+<h1><span id="正则表达式"> 正则表达式</span></h1>
+<p>检查一个串是否含有某种子串</p>
 <p><a href="http://c.runoob.com/front-end/854" target="_blank" rel="noopener">菜鸟正则表达式在线测试</a></p>
 <p><a href="https://www.runoob.com/regexp/regexp-syntax.html" target="_blank" rel="noopener">菜鸟正则表达式语法</a></p>
-<p>&nbsp;</p>
-<h2><span id="1-普通字符">1. 普通字符</span></h2><p>如正则<code>123</code>，则可在<strong>123</strong>4<strong>123</strong>匹配到两处</p>
-<p>&nbsp;</p>
-<h2><span id="2-非打印字符">2. 非打印字符</span></h2><div class="table-container">
+<p> </p>
+<h2><span id="1-普通字符"> 1. 普通字符</span></h2>
+<p>如正则<code>123</code>，则可在<strong>123</strong>4<strong>123</strong>匹配到两处</p>
+<p> </p>
+<h2><span id="2-非打印字符"> 2. 非打印字符</span></h2>
 <table>
 <thead>
 <tr>
@@ -300,9 +305,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<p>&nbsp;</p>
-<h2><span id="3-特殊字符">3. 特殊字符</span></h2><div class="table-container">
+<p> </p>
+<h2><span id="3-特殊字符"> 3. 特殊字符</span></h2>
 <table>
 <thead>
 <tr>
@@ -321,7 +325,7 @@
 </tr>
 <tr>
 <td>*</td>
-<td>匹配前面的子表达式零次或多次。要匹配 <em> 字符，使用`\</em>`。</td>
+<td>匹配前面的子表达式零次或多次。要匹配 * 字符，使用<code>\*</code>。</td>
 </tr>
 <tr>
 <td>+</td>
@@ -352,11 +356,8 @@
 <td>标记限定符表达式的开始。要匹配 {，使用<code>\{</code>。</td>
 </tr>
 <tr>
-<td>\</td>
-<td></td>
-<td>指明两项之间的一个选择。要匹配 \</td>
-<td>，使用`\</td>
-<td>`。</td>
+<td>|</td>
+<td>指明两项之间的一个选择。要匹配 |，使用<code>\|</code>。</td>
 </tr>
 <tr>
 <td>\w</td>
@@ -364,10 +365,11 @@
 </tr>
 </tbody>
 </table>
-</div>
-<p>&nbsp;</p>
-<h3><span id="31-一些需要说明的特殊字符">3.1 一些需要说明的特殊字符</span></h3><ol>
-<li><code>[]</code>：字符簇，用于<strong>匹配单个字符</strong>，若单个字符属于方括号内的字符集合，则匹配成功<ol>
+<p> </p>
+<h3><span id="31-一些需要说明的特殊字符"> 3.1 一些需要说明的特殊字符</span></h3>
+<ol>
+<li><code>[]</code>：字符簇，用于<strong>匹配单个字符</strong>，若单个字符属于方括号内的字符集合，则匹配成功
+<ol>
 <li><code>[^123]</code> 表示匹配除123外的字符</li>
 <li><code>[a-z]</code> 区间</li>
 </ol>
@@ -375,9 +377,9 @@
 <li><code>()</code>：用于匹配多个字符（或称为子串），内部格式和无括号一样。</li>
 <li>贪婪限定符：<code>*</code> 和 <code>+</code> 限定符都是贪婪的，会尽可能多地匹配文字，只有在它们的后面加上一个 ? 就可以实现非贪婪或最小匹配。如<code>&lt;.*?&gt;</code>就可以在<code>&lt;h1&gt; title &lt;/h1&gt;</code>中仅匹配到<code>&lt;h1&gt;</code>而非整句了。</li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="4-限定符">4. 限定符</span></h2><p>用于指定某些字符/组件出现次数的符号</p>
-<div class="table-container">
+<p> </p>
+<h2><span id="4-限定符"> 4. 限定符</span></h2>
+<p>用于指定某些字符/组件出现次数的符号</p>
 <table>
 <thead>
 <tr>
@@ -388,34 +390,33 @@
 <tbody>
 <tr>
 <td>*</td>
-<td>匹配前面的子表达式零次或多次。例如，zo<em> 能匹配 “z” 以及 “zoo”。</em> 等价于{0,}。</td>
+<td>匹配前面的子表达式零次或多次。例如，zo* 能匹配 “z” 以及 “zoo”。* 等价于{0,}。</td>
 </tr>
 <tr>
 <td>+</td>
-<td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
+<td>匹配前面的子表达式一次或多次。例如，‘zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
 </tr>
 <tr>
 <td>?</td>
-<td>匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 、 “does” 中的 “does” 、 “doxy” 中的 “do” 。? 等价于 {0,1}。</td>
+<td>匹配前面的子表达式零次或一次。例如，“do(es)?” 可以匹配 “do” 、 “does” 中的 “does” 、 “doxy” 中的 “do” 。? 等价于 {0,1}。</td>
 </tr>
 <tr>
 <td>{n}</td>
-<td>n 是一个非负整数。匹配确定的n次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
+<td>n 是一个非负整数。匹配确定的n次。例如，‘o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
 </tr>
 <tr>
 <td>{n,}</td>
-<td>n 是一个非负整数。至少匹配n次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’。</td>
+<td>n 是一个非负整数。至少匹配n次。例如，‘o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。‘o{1,}’ 等价于 ‘o+’。‘o{0,}’ 则等价于 ‘o*’。</td>
 </tr>
 <tr>
 <td>{n,m}</td>
-<td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 ‘o?’。<strong>注意在逗号和两个数之间不能有空格。</strong></td>
+<td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，“o{1,3}” 将匹配 “fooooood” 中的前三个 o。‘o{0,1}’ 等价于 ‘o?’。<strong>注意在逗号和两个数之间不能有空格。</strong></td>
 </tr>
 </tbody>
 </table>
-</div>
-<p>&nbsp;</p>
-<h2><span id="5-定位符">5. 定位符</span></h2><p>描述字符串或单词的边界，<code>^</code> 和 <code>$</code> 分别指字符串的开始与结束，<code>\b</code> 描述单词的前或后边界，<code>\B</code> 表示非单词边界。</p>
-<div class="table-container">
+<p> </p>
+<h2><span id="5-定位符"> 5. 定位符</span></h2>
+<p>描述字符串或单词的边界，<code>^</code> 和 <code>$</code> 分别指字符串的开始与结束，<code>\b</code> 描述单词的前或后边界，<code>\B</code> 表示非单词边界。</p>
 <table>
 <thead>
 <tr>
@@ -442,30 +443,33 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>不能将限定符与定位符一起使用。由于在紧靠换行或者单词边界的前面或后面不能有一个以上位置，因此不允许诸如<code>^*</code> 之类的表达式。</p>
-<p>&nbsp;</p>
-<h2><span id="6-选择">6. 选择</span></h2><ol>
+<p> </p>
+<h2><span id="6-选择"> 6. 选择</span></h2>
+<ol>
 <li><code>()</code>表示捕获分组，会导致相关匹配存储到一个临时缓冲区中，所捕获的每个子匹配都按照在正则表达式模式中从左到右出现的顺序存储。缓冲区编号从 1 开始，最多可存储 99 个捕获的子表达式，可用<code>\num</code>查看/调用。如<code>(.)\1</code>匹配两个连续的相同字符。</li>
 <li>eg：<code>\b([a-z]+) \1\b\i</code> 表示搜索相邻两单词，在<code>Is is the cost of of gasoline going up up</code>中可搜索到三组结果。</li>
 </ol>
-<h3><span id="61-非捕获元">6.1 非捕获元</span></h3><p><code>()</code>会导致匹配项缓存，可用非捕获元消除此副作用。</p>
+<h3><span id="61-非捕获元"> 6.1 非捕获元</span></h3>
+<p><code>()</code>会导致匹配项缓存，可用非捕获元消除此副作用。</p>
 <ol>
 <li><code>?:</code>：放在第一个选项前，单纯消除缓存</li>
-<li><code>?=</code>：正向预查，在任何开始匹配圆括号内的正则表达式模式的位置来匹配搜索字符串。<ol>
+<li><code>?=</code>：正向预查，在任何开始匹配圆括号内的正则表达式模式的位置来匹配搜索字符串。
+<ol>
 <li><code>exp1(?=exp2)</code>，搜索exp2前的exp1。如<code>hi(?=[\d+])</code>即为搜索数字前的hi，在<code>hi123hi</code>中仅能搜索到前一个hi</li>
 <li><code>(?&lt;=exp2)exp1</code>查找exp2后面的exp1。</li>
 </ol>
 </li>
-<li><code>?!</code>：负向预查，在任何开始不匹配该正则表达式模式的位置来匹配搜索字符串。<ol>
+<li><code>?!</code>：负向预查，在任何开始不匹配该正则表达式模式的位置来匹配搜索字符串。
+<ol>
 <li><code>exp1(?!exp2)</code>：查找后面不是exp2的exp1。</li>
 <li><code>(?&lt;!exp2)exp1</code>：查找前面不是exp2的exp1。</li>
 </ol>
 </li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="7-修饰符标记">7. 修饰符/标记</span></h2><p>用于指定额外的匹配策略。标记位于表达式之外。格式<code>/pattern/flags</code>。</p>
-<div class="table-container">
+<p> </p>
+<h2><span id="7-修饰符标记"> 7. 修饰符/标记</span></h2>
+<p>用于指定额外的匹配策略。标记位于表达式之外。格式<code>/pattern/flags</code>。</p>
 <table>
 <thead>
 <tr>
@@ -492,10 +496,9 @@
 </tr>
 </tbody>
 </table>
-</div>
-<p>&nbsp;</p>
-<h2><span id="8-优先级">8. 优先级</span></h2><p>下表从最高到最低说明了各种正则表达式运算符的优先级顺序：</p>
-<div class="table-container">
+<p> </p>
+<h2><span id="8-优先级"> 8. 优先级</span></h2>
+<p>下表从最高到最低说明了各种正则表达式运算符的优先级顺序：</p>
 <table>
 <thead>
 <tr>
@@ -509,7 +512,7 @@
 <td style="text-align:left">转义符</td>
 </tr>
 <tr>
-<td style="text-align:left">(), (?:), (?=), []</td>
+<td style="text-align:left">(), (?😃, (?=), []</td>
 <td style="text-align:left">圆括号和方括号</td>
 </tr>
 <tr>
@@ -521,13 +524,11 @@
 <td style="text-align:left">定位点和序列（即：位置和顺序）</td>
 </tr>
 <tr>
-<td style="text-align:left">\</td>
-<td style="text-align:left"></td>
-<td>替换，”或”操作</td>
+<td style="text-align:left">|</td>
+<td style="text-align:left">替换，&quot;或&quot;操作</td>
 </tr>
 </tbody>
 </table>
-</div>
 
         </div>
 
@@ -537,6 +538,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/%E6%9D%82%E9%A1%B9/"># 杂项</a>
+                    
+                        
                 </span>
             </div>
             <div>
