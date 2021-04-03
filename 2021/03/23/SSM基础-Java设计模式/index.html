@@ -14,7 +14,7 @@
 
 
 
-<title>Java设计模式 | gaylong9`s blog</title>
+<title>SSM基础-Java设计模式 | gaylong9`s blog</title>
 
 
 
@@ -208,7 +208,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Java设计模式</h1>
+            <h1 class="post-title">SSM基础-Java设计模式</h1>
             
                 <div class="post-meta">
                     
@@ -217,7 +217,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">March 23, 2021&nbsp;&nbsp;11:19:50</a>
+                        Date: <a href="#">March 23, 2021&nbsp;&nbsp;09:19:50</a>
                         </span>
                     
                     
@@ -261,11 +261,11 @@
 <!-- tocstop -->
 <p> </p>
 <p>[toc]</p>
-<h1><span id="java设计模式"> Java设计模式</span></h1>
-<h2><span id="1-java反射技术"> 1. Java反射技术</span></h2>
+<h1><span id="java设计模式">Java设计模式</span></h1>
+<h2><span id="1-java反射技术">1. Java反射技术</span></h2>
 <p>反射技术能够配置类的全限定名、方法和参数、完成对象初始化操作、甚至反射某些方法。Spring IoC的基本原理也是反射技术。</p>
 <p>Java反射内容繁多，本章重点讲解对象构建和方法的反射调用。Java中反射是通过包java.lang.reflect.*实现。</p>
-<h3><span id="11-通过反射构建对象"> 1.1 通过反射构建对象</span></h3>
+<h3><span id="11-通过反射构建对象">1.1 通过反射构建对象</span></h3>
 <ol>
 <li>
 <p>无参构造：如ReflectSample类</p>
@@ -286,25 +286,25 @@
 </li>
 </ol>
 <p> </p>
-<h3><span id="12-反射方法"> 1.2 反射方法</span></h3>
+<h3><span id="12-反射方法">1.2 反射方法</span></h3>
 <p>使用反射方法前要先获取对象</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">reflectMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Object obj = <span class="keyword">null</span>;</span><br><span class="line">    ReflectSample target = <span class="keyword">new</span> ReflectSample();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Method method = ReflectSample.class.getMethod("sayHello", String.class);</span><br><span class="line">        obj = method.invoke(target, <span class="string">"Tom"</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>对于<code>ReflectSample.class.getMethod()</code>，若有对象但不知道类时，可以使用<code>target.getClass().getMethod()</code>，getMethod中第一个参数是方法名，第二个参数是方法参数类型，是一个列表。</p>
 <p>具体反射方法的执行是<code>method.invoke()</code>实现，等价于<code>target.sayHello(&quot;Tom&quot;)</code>，若反射的方法有多个参数，则<code>invoke(target, obj1, obj2…)</code>即可。</p>
 <p> </p>
-<h3><span id="13-反射实例"> 1.3 反射实例</span></h3>
+<h3><span id="13-反射实例">1.3 反射实例</span></h3>
 <p>完整通过反射创建对象并调用方法，继续以ReflectSample为例</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">reflect</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ReflectSample obj = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        obj = (ReflectSample) Class.forName(<span class="string">"xxx.ReflectSample"</span>).newInstance();</span><br><span class="line">        Method method = obj.getClass().getMethod(<span class="string">"sayHello"</span>, String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        method.invoke(obj, <span class="string">"Tom"</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如此完全可以通过配置来完成对象和方法的反射，增强了Java的可配置性和可扩展性，IoC就是基于此法的典型例子。</p>
 <p> </p>
-<h2><span id="2-动态代理模式和责任链模式"> 2. 动态代理模式和责任链模式</span></h2>
+<h2><span id="2-动态代理模式和责任链模式">2. 动态代理模式和责任链模式</span></h2>
 <ol>
 <li>动态代理是生成一个代理对象（占位），来代理真实对象，从而控制真实对象的访问</li>
 <li>代理模式：调用者与代理对象联系，代理对象与真实对象联系，如此可在访问真实对象的前或后，加入其它逻辑，并且可以判断是否需要访问真实对象等</li>
 <li>故代理分两步：代理对象和真实对象建立代理关系、实现代理对象的代理逻辑方法</li>
 <li>Java有多种动态代理技术，Spring常用JDK（JDK自带功能）和CGLIB（第三方），MyBatis还使用了Javassist</li>
 </ol>
-<h3><span id="21-jdk动态代理"> 2.1 JDK动态代理</span></h3>
+<h3><span id="21-jdk动态代理">2.1 JDK动态代理</span></h3>
 <p>是JDK自带功能，java.lang.reflect.*提供的方式，必须<strong>借助一个接口</strong>才能产生代理对象：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接口，其中定义的方法将是代理过程中可以代理执行的方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">syaHelloWorld</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现类，也是代理中的真实对象类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldImp</span> <span class="keyword">implements</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHelloWorld</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello World."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>接下来需要将代理对象和真实对象绑定，并实现代理对象的代理逻辑方法。JDK动态代理中，要实现代理类必须实现java.lang.reflect.InvocationHandler接口，定义了invoke方法，并提供接口数组用于下挂代理对象：</p>
@@ -316,7 +316,7 @@
 <p>运行将会输出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">进入代理逻辑方法</span><br><span class="line">在调度真实对象之前的服务</span><br><span class="line">Hello World.</span><br><span class="line">在调度真实对象之后的服务</span><br></pre></td></tr></table></figure>
 <p> </p>
-<h3><span id="22-cglib动态代理"> 2.2 CGLIB动态代理</span></h3>
+<h3><span id="22-cglib动态代理">2.2 CGLIB动态代理</span></h3>
 <p>JDK动态代理只能提供接口才能使用，若不能提供接口，就要用其他第三方技术，如CGLIB动态代理，它只要一个非抽象类就能实现动态代理。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CglibProxyExample</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 生成CGLIB代理对象 </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> cls -- 真实对象</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> CGLIB代理对象</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">getProxy</span><span class="params">(Class cls)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// CGLIB enhancer增强类对象</span></span><br><span class="line">		Enhancer enhancer = <span class="keyword">new</span> Enhancer();</span><br><span class="line">		<span class="comment">// 设置增强类型</span></span><br><span class="line">		enhancer.setSuperclass(cls);</span><br><span class="line">		<span class="comment">// 定义代理逻辑对象为当前对象，要求当前对象实现MethodInterceptor方法</span></span><br><span class="line">		enhancer.setCallback(<span class="keyword">this</span>);</span><br><span class="line">		<span class="comment">// 生成并返回代理对象</span></span><br><span class="line">		<span class="keyword">return</span> enhancer.create();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 代理逻辑方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> proxy 代理对象</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> method 方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> args 方法参数</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> methodProxy 方法代理</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 代理逻辑返回</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Throwable异常</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object proxy, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">		System.err.println(<span class="string">"调用真实对象前"</span>);</span><br><span class="line">		<span class="comment">// CGLIB反射调用真实对象方法</span></span><br><span class="line">		Object result = methodProxy.invokeSuper(proxy, args);</span><br><span class="line">		System.err.println(<span class="string">"调用真实对象后"</span>);</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用了CGLIB的加强者Enhancer，通过设置超类的方法（setSuperclass），通过setCallback方法设置哪个类为它的代理类。其中 参数this意味着是当前对象，就要求用this对象实现接口MethodInterceptor的方法intercept，然后返回代理对象。如此，当前类的intercept方法就是代理逻辑方法。</p>
@@ -326,7 +326,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">调用真实对象前</span><br><span class="line">Hello Tom</span><br><span class="line">调用真实对象后</span><br></pre></td></tr></table></figure>
 <p>JDK与CGLIB动态代理都是用getProxy方法生成代理对象，制定代理的逻辑类。代理逻辑类要实现一个接口的一个方法，那么这个接口定义的方法就是代理对象的逻辑方法，可以控制真实对象的方法。</p>
 <p> </p>
-<h3><span id="23-拦截器"> 2.3 拦截器</span></h3>
+<h3><span id="23-拦截器">2.3 拦截器</span></h3>
 <p>由于动态代理的难以理解，通过设计者会设计一个拦截器接口供开发者使用，可将动态代理置入黑箱。</p>
 <p>用JDK动态代理实现一个拦截器，首先需要定义拦截器接口Interceptor。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Interceptor</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">before</span><span class="params">(Object proxy, Object target, Method method, Object[] args)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">around</span><span class="params">(Object proxy, Object target, Method method, Object[] args)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">after</span><span class="params">(Object proxy, Object target, Method method, Object[] args)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -346,12 +346,12 @@
 <p>由于MyInterceptor中，before方法指定返回false，故输出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">反射方法前逻辑。</span><br><span class="line">取代了被代理对象的方法。</span><br><span class="line">反射方法后逻辑。</span><br></pre></td></tr></table></figure>
 <p> </p>
-<h3><span id="24-责任链模式"> 2.4 责任链模式</span></h3>
+<h3><span id="24-责任链模式">2.4 责任链模式</span></h3>
 <p>当一个对象在一条链上被多个拦截器拦截处理时，就把这样的设计模式称为责任链模式。此模式下，可将原始对象层层动态代理，形成嵌套结构。即首先建立多个拦截器接口的实现类，代表多个拦截器，先后进行多次代理，使用前一次的代理对象当做后一次的真实对象。如此运行的话，会生成如下结果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">拦截器2的before方法</span><br><span class="line">拦截器1的before方法</span><br><span class="line">Hello World，真实对象的方法</span><br><span class="line">拦截器1的after方法</span><br><span class="line">拦截器2的after方法</span><br></pre></td></tr></table></figure>
 <p>可见，责任链模式优点在于可加入新的拦截器，增加拦截逻辑，但缺点是会增加代理和反射，而它们的性能都不高。</p>
 <p> </p>
-<h2><span id="3-观察者模式-observer"> 3. 观察者模式 Observer</span></h2>
+<h2><span id="3-观察者模式-observer">3. 观察者模式 Observer</span></h2>
 <p>又称为发布订阅模式，是对象的行为模式。定义了一种一对多的依赖关系，让多个观察者对象同时监视被观察者状态，当被观察者变化时，通知所有观察者，并让它们主动更新自己。</p>
 <p>如一个判断条件，决定很多后续执行的情况，若使用简单的if判断，则使得内容很多，需要大量catch以免后续执行之间的妨碍。而观察者模式更易于扩展，责任也更清晰。</p>
 <p>本例为商家产品列表如有上新，则各个电商平台观察到后自动上新。</p>
@@ -365,13 +365,13 @@
 <p>得到输出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">产品列表新增了产品：产品1</span><br><span class="line">发送新产品【产品1】同步到淘宝商城</span><br><span class="line">发送新产品【产品1】同步到京东商城</span><br></pre></td></tr></table></figure>
 <p> </p>
-<h2><span id="4-工厂模式和抽象工厂模式"> 4. 工厂模式和抽象工厂模式</span></h2>
+<h2><span id="4-工厂模式和抽象工厂模式">4. 工厂模式和抽象工厂模式</span></h2>
 <p>对于同一大类下的诸多类，用户只需知道自己需要什么类，具体实例化交由工厂实现并返回。</p>
-<h3><span id="41普通工厂模式"> 4.1普通工厂模式</span></h3>
+<h3><span id="41普通工厂模式">4.1普通工厂模式</span></h3>
 <p>有一Product接口，有5个类实现了接口，为Product1、Product2、…、Product5，并且由ProductFactory同一管理。用户只需使用工厂中的createProduct方法，并传入所需序号，工厂即可实例化并返回对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Product <span class="title">createProduct</span> <span class="params">(String productNo)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (productNo) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"1"</span>: <span class="keyword">return</span> <span class="keyword">new</span> Product1();</span><br><span class="line">            ...</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"5"</span>: <span class="keyword">return</span> <span class="keyword">new</span> Product5();</span><br><span class="line">            <span class="keyword">default</span>: <span class="keyword">throw</span> <span class="keyword">new</span> NotSuppportedException(<span class="string">"不支持此编号产品"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> </p>
-<h3><span id="42-抽象工厂模式"> 4.2 抽象工厂模式</span></h3>
+<h3><span id="42-抽象工厂模式">4.2 抽象工厂模式</span></h3>
 <p>普通工厂，解决了一类对象创建问题，但有时对象复杂，有很多种，同时又细分了几个类别。此时若只用一个工厂，就会造成工厂内部实现逻辑繁杂，这就需要划分工厂，但仍希望留一个统一的工厂给使用者，再由这个总工厂接收任务后下发给具体完成对象创建的分工厂。这里的总工厂并不实际存在，是通过各分厂实现的，称为抽象工厂。如此封装，简化了调用者的使用过程。</p>
 <p>抽象工厂模式可以向调用者提供一个接口，使其在不必指定产品的具体情况下，创建多个产品族中的产品对象。</p>
 <p>为了统一，首先需要定义一个接口，每个工厂（包括虚拟工厂）都要实现这个接口：</p>
@@ -382,7 +382,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductFactory</span> <span class="keyword">implements</span> <span class="title">ProductFactoryInter</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Product <span class="title">createProduct</span> <span class="params">(String productNo)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span> ch = productNo.charAt(<span class="number">0</span>);</span><br><span class="line">        ProductFactoryInter factory = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (ch == <span class="string">'1'</span>) &#123;</span><br><span class="line">            factory = <span class="keyword">new</span> ProductFactory1();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch == <span class="string">'2'</span>) &#123;</span><br><span class="line">            factory = <span class="keyword">new</span> ProductFactory2();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (factory != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> factory.createProduct(productNo);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如此，就实现了抽象工厂与具体完成任务的分厂之间的联系。调用者只需通过抽象工厂发布任务，抽象工厂自动分发任务给分厂完成并返回结果。各分厂只需维护自己的代码即可。</p>
 <p> </p>
-<h2><span id="5-建造者模式-builder"> 5. 建造者模式 Builder</span></h2>
+<h2><span id="5-建造者模式-builder">5. 建造者模式 Builder</span></h2>
 <p>属于对象的创建模式，可以将一个产品的属性与产品的生产过程分开，从而使一个建造过程生成具有不同属性的对象。</p>
 <p>适用于对象具有较多属性，导致一个产品族中有很多不同产品，使用new或工厂模式时，传入过多参数造成不便。</p>
 <p>Builder模式是分步构建对象的模式，是逐个产品进行构建，用一个配置类对这些步骤进行统筹，然后将所有信息交给构建器完成构建对象。</p>
@@ -417,7 +417,7 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2021/03/23/Spring-1-Spring-IoC%E6%A6%82%E5%BF%B5/">Spring_1.Spring_IoC概念</a>
+                <a class="prev" rel="prev" href="/2021/03/23/MyBatis-1-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/">MyBatis-1-核心组件</a>
             
             
             <a class="next" rel="next" href="/2021/03/20/B%E7%AB%99%E5%8A%A8%E6%80%81%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%8A%BD%E5%A5%96/">B站动态评论区抽奖</a>
