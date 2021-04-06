@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>SpringMVC-1-初始化和流程 | gaylong9`s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">SpringMVC-1-初始化和流程</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 04, 2021&nbsp;&nbsp;09:52:50</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p> </p>
+<a id="more"></a>
+<!-- toc -->
+<ul>
+<li><a href="#1-mvc%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%BF%B0">1. MVC设计概述</a>
+<ul>
+<li><a href="#11-spring-mvc%E6%9E%B6%E6%9E%84">1.1 Spring MVC架构</a></li>
+<li><a href="#12-spring-mvc%E7%BB%84%E4%BB%B6%E4%B8%8E%E6%B5%81%E7%A8%8B">1.2 Spring MVC组件与流程</a></li>
+<li><a href="#13-%E5%85%A5%E9%97%A8%E5%AE%9E%E4%BE%8B">1.3 入门实例</a></li>
+</ul>
+</li>
+<li><a href="#2-spring-mvc%E5%88%9D%E5%A7%8B%E5%8C%96">2. Spring MVC初始化</a>
+<ul>
+<li><a href="#21-%E5%88%9D%E5%A7%8B%E5%8C%96spring-ioc%E4%B8%8A%E4%B8%8B%E6%96%87">2.1 初始化Spring IoC上下文</a></li>
+<li><a href="#22-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%98%A0%E5%B0%84%E8%AF%B7%E6%B1%82%E4%B8%8A%E4%B8%8B%E6%96%87">2.2 初始化映射请求上下文</a></li>
+<li><a href="#23-%E6%B3%A8%E8%A7%A3%E9%85%8D%E7%BD%AE%E5%88%9D%E5%A7%8B%E5%8C%96">2.3 注解配置初始化</a></li>
+</ul>
+</li>
+<li><a href="#3-spring-mvc%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B">3. Spring MVC开发流程</a>
+<ul>
+<li><a href="#31-requestmapping">3.1 @RequestMapping</a></li>
+<li><a href="#32-%E6%8E%A7%E5%88%B6%E5%99%A8%E7%9A%84%E5%BC%80%E5%8F%91">3.2 控制器的开发</a>
+<ul>
+<li><a href="#321-%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0">3.2.1 获取请求参数</a></li>
+<li><a href="#322-%E5%A4%84%E7%90%86%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E4%B8%8E%E7%BB%91%E5%AE%9A%E8%A7%86%E5%9B%BE">3.2.2 处理业务逻辑与绑定视图</a></li>
+</ul>
+</li>
+<li><a href="#33-%E8%A7%86%E5%9B%BE%E6%B8%B2%E6%9F%93">3.3 视图渲染</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p> </p>
+<p>[toc]</p>
+<p> </p>
+<p>Spring Web MVC是Spring提供给Web应用的框架设计，是一种设计理念。</p>
+<p> </p>
+<h1><span id="1-mvc设计概述"> 1. MVC设计概述</span></h1>
+<p>MVC设计不局限与Java，主要目的是解耦模块。</p>
+<p>早期Java Web开发，使用JSP+JavaBean，即JSP Model1时期，JSP与JavaBean、Java与HTML耦合严重，JSP又是显示页面又要完成业务逻辑、页面逻辑。Model2引入Servlet，初步呈现MVC模式，JavaBean作为Model、Servlet作为Controller、JSP作为View，请求先到达Servlet，控制器接收后调度JavaBean，读写数据库，将结果放到JSP并展示给用户。</p>
+<p>此时出现了一些MVC经典框架，Struts1/2，Hibernate等，但如今手机端兴起，Web页面大多Ajax请求，用JSON交互，以前的框架依赖JSP页面，已不适合。</p>
+<p> </p>
+<h2><span id="11-spring-mvc架构"> 1.1 Spring MVC架构</span></h2>
+<p>出现前的问题：Hibernate的移植数据库功能越来越不需要；Hibernate的性能不足；但Hibernate和MyBatis都没有处理好数据库事务编程；Java Web需要从NoSQL中获取数据，上述持久层框架无法完成。</p>
+<p>Spring MVC的解决方案：模型层Model拆分成业务层Service和数据访问层DAO（Data Access Object），业务层Service下通过Spring的声明式事务操作数据访问层DAO，且Service层允许访问NoSQL。Spring MVC另一大特色是结构松散，如视图种类限制小，各类文件均可作为视图，故而能满足各种终端的各类请求。</p>
+<p>![Spring MVC架构](SpringMVC-1-初始化和流程/Spring MVC架构.png)</p>
+<p> </p>
+<h2><span id="12-spring-mvc组件与流程"> 1.2 Spring MVC组件与流程</span></h2>
+<p>流程是其核心与基础。Spring MVC是基于Servlet的技术，提供了核心控制器DispatcherServlet和相关组件，并制定了松散的结构，以适应各种需要。</p>
+<p>![Spring MVC流程](SpringMVC-1-初始化和流程/Spring MVC流程.png)</p>
+<p> </p>
+<h2><span id="13-入门实例"> 1.3 入门实例</span></h2>
+<p>同样可用XML和注解两种方法配置。此处先给出XML方式。[注解方法](# 2.3 注解配置初始化)</p>
+<ol>
+<li>
+<p>配置web.xml：</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    Spring IoC配置文件路径--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>/WEB-INF/applicationContext.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--    ContextLoaderListener以初始化IoC容器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--    DispatcherServlet--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcher<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>2<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcher<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>contextConfigLocation用于告诉MVC其IoC的配置文件在哪里，Spring就能找到配置文件加载，多个文件用逗号分隔，还支持正则匹配、模糊匹配，默认值即为代码所写（实际就是之前学习Spring时的spring-config.xml文件）</li>
+<li>ContextLoaderListener实现了接口ServletContextListener，用于在Web应用前后加入代码，可以做到先于Web应用的IoC初始化，和Web应用关闭时IoC容器的释放</li>
+<li>DispatcherServlet，servlet-name为dispatcher，意味着需要/WEB-INF/dispatcher-servlet.xml文件，需要在服务器启动时就初始化</li>
+<li>简单入门，暂不配置IoC配置文件WEB-INF/applicationContext.xml</li>
+</ul>
+</li>
+<li>
+<p>dispatcher-servlet.xml</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    注解驱动--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:annotation-driven</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    扫描装载的包--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"*"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    视图解析器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"viewResolver"</span> </span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">p:prefix</span>=<span class="string">"/WEB-INF/jsp/"</span> <span class="attr">p:suffix</span>=<span class="string">".jsp"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    若配置了数据库事务，需要开启注解事务时使用以下配置--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    &lt;tx:annotation-driven transaction-manager="transactionManager"/&gt;--&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>&lt;mvc:annotation-driven/&gt;</code>表示使用注解驱动Spring MVC</li>
+<li>扫描包用以加载对应的控制器和其他组件</li>
+<li>定义视图解析器，视图就能根据定义的前后缀去Web工程中找到对应JSP文件作为视图</li>
+</ul>
+</li>
+<li>
+<p>以上XML、JSP包都在WEB-INF下，而普通class文件开发中先放在外部，最终编译后文件放在WEB-INF下</p>
+</li>
+<li>
+<p>一个简单控制器：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span>(<span class="string">"myController"</span>)</span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/my"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/index"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">index</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">        mv.setViewName(<span class="string">"index"</span>);</span><br><span class="line">        <span class="keyword">return</span> mv;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>@Controller：表名此类是控制器，MVC扫描时把它作为控制器加载</li>
+<li>@RequestMapping：指定请求URI，MVC初始化时将这些信息解析存放，就有了HandlerMapping，发生请求时MVC使用这些信息找到对应的控制器提供服务</li>
+<li>方法返回ModelAndView，方法中把视图名称定义为index，故就是采用/WEB-INF/jsp/index.jsp作为视图。</li>
+</ul>
+</li>
+<li>
+<p>编写/WEB-INF/jsp/index.jsp，并访问<code>http://localhost:8080/webapp_name/my/index</code>即可访问到该index.jsp页面</p>
+</li>
+</ol>
+<p><img src="/2021/04/04/SpringMVC-1-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E6%B5%81%E7%A8%8B/%E5%AE%9E%E4%BE%8B%E6%B5%81%E7%A8%8B.png" alt="实例流程"></p>
+<p>流程：MVC启动时解析Controller注解，生成对应的URI和请求的映射关系，并注册对应方法。请求来到时，根据URI找到对应的HandlerMapping，组织为一个执行链，通过请求类型找到RequestMappingHandlerAdapter，该实例是在DispatcherServlet初始化时创建的。通过它执行HandlerExecutionChain的内容，最终在MyController的方法中将index视图返回DispatcherServlet。根据配置的视图解析器的前后缀，确定index.jsp作为视图，响应请求。</p>
+<p> </p>
+<h1><span id="2-spring-mvc初始化"> 2. Spring MVC初始化</span></h1>
+<p>以上实例中配置了DispatcherServlet和ContextLoaderListener，它们初始化了IoC容器上下文和映射请求上下文（后者根据前者扩展出来）。</p>
+<h2><span id="21-初始化spring-ioc上下文"> 2.1 初始化Spring IoC上下文</span></h2>
+<p>Web容器为生命周期中提供ServletContextListener接口，可以在容器初始化和结束期中执行一定逻辑，故可以通过实现该接口，使得在DispatcherServlet初始化前完成IoC容器的初始化，也可以在结束期完成IoC容器的销毁。Spring MVC中ContextLoaderListener就是负责这个工作，它实现了该接口，初始化/销毁了Spring IoC容器。</p>
+<h2><span id="22-初始化映射请求上下文"> 2.2 初始化映射请求上下文</span></h2>
+<p>本上下文是通过DispatcherServlet初始化的，和普通Servlet一样，可以根据自己的需要，配置为启动时初始化或用户首次请求时初始化。若未注册ContextLoaderListener，DispatcherServlet也会在其初始化时对IoC容器初始化。</p>
+<p>DispatcherServlet初始化时机选择：IoC容器初始化比较耗时，不应放在请求时，故应在服务器启动时就完成IoC容器初始化。同时为了照顾到其他需要IoC容器的资源，应尽早完成IoC初始化。故还是推荐使用ContextLoaderListener进行IoC初始化。</p>
+<p>服务器提供了HttpServlet类，随后的子类HttpServletBean、FrameworkServlet、DispatcherServlet都是Spring MVC提供。其中的initServletBean方法，功能之一就是初始化IoC容器。若已被初始化就沿用，否则就新建并onRefresh。onRefresh方法初始化了MVC的各组件，包含以下：</p>
+<ul>
+<li>MultipartResolver：文件解析器，用于服务器的文件上传</li>
+<li>LocaleResolver：国际化解析器，提供国际化功能</li>
+<li>ThemeResolver：主题解析器</li>
+<li>HandlerMapping：MVC中重要内容，包装用户提供的一个控制器的方法和对应的拦截器</li>
+<li>handlerAdapter：处理器适配器，因为处理器在不同上下文运行，MVC先找到合适的适配器然后运行处理器服务方法</li>
+<li>HandlerExceptionResolver：处理器异常解析器，用于处理处理器发生的异常</li>
+<li>RequestToViewNameTranslator：视图逻辑名称转换器，通过控制器返回的视图名称找到具体视图文件，若没有返回逻辑视图名，就将URL映射为逻辑视图名</li>
+<li>ViewResolver：视图解析器，控制器返回后，通过此把逻辑视图名词解析，定位实际视图</li>
+</ul>
+<p>对于以上MVC的初始化，是DispatcherServlet根据配置文件DispatcherServlet.properties完成的。</p>
+<p> </p>
+<h2><span id="23-注解配置初始化"> 2.3 注解配置初始化</span></h2>
+<p>Servlet3.0后允许取消web.xml配置，只使用注解即可，故Spring3.1后也提供了注解配置。</p>
+<p>首先继承AbstractAnnotationConfigDispatcherServletInitializer类，实现方法：Servlet3.0后允许动态加载Servlet，只要实现ServletContainerInitializer接口即可；MVC也实现了SpringServletContainerInitializer类，实现了上述接口，如此就能通过它加载各个初始化器了。SpringServletContainerInitializer中实现了WebApplicationInitializer的onStartup方法。观察源码可知，只要实现了该方法，MVC就会把类作为初始化器加载，我们自己写的MyWebAppInitializer最高祖先就是WebApplicationInitializer接口，故自己写的类就会被认作初始化器进行加载。且ContextLoader和DispatcherServlet的初始化器都是继承自WebApplicationInitializer接口的抽象类，我们自己写的类继承层次更低，故会一并初始化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyWebAppInitializer</span> <span class="keyword">extends</span> <span class="title">AbstractAnnotationConfigDispatcherServletInitializer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Spring IoC容器配置</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getRootConfigClasses() &#123;</span><br><span class="line">        <span class="comment">// 可以返回Spring的Java配置文件数组</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class&lt;?&gt;[] &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// DispatcherServlet的URI映射关系配置</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getServletConfigClasses() &#123;</span><br><span class="line">        <span class="comment">// 可以返回Spring的Java配置文件数组</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class&lt;?&gt;[] &#123; WebConfig<span class="class">.<span class="keyword">class</span> &#125;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 拦截内容</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> String[] getServletMappings() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String[] &#123; <span class="string">"/"</span> &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置类的3个方法：</p>
+<ul>
+<li>getRootConfigClasses：获取IoC容器的Java配置类，用于装载各类Spring Bean，若返回空，就不加载Bean到IoC</li>
+<li>getServletConfigClasses：获取各类MVC的URI和控制器的配置关系类，用于生成Web请求上下文</li>
+<li>getServletMappings：定义DispatcherServlet拦截的请求</li>
+</ul>
+<ol start="2">
+<li>
+<p>WebConfig.class：URI和控制器的映射关系类，生成Web请求上下文</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(<span class="string">"*"</span>)</span><br><span class="line"><span class="meta">@EnableWebMvc</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 视图解析器</span></span><br><span class="line">    <span class="meta">@Bean</span> (name = <span class="string">"viewResolver"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ViewResolver <span class="title">initViewResolver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        InternalResourceViewResolver viewResolver = <span class="keyword">new</span> InternalResourceViewResolver();</span><br><span class="line">        viewResolver.setPrefix(<span class="string">"/WEB-INF/jsp/"</span>);</span><br><span class="line">        viewResolver.setSuffix(<span class="string">".jsp"</span>);</span><br><span class="line">        <span class="keyword">return</span> viewResolver;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> </p>
+</li>
+</ol>
+<h1><span id="3-spring-mvc开发流程"> 3. Spring MVC开发流程</span></h1>
+<p>主流采用注解方式。通常是Controller配合RequestMapping注解。RequestMapping配置在类或方法上，指定URI和处理器（被标注的类或方法）。MVC还定义了处理器的拦截器，启动MVC时，会解析Controller中的RequestMapping，再结合拦截器，组成多个拦截器一个控制器的形式，存放到一个HandlerMapping中。请求到来，首先通过请求信息找到对应的HandlerMapping，进而找到对应的拦截器和处理器，运行拦截器和控制器。</p>
+<p> </p>
+<h2><span id="31-requestmapping"> 3.1 @RequestMapping</span></h2>
+<p>配置属性：请求路径value、请求类型method、请求参数params、请求头headers、请求类型为配置类型是匹配处理器consumes、处理器之后的响应用户的结果类型produces。常用请求路径和类型。</p>
+<p>eg：<code>@RequestMapping(value=&quot;/index2&quot;, method=RequestMethod.GET)</code></p>
+<p> </p>
+<h2><span id="32-控制器的开发"> 3.2 控制器的开发</span></h2>
+<p>MVC核心，一般分三步：</p>
+<ol>
+<li>获取请求参数</li>
+<li>处理业务逻辑</li>
+<li>绑定模型和视图</li>
+</ol>
+<h3><span id="321-获取请求参数"> 3.2.1 获取请求参数</span></h3>
+<p>Spring MVC中接收参数的方法很多，不推荐使用Servlet容器的API，会造成Controller依赖Servlet容器。</p>
+<p>Request：Controller中的方法，如要获取请求中的一个Long型参数id，只需使用@RequestParam指明即可，等价于<code>Long id = Long.parseLong(request.getParameter(&quot;id&quot;))</code>。</p>
+<p>@RequestParam有两个配置项：required：boolean(true)，即不允许参数为空；defaultValue。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/index"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">index</span><span class="params">(@RequestParam(<span class="string">"id"</span>)</span> Long id) </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"params[id] = "</span> + id);</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">    mv.setViewName(<span class="string">"index"</span>);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Session：用法同RequestParam，<code>@SessionAttribute(&quot;userName&quot;)</code>。</p>
+<p>稍后介绍更详细的参数传递。</p>
+<h3><span id="322-处理业务逻辑与绑定视图"> 3.2.2 处理业务逻辑与绑定视图</span></h3>
+<p>如XML配置，只需在applicationContext.xml中配置数据库部分即可；若Java配置，在WebConfig的getRootConfigClasses中加入对应的配置类。</p>
+<p>applicationContext.xml：实际是之前学习Spring时的spring-config.xml（功能一致，现因使用Web项目，应将resources下的文件/代码，移至WEB-INF下）。</p>
+<p>业务逻辑处理：此处示例简单，直接在控制器中完成业务逻辑处理，随后绑定视图</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/book"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> BookService bookService = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/getBook"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">getBook</span><span class="params">(@RequestParam(<span class="string">"id"</span>)</span> String id) </span>&#123;</span><br><span class="line">        Book book = bookService.getBook(id);</span><br><span class="line">        ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">        mv.setViewName(<span class="string">"bookDetails"</span>);</span><br><span class="line">        mv.addObject(<span class="string">"book"</span>, book);</span><br><span class="line">        <span class="keyword">return</span> mv;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> </p>
+<h2><span id="33-视图渲染"> 3.3 视图渲染</span></h2>
+<p>一般配置下，MVC默认使用JSTLView进行渲染，将查询出来的模型绑定到JSTL模型，通过JSTL把数据模型读出展示。MVC中还有大量视图。</p>
+<p>由于控制器的代码中，<code>mv.addObject(&quot;book&quot;, book);</code>将book加入到ModelAndView中，故视图中可以直接使用该变量。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;%@ taglib prefix=<span class="string">"c"</span> uri=<span class="string">"http://java.sun.com/jsp/jstl/core"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;book detail&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;center&gt;</span><br><span class="line">        &lt;table border=<span class="string">"1"</span>&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;标签&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;值&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;书籍编号&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;c:out value="$&#123;book.id&#125;" /&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;书籍标题&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;c:out value="$&#123;book.title&#125;" /&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    &lt;/center&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%90%8E%E7%AB%AF/"># 后端</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/04/06/SpringMVC-2-%E6%B7%B1%E5%85%A5%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91/">SpringMVC-2-深入组件开发</a>
+            
+            
+            <a class="next" rel="next" href="/2021/04/03/Spring-5-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/">Spring-5-数据库事务管理</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
