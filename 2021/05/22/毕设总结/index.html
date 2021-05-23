@@ -237,7 +237,7 @@
 </ul>
 <!-- tocstop -->
 <p> </p>
-<h1><span id="mysql"> MySQL</span></h1>
+<h1><span id="mysql">MySQL</span></h1>
 <ol>
 <li>没有Boolean类型，默认用tinyint(1)替代，故SQL中要用数字1，不用true、false</li>
 <li>MySQL建模，建立关系relationship，<code>识别关系</code>是指一对多时，对于n方必须有一个1方存在，<code>非识别关系</code>则反之，n方可以独立存在</li>
@@ -246,7 +246,7 @@
 <li>MYSQL中触发器中不能对本表进行 insert ,update ,delete 操作，以免递归循环触发，对于update 只能用set 进行操作，insert与delete只能借助第二张表才能实现</li>
 </ol>
 <p> </p>
-<h1><span id="配置问题"> 配置问题</span></h1>
+<h1><span id="配置问题">配置问题</span></h1>
 <ol>
 <li>
 <p>本项目共四个配置文件：</p>
@@ -326,7 +326,7 @@
 </li>
 </ol>
 <p> </p>
-<h1><span id="开发"> 开发</span></h1>
+<h1><span id="开发">开发</span></h1>
 <ol>
 <li>
 <p>页面中图片写法：<code>&lt;img src=&quot;&lt;%=request.getContextPath()%&gt;/img/login_bg.jpg&quot;/&gt;</code> 若用“…/…/img/xxx.jpg”，则请求实际为<code>http://localhost:8080/img/login_bg.jpg</code>，没有项目名</p>
@@ -380,34 +380,34 @@
 <p>jQuery post回传，dataType指定回传内容格式，如<code>“json”</code>，此时后台要使用<code>new ModelAndView(new MappingJackson2JsonView());</code>，并如<code>mv.addObject(&quot;res&quot;, res)</code>为回传的json添加参数，前端拿到后在success的函数中<code>(data){data.res}</code>即可访问</p>
 </li>
 <li>
-<p>MyBatis映射器中，<code>&lt;</code> <code>&amp;</code>会被识别为xml文件的标识，故需要转义，另外 &gt; `  &quot;  虽不非法但也应转义书写</p>
+<p>MyBatis映射器中，<code>&lt;</code> <code>&amp;</code>会被识别为xml文件的标识，故需要转义，另外 &gt; ` &quot;  虽不非法但也应转义书写</p>
 <table>
 <thead>
 <tr>
-<th>体引用</th>
-<th>符号</th>
+<th style="text-align:right">实体引用</th>
+<th style="text-align:center">符号</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>&lt;`</td>
-<td>&lt;</td>
+<td style="text-align:right">&amp;lt;</td>
+<td style="text-align:center">&lt;</td>
 </tr>
 <tr>
-<td>&gt;`</td>
-<td>&gt;</td>
+<td style="text-align:right">&amp;gt;</td>
+<td style="text-align:center">&gt;</td>
 </tr>
 <tr>
-<td>&amp;`</td>
-<td>&amp;</td>
+<td style="text-align:right">&amp;amp;</td>
+<td style="text-align:center">&amp;</td>
 </tr>
 <tr>
-<td>'`</td>
-<td>’</td>
+<td style="text-align:right">&amp; apos;</td>
+<td style="text-align:center">’</td>
 </tr>
 <tr>
-<td>&quot;`</td>
-<td>&quot;</td>
+<td style="text-align:right">&amp; quot;</td>
+<td style="text-align:center">&quot;</td>
 </tr>
 </tbody>
 </table>
@@ -423,7 +423,7 @@
 </li>
 </ol>
 <p> </p>
-<h1><span id="tricks"> Tricks</span></h1>
+<h1><span id="tricks">Tricks</span></h1>
 <ol>
 <li>table背景黑，td背景白，则可实现网格划分</li>
 <li>form要附带其他信息一并请求，可用input，css中设置display为none</li>
