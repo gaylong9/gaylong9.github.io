@@ -269,7 +269,7 @@
 </li>
 <li>
 <p>图片等静态资源获取/加载失败，F12观察到对静态资源的获取返回404：DispatcherServlet对“/”拦截，即所有请求都会被其拦截，Controller有标注的请求会被处理，但静态资源的访问Controller中没有，故404。有两个解决方法，使用默认Servlet处理静态资源访问或使用Spring MVC处理静态资源访问。在Java配置实现时，两方法并未生效（当然大概率是配置错了），故改回xml配置。两种方法均需在web(app)下建立img、css、js包，因WEB-INF下无法直接访问，也就不能访问形式引入资源 <a href="https://www.cnblogs.com/zhangcaihua/p/12829083.html" target="_blank" rel="noopener">参考</a>  <a href="https://blog.csdn.net/shixin_li/article/details/80576753" target="_blank" rel="noopener">参考</a></p>
-</li>
+<ol>
 <li>
 <p>前者方法只需在dispatcher-servlet.xml中设置<code>&lt;mvc:default-servlet-handler/&gt;</code>，随后在web.xml中给default Servlet配置mapping的pattern<code>&lt;url-pattern&gt;*.jpg&lt;/url-pattern&gt;</code>即可。前者设置简单，但由于要由Spring交还给Servlet，略微影响应能（默认servlet handler或会影响其他部件，不建议用此法）</p>
 </li>
@@ -278,6 +278,8 @@
 </li>
 <li>
 <p>另有说resources文件夹下的资源文件可以正常获取，但未尝试</p>
+</li>
+</ol>
 </li>
 <li>
 <p>refactor，如重命名已有类，IDEA不会删除原有已编译完的class文件，需要打开out文件夹，手动删除</p>
@@ -378,7 +380,7 @@
 <p>jQuery post回传，dataType指定回传内容格式，如<code>“json”</code>，此时后台要使用<code>new ModelAndView(new MappingJackson2JsonView());</code>，并如<code>mv.addObject(&quot;res&quot;, res)</code>为回传的json添加参数，前端拿到后在success的函数中<code>(data){data.res}</code>即可访问</p>
 </li>
 <li>
-<p>MyBatis映射器中，<code>&lt;</code> <code>&amp;</code>会被识别为xml文件的标识，故需要转义，另外<code>&gt;</code> `` <code></code>&quot;`   虽不非法但也应转义书写</p>
+<p>MyBatis映射器中，<code>&lt;</code> <code>&amp;</code>会被识别为xml文件的标识，故需要转义，另外 &gt; `  &quot;  虽不非法但也应转义书写</p>
 <table>
 <thead>
 <tr>
