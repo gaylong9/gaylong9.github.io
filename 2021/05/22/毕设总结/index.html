@@ -232,6 +232,7 @@
 <ul>
 <li><a href="#mysql">MySQL</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98">配置问题</a></li>
+<li><a href="#ssm%E9%85%8D%E7%BD%AE">SSM配置</a></li>
 <li><a href="#%E5%BC%80%E5%8F%91">开发</a></li>
 <li><a href="#tricks">Tricks</a></li>
 </ul>
@@ -325,6 +326,18 @@
 </ol>
 </li>
 </ol>
+<p> </p>
+<h1><span id="ssm配置">SSM配置</span></h1>
+<p>（1）web.xml是Tomcat服务器所用的配置文件。在此配置了欢迎页属性welcome-file-list，指定登陆页面文件作为欢迎页，如此便可在输入地址时只输入到项目名称，就可显示登陆页面，无需在地址中后缀特别的字段以表示要访问登陆页面。</p>
+<p>（2）web.xml中设置了一个作用于所有请求的过滤器filter，它采用Spring MVC框架中的CharacterEncodingFilter类作为过滤器类，能将请求的编码方式过滤，改为支持中文的编码方式。在此设置之后，所有页面就无需设置，简单方便。</p>
+<p>（3）web.xml中设置了错误页面error-page，404页面就是在此设置，为404错误绑定了专属页面。当发生404错误时，就会以该页面返回显示。</p>
+<p>（4）web.xml中设置了最重要的Servlet——DispatcherServlet，使用的是Spring MVC中的DispatcherServlet类，作用于所有请求。如此便可实现所有请求首先由该类捕获，然后分发给对应的控制器处理。</p>
+<p>（5）dispatcher-servlet.xml是配合上述DispatcherServlet的一个配置文件，其中对DispatcherServlet进行了更详细的配置。在此指明了本系统Spring框架开启注解驱动，如此，在代码中就可以使用注解方便地进行设置。</p>
+<p>（6）dispatcher-servlet.xml中配置了拦截器interceptors，其作用是声明拦截器类，和类要拦截的请求。本系统用此方法实现了权限分隔。在用户使用系统时，每次发起新的请求，被控制器捕获前都会先经过拦截器处理，判断当前用户是否有权限进行接下来的操作。若当前会话内尚无登陆用户信息，就跳转到登陆页面；若当前用户并无进行操作的权限，就跳转至该用户主页，不进行接下来的操作；若用户拥有权限，操作与用户身份匹配，就正常进行后续操作。</p>
+<p>（7）dispatcher-servlet.xml中配置使用Spring MVC处理静态资源访问。如CSS、JavaScript、图片等静态资源，都是单独开启一次访问请求获取，但所有请求已被DispatcherServlet和控制器获取，并无针对静态资源的方法。这就会导致静态资源的获取404。配置resources，指定URL与后端静态资源文件存放路径，就可使针对这些静态资源的访问改由Spring MVC处理，便能正常返回给前端。</p>
+<p>（8）dispatcher-servlet.xml中配置视图解析器Bean，使用Spring MVC的InternalResourceViewResolver类。配置项中的前缀可用于指定页面所在包，后缀可指定页面文件格式。配置后即可实现在控制器中指定视图时，直接写出视图文件名即可，系统会自动加上配置过的前后缀寻找到视图文件绑定数据并返回。</p>
+<p>（9）applicationContext.xml是Spring框架所需的配置文件，本系统使用Spring-MyBatis项目作为Spring与MyBatis的桥梁，使MyBatis能在Spring环境下运行。在此配置文件中指明了数据库相关的设置，如数据源、事务管理器、声明注解驱动等。</p>
+<p>（10）applicationContext.xml中设置数据源URL时，本系统开启了allowMultiQueries，声明MyBatis和MySQL支持一个方法执行多条SQL语句。</p>
 <p> </p>
 <h1><span id="开发">开发</span></h1>
 <ol>
