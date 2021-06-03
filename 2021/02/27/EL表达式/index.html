@@ -247,9 +247,9 @@
 <!-- tocstop -->
 <p> </p>
 <p>[toc]</p>
-<h1><span id="el表达式"> EL表达式</span></h1>
+<h1><span id="el表达式">EL表达式</span></h1>
 <p>Expression Language是JSP 2中引入的新特性，用于JSP文件中的数据访问，简化代码，替代传统<code>&lt;%= %&gt;</code>的Java表达式，以及部分<code>&lt;% %&gt;</code>Java程序片段。</p>
-<h2><span id="1-基本语法"> 1. 基本语法</span></h2>
+<h2><span id="1-基本语法">1. 基本语法</span></h2>
 <ol>
 <li>基本形式<code>${ }</code>，若在JSP模板文本中使用EL表达式，会输出到网页上</li>
 <li>和Java表达式一样，既能直接插入到JSP文件的模板文本中输出到网页，也能作为JSP标签的属性的值</li>
@@ -257,17 +257,17 @@
 <li>主要操作域对象的数据，不可操作局部变量</li>
 <li>命名变量默认从小范围起找，若域对象全找完仍没有，返回空字符串</li>
 </ol>
-<h3><span id="11-访问对象属性及数组元素"> 1.1 访问对象属性及数组元素</span></h3>
+<h3><span id="11-访问对象属性及数组元素">1.1 访问对象属性及数组元素</span></h3>
 <ol>
 <li><code>.</code> 访问对象属性，如<code>${customer.name}</code>表示customer对象的name属性</li>
 <li>也可用<code>[]</code>访问对象属性，如<code>${customer[&quot;name&quot;]}</code>；如属性中有特殊字符，如<code>-</code>则必须用<code>[]</code>访问</li>
 <li><code>[]</code>还可访问数组元素，如<code>${customers[0]}</code></li>
 </ol>
-<h3><span id="12-el运算符"> 1.2 EL运算符</span></h3>
+<h3><span id="12-el运算符">1.2 EL运算符</span></h3>
 <ol>
 <li>
-<p>支持以下运算符：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>+</mo><mo>−</mo><mo>∗</mo><mspace width="1em"><mi mathvariant="normal">/</mi><mi>d</mi><mi>i</mi><mi>v</mi><mspace width="1em"><mi mathvariant="normal">%</mi><mi>m</mi><mi>o</mi><mi>d</mi><mspace width="1em"><mo>=</mo><mo>=</mo><mi>e</mi><mi>q</mi><mspace width="1em"><mo stretchy="false">!</mo><mo>=</mo><mi>n</mi><mi>e</mi><mspace width="1em"><mo>&lt;</mo><mi>l</mi><mi>t</mi><mspace width="1em"><mo>&gt;</mo><mi>g</mi><mi>t</mi><mspace width="1em"><mo>≤</mo><mi>l</mi><mi>e</mi><mspace width="1em"><mo>≥</mo><mi>g</mi><mi>e</mi></mspace></mspace></mspace></mspace></mspace></mspace></mspace></mspace></mrow><annotation encoding="application/x-tex">+-*\quad/div\quad\%mod\quad==eq\quad!=ne\quad&lt;lt\quad&gt;gt\quad \le le \quad \ge ge</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∗</span><span class="mspace" style="margin-right:1em;"></span><span class="mord">/</span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:1em;"></span><span class="mord">%</span><span class="mord mathdefault">m</span><span class="mord mathdefault">o</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mrel">=</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:1em;"></span><span class="mclose">!</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8304100000000001em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83041em;vertical-align:-0.13597em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">e</span></span></span></span></p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">&amp;</mi><mi mathvariant="normal">&amp;</mi><mi>a</mi><mi>n</mi><mi>d</mi><mspace width="1em"><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>o</mi><mi>r</mi><mspace width="1em"><mo stretchy="false">!</mo><mi>n</mi><mi>o</mi><mi>t</mi><mspace width="1em"><mi>e</mi><mi>m</mi><mi>p</mi><mi>t</mi><mi>y</mi><mspace width="1em"><mo stretchy="false">?</mo><mo>:</mo></mspace></mspace></mspace></mspace></mrow><annotation encoding="application/x-tex">\&amp;\&amp;and\quad||or\quad!not\quad empty\quad ?:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">&amp;</span><span class="mord">&amp;</span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:1em;"></span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:1em;"></span><span class="mclose">!</span><span class="mord mathdefault">n</span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">m</span><span class="mord mathdefault">p</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:1em;"></span><span class="mclose">?</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span></span></span></p>
+<p>支持以下运算符：$±*\quad/div\quad%mod\quad==eq\quad!=ne\quad&lt;lt\quad&gt;gt\quad \le le \quad \ge ge$</p>
+<p>$&amp;&amp;and\quad||or\quad!not\quad empty\quad ?😒</p>
 </li>
 <li>
 <p>特殊运算符<code>${empty obj}</code>，判断obj对象是否为空：</p>
@@ -279,7 +279,7 @@
 </ol>
 </li>
 </ol>
-<h3><span id="13-隐含对象"> 1.3 隐含对象</span></h3>
+<h3><span id="13-隐含对象">1.3 隐含对象</span></h3>
 <ol>
 <li>
 <p>EL定义了11个隐含对象，10个都是Map类型，用于访问Web应用中的特定数据</p>
@@ -323,10 +323,10 @@
 <p>EL表达式中无法直接访问JSP的隐含对象，可用pageContext获取，如<code>${pageContext.request.requestURL}</code></p>
 </li>
 </ol>
-<h3><span id="14-命名变量"> 1.4 命名变量</span></h3>
+<h3><span id="14-命名变量">1.4 命名变量</span></h3>
 <p>EL表达式中的变量称为命名变量，不是JSP文件中的局部变量或实例变量，是存放在特定范围内的属性；命名变量的名字和特定范围内的属性名字对应，如<code>${username}</code>表示从page到application范围寻找username这一属性attribute。</p>
 <p> </p>
-<h2><span id="2-el函数"> 2. EL函数</span></h2>
+<h2><span id="2-el函数">2. EL函数</span></h2>
 <ol>
 <li>
 <p>EL表达式可以访问EL函数；<strong>EL函数实际上与Java类中的方法对应，此Java类要为public，作为函数的方法要为public static</strong>；Java类定义后应在标签库描述符TLD文件中把类的方法映射为函数</p>

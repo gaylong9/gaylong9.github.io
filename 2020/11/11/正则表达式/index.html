@@ -254,15 +254,15 @@
 <!-- tocstop -->
 <br>
 <p>[toc]</p>
-<h1><span id="正则表达式"> 正则表达式</span></h1>
+<h1><span id="正则表达式">正则表达式</span></h1>
 <p>检查一个串是否含有某种子串</p>
 <p><a href="http://c.runoob.com/front-end/854" target="_blank" rel="noopener">菜鸟正则表达式在线测试</a></p>
 <p><a href="https://www.runoob.com/regexp/regexp-syntax.html" target="_blank" rel="noopener">菜鸟正则表达式语法</a></p>
 <p> </p>
-<h2><span id="1-普通字符"> 1. 普通字符</span></h2>
+<h2><span id="1-普通字符">1. 普通字符</span></h2>
 <p>如正则<code>123</code>，则可在<strong>123</strong>4<strong>123</strong>匹配到两处</p>
 <p> </p>
-<h2><span id="2-非打印字符"> 2. 非打印字符</span></h2>
+<h2><span id="2-非打印字符">2. 非打印字符</span></h2>
 <table>
 <thead>
 <tr>
@@ -306,7 +306,7 @@
 </tbody>
 </table>
 <p> </p>
-<h2><span id="3-特殊字符"> 3. 特殊字符</span></h2>
+<h2><span id="3-特殊字符">3. 特殊字符</span></h2>
 <table>
 <thead>
 <tr>
@@ -333,7 +333,7 @@
 </tr>
 <tr>
 <td>.</td>
-<td>匹配除换行符<code>\n</code>之外的任何单字符。要匹配.，使用<code>\.</code>。</td>
+<td>匹配除换行符<code>\n</code>之外的任何单字符。要匹配.，使用<code>\. </code>。</td>
 </tr>
 <tr>
 <td>[</td>
@@ -366,7 +366,7 @@
 </tbody>
 </table>
 <p> </p>
-<h3><span id="31-一些需要说明的特殊字符"> 3.1 一些需要说明的特殊字符</span></h3>
+<h3><span id="31-一些需要说明的特殊字符">3.1 一些需要说明的特殊字符</span></h3>
 <ol>
 <li><code>[]</code>：字符簇，用于<strong>匹配单个字符</strong>，若单个字符属于方括号内的字符集合，则匹配成功
 <ol>
@@ -378,7 +378,7 @@
 <li>贪婪限定符：<code>*</code> 和 <code>+</code> 限定符都是贪婪的，会尽可能多地匹配文字，只有在它们的后面加上一个 ? 就可以实现非贪婪或最小匹配。如<code>&lt;.*?&gt;</code>就可以在<code>&lt;h1&gt; title &lt;/h1&gt;</code>中仅匹配到<code>&lt;h1&gt;</code>而非整句了。</li>
 </ol>
 <p> </p>
-<h2><span id="4-限定符"> 4. 限定符</span></h2>
+<h2><span id="4-限定符">4. 限定符</span></h2>
 <p>用于指定某些字符/组件出现次数的符号</p>
 <table>
 <thead>
@@ -415,7 +415,7 @@
 </tbody>
 </table>
 <p> </p>
-<h2><span id="5-定位符"> 5. 定位符</span></h2>
+<h2><span id="5-定位符">5. 定位符</span></h2>
 <p>描述字符串或单词的边界，<code>^</code> 和 <code>$</code> 分别指字符串的开始与结束，<code>\b</code> 描述单词的前或后边界，<code>\B</code> 表示非单词边界。</p>
 <table>
 <thead>
@@ -445,12 +445,12 @@
 </table>
 <p>不能将限定符与定位符一起使用。由于在紧靠换行或者单词边界的前面或后面不能有一个以上位置，因此不允许诸如<code>^*</code> 之类的表达式。</p>
 <p> </p>
-<h2><span id="6-选择"> 6. 选择</span></h2>
+<h2><span id="6-选择">6. 选择</span></h2>
 <ol>
 <li><code>()</code>表示捕获分组，会导致相关匹配存储到一个临时缓冲区中，所捕获的每个子匹配都按照在正则表达式模式中从左到右出现的顺序存储。缓冲区编号从 1 开始，最多可存储 99 个捕获的子表达式，可用<code>\num</code>查看/调用。如<code>(.)\1</code>匹配两个连续的相同字符。</li>
-<li>eg：<code>\b([a-z]+) \1\b\i</code> 表示搜索相邻两单词，在<code>Is is the cost of of gasoline going up up</code>中可搜索到三组结果。</li>
+<li>eg：<code>\b([a-z]+) \1\b\i</code> 表示搜索相邻两单词，在<code>Is is the cost of of gasoline going up up </code>中可搜索到三组结果。</li>
 </ol>
-<h3><span id="61-非捕获元"> 6.1 非捕获元</span></h3>
+<h3><span id="61-非捕获元">6.1 非捕获元</span></h3>
 <p><code>()</code>会导致匹配项缓存，可用非捕获元消除此副作用。</p>
 <ol>
 <li><code>?:</code>：放在第一个选项前，单纯消除缓存</li>
@@ -468,7 +468,7 @@
 </li>
 </ol>
 <p> </p>
-<h2><span id="7-修饰符标记"> 7. 修饰符/标记</span></h2>
+<h2><span id="7-修饰符标记">7. 修饰符/标记</span></h2>
 <p>用于指定额外的匹配策略。标记位于表达式之外。格式<code>/pattern/flags</code>。</p>
 <table>
 <thead>
@@ -497,7 +497,7 @@
 </tbody>
 </table>
 <p> </p>
-<h2><span id="8-优先级"> 8. 优先级</span></h2>
+<h2><span id="8-优先级">8. 优先级</span></h2>
 <p>下表从最高到最低说明了各种正则表达式运算符的优先级顺序：</p>
 <table>
 <thead>

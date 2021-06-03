@@ -258,7 +258,7 @@
 <!-- tocstop -->
 <p> </p>
 <p>[toc]</p>
-<h1><span id="自定义jsp标签"> 自定义JSP标签</span></h1>
+<h1><span id="自定义jsp标签">自定义JSP标签</span></h1>
 <ol>
 <li>为了便于组织和管理，可以把一组功能相同的标签放在同一个标签库中</li>
 <li>开发包含自定义标签的标签库步骤：
@@ -277,7 +277,7 @@
 </li>
 <li>jar包：Servlet API的类库文件servlet-api.jar 和 JSP API的类库文件jsp-api.jar添加到classpath中</li>
 </ol>
-<h2><span id="1-jsp-tag-api"> 1. JSP Tag API</span></h2>
+<h2><span id="1-jsp-tag-api">1. JSP Tag API</span></h2>
 <ol>
 <li>
 <p>容器运行JSP文件时，遇到自定义标签就会调用对应处理类的相关方法，处理类可以继承JSP Tag API中的<code>TagSupport</code>类或<code>BodyTagSupport</code>类</p>
@@ -287,9 +287,9 @@
 <p>![JSP Tag API](自定义JSP标签/JSP Tag API.png)</p>
 </li>
 </ol>
-<h3><span id="11-jsptag接口"> 1.1 JspTag接口</span></h3>
+<h3><span id="11-jsptag接口">1.1 JspTag接口</span></h3>
 <p>所有标签处理类都要实现本接口，只是一个标识接口，没有方法。</p>
-<h3><span id="12-tag接口"> 1.2 Tag接口</span></h3>
+<h3><span id="12-tag接口">1.2 Tag接口</span></h3>
 <p>传统标签Classic Tag</p>
 <ol>
 <li>传统标签处理类的基本方法：
@@ -312,7 +312,7 @@
 </li>
 <li>一个Tag对象创建后就会一直存在，可被容器重复调用；Web应用终止时容器先调用Tag对象的release方法，然后销毁对象</li>
 </ol>
-<h3><span id="13-iterationtag接口"> 1.3 IterationTag接口</span></h3>
+<h3><span id="13-iterationtag接口">1.3 IterationTag接口</span></h3>
 <p>继承自Tag接口，增加了重复执行标签主体内容的功能。</p>
 <ol>
 <li>定义了doAfterBody()方法：容器执行完标签主体内容后，调用此方法；若未执行主体内容则不调用；本方法也返回一个整数值，决定后续流程；Tag.SKIP_BODY不再执行主体内容，Tag.EVAL_BODY_AGAIN重复执行标签主体内容</li>
@@ -326,7 +326,7 @@
 </ol>
 </li>
 </ol>
-<h3><span id="14-bodytag接口"> 1.4 BodyTag接口</span></h3>
+<h3><span id="14-bodytag接口">1.4 BodyTag接口</span></h3>
 <ol>
 <li>继承IterationTag接口，增加了直接访问和操纵标签主体内容的功能
 <ol>
@@ -351,7 +351,7 @@
 </ol>
 </li>
 </ol>
-<h3><span id="15-tagsupport类"> 1.5 TagSupport类</span></h3>
+<h3><span id="15-tagsupport类">1.5 TagSupport类</span></h3>
 <p>标签实现类，TagSupport类实现了IterationTag接口，用户自定义标签时可选继承此类。[如需重复执行标签主体](#4. 重复执行标签主体)</p>
 <ol>
 <li>主要方法除接口中已说明的外，还有以下三个：
@@ -371,7 +371,7 @@
 <li>处理标签的方法：用户自定义标签类时主要是复写doStartTag、doEndTag、doAfterBody方法</li>
 <li>用户自定义的标签属性：若标签包含自定义属性 <code>&lt;prefix:mytag name=&quot;Tom&quot; /&gt;</code>，就要在处理类中将name属性作为private成员变量，并提供set get方法</li>
 </ol>
-<h3><span id="16-bodytagsupport类"> 1.6 BodyTagSupport类</span></h3>
+<h3><span id="16-bodytagsupport类">1.6 BodyTagSupport类</span></h3>
 <p>标签实现类，BodyTagSupport类继承自TagSupport类，并实现了BodyTag接口，用户自定义标签时可选继承此类，可以操纵标签主体内容。[如需访问标签主体内容](#5. 访问标签主体内容)</p>
 <ol>
 <li>有bodyContent成员变量及set get方法，protected，是javax.servlet.jsp.tagext.BodyContent类型，用于缓存标签主体的执行结果</li>
@@ -379,7 +379,7 @@
 <li>子类可以直接访问或get到bodyContent成员变量；BodyContent类的getString方法返回字符串形式的标签主体执行结果</li>
 </ol>
 <p> </p>
-<h2><span id="2-自定义jsp标签实例"> 2. 自定义JSP标签实例</span></h2>
+<h2><span id="2-自定义jsp标签实例">2. 自定义JSP标签实例</span></h2>
 <ol>
 <li>
 <p>编写处理类</p>
@@ -415,7 +415,7 @@
 </li>
 </ol>
 <p> </p>
-<h2><span id="3-访问标签属性"> 3. 访问标签属性</span></h2>
+<h2><span id="3-访问标签属性">3. 访问标签属性</span></h2>
 <ol>
 <li>如静态文本等内容，多次重复，可用标签替代，便于维护</li>
 <li>步骤
@@ -427,7 +427,7 @@
 <li>message标签处理类根据key的属性值，从特定资源文件中找到匹配的字符串</li>
 <li>此法甚至能实现一个JSP文件支持多种语言版本</li>
 </ol>
-<h3><span id="31-创建标签处理类messagetag"> 3.1 创建标签处理类MessageTag</span></h3>
+<h3><span id="31-创建标签处理类messagetag">3.1 创建标签处理类MessageTag</span></h3>
 <ol>
 <li>
 <p>首先需要资源文件，包含要替代的静态文本等，以key-value形式存放；中文资源文件messagesource_ch.properties，英文资源文件messagesouorce_en.properties，存放在WEB-INF下；约定不同页面的静态文本，用key区分</p>
@@ -447,7 +447,7 @@
 <p>Properties对象通过InputStream流装载文件时，是按照ISO-8859-1编码，故需转换。</p>
 </li>
 </ol>
-<h3><span id="32-创建标签库描述文件tld"> 3.2 创建标签库描述文件TLD</span></h3>
+<h3><span id="32-创建标签库描述文件tld">3.2 创建标签库描述文件TLD</span></h3>
 <p>TLD中元素有三类：<code>&lt;taglib&gt;</code>标签库元素，<code>&lt;tag&gt;</code>标签元素，<code>&lt;attribute&gt;</code>标签属性元素</p>
 <ol>
 <li>标签库元素<code>&lt;taglib&gt;</code>，设定标签库的相关信息，其子元素：
@@ -477,7 +477,7 @@
 </ol>
 <p>创建名为mytaglib.tld的TLD文件</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">taglib</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">tlib-version</span>&gt;</span>1.1<span class="tag">&lt;/<span class="name">tlib-version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">jsp-version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">jsp-version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">short-name</span>&gt;</span>mytaglib<span class="tag">&lt;/<span class="name">short-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">uri</span>&gt;</span>/mytaglib<span class="tag">&lt;/<span class="name">uri</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">tag</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>message<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tag-class</span>&gt;</span>mypack.MessageTag<span class="tag">&lt;/<span class="name">tag-class</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">body-content</span>&gt;</span>empty<span class="tag">&lt;/<span class="name">body-content</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">info</span>&gt;</span>produce message by key<span class="tag">&lt;/<span class="name">info</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">attribute</span>&gt;</span></span><br><span class="line">        	<span class="tag">&lt;<span class="name">name</span>&gt;</span>key<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">required</span>&gt;</span>true<span class="tag">&lt;/<span class="name">required</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">attribute</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">taglib</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3><span id="33-web应用中使用标签"> 3.3 Web应用中使用标签</span></h3>
+<h3><span id="33-web应用中使用标签">3.3 Web应用中使用标签</span></h3>
 <ol>
 <li>
 <p>web.xml中加入<code>&lt;taglib&gt;</code>以引入自定义标签库</p>
@@ -489,7 +489,7 @@
 </li>
 </ol>
 <p> </p>
-<h2><span id="4-重复执行标签主体"> 4. 重复执行标签主体</span></h2>
+<h2><span id="4-重复执行标签主体">4. 重复执行标签主体</span></h2>
 <p>如需重复执行操作时，原生方法需要JSP与Java 的for混用，可自定义一个iterate标签来重复执行主体。</p>
 <ol>
 <li>
@@ -523,7 +523,7 @@
 <p> </p>
 </li>
 </ol>
-<h2><span id="5-访问标签主体内容"> 5. 访问标签主体内容</span></h2>
+<h2><span id="5-访问标签主体内容">5. 访问标签主体内容</span></h2>
 <p>操纵标签主体内容，继承BodyTagSupport类，具有重复执行主体内容，访问存放在BodyContent对象中的标签主体的执行结果 的功能。</p>
 <p>以自定义名为greet的标签为例，其功能是判断请求参数username，若是Monster，则输出&quot;Go away, Monster!&quot;，否则就先缓存count次主体的值，然后输出。</p>
 <p>处理类</p>

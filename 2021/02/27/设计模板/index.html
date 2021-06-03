@@ -252,10 +252,10 @@
 <!-- tocstop -->
 <p> </p>
 <p>[toc]</p>
-<h1><span id="设计模板"> 设计模板</span></h1>
+<h1><span id="设计模板">设计模板</span></h1>
 <p>为使网站页面风格统一，可通过自定义JSP标签为网站设计模板。所有在客户端战士的页面都通过模板生成。由此，提高开发效率，便于维护，修改模板即可实现批量网页修改。</p>
 <p>实际运用中，已有现成框架软件，通常不需从头设计模板。</p>
-<h2><span id="1-如何设计模板"> 1. 如何设计模板</span></h2>
+<h2><span id="1-如何设计模板">1. 如何设计模板</span></h2>
 <ol>
 <li>先找出所有网页在结构和内容上的相同之处，把相同之处定义在模板中，模板本身也常是JSP文件。如bookstore中，每个页面都是title+body（banner、body）结构，故可定义template.jsp作为模板。当接收到请求时，template.jsp中的自定义标签可以根据客户的请求，把具体的title、banner、body填充进去，生成所需网页</li>
 <li>所有客户请求都由DispatcherServlet类处理，将请求的具体URL保存在请求范围中，再把请求转发给template.jsp。jsp从请求范围读取请求URL，根据请求生成相关网页</li>
@@ -268,7 +268,7 @@
 </li>
 </ol>
 <p> </p>
-<h2><span id="2-负责流程控制的servlet"> 2. 负责流程控制的Servlet</span></h2>
+<h2><span id="2-负责流程控制的servlet">2. 负责流程控制的Servlet</span></h2>
 <p>所有请求都由DispatcherServlet类处理，把请求的URL作为selectScreen属性存放在请求范围，转发请求给template.jsp。template.jsp中的自定义标签再从请求范围中读取selectScreen属性，把具体的title、body内容填充进去，生成所需网页</p>
 <ol>
 <li>
@@ -287,7 +287,7 @@
 </li>
 </ol>
 <p> </p>
-<h2><span id="3-模板标签和模板jsp"> 3. 模板标签和模板JSP</span></h2>
+<h2><span id="3-模板标签和模板jsp">3. 模板标签和模板JSP</span></h2>
 <ol>
 <li>
 <p>template.jsp</p>
@@ -305,7 +305,7 @@
 <p>​	<code>&lt;insert&gt;</code>负责把客户请求的网页的各项内容填充到模板中</p>
 </li>
 </ol>
-<h3><span id="31-ltparametergt标签和处理类"> 3.1 &lt;parameter&gt;标签和处理类</span></h3>
+<h3><span id="31-ltparametergt标签和处理类">3.1 &lt;parameter&gt;标签和处理类</span></h3>
 <ol>
 <li>
 <p>本标签定义了网页中的某一部分的内容，有3个属性：</p>
@@ -331,7 +331,7 @@
 </li>
 </ol>
 <p> </p>
-<h3><span id="32-ltscreengt标签和处理类"> 3.2 &lt;screen&gt;标签和处理类</span></h3>
+<h3><span id="32-ltscreengt标签和处理类">3.2 &lt;screen&gt;标签和处理类</span></h3>
 <p>本例中，screendefinitions.jsp中定义了6个<code>&lt;screen&gt;</code>标签，分别代表了本例所实现的6个网页。<code>&lt;screen&gt;</code>标签是<code>&lt;definition&gt;</code>的子标签，又是<code>&lt;parameter&gt;</code>的父标签</p>
 <ol>
 <li>
@@ -343,7 +343,7 @@
 </li>
 </ol>
 <p> </p>
-<h3><span id="33-ltdefinitiongt标签和处理类"> 3.3 &lt;definition&gt;标签和处理类</span></h3>
+<h3><span id="33-ltdefinitiongt标签和处理类">3.3 &lt;definition&gt;标签和处理类</span></h3>
 <ol>
 <li>
 <p>本标签根据客户请求，决定输出的网页内容</p>
@@ -371,7 +371,7 @@
 </li>
 </ol>
 <p> </p>
-<h3><span id="34-ltinsertgt标签和处理类"> 3.4 &lt;insert&gt;标签和处理类</span></h3>
+<h3><span id="34-ltinsertgt标签和处理类">3.4 &lt;insert&gt;标签和处理类</span></h3>
 <p>本标签在template.jsp中，用于将网页的某部分内容填充到模板中，生成客户所需页面。 如<code>&lt;mm:insert definition=&quot;bookstore&quot; parameter=&quot;title&quot; /&gt;</code></p>
 <ol>
 <li>
@@ -399,7 +399,7 @@
 </li>
 </ol>
 <p> </p>
-<h3><span id="35-配置"> 3.5 配置</span></h3>
+<h3><span id="35-配置">3.5 配置</span></h3>
 <ol>
 <li>
 <p>mytaglib.tld</p>
@@ -411,7 +411,7 @@
 </li>
 </ol>
 <p> </p>
-<h2><span id="4-修改调整其余jsp"> 4. 修改/调整其余JSP</span></h2>
+<h2><span id="4-修改调整其余jsp">4. 修改/调整其余JSP</span></h2>
 <p>当使用模板时，除template.jsp外，其余JSP不能单独构成网页，均是模板中的部分内容。故：</p>
 <ol>
 <li>title部分是String类型，不需专门JSP</li>
@@ -420,7 +420,7 @@
 <li>此外，为保证请求的URL都能有DispatcherServlet接收，要修改JSP中的URL链接，将链接标签中的/xxx.jsp改为/xxx</li>
 </ol>
 <p> </p>
-<h2><span id="5-目录"> 5. 目录</span></h2>
+<h2><span id="5-目录">5. 目录</span></h2>
 <ol>
 <li>DispatcherServlet：webapp/WEB-INF/classes/mypack</li>
 <li>标签处理类和相关类：webapp/WEB-INF/classes/mytaglib</li>
@@ -428,7 +428,7 @@
 <li>mytaglib.tld：webapp/WEB-INF</li>
 </ol>
 <p> </p>
-<h2><span id="6-流程总结"> 6. 流程总结</span></h2>
+<h2><span id="6-流程总结">6. 流程总结</span></h2>
 <p><img src="/2021/02/27/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E6%9D%BF/%E6%A8%A1%E6%9D%BF%E6%B5%81%E7%A8%8B.jpg" alt="模板流程"></p>
 
         </div>
