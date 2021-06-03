@@ -15,6 +15,7 @@
 
 
 <title>SiamDW | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
 
 
 
@@ -230,14 +231,13 @@
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#siam%E7%89%B9%E7%82%B9">siam特点</a></li>
-<li><a href="#siam%E5%8E%86%E5%8F%B2">Siam历史</a></li>
+<li><a href="#siam特点">siam特点</a></li>
+<li><a href="#siam历史">Siam历史</a></li>
 <li><a href="#motivation">Motivation</a></li>
-<li><a href="#analysis-guidelines">Analysis &amp; Guidelines</a>
-<ul>
+<li><a href="#analysis-guidelines">Analysis &amp; Guidelines</a><ul>
 <li><a href="#paddingpad">padding/PAD</a></li>
-<li><a href="#%E6%AD%A5%E9%95%BFstr">步长STR</a></li>
-<li><a href="#%E6%84%9F%E5%8F%97%E9%87%8Erf%E5%92%8C%E8%BE%93%E5%87%BA%E5%B0%BA%E5%AF%B8ofs">感受野RF和输出尺寸OFS</a></li>
+<li><a href="#步长str">步长STR</a></li>
+<li><a href="#感受野rf和输出尺寸ofs">感受野RF和输出尺寸OFS</a></li>
 <li><a href="#guidelines">Guidelines</a></li>
 </ul>
 </li>
@@ -246,33 +246,27 @@
 <!-- tocstop -->
 <p>[toc]</p>
 <p><a href="https://www.bilibili.com/video/av52113951" target="_blank" rel="noopener">作者讲解视频&amp;PPT</a></p>
-<br>
-<h1><span id="siam特点"> siam特点</span></h1>
-<ol>
+<p><br></p>
+<h1><span id="siam特点">siam特点</span></h1><ol>
 <li>共享权重</li>
 <li>做检索，对比相似性。information经过相同网络，在空间中产生表征向量，计算距离代表相似性</li>
 <li>以pair对形式进入网络，两两组合，相当于增加数据量</li>
 </ol>
 <p><img src="/2020/03/04/SiamDW/simple_siam.png" alt="simple_siam"></p>
-<br>
-<h1><span id="siam历史"> Siam历史</span></h1>
-<ol>
-<li>
-<p>SINT：在图像中抽取很多候选目标，经过同一网络，与模板比较，选择距离最小（最相似）</p>
-<p><img src="/2020/03/04/SiamDW/SINT.png" alt="SINT"></p>
+<p><br></p>
+<h1><span id="siam历史">Siam历史</span></h1><ol>
+<li><p>SINT：在图像中抽取很多候选目标，经过同一网络，与模板比较，选择距离最小（最相似）</p>
+<p> <img src="/2020/03/04/SiamDW/SINT.png" alt="SINT"></p>
 </li>
-<li>
-<p>SiamFC：Cross-correlation互相关，与卷积类似，滑窗，计算相似性</p>
-<p><img src="/2020/03/04/SiamDW/SiamFC_1.png" alt="SiamFC_1"></p>
+<li><p>SiamFC：Cross-correlation互相关，与卷积类似，滑窗，计算相似性</p>
+<p> <img src="/2020/03/04/SiamDW/SiamFC_1.png" alt="SiamFC_1"></p>
 </li>
-<li>
-<p>SiamRPN：通过RPN，解决了SiamFC中的僵硬的尺度估计：手动设定几个scale</p>
-<p><img src="/2020/03/04/SiamDW/SiamRPN_net.png" alt="SiamRPN_net"></p>
+<li><p>SiamRPN：通过RPN，解决了SiamFC中的僵硬的尺度估计：手动设定几个scale</p>
+<p> <img src="/2020/03/04/SiamDW/SiamRPN_net.png" alt="SiamRPN_net"></p>
 </li>
 </ol>
-<br>
-<h1><span id="motivation"> Motivation</span></h1>
-<p>原有backbone很浅，改用深层，performance降低及思考：</p>
+<p><br></p>
+<h1><span id="motivation">Motivation</span></h1><p>原有backbone很浅，改用深层，performance降低及思考：</p>
 <ol>
 <li>backbone的基本模块：res、inception、卷积</li>
 <li>stride：分类大，精细任务小</li>
@@ -280,108 +274,92 @@
 <li>输出尺寸：AlexNet 6×6、而后者为16或32</li>
 </ol>
 <p><img src="/2020/03/04/SiamDW/motivation.png" alt="motivation"></p>
-<br>
-<h1><span id="analysis-amp-guidelines"> Analysis &amp; Guidelines</span></h1>
-<p>通过修改感受野、步长、输出特征尺寸、padding与否、backbone类型，进行实验，发现padding会降点</p>
-<h2><span id="paddingpad"> padding/PAD</span></h2>
-<p><img src="/2020/03/04/SiamDW/padding_test.png" alt="padding_test"></p>
+<p><br></p>
+<h1><span id="analysis-amp-guidelines">Analysis &amp; Guidelines</span></h1><p>通过修改感受野、步长、输出特征尺寸、padding与否、backbone类型，进行实验，发现padding会降点</p>
+<h2><span id="paddingpad">padding/PAD</span></h2><p><img src="/2020/03/04/SiamDW/padding_test.png" alt="padding_test"></p>
 <p>padding导致掉点（但输出尺寸不一致，不能说完全都是padding影响）</p>
 <ol>
-<li>
-<p>无padding：</p>
-<p><img src="/2020/03/04/SiamDW/without_padding.png" alt="without_padding"></p>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow></mrow><annotation encoding="application/x-tex"></annotation></semantics></math></span><span class="katex-html" aria-hidden="true"></span></span></span></p>
-<p>R2=\phi(B)·\phi(E) \<br>
-R1 = R2</p>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow></mrow><annotation encoding="application/x-tex">
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"></span></span></span></p>
-<ol start="2">
-<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">A B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span>：目标位置</li>
-<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">ϕ</span></span></span></span>：backbone，提取特征向量</li>
-<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo separator="true">⋅</mo></mrow><annotation encoding="application/x-tex">·</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mpunct">⋅</span></span></span></span>：cross-correlation</li>
-<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span>：响应</li>
+<li><p>无padding：</p>
+<p> <img src="/2020/03/04/SiamDW/without_padding.png" alt="without_padding"></p>
+<script type="math/tex; mode=display">
+ R1=\phi(A)·\phi(E) \\
+ R2=\phi(B)·\phi(E) \\
+ R1 = R2</script><ol>
+<li>$E$：模板<ol>
+<li>$A B$：目标位置</li>
+<li>$\phi$：backbone，提取特征向量</li>
+<li>$·$：cross-correlation</li>
+<li>$R$：响应</li>
 <li>因为E相同、A和B是同一目标提取向量所得，相同，故两响应相同，满足平移不变性</li>
 </ol>
 </li>
-<li>
-<p>有padding：</p>
-<p><img src="/2020/03/04/SiamDW/with_padding.png" alt="with_padding"></p>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow></mrow><annotation encoding="application/x-tex"></annotation></semantics></math></span><span class="katex-html" aria-hidden="true"></span></span></span></p>
-<p>R2=\phi(B’)·\phi(E’) \<br>
-R1 \not= R2</p>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow></mrow><annotation encoding="application/x-tex">
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"></span></span></span></p>
-<ol start="2">
+</ol>
+</li>
+<li><p>有padding：</p>
+<p> <img src="/2020/03/04/SiamDW/with_padding.png" alt="with_padding"></p>
+<script type="math/tex; mode=display">
+ R1=\phi(A')·\phi(E') \\
+ R2=\phi(B')·\phi(E') \\
+ R1 \not= R2</script><ol>
+<li>padding引入外层感受野，目标位置变大，模板变大</li>
 <li>扩大后的目标<strong>仍在</strong>画面中时，没有变化</li>
-<li>扩大后的目标<strong>不在</strong>画面中时，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><msup><mi>A</mi><mo mathvariant="normal">′</mo></msup><mo stretchy="false">)</mo><mo>≠</mo><mi>ϕ</mi><mo stretchy="false">(</mo><msup><mi>B</mi><mo mathvariant="normal">′</mo></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\phi(A&#x27;)\not=\phi(B&#x27;)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="mord mathdefault">ϕ</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="mord mathdefault">ϕ</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，最终导致两响应不同，破坏平移不变性</li>
+<li>扩大后的目标<strong>不在</strong>画面中时，$\phi(A’)\not=\phi(B’)$，最终导致两响应不同，破坏平移不变性</li>
 <li><strong>而深层网络中，感受野会快速扩大，很容易就会超出画面</strong></li>
 </ol>
 </li>
 </ol>
-<h2><span id="步长str"> 步长STR</span></h2>
-<p><img src="/2020/03/04/SiamDW/other_test.png" alt="other_test"></p>
+<h2><span id="步长str">步长STR</span></h2><p><img src="/2020/03/04/SiamDW/other_test.png" alt="other_test"></p>
 <p>跟踪的位移较小，使用小步长捕捉微小变化（siam跟踪通常为8）</p>
-<h2><span id="感受野rf和输出尺寸ofs"> 感受野RF和输出尺寸OFS</span></h2>
-<ol>
-<li>
-<p>二者具有相关性，互影响，所以一起讨论</p>
+<h2><span id="感受野rf和输出尺寸ofs">感受野RF和输出尺寸OFS</span></h2><ol>
+<li><p>二者具有相关性，互影响，所以一起讨论</p>
 </li>
-<li>
-<p>在实验中，performance出现“单峰”，表示RF和OFS大小适中为好</p>
+<li><p>在实验中，performance出现“单峰”，表示RF和OFS大小适中为好</p>
 </li>
-<li>
-<p>后续分析：</p>
-<p><img src="/2020/03/04/SiamDW/analysis.png" alt="analysis"></p>
+<li><p>后续分析：</p>
+<p> <img src="/2020/03/04/SiamDW/analysis.png" alt="analysis"></p>
 <ol>
 <li>feature map中的element，所对应的RF太小，表示网络太浅，提取特征能力差；而RF太大，不仅捕捉不到细节，而且element之间的重叠率overlap ratio上升，导致特征信息冗余，也会降低feature的判别</li>
 <li>故感受野合适大小才行</li>
 </ol>
 </li>
 </ol>
-<h2><span id="guidelines"> Guidelines</span></h2>
-<ol>
+<h2><span id="guidelines">Guidelines</span></h2><ol>
 <li>步长：小，4或8，捕捉运动变化（4较慢）</li>
 <li>感受野：feature与输入的尺寸比在60%~80%</li>
 <li>步长、感受野、输出尺寸，应作为整体考虑，最终performance是每个环节共同决定。实验中不去掉padding，而通过CIR修改输出尺寸，也能获得不错的效果</li>
 </ol>
-<br>
-<h1><span id="method"> Method</span></h1>
-<p>根据以上guidelines，设计新的网络</p>
+<p><br></p>
+<h1><span id="method">Method</span></h1><p>根据以上guidelines，设计新的网络</p>
 <ol>
-<li>
-<p>1×1卷积：调整维度，减少参数</p>
-<p><a href="https://zhuanlan.zhihu.com/p/27642620" target="_blank" rel="noopener" title="源网址"><img src="/2020/03/04/SiamDW/1times1conv.png" alt="1times1conv"></a></p>
+<li><p>1×1卷积：调整维度，减少参数</p>
+<p> <a href="https://zhuanlan.zhihu.com/p/27642620" target="_blank" rel="noopener" title="源网址"><img src="/2020/03/04/SiamDW/1times1conv.png" alt="1times1conv"></a></p>
 </li>
-<li>
-<p>cropping-inside residual unit</p>
+<li><p>cropping-inside residual unit</p>
 <ol>
-<li>
-<p>CIR Module：原始残差单元中，两个1×1用于维度调整，3×3卷积，因为padding为1、stride为1，输出feature map中仅最外一圈受padding影响，故本文中移去。此法除了消除padding影响，而且因为减小了feature大小，有提速作用。</p>
-<p><img src="/2020/03/04/SiamDW/CIR.png" alt="CIR"></p>
+<li><p>CIR Module：原始残差单元中，两个1×1用于维度调整，3×3卷积，因为padding为1、stride为1，输出feature map中仅最外一圈受padding影响，故本文中移去。此法除了消除padding影响，而且因为减小了feature大小，有提速作用。</p>
+<p> <img src="/2020/03/04/SiamDW/CIR.png" alt="CIR"></p>
 </li>
-<li>
-<p>CIR-Downsampling Module：原始残差网络的深层下采样单元，采用conv中增大步长的方式减小feature map大小；本文不同于传统认为的conv+大步长会减轻信息丢失，而是采用了小步长+最大池化的下采样方法。</p>
-<p><img src="/2020/03/04/SiamDW/CIR-D.png" alt="CIR-D"></p>
-<p>原因：传统方法结合crop消去最外层feature后，剩余feature map的感受野不足以覆盖完整图片。改为stride1后，紫色映射范围向左上移动一位，覆盖完全。</p>
-<p>以原本的stride2 conv3的方式下采样：</p>
-<p><img src="/2020/03/04/SiamDW/CIR-D_2.png" alt="CIR-D_2"></p>
-<p><img src="/2020/03/04/SiamDW/loss_feature_with_str-1583335627710.png" alt="loss_feature_with_str"></p>
+<li><p>CIR-Downsampling Module：原始残差网络的深层下采样单元，采用conv中增大步长的方式减小feature map大小；本文不同于传统认为的conv+大步长会减轻信息丢失，而是采用了小步长+最大池化的下采样方法。</p>
+<p> <img src="/2020/03/04/SiamDW/CIR-D.png" alt="CIR-D"></p>
+<p> 原因：传统方法结合crop消去最外层feature后，剩余feature map的感受野不足以覆盖完整图片。改为stride1后，紫色映射范围向左上移动一位，覆盖完全。</p>
+<p> 以原本的stride2 conv3的方式下采样：</p>
+<p> <img src="/2020/03/04/SiamDW/CIR-D_2.png" alt="CIR-D_2"></p>
+<p> <img src="/2020/03/04/SiamDW/loss_feature_with_str-1583335627710.png" alt="loss_feature_with_str"></p>
 </li>
 </ol>
 </li>
-<li>
-<p>构建新网络</p>
-<p>通过在不同网络、不同深度下的组合测试（实验中注意不能一味追求深度，要注意输出尺寸）</p>
+<li><p>构建新网络</p>
+<p> 通过在不同网络、不同深度下的组合测试（实验中注意不能一味追求深度，要注意输出尺寸）</p>
 <ol>
 <li>确定步长：3-stage网络步长为8；2-stage网络步长为4</li>
 <li>堆叠CIR单元：合理控制CIR、CIR-D单元数，确保最终层神经元感受野在原图的60%~80%（并非全部都是CIR单元，具体见论文描述）</li>
-<li>深度增加，感受野超过合理区间时，减半步长至4</li>
-</ol>
+<li><p>深度增加，感受野超过合理区间时，减半步长至4</p>
 <p>最终确定了深度为22层。</p>
 </li>
-<li>
-<p>加宽channel</p>
-<p>作者尝试在ResNet的unit的1、 3、 1卷积中加宽通道数以提升性能，结果过高的通道数造成掉点。作者认为过高的通道对cross-correlation并不友好，最终在256或512为宜。</p>
+</ol>
+</li>
+<li><p>加宽channel</p>
+<p> 作者尝试在ResNet的unit的1、 3、 1卷积中加宽通道数以提升性能，结果过高的通道数造成掉点。作者认为过高的通道对cross-correlation并不友好，最终在256或512为宜。</p>
 </li>
 </ol>
 
@@ -426,5 +404,25 @@ R1 \not= R2</p>
 </footer>
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

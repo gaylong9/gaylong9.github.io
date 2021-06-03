@@ -15,6 +15,7 @@
 
 
 <title>Servlet | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
 
 
 
@@ -226,112 +227,98 @@
         </header>
 
         <div class="post-content">
-            <p> </p>
+            <p>&nbsp;</p>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#servlet">Servlet</a>
-<ul>
-<li><a href="#1-http%E5%8D%8F%E8%AE%AE">1. HTTP协议</a></li>
-<li><a href="#2-servlet-api">2. Servlet API</a>
-<ul>
-<li><a href="#21-servlet%E6%8E%A5%E5%8F%A3">2.1 Servlet接口</a></li>
-<li><a href="#22-genericservlet%E6%8A%BD%E8%B1%A1%E7%B1%BB">2.2 GenericServlet抽象类</a></li>
-<li><a href="#23-httpservlet%E6%8A%BD%E8%B1%A1%E7%B1%BB">2.3 HttpServlet抽象类</a></li>
-<li><a href="#24-servletrequest%E6%8E%A5%E5%8F%A3">2.4 ServletRequest接口</a></li>
-<li><a href="#25-httpservletrequest%E6%8E%A5%E5%8F%A3">2.5 HttpServletRequest接口</a></li>
-<li><a href="#26-servletresponse%E6%8E%A5%E5%8F%A3">2.6 ServletResponse接口</a></li>
-<li><a href="#27-httpservletresponse%E6%8E%A5%E5%8F%A3">2.7 HttpServletResponse接口</a></li>
-<li><a href="#28-servletconfig%E6%8E%A5%E5%8F%A3">2.8 ServletConfig接口</a></li>
-<li><a href="#29-servletcontext%E6%8E%A5%E5%8F%A3">2.9 ServletContext接口</a></li>
+<li><a href="#servlet">Servlet</a><ul>
+<li><a href="#1-http协议">1. HTTP协议</a></li>
+<li><a href="#2-servlet-api">2. Servlet API</a><ul>
+<li><a href="#21-servlet接口">2.1 Servlet接口</a></li>
+<li><a href="#22-genericservlet抽象类">2.2 GenericServlet抽象类</a></li>
+<li><a href="#23-httpservlet抽象类">2.3 HttpServlet抽象类</a></li>
+<li><a href="#24-servletrequest接口">2.4 ServletRequest接口</a></li>
+<li><a href="#25-httpservletrequest接口">2.5 HttpServletRequest接口</a></li>
+<li><a href="#26-servletresponse接口">2.6 ServletResponse接口</a></li>
+<li><a href="#27-httpservletresponse接口">2.7 HttpServletResponse接口</a></li>
+<li><a href="#28-servletconfig接口">2.8 ServletConfig接口</a></li>
+<li><a href="#29-servletcontext接口">2.9 ServletContext接口</a></li>
 </ul>
 </li>
-<li><a href="#3-java-web%E5%BA%94%E7%94%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">3. Java Web应用的生命周期</a>
-<ul>
-<li><a href="#31-%E5%90%AF%E5%8A%A8%E9%98%B6%E6%AE%B5">3.1 启动阶段</a></li>
-<li><a href="#32-%E8%BF%90%E8%A1%8C%E6%97%B6%E9%98%B6%E6%AE%B5">3.2 运行时阶段</a></li>
-<li><a href="#33-%E7%BB%88%E6%AD%A2%E9%98%B6%E6%AE%B5">3.3 终止阶段</a></li>
-<li><a href="#34-tomcat%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E7%AE%A1%E7%90%86%E5%BA%94%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">3.4 Tomcat管理平台管理应用生命周期</a></li>
+<li><a href="#3-java-web应用的生命周期">3. Java Web应用的生命周期</a><ul>
+<li><a href="#31-启动阶段">3.1 启动阶段</a></li>
+<li><a href="#32-运行时阶段">3.2 运行时阶段</a></li>
+<li><a href="#33-终止阶段">3.3 终止阶段</a></li>
+<li><a href="#34-tomcat管理平台管理应用生命周期">3.4 Tomcat管理平台管理应用生命周期</a></li>
 </ul>
 </li>
-<li><a href="#4-servlet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">4. Servlet生命周期</a>
-<ul>
-<li><a href="#41-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%98%B6%E6%AE%B5">4.1 初始化阶段</a></li>
-<li><a href="#42-%E8%BF%90%E8%A1%8C%E6%97%B6%E9%98%B6%E6%AE%B5">4.2 运行时阶段</a></li>
-<li><a href="#43-%E9%94%80%E6%AF%81%E9%98%B6%E6%AE%B5">4.3 销毁阶段</a></li>
+<li><a href="#4-servlet生命周期">4. Servlet生命周期</a><ul>
+<li><a href="#41-初始化阶段">4.1 初始化阶段</a></li>
+<li><a href="#42-运行时阶段">4.2 运行时阶段</a></li>
+<li><a href="#43-销毁阶段">4.3 销毁阶段</a></li>
 </ul>
 </li>
-<li><a href="#5-servletcontext%E4%B8%8Eweb%E5%BA%94%E7%94%A8%E8%8C%83%E5%9B%B4">5. ServletContext与Web应用范围</a>
-<ul>
+<li><a href="#5-servletcontext与web应用范围">5. ServletContext与Web应用范围</a><ul>
 <li><a href="#51-servletcontextlistener">5.1 ServletContextListener</a></li>
 </ul>
 </li>
-<li><a href="#6-servletservice%E7%9A%84%E5%BC%82%E5%B8%B8">6. Servlet.service()的异常</a></li>
-<li><a href="#7-%E9%98%B2%E6%AD%A2%E9%A1%B5%E9%9D%A2%E8%A2%AB%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%BC%93%E5%AD%98">7. 防止页面被客户端缓存</a></li>
-<li><a href="#8-annotation%E6%A0%87%E6%B3%A8%E9%85%8D%E7%BD%AEservlet">8. Annotation标注配置Servlet</a>
-<ul>
-<li><a href="#81-servlet%E7%9A%84%E6%A0%87%E6%B3%A8%E9%85%8D%E7%BD%AE">8.1 Servlet的标注配置</a></li>
-<li><a href="#82-servletcontextlistener%E7%9A%84%E6%A0%87%E6%B3%A8%E9%85%8D%E7%BD%AE">8.2 ServletContextListener的标注配置</a></li>
+<li><a href="#6-servletservice的异常">6. Servlet.service()的异常</a></li>
+<li><a href="#7-防止页面被客户端缓存">7. 防止页面被客户端缓存</a></li>
+<li><a href="#8-annotation标注配置servlet">8. Annotation标注配置Servlet</a><ul>
+<li><a href="#81-servlet的标注配置">8.1 Servlet的标注配置</a></li>
+<li><a href="#82-servletcontextlistener的标注配置">8.2 ServletContextListener的标注配置</a></li>
 </ul>
 </li>
-<li><a href="#9-%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81">9. 中文字符编码</a>
-<ul>
-<li><a href="#91-http%E8%AF%B7%E6%B1%82">9.1 HTTP请求</a></li>
-<li><a href="#92-http%E5%93%8D%E5%BA%94">9.2 HTTP响应</a></li>
+<li><a href="#9-中文字符编码">9. 中文字符编码</a><ul>
+<li><a href="#91-http请求">9.1 HTTP请求</a></li>
+<li><a href="#92-http响应">9.2 HTTP响应</a></li>
 </ul>
 </li>
-<li><a href="#10-%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6">10. 下载文件</a></li>
-<li><a href="#11-%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6">11. 上传文件</a>
-<ul>
-<li><a href="#111-%E5%89%8D%E5%8F%B0">11.1 前台</a></li>
-<li><a href="#112-%E5%90%8E%E5%8F%B0">11.2 后台</a>
-<ul>
+<li><a href="#10-下载文件">10. 下载文件</a></li>
+<li><a href="#11-上传文件">11. 上传文件</a><ul>
+<li><a href="#111-前台">11.1 前台</a></li>
+<li><a href="#112-后台">11.2 后台</a><ul>
 <li><a href="#1121-apache">11.2.1 Apache</a></li>
 <li><a href="#1122-part">11.2.2 Part</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#12-%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E5%9B%BE%E5%83%8F">12. 动态生成图像</a></li>
+<li><a href="#12-动态生成图像">12. 动态生成图像</a></li>
 <li><a href="#13-cookie">13. Cookie</a></li>
-<li><a href="#14-%E8%AE%BF%E9%97%AEweb%E5%BA%94%E7%94%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95">14. 访问Web应用的工作目录</a></li>
-<li><a href="#15-%E8%BD%AC%E5%8F%91%E5%92%8C%E5%8C%85%E5%90%AB">15. 转发和包含</a>
-<ul>
-<li><a href="#151-%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91">15.1 请求转发</a></li>
-<li><a href="#152-%E5%8C%85%E5%90%AB">15.2 包含</a></li>
-<li><a href="#153-%E8%AF%B7%E6%B1%82%E8%8C%83%E5%9B%B4">15.3 请求范围</a></li>
+<li><a href="#14-访问web应用的工作目录">14. 访问Web应用的工作目录</a></li>
+<li><a href="#15-转发和包含">15. 转发和包含</a><ul>
+<li><a href="#151-请求转发">15.1 请求转发</a></li>
+<li><a href="#152-包含">15.2 包含</a></li>
+<li><a href="#153-请求范围">15.3 请求范围</a></li>
 </ul>
 </li>
-<li><a href="#16-%E9%87%8D%E5%AE%9A%E5%90%91">16. 重定向</a></li>
-<li><a href="#17-%E8%AE%BF%E9%97%AEservlet%E5%AE%B9%E5%99%A8%E5%86%85%E5%85%B6%E4%BB%96web%E5%BA%94%E7%94%A8">17. 访问Servlet容器内其他Web应用</a></li>
-<li><a href="#18-%E9%81%BF%E5%85%8D%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98">18. 避免并发问题</a></li>
-<li><a href="#19-%E5%AF%B9%E8%AF%B7%E6%B1%82%E7%9A%84%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86">19. 对请求的异步处理</a>
-<ul>
-<li><a href="#191-servlet%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5">19.1 Servlet中的异步</a></li>
-<li><a href="#192-%E5%BC%82%E6%AD%A5%E6%B5%81%E7%A8%8B">19.2 异步流程</a></li>
-<li><a href="#193-%E5%BC%82%E6%AD%A5%E7%9B%91%E5%90%AC%E5%99%A8asynclistener">19.3 异步监听器AsyncListener</a></li>
-<li><a href="#194-%E9%9D%9E%E9%98%BB%E5%A1%9Eio">19.4 非阻塞I/O</a></li>
+<li><a href="#16-重定向">16. 重定向</a></li>
+<li><a href="#17-访问servlet容器内其他web应用">17. 访问Servlet容器内其他Web应用</a></li>
+<li><a href="#18-避免并发问题">18. 避免并发问题</a></li>
+<li><a href="#19-对请求的异步处理">19. 对请求的异步处理</a><ul>
+<li><a href="#191-servlet中的异步">19.1 Servlet中的异步</a></li>
+<li><a href="#192-异步流程">19.2 异步流程</a></li>
+<li><a href="#193-异步监听器asynclistener">19.3 异步监听器AsyncListener</a></li>
+<li><a href="#194-非阻塞io">19.4 非阻塞I/O</a></li>
 </ul>
 </li>
-<li><a href="#20-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%8E%A8%E9%80%81">20. 服务器端推送</a></li>
+<li><a href="#20-服务器端推送">20. 服务器端推送</a></li>
 <li><a href="#21-session">21. Session</a></li>
-<li><a href="#22-%E5%9F%9F%E5%AF%B9%E8%B1%A1%E6%80%BB%E7%BB%93">22. 域对象总结</a></li>
+<li><a href="#22-域对象总结">22. 域对象总结</a></li>
 <li><a href="#23-webxml">23. web.xml</a></li>
-<li><a href="#24-url%E6%80%BB%E7%BB%93">24. URL总结</a></li>
-<li><a href="#cookie%E4%BF%9D%E5%AD%98%E5%AF%86%E7%A0%81%E5%85%8D%E7%99%BB%E5%BD%95%E7%9A%84%E4%BE%8B%E5%AD%90">cookie保存密码免登录的例子</a></li>
+<li><a href="#24-url总结">24. URL总结</a></li>
+<li><a href="#cookie保存密码免登录的例子">cookie保存密码免登录的例子</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p> </p>
+<p>&nbsp;</p>
 <p>[toc]</p>
-<h1><span id="servlet"> Servlet</span></h1>
-<h2><span id="1-http协议"> 1. HTTP协议</span></h2>
-<ol>
+<h1><span id="servlet">Servlet</span></h1><h2><span id="1-http协议">1. HTTP协议</span></h2><ol>
 <li>超文本传输协议，客户端请求和响应的标准协议。</li>
 <li>URL：协议+地址+端口+资源路径+参数，<code>http://localhost:8080/myweb/sr01?name=zhangsan</code></li>
-<li>特点：
-<ol>
+<li>特点：<ol>
 <li>C/S模式</li>
 <li>简单快速</li>
 <li>灵活：允许传输任意类型数据，传输类型用<code>Content-Type</code>标记</li>
@@ -343,21 +330,18 @@
 <li>响应：状态行（一行）+响应头（响应状态，多行）+响应正文</li>
 <li>报头域：键值对，中以冒号+空格间隔，键名大小写无关</li>
 </ol>
-<p> </p>
-<h2><span id="2-servlet-api"> 2. Servlet API</span></h2>
-<p>一个Servlet样例</p>
+<p>&nbsp;</p>
+<h2><span id="2-servlet-api">2. Servlet API</span></h2><p>一个Servlet样例</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/location"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        <span class="comment">// actions</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
-<li>
-<p>代码结构：</p>
+<li><p>代码结构：</p>
 <ol>
 <li>WebServlet标注，内容为本Servlet的各种设置</li>
 <li>继承HttpServlet类</li>
 <li>复写service方法（内含doGet和doPost方法，自动处理）</li>
 </ol>
 </li>
-<li>
-<p>工作流程：</p>
+<li><p>工作流程：</p>
 <ol>
 <li>通过请求头确定要访问的主机</li>
 <li>通过请求行确定要访问的应用</li>
@@ -369,8 +353,7 @@
 </ol>
 </li>
 </ol>
-<h3><span id="21-servlet接口"> 2.1 Servlet接口</span></h3>
-<p>本接口是API的核心，所有Servlet类都需实现，包含5个方法</p>
+<h3><span id="21-servlet接口">2.1 Servlet接口</span></h3><p>本接口是API的核心，所有Servlet类都需实现，包含5个方法</p>
 <ol>
 <li><code>init(ServletConfig config)</code>：容器在创建好Servlet对象后调用本方法</li>
 <li><code>service(ServletRequest req, ServletResponse res)</code>：容器接收到客户端访问特定Servlet对象的请求时调用</li>
@@ -379,9 +362,8 @@
 <li><code>getSerletConfig()</code>：返回ServletConfig对象，包含了初始化参数信息</li>
 <li><code>getServletInfo()</code>：返回一个包含了Servlet创建者、版本、版权等信息的字符串</li>
 </ol>
-<p> </p>
-<h3><span id="22-genericservlet抽象类"> 2.2 GenericServlet抽象类</span></h3>
-<ol>
+<p>&nbsp;</p>
+<h3><span id="22-genericservlet抽象类">2.2 GenericServlet抽象类</span></h3><ol>
 <li>本抽象类实现了Servlet、ServletConfig和Serializable接口，且HttpServlet抽象类是本类的子类。</li>
 <li>本类实现了init方法，传入的ServletConfig对象，由私有变量config引用，此时GenericServlet对象即于ServletConfig对象关联。</li>
 <li>同时本类还定义了不带参数的<code>init()</code>方法，带参init会调用不带参init，故若要覆盖父类的初始化，则可覆盖父类的不带参init，或覆盖带参init（此时若需关联config，则要<code>super.init(config)</code>先用父类init关联）。</li>
@@ -389,35 +371,28 @@
 <li>destory方法中，可以释放所占资源，如文件流关闭，数据库关闭等。</li>
 <li>本类实现了ServletConfig的所有方法，可直接调用。</li>
 </ol>
-<p> </p>
-<h3><span id="23-httpservlet抽象类"> 2.3 HttpServlet抽象类</span></h3>
-<ol>
-<li>
-<p>是GenericServlet的抽象子类，本类为Servlet接口提供了与HTTP协议相关的实现，即本类适合运行在与客户端采用HTTP协议通信的servlet容器或web服务器中。JavaWeb开发时定义类一般扩展本类。</p>
+<p>&nbsp;</p>
+<h3><span id="23-httpservlet抽象类">2.3 HttpServlet抽象类</span></h3><ol>
+<li><p>是GenericServlet的抽象子类，本类为Servlet接口提供了与HTTP协议相关的实现，即本类适合运行在与客户端采用HTTP协议通信的servlet容器或web服务器中。JavaWeb开发时定义类一般扩展本类。</p>
 </li>
-<li>
-<p>本类为HTTP的每种请求方式提供了响应的服务方法，如<code>doGet()</code>、<code>doPost()</code>、<code>doPut()</code>、<code>doDelete()</code>等。</p>
+<li><p>本类为HTTP的每种请求方式提供了响应的服务方法，如<code>doGet()</code>、<code>doPost()</code>、<code>doPut()</code>、<code>doDelete()</code>等。</p>
 </li>
-<li>
-<p>本类实现了<code>service(ServletRequest req, ServletResponse res)</code>方法，内部将ServletRequest和ServletResponse强转为HttpServletRequest和HttpServletResponse，之后调用重载方法<code>service(HttpServletRequest req, HttpServletResponse resp)</code>。重载方法中通过<code>res.getMethod()</code>获取请求方式，然后调用不同请求方式对应的不同do方法。</p>
+<li><p>本类实现了<code>service(ServletRequest req, ServletResponse res)</code>方法，内部将ServletRequest和ServletResponse强转为HttpServletRequest和HttpServletResponse，之后调用重载方法<code>service(HttpServletRequest req, HttpServletResponse resp)</code>。重载方法中通过<code>res.getMethod()</code>获取请求方式，然后调用不同请求方式对应的不同do方法。</p>
 </li>
-<li>
-<p>本类的各种默认实现的do方法，都会客户端返回一个错误：</p>
+<li><p>本类的各种默认实现的do方法，都会客户端返回一个错误：</p>
 <ol>
 <li>若HTTP1.1通信，那么返回<code>HttpServletResponse.SC_METHOD_NOT_ALLOWED</code>即错误405</li>
-<li>若不是HTTP1.1，则返回``HttpServletResponse.SC_BAD_REQUEST`即错误400</li>
-</ol>
+<li><p>若不是HTTP1.1，则返回<code>`HttpServletResponse.SC_BAD_REQUEST</code>即错误400</p>
 <p>故子类中应覆盖各种do方法。？</p>
 </li>
 </ol>
-<p> </p>
-<h3><span id="24-servletrequest接口"> 2.4 ServletRequest接口</span></h3>
-<ol>
-<li>
-<p>Servlet接口的service方法中，有此类型的参数。容器接收到访问Servlet请求时，将原始请求数据包装成一个ServletRequest对象，容器调用service方法时就传入该对象。</p>
 </li>
-<li>
-<p>本接口提供了一系列获取请求数据的方法：</p>
+</ol>
+<p>&nbsp;</p>
+<h3><span id="24-servletrequest接口">2.4 ServletRequest接口</span></h3><ol>
+<li><p>Servlet接口的service方法中，有此类型的参数。容器接收到访问Servlet请求时，将原始请求数据包装成一个ServletRequest对象，容器调用service方法时就传入该对象。</p>
+</li>
+<li><p>本接口提供了一系列获取请求数据的方法：</p>
 <ol>
 <li><code>getContentLength()</code> 返回请求正文长度/-1</li>
 <li><code>getContentType()</code> 获取请求正文的MIME类型/null</li>
@@ -430,24 +405,21 @@
 <li><code>getReader()</code> 用于读取字符串形式的请求正文的BufferedReader对象</li>
 <li><code>getRemoteAddr()</code> 客户端IP</li>
 <li><code>getRemoteHost()</code> 客户端主机名</li>
-<li><code>getRemotePort()</code> 客户端FTP端口号</li>
-</ol>
+<li><p><code>getRemotePort()</code> 客户端FTP端口号</p>
 <p>以下是定义了一组用于在请求范围内存取共享数据的方法</p>
-<ol>
-<li><code>setAttribute(String name, Object)</code> 在请求范围内保存一个属性（即要共享的数据），参数是属性名与值</li>
+</li>
+<li><p><code>setAttribute(String name, Object)</code> 在请求范围内保存一个属性（即要共享的数据），参数是属性名与值</p>
+</li>
 <li><code>getAttribute(String name)</code> 根据name获取属性值</li>
 <li><code>removeAttribute(String name)</code> 在请求范围中删除一个属性</li>
 </ol>
 </li>
 </ol>
-<p> </p>
-<h3><span id="25-httpservletrequest接口"> 2.5 HttpServletRequest接口</span></h3>
-<ol>
-<li>
-<p>是2.4中ServletRequest的子接口</p>
+<p>&nbsp;</p>
+<h3><span id="25-httpservletrequest接口">2.5 HttpServletRequest接口</span></h3><ol>
+<li><p>是2.4中ServletRequest的子接口</p>
 </li>
-<li>
-<p>本接口提供了读取HTTP请求中相关信息的方法</p>
+<li><p>本接口提供了读取HTTP请求中相关信息的方法</p>
 <ol>
 <li><code>getContextPath()</code> 客户端请求访问的Web应用的URL入口，如客户端访问<code>http://localhost:8080/helloapp/info</code>，则本方法返回<code>/helloapp</code>，即Web应用名字</li>
 <li><code>getCookies()</code> 返回HTTP请求中的所有Cookie</li>
@@ -458,22 +430,20 @@
 <li><code>getQueryString()</code> HTTP请求中的查询字符串，即<code>?</code>后的内容，参数部分</li>
 </ol>
 </li>
-<li>
-<p><code>getRequestURL()</code> 完整URL</p>
-<ol start="9">
+<li><p><code>getRequestURL()</code> 完整URL</p>
+<ol>
 <li><code>getProtocol()</code> HTTP版本号</li>
 <li><code>getParameter(name)</code> 获取指定名称的参数值（参数均为键值对）</li>
-<li><code>getParameterValues(name)</code> 获取指定名称参数的所有值</li>
-</ol>
+<li><p><code>getParameterValues(name)</code> 获取指定名称参数的所有值</p>
 <p>由此可见，Servlet容器已经将HTTP请求进行了解析，只需get方法获取即可。</p>
 </li>
 </ol>
-<p> </p>
-<h3><span id="26-servletresponse接口"> 2.6 ServletResponse接口</span></h3>
-<ol>
+</li>
+</ol>
+<p>&nbsp;</p>
+<h3><span id="26-servletresponse接口">2.6 ServletResponse接口</span></h3><ol>
 <li>Servlet通过本接口对象生成响应结果。当容器接收到访问Servlet请求时，创建一个本接口对象，作为参数传给service方法。</li>
-<li>定义了一系列与生成响应结果相关的方法：
-<ol>
+<li>定义了一系列与生成响应结果相关的方法：<ol>
 <li><code>setHeader(&quot;content-type&quot;, &quot;text/html&quot;);</code> 设置响应MIME类型</li>
 <li><code>set/getCharacterEncoding(String charser)</code> 响应正文的字符编码，默认编码为ISO-8859-1不支持中文，GB2312支持简中，其扩展GBK支持简繁中</li>
 <li><code>setcontentLength()</code> 响应正文长度</li>
@@ -490,8 +460,7 @@
 </ol>
 </li>
 <li>本对象主要用于产生HTTP相应结果正文部分。</li>
-<li>缓冲区数据发送到客户端的时机：
-<ol>
+<li>缓冲区数据发送到客户端的时机：<ol>
 <li>缓冲区已满，自动发送，并清空缓冲区</li>
 <li>调用本对象的<code>flushBuffer()</code>方法</li>
 <li>调用ServletOutputStream对象或PrintWriter对象的flush或close方法</li>
@@ -500,11 +469,9 @@
 <li>为确保缓冲区数据完全发送，应输出数据完毕后调用ServletOutputStream对象或PrintWriter对象的<code>close()</code>方法。Tomcat中，若service未执行close，则自动调用。</li>
 <li>MIME和字符编码的设置（其set方法），要先于输出（get输出方法）。</li>
 </ol>
-<p> </p>
-<h3><span id="27-httpservletresponse接口"> 2.7 HttpServletResponse接口</span></h3>
-<ol>
-<li>是2.6的ServletResponse接口的子接口，提供了与HTTP协议相关的一些方法，可用于设置响应头或向客户端写Cookie：
-<ol>
+<p>&nbsp;</p>
+<h3><span id="27-httpservletresponse接口">2.7 HttpServletResponse接口</span></h3><ol>
+<li>是2.6的ServletResponse接口的子接口，提供了与HTTP协议相关的一些方法，可用于设置响应头或向客户端写Cookie：<ol>
 <li><code>addHeader(String name, String value)</code> 向响应头加入内容</li>
 <li><code>sendError(int sc)</code> 向客户端发送HTTP错误状态响应码</li>
 <li><code>sendError(int sc, String msg)</code> 向客户端发送响应码和具体信息</li>
@@ -514,8 +481,7 @@
 <li><code>sendRedirect(String path)</code> 重定向</li>
 </ol>
 </li>
-<li>本接口中定义了一些响应码静态常量
-<ol>
+<li>本接口中定义了一些响应码静态常量<ol>
 <li><code>HTTPServletResponse.SC_BAD_REQUEST</code> 400</li>
 <li><code>HTTPServletResponse.SC_FOUND</code> 302</li>
 <li><code>HTTPServletResponse.SC_METHOD_NOT_ALLOWED</code> 405</li>
@@ -526,13 +492,11 @@
 </ol>
 </li>
 </ol>
-<p> </p>
-<h3><span id="28-servletconfig接口"> 2.8 ServletConfig接口</span></h3>
-<ol>
+<p>&nbsp;</p>
+<h3><span id="28-servletconfig接口">2.8 ServletConfig接口</span></h3><ol>
 <li>Servlet接口的init方法接收此参数。当Servlet容器初始化一个Servlet对象时，对为其创建一个ServletConfig对象，其中包含了Servlet初始化参数信息。init中会将Servlet对象与ServletConfig对象关联。</li>
 <li>此外，ServletConfig对象还与当前web应用的ServletContext对象关联。</li>
-<li>本接口有以下方法：
-<ol>
+<li>本接口有以下方法：<ol>
 <li><code>getInitParameter(String name)</code> 根据参数名获取参数值</li>
 <li><code>getInitParameterNames</code> 返回一个Enumeration对象，包含所有参数名</li>
 <li><code>getServletContext()</code> 返回一个ServletContext对象</li>
@@ -542,19 +506,16 @@
 <li>每个初始化参数包括一对名和值，在web.xml中配置Servlet时，可以通过<code>&lt;servlet&gt;</code>内的<code>&lt;init_param&gt;</code>来设置初始化参数，有<code>&lt;param_name&gt;</code>和<code>&lt;param_value&gt;</code>两个子元素。</li>
 <li>GenericServlet类实现了本接口，HttpServlet类继承GenericServlet类，故在其及其子类中可调用本接口方法。</li>
 </ol>
-<p> </p>
-<h3><span id="29-servletcontext接口"> 2.9 ServletContext接口</span></h3>
-<ol>
+<p>&nbsp;</p>
+<h3><span id="29-servletcontext接口">2.9 ServletContext接口</span></h3><ol>
 <li>ServletContext是Servlet和容器通信的接口。容器在启动一个web应用时，会为其创建一个ServletContext对象，即web应用有一个专属对象。本web应用下的所有Servlet对象都共享这个“总管家”，通过它访问容器的资源：</li>
-<li>在web应用范围内存取共享数据：
-<ol>
+<li>在web应用范围内存取共享数据：<ol>
 <li><code>set/getAttribute(String name, Object)</code> 将一个对象与name绑定，存入ServletContext</li>
 <li><code>getAttributeNames()</code> 返回Enumeration对象，包含所有存放于ServletContext的属性名</li>
 <li><code>removeAttribute(String name)</code> 删除属性</li>
 </ol>
 </li>
-<li>访问当前web应用的资源：
-<ol>
+<li>访问当前web应用的资源：<ol>
 <li><code>getContextPath()</code> 当前web应用的URL入口</li>
 <li><code>getInitParameter(String name)</code> 根据参数名，返回web应用范围内的匹配的初始化参数值。在web.xml中，在<code>&lt;web-app&gt;</code>根元素下定义的<code>&lt;context_param</code>表示应用范围内的初始化参数</li>
 <li><code>getInitParameterNames()</code> Enumeration对象，包含web应用范围内的所有初始化参数名</li>
@@ -562,28 +523,24 @@
 <li><code>getRequestDispathcer(String path)</code> 返回一个用于向其他web组件转发请求的RequestDispathcer对象</li>
 </ol>
 </li>
-<li>访问Servlet容器中的其他web应用
-<ol>
+<li>访问Servlet容器中的其他web应用<ol>
 <li><code>getContext(String uripath)</code> 根据uri，返回当前容器中其他web应用的ServletContext对象</li>
 </ol>
 </li>
-<li>访问容器相关信息
-<ol>
+<li>访问容器相关信息<ol>
 <li><code>getMajorVersion()</code> 容器支持的Java Servlet API的主版本号</li>
 <li><code>getMinorVersion()</code> 容器支持的Java Servlet API的次版本号</li>
 <li><code>getServerInfo()</code> 容器的名字和版本</li>
 </ol>
 </li>
-<li>访问服务器端文件系统资源
-<ol>
+<li>访问服务器端文件系统资源<ol>
 <li><code>getRealPath(String path)</code> 根据参数指定的虚拟路径，返回文件真实路径</li>
 <li><code>getResource(String path)</code> 返回一个映射到参数指定路径的URL</li>
 <li><code>getResourceAsStream(String path)</code> 返回一个用于读取指定文件的输入流，默认从当前Web应用根目录下取，故path也如此</li>
 <li><code>getMimeType(String file)</code> 返回参数指定文件的MIME类型</li>
 </ol>
 </li>
-<li>输出日志
-<ol>
+<li>输出日志<ol>
 <li><code>log(String msg)</code> 向Servlet日志文件写日志</li>
 <li><code>log(String msg, Throwable)</code> 写错误日志及异常堆栈信息</li>
 <li>默认日志输出到<code>&lt;CATALINA_HOME&gt;/logs/localhost.YYYY-MM-DD.log</code>文件</li>
@@ -591,43 +548,35 @@
 </li>
 <li>ServletConfig接口中定义了<code>getServletContext()</code>方法，故其实现类、继承类均可直接调用本方法获得ServletContext对象。</li>
 </ol>
-<p> </p>
-<h2><span id="3-java-web应用的生命周期"> 3. Java Web应用的生命周期</span></h2>
-<p>Java Web生命周期由Servlet容器控制，共三阶段：</p>
+<p>&nbsp;</p>
+<h2><span id="3-java-web应用的生命周期">3. Java Web应用的生命周期</span></h2><p>Java Web生命周期由Servlet容器控制，共三阶段：</p>
 <ol>
 <li>启动：加载Web应用数据，创建ServletContext对象，对filter和一些Servlet初始化</li>
 <li>运行时：提供服务</li>
 <li>终止：释放Web应用占用资源</li>
 </ol>
-<h3><span id="31-启动阶段"> 3.1 启动阶段</span></h3>
-<ol>
+<h3><span id="31-启动阶段">3.1 启动阶段</span></h3><ol>
 <li>web.xml加载到内存</li>
 <li>为Java Web应用创建一个ServletContext对象（此时有ServletContextListener监听，并调用方法）</li>
 <li>对所有Filter初始化</li>
 <li>对启动阶段需要初始化的Servlet初始化</li>
 </ol>
-<h3><span id="32-运行时阶段"> 3.2 运行时阶段</span></h3>
-<p>此时，所有Servlet待命，随时响应请求，提供服务。若请求的Servlet还不存在，容器就先加载并初始化Servlet，再调用service方法。</p>
-<h3><span id="33-终止阶段"> 3.3 终止阶段</span></h3>
-<ol>
+<h3><span id="32-运行时阶段">3.2 运行时阶段</span></h3><p>此时，所有Servlet待命，随时响应请求，提供服务。若请求的Servlet还不存在，容器就先加载并初始化Servlet，再调用service方法。</p>
+<h3><span id="33-终止阶段">3.3 终止阶段</span></h3><ol>
 <li>销毁应用中所有运行时状态的Servlet</li>
 <li>销毁应用中所有运行时状态的Filter</li>
 <li>销毁所有与应用相关的对象，如ServletContext，并释放占用资源（此时有ServletContextListener监听，并调用方法）</li>
 </ol>
-<h3><span id="34-tomcat管理平台管理应用生命周期"> 3.4 Tomcat管理平台管理应用生命周期</span></h3>
-<ol>
+<h3><span id="34-tomcat管理平台管理应用生命周期">3.4 Tomcat管理平台管理应用生命周期</span></h3><ol>
 <li><code>&lt;CATALINA_HOME&gt;/conf/tomcat-users.xml</code>中加入<code>&lt;user username=&quot;name&quot; password=&quot;password&quot; roles=&quot;manager-gui&quot;/&gt;</code></li>
 <li>启动Tomcat，访问<code>http://localhost:8080/manager/html</code>，即可进入管理平台（也是一个web应用，位于<code>webapps/manager</code>）</li>
 <li>在将web应用发布到Tomcat时，可为其配置<code>&lt;Context&gt;</code>元素，内有reloadable属性，若true，则Tomcat运行时监视应用的<code>WEB-INF/classes</code>和<code>WEB-INF/lib</code>目录下类文件的改动，若检测到更新，会自动重启应用。默认false，开发阶段可设为true。</li>
 </ol>
-<p> </p>
-<h2><span id="4-servlet生命周期"> 4. Servlet生命周期</span></h2>
-<p>也由容器控制，分为初始化、运行时、销毁阶段，Servlet接口的init、service。destroy方法分别在三个状态调用。</p>
+<p>&nbsp;</p>
+<h2><span id="4-servlet生命周期">4. Servlet生命周期</span></h2><p>也由容器控制，分为初始化、运行时、销毁阶段，Servlet接口的init、service。destroy方法分别在三个状态调用。</p>
 <p>此处说明一点，为Servlet命名时，可以有多个名字，则代表有多个Servlet对象（使用同一类）。</p>
-<h3><span id="41-初始化阶段"> 4.1 初始化阶段</span></h3>
-<ol>
-<li>初始化步骤：
-<ol>
+<h3><span id="41-初始化阶段">4.1 初始化阶段</span></h3><ol>
+<li>初始化步骤：<ol>
 <li>容器加载Servlet类，把clss文件读入内存</li>
 <li>创建ServletConfig对象，包含特定Servlet的初始化配置信息，如初始化参数；并且容器将ServletConfig对象与当前web应用的ServletContext对象关联</li>
 <li>容器创建Servlet对象</li>
@@ -635,26 +584,22 @@
 </ol>
 </li>
 <li>以上初始化结束后，Servlet对象可通过<code>getServletContext()</code>直接得到应用的ServletContext对象</li>
-<li>以下情况，Servlet会进入初始化阶段：
-<ol>
+<li>以下情况，Servlet会进入初始化阶段：<ol>
 <li>web应用运行时阶段，特定Servlet被首次请求访问</li>
 <li>web.xml中为某个Servlet设置了<code>&lt;load-on-startup&gt; num &lt;/load-on-startup&gt;</code>元素，则容器启动应用时就初始化该Servlet，num表示在此阶段Servlet被初始化的顺序（0开始）（初始化：实例化并调用其init()方法，并非service方法）</li>
 <li>当web应用重启时，所有Servlet都会在特定时间被重新初始化</li>
 </ol>
 </li>
 </ol>
-<h3><span id="42-运行时阶段"> 4.2 运行时阶段</span></h3>
-<p>此时Servlet随时响应请求。</p>
+<h3><span id="42-运行时阶段">4.2 运行时阶段</span></h3><p>此时Servlet随时响应请求。</p>
 <ol>
 <li>容器接收到访问请求，为Servlet创建ServletRequest和ServletResponse对象，调用相应Servlet对象的service方法</li>
 <li>当容器将结果发送给客户端，就会销毁ServletRequest和ServletResponse对象</li>
 </ol>
-<h3><span id="43-销毁阶段"> 4.3 销毁阶段</span></h3>
-<p>当应用终止，容器先调用应用中所有Servlet对象的destroy方法，然后再销毁这些对象。在destroy方法中释放占用资源。</p>
+<h3><span id="43-销毁阶段">4.3 销毁阶段</span></h3><p>当应用终止，容器先调用应用中所有Servlet对象的destroy方法，然后再销毁这些对象。在destroy方法中释放占用资源。</p>
 <p>此外容器还会销毁与Servlet对象关联的ServletConfig对象，ServletRequest和ServletResponse不会销毁。</p>
-<p> </p>
-<h2><span id="5-servletcontext与web应用范围"> 5. ServletContext与Web应用范围</span></h2>
-<ol>
+<p>&nbsp;</p>
+<h2><span id="5-servletcontext与web应用范围">5. ServletContext与Web应用范围</span></h2><ol>
 <li>ServletContext与Web应用有同样的生命周期</li>
 <li>范围：时间段，与可共享数据的Web组件集合</li>
 <li>Web应用范围：Wen应用生命周期构成的时间段 与 Web应用生命周期内所有Web组件的集合</li>
@@ -662,126 +607,62 @@
 <li>由于ServletContext与Web应用生命周期相同，故用其存放Web应用范围的共享数据</li>
 <li>由于Web终止时，销毁ServletContext对象，故此时存中的共享数据/属性一并销毁</li>
 </ol>
-<h3><span id="51-servletcontextlistener"> 5.1 ServletContextListener</span></h3>
-<ol>
-<li>
-<p>Servlet API中有此接口，能够监听ServletContext对象的生命周期，即Web应用的生命周期</p>
+<h3><span id="51-servletcontextlistener">5.1 ServletContextListener</span></h3><ol>
+<li><p>Servlet API中有此接口，能够监听ServletContext对象的生命周期，即Web应用的生命周期</p>
 </li>
-<li>
-<p>当容器启动或终止Web应用时，会触发ServletContextEvent事件，由ServletContextListener处理。接口中定义了处理事件的两个方法：</p>
+<li><p>当容器启动或终止Web应用时，会触发ServletContextEvent事件，由ServletContextListener处理。接口中定义了处理事件的两个方法：</p>
 <ol>
 <li><code>contextInitialized(ServletContextEvent sce)</code> 当容器启动应用时调用此方法，之后再对Filter初始化，初始化必要Servlet</li>
 <li><code>contextDestroyed(ServletContextEvent sce)</code> 当容器终止应用时调用，先销毁Servlet和Filter，再调用此法（此时甚至不能调用ServletContext中的共享数据）</li>
 </ol>
 </li>
-<li>
-<p>自定义的监听器也需web.xml中注册</p>
+<li><p>自定义的监听器也需web.xml中注册</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Listener</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>MyServletContextListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>也可用标注配置<code>@WebListener</code></p>
+<p> 也可用标注配置<code>@WebListener</code></p>
 </li>
 </ol>
-<p> </p>
-<h2><span id="6-servletservice的异常"> 6. Servlet.service()的异常</span></h2>
-<p><code>public void service(ServletRequest req, res) throws ServletException, java.io.IOException</code></p>
+<p>&nbsp;</p>
+<h2><span id="6-servletservice的异常">6. Servlet.service()的异常</span></h2><p><code>public void service(ServletRequest req, res) throws ServletException, java.io.IOException</code></p>
 <p>ServletException表示常规操作时异常，IOException表示进行IO时异常。</p>
 <ol>
 <li>ServletException有子类UnavailableException，表示无法访问当前Servlet的异常。若Servlet由于一些系统级别的原因（内存不足、无法访问第三方服务器如数据库服务器等）而不能响应请求，就可抛出此异常。</li>
-<li>UnavailableException的两个构造方法：
-<ol>
+<li>UnavailableException的两个构造方法：<ol>
 <li><code>UnavailableException(String msg)</code> 创建一个表示Servlet永远不能被访问的异常，此后除非重启Web应用，否则再也无法通过浏览器访问此Servlet</li>
 <li><code>UnavailableException(String msg, int seconds)</code> 创建一个表示Servlet暂时不能被访问的异常，seconds表示暂时不能访问的时间，若为0或负数表示无法估计暂且不能被访问的时间</li>
 </ol>
 </li>
 <li>service方法抛出的异常由容器捕获，并向客户端发送错误信息。</li>
 </ol>
-<p> </p>
-<h2><span id="7-防止页面被客户端缓存"> 7. 防止页面被客户端缓存</span></h2>
-<ol>
-<li>
-<p>浏览器为了能够快速响应请求，会把来自服务端的页面存放至缓存。</p>
+<p>&nbsp;</p>
+<h2><span id="7-防止页面被客户端缓存">7. 防止页面被客户端缓存</span></h2><ol>
+<li><p>浏览器为了能够快速响应请求，会把来自服务端的页面存放至缓存。</p>
 </li>
-<li>
-<p>但缓存技术适用于静态网页，及不包含敏感数据的网页</p>
+<li><p>但缓存技术适用于静态网页，及不包含敏感数据的网页</p>
 </li>
-<li>
-<p>可通过一下方式禁止缓存：</p>
+<li><p>可通过一下方式禁止缓存：</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resp.addHeader(<span class="string">"Pragma"</span>, <span class="string">"no-cache"</span>);	<span class="comment">// HTTP/1.0</span></span><br><span class="line">resp.setHeader(<span class="string">"Cache-Control"</span>, <span class="string">"no-cache"</span>);	<span class="comment">// HTTP/1.1</span></span><br><span class="line">resp.setHeader(<span class="string">"Expires"</span>, <span class="string">"0"</span>);	<span class="comment">// 两版本协议均支持，表示网页过期时间，0即立即过期，需要从服务器获取最新数据</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p> </p>
-<h2><span id="8-annotation标注配置servlet"> 8. Annotation标注配置Servlet</span></h2>
-<p>从Servlet3开始，为简化开发，可不必在web.xml配置，直接在类中Annotation标注配置。</p>
-<h3><span id="81-servlet的标注配置"> 8.1 Servlet的标注配置</span></h3>
-<ol>
-<li>
-<p>各属性用法：</p>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>name</td>
-<td>String</td>
-<td>指定Servlet名字，<code>&lt;servlet-name&gt;</code>，未指定则默认类的全限定名</td>
-</tr>
-<tr>
-<td>urlPatterns</td>
-<td>String[]</td>
-<td>指定一组URL匹配模式，<code>&lt;url-pattern&gt;</code></td>
-</tr>
-<tr>
-<td>loadOnStartup</td>
-<td>int</td>
-<td>指定Servlet启动时加载顺序，<code>&lt;load-on-startup&gt;</code></td>
-</tr>
-<tr>
-<td>initParams</td>
-<td>WebInitParam[]</td>
-<td>指定一组初始化参数，<code>&lt;init-param&gt;</code></td>
-</tr>
-<tr>
-<td>asyncSupported</td>
-<td>boolean</td>
-<td>声明Servlet是否支持异步处理模式，<code>&lt;async-supported&gt;</code></td>
-</tr>
-<tr>
-<td>desciption</td>
-<td>String</td>
-<td>指定Servlet描述信息，<code>&lt;description&gt;</code></td>
-</tr>
-<tr>
-<td>displayName</td>
-<td>String</td>
-<td>指定Servlet显示名，通常配合工具使用，<code>&lt;display-name&gt;</code></td>
-</tr>
-</tbody>
-</table>
+<p>&nbsp;</p>
+<h2><span id="8-annotation标注配置servlet">8. Annotation标注配置Servlet</span></h2><p>从Servlet3开始，为简化开发，可不必在web.xml配置，直接在类中Annotation标注配置。</p>
+<h3><span id="81-servlet的标注配置">8.1 Servlet的标注配置</span></h3><ol>
+<li><p>各属性用法：</p>
+<p> | 属性           | 类型           | 描述                                                        |<br> | ——————— | ——————— | —————————————————————————————- |<br> | name           | String         | 指定Servlet名字，<code>&lt;servlet-name&gt;</code>，未指定则默认类的全限定名 |<br> | urlPatterns    | String[]       | 指定一组URL匹配模式，<code>&lt;url-pattern&gt;</code>                        |<br> | loadOnStartup  | int            | 指定Servlet启动时加载顺序，<code>&lt;load-on-startup&gt;</code>              |<br> | initParams     | WebInitParam[] | 指定一组初始化参数，<code>&lt;init-param&gt;</code>                          |<br> | asyncSupported | boolean        | 声明Servlet是否支持异步处理模式，<code>&lt;async-supported&gt;</code>        |<br> | desciption     | String         | 指定Servlet描述信息，<code>&lt;description&gt;</code>                        |<br> | displayName    | String         | 指定Servlet显示名，通常配合工具使用，<code>&lt;display-name&gt;</code>       |</p>
 </li>
-<li>
-<p>eg：</p>
+<li><p>eg：</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>Font<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>mypack.FontServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>color<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>blue<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>size<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>15<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>Font<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattren</span>&gt;</span>/font<span class="tag">&lt;/<span class="name">url-pattren</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(name=<span class="string">"Font"</span>, </span><br><span class="line">            urlPatterns=&#123;<span class="string">"\font"</span>&#125;,</span><br><span class="line">           initParams=&#123;</span><br><span class="line">               <span class="meta">@WebInitParam</span>(name=<span class="string">"color"</span>, value=<span class="string">"blue"</span>),</span><br><span class="line">               <span class="meta">@WebInitParam</span>(name=<span class="string">"size"</span>, value=<span class="string">"15"</span>)</span><br><span class="line">           &#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FontServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>仅指定一个urlPatterns时，可直接<code>@WebServlet(&quot;/hello&quot;)</code></p>
+<li><p>仅指定一个urlPatterns时，可直接<code>@WebServlet(&quot;/hello&quot;)</code></p>
 </li>
-<li>
-<p>配置方式二选一：若配置固定，可标注形式，否则web.xml更集中管理方便</p>
+<li><p>配置方式二选一：若配置固定，可标注形式，否则web.xml更集中管理方便</p>
 </li>
 </ol>
-<h3><span id="82-servletcontextlistener的标注配置"> 8.2 ServletContextListener的标注配置</span></h3>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Listener</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>MyServletContextListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3><span id="82-servletcontextlistener的标注配置">8.2 ServletContextListener的标注配置</span></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Listener</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>MyServletContextListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebListener</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyServletContextListener</span> <span class="keyword">implements</span> <span class="title">ServletContextListener</span>  </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p> </p>
-<h2><span id="9-中文字符编码"> 9. 中文字符编码</span></h2>
-<p>请求和响应的编码设定，要在获取输入输出流之前</p>
-<h3><span id="91-http请求"> 9.1 HTTP请求</span></h3>
-<p>接收客户端参数并解析时，部分浏览器默认使用ISO-8859-1编码，不支持中文，会乱码.</p>
+<p>&nbsp;</p>
+<h2><span id="9-中文字符编码">9. 中文字符编码</span></h2><p>请求和响应的编码设定，要在获取输入输出流之前</p>
+<h3><span id="91-http请求">9.1 HTTP请求</span></h3><p>接收客户端参数并解析时，部分浏览器默认使用ISO-8859-1编码，不支持中文，会乱码.</p>
 <ol>
 <li>单独对参数更改编码：<code>username = new String(username.getBytes(ISO8859-1), &quot;GBK&quot;);</code> ，或UTF-8</li>
 <li>POST：接收数据前 <code>req.setCharacterEncoding(&quot;UTF-8&quot;);</code>，或GBK</li>
@@ -790,48 +671,32 @@
 <li>在Tomcat的server.xml中对HTTP连接器更改配置，自动把URI中的请求参数转换编码，一劳永逸<code>&lt;Connection ... URIEncoding=&quot;UTF-8&quot; /&gt;</code></li>
 <li>不同浏览器传递的请求参数采用字符编码不同，常用的四种GBK、GB2312、ISO-8859-1、UTF-8，可通过<code>str.equals(new String(str.getBytes(encodingType), encodingType))</code>判断str是否是encodingType类型编码</li>
 </ol>
-<h3><span id="92-http响应"> 9.2 HTTP响应</span></h3>
-<p><code>resp.setCharacterEncoding(&quot;GBK&quot;);</code></p>
+<h3><span id="92-http响应">9.2 HTTP响应</span></h3><p><code>resp.setCharacterEncoding(&quot;GBK&quot;);</code></p>
 <p><code>resp.setContentType(&quot;text/html;charset=GBK&quot;);</code></p>
-<p> </p>
-<h2><span id="10-下载文件"> 10. 下载文件</span></h2>
-<ol>
-<li>
-<p>IDEA中，项目根目录下不可新增文件夹，要在“web”下新建“store”目录存放上传下载文件</p>
+<p>&nbsp;</p>
+<h2><span id="10-下载文件">10. 下载文件</span></h2><ol>
+<li><p>IDEA中，项目根目录下不可新增文件夹，要在“web”下新建“store”目录存放上传下载文件</p>
 </li>
-<li>
-<p>前台超链接方法：前台a标签跳转时，若资源无法被浏览器识别则下载，可识别资源也可以通过设置download属性实现下载。该属性为空使用原文件名，指定属性即为下载的文件名。</p>
-</li>
-</ol>
+<li><p>前台超链接方法：前台a标签跳转时，若资源无法被浏览器识别则下载，可识别资源也可以通过设置download属性实现下载。该属性为空使用原文件名，指定属性即为下载的文件名。</p>
 <p><code>&lt;a href=&quot;download/avatar.jpg&quot; download=&quot;dragon.jpg&quot;&gt;头像图片&lt;/a&gt;</code></p>
-<ol start="3">
-<li>
-<p>后台代码方法：</p>
 </li>
-<li>
-<p>需要通过<code>response.setContentType</code>方法设置Content-type头字段的值为浏览器无法使用某种方式或激活某个程序来处理的MIME类型，例如<code>application/octet-stream</code>、<code>application/x-msdownload</code>、<code>application/force-download</code>等。</p>
-</li>
-<li>
-<p>需要通过<code>response.setHeader</code>方法设置<code>Content-Disposition</code>头的值为<code>attachment;filename=文件名</code></p>
-</li>
-<li>
-<p>读取下载文件，调用<code>response.getOutputStream</code>方法向客户端写入附件内容。</p>
+<li><p>后台代码方法：</p>
+<ol>
+<li>需要通过<code>response.setContentType</code>方法设置Content-type头字段的值为浏览器无法使用某种方式或激活某个程序来处理的MIME类型，例如<code>application/octet-stream</code>、<code>application/x-msdownload</code>、<code>application/force-download</code>等。</li>
+<li>需要通过<code>response.setHeader</code>方法设置<code>Content-Disposition</code>头的值为<code>attachment;filename=文件名</code></li>
+<li>读取下载文件，调用<code>response.getOutputStream</code>方法向客户端写入附件内容。  </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DownloadServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"file download...."</span>);</span><br><span class="line">        req.setCharacterEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">        <span class="comment">// 获取文件名并判空</span></span><br><span class="line">        String fileName = req.getParameter(<span class="string">"fileName"</span>);</span><br><span class="line">        System.out.println(<span class="string">"filename: "</span> + fileName);</span><br><span class="line">        <span class="keyword">if</span> (fileName == <span class="keyword">null</span> || <span class="string">""</span>.equals(fileName.trim())) &#123;</span><br><span class="line">            resp.getWriter().write(<span class="string">"input name again."</span>);</span><br><span class="line">            resp.getWriter().close();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 确定文件存在，开始下载</span></span><br><span class="line">        String path = req.getServletContext().getRealPath(<span class="string">"/download/"</span>);</span><br><span class="line">        File file = <span class="keyword">new</span> File(path + fileName);</span><br><span class="line">        <span class="keyword">if</span> (file.exists() &amp;&amp; file.isFile()) &#123;</span><br><span class="line">            <span class="comment">// 输入流</span></span><br><span class="line">            InputStream in = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            <span class="comment">//in = getServletContext().getResourceAsStream(path);</span></span><br><span class="line">            <span class="comment">// 响应类型</span></span><br><span class="line">            resp.setContentType(<span class="string">"application/x-msdownload"</span>);</span><br><span class="line">            <span class="comment">// 响应头</span></span><br><span class="line">            resp.setHeader(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment;filename="</span> + fileName);</span><br><span class="line">            resp.setHeader(<span class="string">"Content-Length"</span>, String.valueof(in.available()));</span><br><span class="line">            <span class="comment">// 字节输出流</span></span><br><span class="line">            ServletOutputStream out = resp.getOutputStream();</span><br><span class="line">            <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((len = in.read(bytes)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                out.write(bytes, <span class="number">0</span>, len);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 关闭资源</span></span><br><span class="line">            out.close();</span><br><span class="line">            in.close();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            resp.getWriter().write(<span class="string">"file doesn`t exists."</span>);</span><br><span class="line">            resp.getWriter().close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DownloadServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"file download...."</span>);</span><br><span class="line">        req.setCharacterEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">        <span class="comment">// 获取文件名并判空</span></span><br><span class="line">        String fileName = req.getParameter(<span class="string">"fileName"</span>);</span><br><span class="line">        System.out.println(<span class="string">"filename: "</span> + fileName);</span><br><span class="line">        <span class="keyword">if</span> (fileName == <span class="keyword">null</span> || <span class="string">""</span>.equals(fileName.trim())) &#123;</span><br><span class="line">            resp.getWriter().write(<span class="string">"input name again."</span>);</span><br><span class="line">            resp.getWriter().close();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 确定文件存在，开始下载</span></span><br><span class="line">        String path = req.getServletContext().getRealPath(<span class="string">"/download/"</span>);</span><br><span class="line">        File file = <span class="keyword">new</span> File(path + fileName);</span><br><span class="line">        <span class="keyword">if</span> (file.exists() &amp;&amp; file.isFile()) &#123;</span><br><span class="line">            <span class="comment">// 输入流</span></span><br><span class="line">            InputStream in = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            <span class="comment">//in = getServletContext().getResourceAsStream(path);</span></span><br><span class="line">            <span class="comment">// 响应类型</span></span><br><span class="line">            resp.setContentType(<span class="string">"application/x-msdownload"</span>);</span><br><span class="line">            <span class="comment">// 响应头</span></span><br><span class="line">            resp.setHeader(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment;filename="</span> + fileName);</span><br><span class="line">            resp.setHeader(<span class="string">"Content-Length"</span>, String.valueof(in.available()));</span><br><span class="line">            <span class="comment">// 字节输出流</span></span><br><span class="line">            ServletOutputStream out = resp.getOutputStream();</span><br><span class="line">            <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((len = in.read(bytes)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                out.write(bytes, <span class="number">0</span>, len);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 关闭资源</span></span><br><span class="line">            out.close();</span><br><span class="line">            in.close();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            resp.getWriter().write(<span class="string">"file doesn`t exists."</span>);</span><br><span class="line">            resp.getWriter().close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> </p>
-<h2><span id="11-上传文件"> 11. 上传文件</span></h2>
-<h3><span id="111-前台"> 11.1 前台</span></h3>
-<p>前台：表单、post、指定的enctype数据类型<code>multipart/form-data</code>，表示复杂的包括多个子部分的复合表单。</p>
+<p>&nbsp;</p>
+<h2><span id="11-上传文件">11. 上传文件</span></h2><h3><span id="111-前台">11.1 前台</span></h3><p>前台：表单、post、指定的enctype数据类型<code>multipart/form-data</code>，表示复杂的包括多个子部分的复合表单。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;form method=<span class="string">"post"</span> enctype=<span class="string">"multipart/form-data"</span> action=<span class="string">"UpLoad"</span>&gt;</span><br><span class="line">    姓名：&lt;input type=<span class="string">"text"</span> name=<span class="string">"uname"</span>&gt; &lt;br&gt;</span><br><span class="line">    文件：&lt;input type=<span class="string">"file"</span> name=<span class="string">"myfile"</span>&gt; &lt;br&gt;</span><br><span class="line">    &lt;button&gt;提交&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
 <p>此请求发至后台，请求会被以下两方法看作多个子部分：HTTP请求头不被考虑进内，主要是正文被分为多个子部分：</p>
 <ol>
-<li>普通表单域：
-<ol>
-<li>此子部分的请求头
-<ol>
-<li><code>Content-Disposition:</code>
-<ol>
+<li>普通表单域：<ol>
+<li>此子部分的请求头<ol>
+<li><code>Content-Disposition:</code><ol>
 <li><code>form-data;</code></li>
 <li><code>name=&quot;uname&quot;</code> 前端<code>&lt;input&gt;</code>标签指定的name</li>
 </ol>
@@ -841,12 +706,9 @@
 <li>此子部分正文：<code>&lt;input&gt;</code>输入内容</li>
 </ol>
 </li>
-<li>文件域：
-<ol>
-<li>子部分请求头
-<ol>
-<li><code>Content-Disposition:</code>
-<ol>
+<li>文件域：<ol>
+<li>子部分请求头<ol>
+<li><code>Content-Disposition:</code><ol>
 <li><code>form-data;</code></li>
 <li><code>name=&quot;myfile&quot;</code> 前端<code>&lt;input&gt;</code>标签指定的name</li>
 <li><code>filename=&quot;C:\...\file1.rar&quot;</code> 此处完整路径名</li>
@@ -859,21 +721,18 @@
 </ol>
 </li>
 </ol>
-<p> </p>
-<h3><span id="112-后台"> 11.2 后台</span></h3>
-<p>容器会将HTTP请求包装为HttpServletRequest对象，当请求正文为<code>multipart/form-data</code>类型时，Servlet从HttpServletRequest中解析复合表单子部分仍然十分繁琐，为了简化，可使用Apache开源类库或Servlet API提供的Part接口（Servlet 3.0出现）。</p>
-<h4><span id="1121-apache"> 11.2.1 Apache</span></h4>
-<ol>
-<li>
-<p>Apache开源类库：提供了两个与上传文件相关的包：</p>
+<p>&nbsp;</p>
+<h3><span id="112-后台">11.2 后台</span></h3><p>容器会将HTTP请求包装为HttpServletRequest对象，当请求正文为<code>multipart/form-data</code>类型时，Servlet从HttpServletRequest中解析复合表单子部分仍然十分繁琐，为了简化，可使用Apache开源类库或Servlet API提供的Part接口（Servlet 3.0出现）。</p>
+<h4><span id="1121-apache">11.2.1 Apache</span></h4><ol>
+<li><p>Apache开源类库：提供了两个与上传文件相关的包：</p>
 <ol>
 <li>fileupload（commons-fileupload-X.jar），<a href="http://commons.apache.org/fileupload" target="_blank" rel="noopener">下载地址</a></li>
-<li>I/O（commons-io-X.jar），<a href="http://commons.apache.org/io" target="_blank" rel="noopener">下载地址</a></li>
-</ol>
+<li><p>I/O（commons-io-X.jar），<a href="http://commons.apache.org/io" target="_blank" rel="noopener">下载地址</a></p>
 <p>两个jar文件放于<code>app/WEB-INF/lib</code>下，Servlet利用fileupload包的类和接口完成上传，而此包依赖于I/O包。</p>
 </li>
-<li>
-<p>fileupload包中主要类和接口：</p>
+</ol>
+</li>
+<li><p>fileupload包中主要类和接口：</p>
 <ol>
 <li>FileItem接口</li>
 <li>FileItemFactory接口，依赖于FileItem接口，是创建FileItem对象的工厂</li>
@@ -882,27 +741,22 @@
 <li>ServletFileUpload类，与FileItemFactory接口关联，是文件上传处理器</li>
 </ol>
 </li>
-<li>
-<p>fileupload软件包把<code>multipart/form-data</code>类型HTTP请求正文中，复合表单包含的每个子部分看作是一个FileItem对象，此类对象有两种类型：formFiled普通表单域如文本域及提交按钮，非formFiled即上传文件类型</p>
+<li><p>fileupload软件包把<code>multipart/form-data</code>类型HTTP请求正文中，复合表单包含的每个子部分看作是一个FileItem对象，此类对象有两种类型：formFiled普通表单域如文本域及提交按钮，非formFiled即上传文件类型</p>
 </li>
-<li>
-<p>包实现中，为提高效率，会使用缓存和临时目录存放临时数据，而ServletFileUpload作为文件上传处理器，与工厂接口关联，能够解析请求对象，返回一组FileItem对象的List集合</p>
+<li><p>包实现中，为提高效率，会使用缓存和临时目录存放临时数据，而ServletFileUpload作为文件上传处理器，与工厂接口关联，能够解析请求对象，返回一组FileItem对象的List集合</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建工厂</span></span><br><span class="line">DiskFileItemFactory factory = <span class="keyword">new</span> DiskFileItemFactory();</span><br><span class="line"><span class="comment">// 设置缓冲区，此处4k</span></span><br><span class="line">factory.setSizeThreshold(<span class="number">4</span> * <span class="number">1024</span>);</span><br><span class="line"><span class="comment">// 设置临时目录</span></span><br><span class="line">factory.setRepository(<span class="keyword">new</span> File(tempFilePath));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建文件上传处理器</span></span><br><span class="line">ServletFileUpload upload = <span class="keyword">new</span> ServletFileUpload(factory);</span><br><span class="line"><span class="comment">// 设置允许上传的文件最大尺寸，此处4MB</span></span><br><span class="line">upload.setSizeMax(<span class="number">4</span> * <span class="number">1024</span> * <span class="number">1024</span>);</span><br><span class="line"><span class="comment">// 解析HTTPServletRequest请求</span></span><br><span class="line">List&lt;FileItem&gt; items = upload.parseRequest(request);</span><br><span class="line"><span class="comment">// 遍历集合，分别处理</span></span><br><span class="line"><span class="keyword">for</span> (FileItem item : items) &#123;</span><br><span class="line">    <span class="keyword">if</span> (item.isFormFiled()) </span><br><span class="line">        processFormFile(item, out);	<span class="comment">// 处理普通表单域</span></span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        processUploadedFile(item, out);	<span class="comment">// 处理上传文件</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// processFormFile()</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processFormFile</span><span class="params">(FileItem item, PrintWriter out)</span> </span>&#123;</span><br><span class="line">    String name = item.getFieldName();</span><br><span class="line">    String value = item.getString();</span><br><span class="line">    out.println(...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// processUploadedFile()</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processUploadedFile</span><span class="params">(FileItem item, PrintWriter out)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	String fileName = item.getName();</span><br><span class="line">    <span class="keyword">int</span> idx = fileName.lastIndexOf(<span class="string">"\\"</span>);</span><br><span class="line">    fileName = fileName.substring(idx+<span class="number">1</span>, fileName.length());</span><br><span class="line">    <span class="keyword">long</span> fileSize = item.getSize();</span><br><span class="line">    <span class="keyword">if</span> (fileName.equals(<span class="string">""</span>) &amp;&amp; fileSize == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">	File uploadFile = <span class="keyword">new</span> File(filePath + <span class="string">"/"</span> + fileName);</span><br><span class="line">    item.write(uploadFile);</span><br><span class="line">    out.println(fileName + <span class="string">" is saved. Size is "</span> + fileSize);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>因要用到上传文件存储目录和临时目录，故可在web.xml或标注中，将两路径作为参数，Servlet.init()中直接从ServletConfig中获取即可</p>
+<li><p>因要用到上传文件存储目录和临时目录，故可在web.xml或标注中，将两路径作为参数，Servlet.init()中直接从ServletConfig中获取即可</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>filePath<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span>    	</span><br><span class="line">         <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>store<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>tempFilePath<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>temp<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UploadServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String filePath;</span><br><span class="line">    <span class="keyword">private</span> String tempFilePath;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.init(config);</span><br><span class="line">        filePath = config.getInitParameter(<span class="string">"filePath"</span>);</span><br><span class="line">        filePath = getServletContext().getRealPath(filePath);</span><br><span class="line">        tempFilePath = config.getInitParameter(<span class="string">"tempFilePath"</span>);</span><br><span class="line">        tempFilePath = getServletContext.getRealPath(tempFilePath);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> </p>
+<p> &nbsp;</p>
 </li>
 </ol>
-<h4><span id="1122-part"> 11.2.2 Part</span></h4>
-<p>Servlet将<code>multipart/form-data</code>的POST请求封装成Part，通过Part对上传的文件操作。</p>
+<h4><span id="1122-part">11.2.2 Part</span></h4><p>Servlet将<code>multipart/form-data</code>的POST请求封装成Part，通过Part对上传的文件操作。</p>
 <ol>
 <li>注解<code>@MultipartConfig</code>将一个Servlet标识为支持文件上传</li>
 <li>会将复合表单的每个子部分看作一个Part对象。<code>HttpServletRequest.getParts()</code>方法返回Part对象集合，每个对象代表请求中复合表单的一个子部分</li>
-<li>Part对象方法：
-<ol>
+<li>Part对象方法：<ol>
 <li><code>getHeader(String name)</code> 读取子部分请求头中特定选项值</li>
 <li><code>getContentType()</code> 读取子部分请求正文的数据类型</li>
 <li><code>getSize()</code> 读取子部分的请求正文长度</li>
@@ -912,37 +766,29 @@
 </li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/UpLoad"</span>)</span><br><span class="line"><span class="meta">@MultipartConfig</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UploadServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        req.setCharacterEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">        System.out.println(<span class="string">"file upload..."</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 直接根据前端元素name处理</span></span><br><span class="line">        String uname = req.getParameter(<span class="string">"uname"</span>);</span><br><span class="line">        System.out.println(<span class="string">"uname: "</span> + uname);</span><br><span class="line"></span><br><span class="line">        Part part = req.getPart(<span class="string">"myfile"</span>);</span><br><span class="line">        String fileName = part.getSubmittedFileName();	<span class="comment">// Tomcat8</span></span><br><span class="line">        System.out.println(<span class="string">"file name: "</span> + fileName);</span><br><span class="line"></span><br><span class="line">        String filePath = req.getServletContext().getRealPath(<span class="string">"/"</span>);</span><br><span class="line">        System.out.println(<span class="string">"file path: "</span> + filePath);</span><br><span class="line">        part.write(filePath + <span class="string">"/"</span> + fileName);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 遍历Part</span></span><br><span class="line">        Collection&lt;Part&gt; parts = request.getParts();</span><br><span class="line">        <span class="keyword">for</span> (Part part : parts) &#123;</span><br><span class="line">            <span class="keyword">if</span> (part.getContentType() == <span class="keyword">null</span>) &#123;	<span class="comment">// 文本域</span></span><br><span class="line">                String name = part.getName();</span><br><span class="line">                String value = req.getParameter(name);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (part.getName().indexOf(<span class="string">"file"</span>) != -<span class="number">1</span>) &#123;	</span><br><span class="line">                <span class="comment">// 文件域，此处“file”是前端指定的name</span></span><br><span class="line">                String head = part.getHeader(<span class="string">"Content-Disposition"</span>);</span><br><span class="line">                <span class="comment">// head : "form-data; name="myfile"; filename="uploadedfile.rar"</span></span><br><span class="line">			   String filename = cd.substring(cd.lastIndexOf(<span class="string">"="</span>)+<span class="number">2</span>, head.length()-<span class="number">1</span>);</span><br><span class="line">                <span class="comment">// Tomcat8使用上述part.getSubmittedFileName()即可</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> </p>
-<h2><span id="12-动态生成图像"> 12. 动态生成图像</span></h2>
-<ol>
-<li>
-<p>所需类：</p>
+<p>&nbsp;</p>
+<h2><span id="12-动态生成图像">12. 动态生成图像</span></h2><ol>
+<li><p>所需类：</p>
 <ol>
 <li><code>java.awt.image.BufferedImage</code> 位于缓存中的图像</li>
 <li><code>java.awt.Graphics</code> 画笔</li>
 <li><code>javax.imageio.ImageIO</code> 把原始图像转换为特定格式，利用外界提供输出流来输出</li>
 </ol>
 </li>
-<li>
-<p>ImageIO类以<code>write()</code>静态方法输出，会产生临时文件，需在Tomcat根目录下事先创建temp目录</p>
-<p><code>public static boolean write (RenderedImage im, String formatName, File output) throws IOException</code></p>
+<li><p>ImageIO类以<code>write()</code>静态方法输出，会产生临时文件，需在Tomcat根目录下事先创建temp目录</p>
+<p> <code>public static boolean write (RenderedImage im, String formatName, File output) throws IOException</code></p>
 </li>
-<li>
-<p>绘图实例</p>
+<li><p>绘图实例</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">resp.setContentType(<span class="string">"image/jpeg"</span>);</span><br><span class="line"><span class="keyword">var</span> out = resp.getOutputStream();</span><br><span class="line"><span class="comment">// 创建一个缓存中的图像，长高11*16</span></span><br><span class="line"><span class="keyword">var</span> image = <span class="keyword">new</span> BufferedImage(<span class="number">11</span>, <span class="number">16</span>, BufferedImage.TYPE_INT_RGB);</span><br><span class="line"><span class="comment">// 画笔</span></span><br><span class="line"><span class="keyword">var</span> g = image.getGraphics();	</span><br><span class="line">g.setColor(Color.white);</span><br><span class="line"><span class="keyword">var</span> font = <span class="keyword">new</span> Font(<span class="string">"Courier"</span>, Font.BOLD, <span class="number">12</span>);</span><br><span class="line">g.setFont(font);</span><br><span class="line">g.drawString(<span class="string">".."</span>);</span><br><span class="line">g.drawLine(...);</span><br><span class="line"><span class="comment">// 输出JPEG</span></span><br><span class="line">ImageIO.write(iamge, <span class="string">"jpeg"</span>, out);</span><br><span class="line">out.close();</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>前端<code>&lt;img&gt;</code>标签：<code>&lt;img src='image?param=12'/&gt;</code> image表示自定义绘图ImageServlet，param=12表示传给该Servlet的参数（动态生成img，相当于此元素需要再次发送请求给后台）</p>
+<li><p>前端<code>&lt;img&gt;</code>标签：<code>&lt;img src=&#39;image?param=12&#39;/&gt;</code> image表示自定义绘图ImageServlet，param=12表示传给该Servlet的参数（动态生成img，相当于此元素需要再次发送请求给后台）</p>
 </li>
 </ol>
-<p> </p>
-<h2><span id="13-cookie"> 13. Cookie</span></h2>
-<ol>
-<li>
-<p>是客户端访问服务器时，服务器存于客户端硬盘的信息，服务器可以根据Cookie跟踪客户状态，尤其便于区别客户端。但保存在客户端，安全性差。</p>
+<p>&nbsp;</p>
+<h2><span id="13-cookie">13. Cookie</span></h2><ol>
+<li><p>是客户端访问服务器时，服务器存于客户端硬盘的信息，服务器可以根据Cookie跟踪客户状态，尤其便于区别客户端。但保存在客户端，安全性差。</p>
 </li>
-<li>
-<p>Cookie建立过程：</p>
+<li><p>Cookie建立过程：</p>
 <ol>
 <li>客户端首次请求访问服务器时，发送一个不含Cookie的请求</li>
 <li>服务器的响应中包含一个含有客户端信息的Cookie（Cookie位于协议头）</li>
@@ -951,127 +797,88 @@
 <li>浏览器收到含有Cookie的请求，就可获取客户端信息</li>
 </ol>
 </li>
-<li>
-<p>原始Cookie数据的解析也由Servlet容器完成。<code>javax.servlet.http.Cookie</code>类可操作Cookie。每个Cookie对象包含一个Cookie名和值。</p>
+<li><p>原始Cookie数据的解析也由Servlet容器完成。<code>javax.servlet.http.Cookie</code>类可操作Cookie。每个Cookie对象包含一个Cookie名和值。</p>
 </li>
-<li>
-<p>服务器端创建与发送：</p>
+<li><p>服务器端创建与发送：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie01 = <span class="keyword">new</span> Cookie(<span class="string">"name"</span>, <span class="string">"admin"</span>);</span><br><span class="line">resp.addCookie(cookie01);</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie01 = <span class="keyword">new</span> Cookie(<span class="string">"name"</span>, <span class="string">"admin"</span>);</span><br><span class="line">resp.addCookie(cookie01);</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>服务器端获取：仅有<code>getCookies</code>一个方法，返回数组，需要遍历并<code>getName() getValue()</code>，若无Cookie则返回null</li>
-</ol>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies =  req.getCookies();</span><br><span class="line"><span class="keyword">if</span> (cookies != <span class="keyword">null</span> &amp;&amp; cookies.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (Cookie temp :</span><br><span class="line">         cookies) &#123;</span><br><span class="line">        String name = temp.getName();</span><br><span class="line">        String value = temp.getValue();</span><br><span class="line">        System.out.println(<span class="string">"name: "</span> + name + <span class="string">", value: "</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li>
-<p>到期时间：默认关闭浏览器即失效。<code>setMaxAge(int)</code>设置到期时间，秒</p>
+<li><p>服务器端获取：仅有<code>getCookies</code>一个方法，返回数组，需要遍历并<code>getName() getValue()</code>，若无Cookie则返回null</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookies =  req.getCookies();</span><br><span class="line"><span class="keyword">if</span> (cookies != <span class="keyword">null</span> &amp;&amp; cookies.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (Cookie temp :</span><br><span class="line">         cookies) &#123;</span><br><span class="line">        String name = temp.getName();</span><br><span class="line">        String value = temp.getValue();</span><br><span class="line">        System.out.println(<span class="string">"name: "</span> + name + <span class="string">", value: "</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>-1（或负数）：默认就是-1，表示不存储，只在内存存活，关闭浏览器就失效</p>
-</li>
-<li>
-<p>正整数：存储到磁盘</p>
-</li>
-<li>
-<p>0：删除cookie</p>
-</li>
-<li>
-<p>注意点：</p>
-</li>
-<li>
-<p>保存在当前浏览器，换电脑或浏览器均不能使用</p>
-</li>
-<li>
-<p>中文：默认不能存储中文，需要<code>URLEncoder.encode()</code>编码存储，<code>decode()</code>解码读取</p>
-</li>
-<li>
-<p>发送重名cookie会覆盖</p>
-</li>
-<li>
-<p>有数量上限</p>
-</li>
-<li>
-<p>路径：决定能否读取到cookie</p>
-</li>
-<li>
-<p><code>cookie.setPath(&quot;/&quot;)</code> 即为服务器根路径，表示当前服务器下所有项目都可访问</p>
-</li>
-<li>
-<p><code>cookie.setPath(&quot;/pro1&quot;)</code> 当前项目下可访问，默认为此</p>
-</li>
-<li>
-<p><code>cookie.setPath(&quot;/pro2&quot;)</code> 仅项目pro2下可访问，即使是pro1项目创建的cookie</p>
-</li>
-<li>
-<p><code>cookie.setPath(&quot;/pro1/cook&quot;)</code> 仅项目pro1下的cook目录下可访问</p>
-</li>
-<li>
-<p>当设置了路径且访问路径在设置的路径下，cookie就会加载到req对象中</p>
-</li>
-<li>
-<p><code>cookie.setDomain(&quot;.cat.tom&quot;)</code> 表示可使其他服务器<code>www.cat.tom</code>的所有应用访问本Cookie</p>
-</li>
-</ol>
-<p> </p>
-<h2><span id="14-访问web应用的工作目录"> 14. 访问Web应用的工作目录</span></h2>
+<li><p>到期时间：默认关闭浏览器即失效。<code>setMaxAge(int)</code>设置到期时间，秒</p>
 <ol>
+<li>-1（或负数）：默认就是-1，表示不存储，只在内存存活，关闭浏览器就失效</li>
+<li>正整数：存储到磁盘</li>
+<li>0：删除cookie</li>
+</ol>
+</li>
+<li><p>注意点：</p>
+<ol>
+<li>保存在当前浏览器，换电脑或浏览器均不能使用</li>
+<li>中文：默认不能存储中文，需要<code>URLEncoder.encode()</code>编码存储，<code>decode()</code>解码读取</li>
+<li>发送重名cookie会覆盖</li>
+<li>有数量上限</li>
+</ol>
+</li>
+<li><p>路径：决定能否读取到cookie </p>
+<ol>
+<li><code>cookie.setPath(&quot;/&quot;)</code> 即为服务器根路径，表示当前服务器下所有项目都可访问</li>
+<li><code>cookie.setPath(&quot;/pro1&quot;)</code> 当前项目下可访问，默认为此</li>
+<li><code>cookie.setPath(&quot;/pro2&quot;)</code> 仅项目pro2下可访问，即使是pro1项目创建的cookie</li>
+<li><code>cookie.setPath(&quot;/pro1/cook&quot;)</code> 仅项目pro1下的cook目录下可访问</li>
+<li>当设置了路径且访问路径在设置的路径下，cookie就会加载到req对象中</li>
+<li><code>cookie.setDomain(&quot;.cat.tom&quot;)</code> 表示可使其他服务器<code>www.cat.tom</code>的所有应用访问本Cookie</li>
+</ol>
+</li>
+</ol>
+<p>&nbsp;</p>
+<h2><span id="14-访问web应用的工作目录">14. 访问Web应用的工作目录</span></h2><ol>
 <li>每个Web应用下都有一个工作目录，容器将应用相关临时文件存于此。Tomcat默认工作目录是<code>&lt;CATALINA_HOME&gt;/work/[enginename]/[hostname]/[contextpath]</code></li>
 <li>显式指定：配置Web应用的<code>&lt;Context&gt;</code>元素时，指定<code>workDir</code>属性</li>
 <li>访问：除容器，Servlet也可访问工作目录。Servlet规范规定容器初始化应用时，要向创建的ServletContext设置<code>javax.servlet.context.tempdir</code>的属性，属性值是一个<code>java.io.File</code>对象，代表当前应用的工作目录。故Servlet获取应用工作目录<code>File workDir = (File)context.getAttribute(&quot;javax.servlet.context.tempdir&quot;)</code></li>
 </ol>
-<p> </p>
-<h2><span id="15-转发和包含"> 15. 转发和包含</span></h2>
-<ol>
+<p>&nbsp;</p>
+<h2><span id="15-转发和包含">15. 转发和包含</span></h2><ol>
 <li>从Servlet2.1开始，Servlet内无法获取其他Servlet的引用，也就无法调用其他Servlet，为完成组件协作，Servlet规范提供了两种途径：请求转发（源组件处理一部分后将请求转发给目标组件）和包含（源组件把其他组件/目标组件生成的响应结果包含到自身的响应结果中）</li>
-<li>二者特点：
-<ol>
+<li>二者特点：<ol>
 <li>源组件与目标组件，处理的是同一请求，共享一份ServletRequest和ServletResponse对象</li>
 <li>目标组件可以是Servlet、JSP、HTML</li>
 <li>都依赖<code>javax.servlet.RequestDispatcher</code>接口</li>
 <li>地址栏的URL不变，整个过程仅一个请求</li>
 </ol>
 </li>
-<li>RequestDispatcher请求分发器，有两个方法：
-<ol>
+<li>RequestDispatcher请求分发器，有两个方法：<ol>
 <li><code>public void forward(ServletRequest request, ServletResponse response) throws ServletException, java.io.IOException</code> 把请求转发给目标组件</li>
 <li><code>public void include(ServletRequest request, ServletResponse response) throws ServletException, java.io.IOException</code> 包含目标组件响应结果</li>
 </ol>
 </li>
-<li>获取RequestDispatcher对象：
-<ol>
+<li>获取RequestDispatcher对象：<ol>
 <li><code>servletContext.getRequestDispatcher(String path)</code> 目标组件绝对路径</li>
 <li><code>servletRequest.getRequestDispatcher(String path)</code> 绝对/相对路径</li>
 <li>url起始不加/</li>
 </ol>
 </li>
 </ol>
-<h3><span id="151-请求转发"> 15.1 请求转发</span></h3>
-<ol>
+<h3><span id="151-请求转发">15.1 请求转发</span></h3><ol>
 <li>流程：清空存放响应正文的缓冲区；若目标组件是Servlet或JSP，就调用其service方法，把该方法结果发送到客户端；若目标组件是HTML，就把文档发送到客户端</li>
-<li>特点：
-<ol>
+<li>特点：<ol>
 <li>源组件不能提交响应结果，否则forward()时会报错，仅目标组件可响应，数据通信用<code>req.setAttribute()</code></li>
 <li>源组件转发后，后面的代码仍会执行</li>
 </ol>
 </li>
 </ol>
-<h3><span id="152-包含"> 15.2 包含</span></h3>
-<ol>
+<h3><span id="152-包含">15.2 包含</span></h3><ol>
 <li>流程：目标组件Servlet或JSP，就将其service产生的响应正文添加到源组件相应结果中；若HTML就直接把文档内容添加到源组件响应结果</li>
 <li>特点：目标组件中对响应状态码和响应头所做的修改都会被忽略</li>
 </ol>
-<h3><span id="153-请求范围"> 15.3 请求范围</span></h3>
-<ol>
+<h3><span id="153-请求范围">15.3 请求范围</span></h3><ol>
 <li>Web应用范围/ServletContext：整个Web应用的生命周期</li>
 <li>请求范围/ServletRequest：服务器响应一次客户请求的过程，从接收到返回；容器接收到请求，创建req和resp对象传给相应Servlet，待容器返回给客户结果后，俩对象销毁</li>
 <li></li>
 </ol>
-<p> </p>
-<h2><span id="16-重定向"> 16. 重定向</span></h2>
-<ol>
-<li>流程：
-<ol>
+<p>&nbsp;</p>
+<h2><span id="16-重定向">16. 重定向</span></h2><ol>
+<li>流程：<ol>
 <li>客户端输入URl访问服务器某个组件</li>
 <li>服务器端组件返回302结果和另一个组件的URL，表示让浏览器在请求访问该组件。该组件不一定在同一服务器上</li>
 <li>浏览器接收到响应结果后立即自动请求访问另一组件</li>
@@ -1079,8 +886,7 @@
 </ol>
 </li>
 <li>方法：<code>HttpServletRequest.sendRedirect(String location)</code></li>
-<li>特点：
-<ol>
+<li>特点：<ol>
 <li>源组件响应结果不会发送到客户端</li>
 <li>源组件重定向前已提交响应结果会抛出异常</li>
 <li>源组件与目标组件不共享ServletRequest对象，不能共享请求范围内的数据</li>
@@ -1089,45 +895,37 @@
 </ol>
 </li>
 </ol>
-<p> </p>
-<h2><span id="17-访问servlet容器内其他web应用"> 17. 访问Servlet容器内其他Web应用</span></h2>
-<ol>
+<p>&nbsp;</p>
+<h2><span id="17-访问servlet容器内其他web应用">17. 访问Servlet容器内其他Web应用</span></h2><ol>
 <li>一个容器进程内可以同时运行多个Web应用，各应用之间通过ServletContext通信</li>
 <li><code>ServletContext.getContext(String uripath)</code>用于获取其他Web应用的ServletContext对象，参数指定其他应用的URL入口，如<code>/app1</code></li>
 <li>为了安全起见，多数容器允许用户设置是否允许应用得到其他应用的ServletContext对象。Tomcat中，<code>&lt;Context&gt;</code>元素的crossContext属性用于设置本项。默认false，调用上述方法返回null</li>
 </ol>
-<p> </p>
-<h2><span id="18-避免并发问题"> 18. 避免并发问题</span></h2>
-<ol>
+<p>&nbsp;</p>
+<h2><span id="18-避免并发问题">18. 避免并发问题</span></h2><ol>
 <li>并发访问同一Servlet，容器通常会为每个请求分配一个工作线程，线程们并发执行同一个Servlet.service()方法</li>
-<li>但多线程引入线程并发问题，处理原则：
-<ol>
+<li>但多线程引入线程并发问题，处理原则：<ol>
 <li>根据实际需求，决定Servlet中变量作用域，是实例变量还是局部变量</li>
 <li>多线程同时访问共享数据而导致并发问题时，采用Java同步机制对线程同步</li>
 <li><code>javax.servlet.SingleThreadModel</code>接口已废弃</li>
 </ol>
 </li>
-<li>合理决定变量作用域：
-<ol>
-<li>不同变量作用域：
-<ol>
-<li>局部变量：方法中定义，执行方法时线程堆栈中创建局部变量，线程执行完方法时局部变量销毁。多线程时，每个线程有独立的局部变量</li>
+<li>合理决定变量作用域：<ol>
+<li>不同变量作用域：<ol>
+<li>局部变量：方法中定义，执行方法时线程堆栈中创建局部变量，线程执行完方法时局部变量销毁。多线程时，每个线程有独立的局部变量    </li>
 <li>实例变量：即类的成员，每个对象（类的实例）有独立的实例变量。实例销毁，实例变量才销毁。若多线程执行同一实例的方法，则访问到同一组实例变量</li>
 </ol>
 </li>
 <li>由于每个请求对应一个线程，故如需每个请求对应单独变量时，使用局部变量；而需每个请求都对应同一变量时，使用实例变量</li>
 </ol>
 </li>
-<li>Java同步机制
-<ol>
+<li>Java同步机制<ol>
 <li>当需每个请求都对应同一变量，使用实例变量时，要使用同步机制对多线程同步</li>
 <li>可使用锁对象或synchronized关键字，锁方法或代码块</li>
 </ol>
 </li>
-<li>废弃的SingleThreadModel接口：
-<ol>
-<li>如Servlet实现此接口，可采用以下方式之一运行Servlet：
-<ol>
+<li>废弃的SingleThreadModel接口：<ol>
+<li>如Servlet实现此接口，可采用以下方式之一运行Servlet：<ol>
 <li>任一时刻仅允许一个工作线程执行service方法，其余请求放入等待队列，依次响应，这实际上禁止了多客户端对同一Servlet的并发访问</li>
 <li>容器为Servlet创建对象池，其中存放多个对象，每个请求的线程使用一个实例对象。此方法一来使得不同请求访问不同实例对象，二来请求过多时要创建过多实例对象，消耗内存资源</li>
 </ol>
@@ -1136,14 +934,11 @@
 </ol>
 </li>
 </ol>
-<p> </p>
-<h2><span id="19-对请求的异步处理"> 19. 对请求的异步处理</span></h2>
-<h3><span id="191-servlet中的异步"> 19.1 Servlet中的异步</span></h3>
-<ol>
+<p>&nbsp;</p>
+<h2><span id="19-对请求的异步处理">19. 对请求的异步处理</span></h2><h3><span id="191-servlet中的异步">19.1 Servlet中的异步</span></h3><ol>
 <li>Servlet API 3.0之前，容器对请求分配各自线程，这些线程来自主线程池的空闲线程，但请求过多，每个线程耗时过长时，会极大降低并发访问性能，故3.0开始引入异步处理机制，3.1加入非阻塞IO进一步增强异步处理的性能</li>
 <li>Servlet异步处理机制：Servlet从HttpServletRequest对象中获得一个AsyncContext对象，表示异步处理的上下文。它把响应当前请求的任务传给另一个新线程，新线程完成处理请求并向客户端返回结果的任务。而最初由容器分配给请求的线程就可及时释放回主线程池，从而及时处理更多请求。故Servlet异步处理机制，就是把响应请求的任务传递给另一个线程</li>
-<li>AsyncContext接口的方法：
-<ol>
+<li>AsyncContext接口的方法：<ol>
 <li><code>setTimeout(long timeout)</code> 设置异步线程处理请求任务的超时时间（毫秒），异步线程必须在参数时间内完成任务</li>
 <li><code>start(Runnable run)</code> 启动一个异步线程，执行参数run指定的任务</li>
 <li><code>addListener(AsyncListener listener)</code> 添加一个异步监听器</li>
@@ -1154,42 +949,33 @@
 </ol>
 </li>
 </ol>
-<h3><span id="192-异步流程"> 19.2 异步流程</span></h3>
-<ol>
-<li>
-<p>开启asyncSupport属性，使Servlet支持异步处理</p>
+<h3><span id="192-异步流程">19.2 异步流程</span></h3><ol>
+<li><p>开启asyncSupport属性，使Servlet支持异步处理</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(name=<span class="string">"..."</span>,</span><br><span class="line">           urlPatterns=<span class="string">"/..."</span>,</span><br><span class="line">           asyncSupported=<span class="keyword">true</span>)</span><br></pre></td></tr></table></figure>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>...<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>...<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">async-supported</span>&gt;</span>true<span class="tag">&lt;/<span class="name">async-supported</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>service方法中，获得AsyncContext对象</p>
+<li><p>service方法中，获得AsyncContext对象</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AsyncContext asyncContext = req.startAsync();</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>调用AsyncContext对象的setTimeout方法，设置处理请求的异步线程超时时间（非必须）</p>
+<li><p>调用AsyncContext对象的setTimeout方法，设置处理请求的异步线程超时时间（非必须）</p>
 </li>
-<li>
-<p>启动异步线程执行处理请求的任务，启动方法有三种：</p>
+<li><p>启动异步线程执行处理请求的任务，启动方法有三种：</p>
+<ol>
+<li><p><code>aysncContext.start(Runnable)</code>，参数可自定义一个实现了Runnable接口的新类，为的是将AsyncContext对象传入该任务类的实例变量，能够在run方法中执行complete方法。AsyncContext对象的start方法的实现取决于具体容器，有的容器额外维护一个线程池，从中取出线程用于响应，有的容器从主线程池中取线程；后者并未改进性能</p>
 </li>
-<li>
-<p><code>aysncContext.start(Runnable)</code>，参数可自定义一个实现了Runnable接口的新类，为的是将AsyncContext对象传入该任务类的实例变量，能够在run方法中执行complete方法。AsyncContext对象的start方法的实现取决于具体容器，有的容器额外维护一个线程池，从中取出线程用于响应，有的容器从主线程池中取线程；后者并未改进性能</p>
+<li><p><code>new Thread(Runnable).start()</code> 此法亲自创建新线程，并发访问量大时导致创建大量新线程，降低运行性能</p>
 </li>
-<li>
-<p><code>new Thread(Runnable).start()</code> 此法亲自创建新线程，并发访问量大时导致创建大量新线程，降低运行性能</p>
-</li>
-<li>
-<p>利用Java API的线程池ThreadPoolExecutor类创建一个线程池，所有异步线程都放在此池中。此法可灵活设定池。</p>
+<li><p>利用Java API的线程池ThreadPoolExecutor类创建一个线程池，所有异步线程都放在此池中。此法可灵活设定池。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> ThreadPoolExecutor executor = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">100</span>, <span class="number">200</span>, <span class="number">50000L</span>, TimeUnit.MILLISECONDS, <span class="keyword">new</span> ArrayBlockingQueue&lt;&gt;(<span class="number">100</span>));</span><br><span class="line">	<span class="comment">// 代表池中最少100线程，最多200，允许的线程空闲时间，空闲时间单位，池使用的缓冲队列</span></span><br><span class="line">	</span><br><span class="line">	service() &#123;</span><br><span class="line">	    ...</span><br><span class="line">	    executor.execute(Runnable);	<span class="comment">// 从池中取出一个空闲线程执行任务</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	destory() &#123;</span><br><span class="line">	    executor.shutdownNow();	<span class="comment">// 需显式关闭</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> ThreadPoolExecutor executor = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">100</span>, <span class="number">200</span>, <span class="number">50000L</span>, TimeUnit.MILLISECONDS, <span class="keyword">new</span> ArrayBlockingQueue&lt;&gt;(<span class="number">100</span>));</span><br><span class="line">	<span class="comment">// 代表池中最少100线程，最多200，允许的线程空闲时间，空闲时间单位，池使用的缓冲队列</span></span><br><span class="line">	</span><br><span class="line">	service() &#123;</span><br><span class="line">	    ...</span><br><span class="line">	    executor.execute(Runnable);	<span class="comment">// 从池中取出一个空闲线程执行任务</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	destory() &#123;</span><br><span class="line">	    executor.shutdownNow();	<span class="comment">// 需显式关闭</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<ol start="5">
+</li>
+</ol>
+<ol>
 <li>调用AsyncContext对象的complete方法，通知容器已完成任务，或dispatch方法，把请求转发给其他Web组件</li>
 </ol>
-<h3><span id="193-异步监听器asynclistener"> 19.3 异步监听器AsyncListener</span></h3>
-<ol>
-<li>
-<p>可用AsyncListener捕获并处理异步线程运行中的特定事件</p>
+<h3><span id="193-异步监听器asynclistener">19.3 异步监听器AsyncListener</span></h3><ol>
+<li><p>可用AsyncListener捕获并处理异步线程运行中的特定事件</p>
 <ol>
 <li><code>onStartAsync(AsyncEvent event)</code> 异步线程开始时调用</li>
 <li><code>onError(event)</code> 异步线程出错时调用</li>
@@ -1197,72 +983,58 @@
 <li><code>onComplete(event)</code> 异步线程执行完毕时调用</li>
 </ol>
 </li>
-<li>
-<p>如例</p>
+<li><p>如例</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">AsyncContext asyncContext = req.getAsyncContext();</span><br><span class="line">asyncContext.setTimeout(<span class="number">60</span> * <span class="number">1000</span>);</span><br><span class="line">asyncContext.addListener(<span class="keyword">new</span> AsyncListener() &#123;</span><br><span class="line">    <span class="comment">// 复写四个监听方法</span></span><br><span class="line">&#125;);</span><br><span class="line">asyncContext.start(Runnable);</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h3><span id="194-非阻塞io"> 19.4 非阻塞I/O</span></h3>
-<ol>
-<li>
-<p>阻塞I/O：</p>
+<h3><span id="194-非阻塞io">19.4 非阻塞I/O</span></h3><ol>
+<li><p>阻塞I/O：</p>
 <ol>
 <li>线程通过输入流执行读操作时，若输入流的可读数据还未准备好，则当前线程进入阻塞状态，当读到数据或到达数据末尾，线程才从读方法退出。如上传大文件，网络传输耗时，后台读数据阻塞</li>
 <li>线程通过输出流写操作时，若因为某些原因，暂时不能向目的地写数据，就阻塞，只有完成了写数据的操作才从写方法中退出。如发送大文件。</li>
 </ol>
 </li>
-<li>
-<p>非阻塞I/O：</p>
+<li><p>非阻塞I/O：</p>
 <ol>
 <li>线程输入流读操作，数据未准备好，则线程立即退出读方法。只有输入流中有可读数据才进行读操作</li>
 <li>线程输出流写操作，暂时不能写数据时立即退出写方法。只有可以写时才进行写操作</li>
 </ol>
 </li>
-<li>
-<p>Java中传统读写都是阻塞I/O。当异步线程用阻塞I/O读写时，会使异步线程阻塞，还是削弱了并发性能。故从Servlet API 3.1开始，引入非阻塞I/O机制，建立在异步基础上</p>
+<li><p>Java中传统读写都是阻塞I/O。当异步线程用阻塞I/O读写时，会使异步线程阻塞，还是削弱了并发性能。故从Servlet API 3.1开始，引入非阻塞I/O机制，建立在异步基础上</p>
 </li>
-<li>
-<p>实现方法：引入两个监听器</p>
+<li><p>实现方法：引入两个监听器</p>
 <ol>
-<li>ReadListener接口：监听ServletInputStream输入流行为
-<ol>
+<li>ReadListener接口：监听ServletInputStream输入流行为<ol>
 <li><code>onDataAvailable()</code> 输入流中有可读数据时触发此方法</li>
 <li><code>onAllDataRead()</code> 输入流中所有数据读完时触发此方法</li>
 <li><code>onError(Throwable)</code> 输入操作出现错误时触发此方法</li>
 </ol>
 </li>
-<li>WriteListener接口：监听ServletOutputStream输出流行为
-<ol>
+<li>WriteListener接口：监听ServletOutputStream输出流行为<ol>
 <li><code>onWritePossible()</code> 可以向输出流写数据时触发此方法</li>
 <li><code>onError(Throwable)</code> 输出操作出现错误时触发此方法</li>
 </ol>
 </li>
 </ol>
 </li>
-<li>
-<p>操作步骤：在支持异步处理的Servlet类中进行非阻塞I/O</p>
+<li><p>操作步骤：在支持异步处理的Servlet类中进行非阻塞I/O</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 得到输入输出流</span></span><br><span class="line">ServletInputStream input = req.getInputStream();</span><br><span class="line">ServletOutputStream output = resp.getOutputStream();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册监听器</span></span><br><span class="line">input.setReadListener(<span class="keyword">new</span> MyReadListener(input, asyncContext));</span><br><span class="line">output.setWriteListener(<span class="keyword">new</span> MyWriteListener(output, asyncContext));</span><br><span class="line"></span><br><span class="line"><span class="comment">// MyReadListener.class</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyReadListener</span> <span class="keyword">implements</span> <span class="title">ReadListener</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ServletInputStream imput;</span><br><span class="line">    <span class="keyword">private</span> AsyncContext asyncContext;</span><br><span class="line">    <span class="keyword">private</span> StringBUilder builder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyReadListener</span> <span class="params">(ServletInputStream input, AsyncContext asyncContext)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.input = input;</span><br><span class="line">        <span class="keyword">this</span>.asyncContext = asyncContext;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDataAvailable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> len = -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">byte</span>[] buff = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="comment">// 读取客户端提交的数据</span></span><br><span class="line">            <span class="keyword">while</span> (input.isReady() &amp;&amp; (len = input.read(buff)) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                String data = <span class="keyword">new</span> String(buff, <span class="number">0</span>, len);</span><br><span class="line">                builder.append(data);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAllDataRead</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 将数据设为req范围属性，并派发给负责输出的Servlet组件</span></span><br><span class="line">        asyncContext.getRequest.setAttribute(<span class="string">"msg"</span>, builder.toString());</span><br><span class="line">        asyncContext.dispatch(<span class="string">"/output"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnError</span> <span class="params">(Throwable t)</span> </span>&#123;</span><br><span class="line">        t.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p>当主线程使用监听器时，service方法会先于读取结束，可见容器会提供一个异步线程来执行监听器中的非阻塞I/O操作</p>
+<li><p>当主线程使用监听器时，service方法会先于读取结束，可见容器会提供一个异步线程来执行监听器中的非阻塞I/O操作</p>
 </li>
 </ol>
-<p> </p>
-<h2><span id="20-服务器端推送"> 20. 服务器端推送</span></h2>
-<ol>
+<p>&nbsp;</p>
+<h2><span id="20-服务器端推送">20. 服务器端推送</span></h2><ol>
 <li>如最新消息推送、原请求包含其他链接时的主动发送等，都需主动推送。</li>
-<li>HTTP/2引入服务器推送概念，Servlet API 4开始提供服务器推送支持，有PushBuilder接口实现
-<ol>
+<li>HTTP/2引入服务器推送概念，Servlet API 4开始提供服务器推送支持，有PushBuilder接口实现<ol>
 <li><code>path(String path)</code> 指定待推送资源的URL</li>
 <li><code>push()</code> 把path指定资源推送到客户端</li>
 </ol>
 </li>
 </ol>
-<p> </p>
-<h2><span id="21-session"> 21. Session</span></h2>
-<ol>
-<li>介绍：
-<ol>
+<p>&nbsp;</p>
+<h2><span id="21-session">21. Session</span></h2><ol>
+<li>介绍：<ol>
 <li>HttpSession对象是同名接口的实例，无父接口。session本身就是http协议的内容。</li>
 <li>session标识一次会话/确认一个用户（一个用户的多次请求），并在会话期间共享数据（更长的生命周期）</li>
 <li>对于服务器，每个连接来的客户端都是一个session。Servlet容器用此接口创建客户端和服务器的会话，保留指定时长，跨多个连接或请求。一个会话通常对应一个用户，可用session查看和操作会话属性。</li>
@@ -1270,17 +1042,15 @@
 </ol>
 </li>
 <li><code>req.getSession()</code>获取session对象。</li>
-<li>JSession标识符：
-<ol>
+<li>JSession标识符：<ol>
 <li>会话的唯一标志sessionId</li>
 <li>名为JSESSIONID的cookie，请求中如果访问了session，则服务器会创建一个名为JSESSIONID，值为获取到的session（无论是获取到的还是新创建的）的sessionId的cookie对象，并添加到response对象中，响应给客户端，有效时间为关闭浏览器。所以Session的底层依赖Cookie来实现。</li>
 <li>每当一次请求到达服务器，如果开启了会话（访问了session），服务器第一步会查看是否从客户端回传一个名为JSESSIONID的cookie，如果没有则认为这是一次新的会话，会创建一个新的session对象，并用唯一的sessionId为此次会话做一个标志。如果有JESSIONID 这个cookie回传，服务器则会根据JSESSIONID这个值去查看是否含有id为JSESSION值的session对象，如果没有则认为是一个新的会话，重新创建一个新的 session对象，并标志此次会话；如果找到了相应的session对象，则认为是之前标志过的一次会话，返回该session对象，数据达到共享。</li>
 </ol>
 </li>
 <li>session域对象：<code>session.setAttribute(key, value)</code> <code>req.getAttribute(key)</code> <code>session.removeAttribute(key)</code>。数据存储在session域对象中。</li>
-<li>生命周期：
-<ol>
-<li>默认时长：当客户端第一次请求 servlet 并且操作session时，session 对象生成，Tomcat 中 session 默认的存活时间为30min，即你不操作界面的时间，一旦有操作，session 会重新计时。</li>
+<li>生命周期：<ol>
+<li>默认时长：当客户端第一次请求 servlet 并且操作session时，session 对象生成，Tomcat 中 session 默认的存活时间为30min，即你不操作界面的时间，一旦有操作，session 会重新计时。  </li>
 <li><code>session.setMaxInactiveInterval(int)</code>按秒设置最大不活动时间或get。</li>
 <li><code>session.invalidate()</code> 立刻失效</li>
 <li>关闭浏览器：jsession基于cookie，若cookie有效期默认，关闭浏览器后session也结束。</li>
@@ -1288,47 +1058,39 @@
 </ol>
 </li>
 </ol>
-<h2><span id="22-域对象总结"> 22. 域对象总结</span></h2>
-<ol>
+<h2><span id="22-域对象总结">22. 域对象总结</span></h2><ol>
 <li>request域对象：一次请求中有效。请求转发有效，重定向无效。</li>
 <li>session域对象：一次会话中有效。请求转发和重定向都有想，session销毁无效。</li>
 <li>ServletContext域对象：整个应用程序有效，服务器关闭失效。</li>
 </ol>
-<h2><span id="23-webxml"> 23. web.xml</span></h2>
-<p>为Servlet映射URL既可以通过xml，也可以用标注<code>@WebServlet(/serlvetName)</code></p>
+<h2><span id="23-webxml">23. web.xml</span></h2><p>为Servlet映射URL既可以通过xml，也可以用标注<code>@WebServlet(/serlvetName)</code></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcher<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>Dispatcher<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcher<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/dispatcher<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ol>
-<li>
-<p><code>servlet为Servlet指定名字</code></p>
-<ol>
+<li><code>servlet为Servlet指定名字</code><ol>
 <li><code>servlet-name</code>为Servlet指定名字</li>
 <li><code>servlet-class</code>指定具体类的完整路径/类名</li>
 <li><code>init-param</code>定义初始化参数（参数名和值），可有多个本元素</li>
 <li><code>load-on-startup</code>指定Servlet容器启动web时加载Servlet的次序，小数字优先级高，0或未指定则表示访问时才加载</li>
 </ol>
 </li>
-<li>
-<p><code>servlet-mapping</code>为其映射一个URL</p>
+<li><p><code>servlet-mapping</code>为其映射一个URL</p>
 <ol>
 <li><code>url-pattern</code>指定相对URL路径，可一个Servlet映射多个URL</li>
 </ol>
 </li>
-<li>
-<p><code>welcome-file-list</code></p>
+<li><p><code>welcome-file-list</code></p>
 <ol>
 <li><code>welcome-file&gt;</code>用于为web设置默认主页</li>
 </ol>
 </li>
 </ol>
-<h2><span id="24-url总结"> 24. URL总结</span></h2>
-<ol>
+<h2><span id="24-url总结">24. URL总结</span></h2><ol>
 <li>Servlet前的<code>@WebServlet(&quot;/servletName&quot;)</code>，此为Servlet的名字，并且在地址栏中显示。</li>
 <li>HTML中的<code>action=&quot;servletName&quot;</code>，同1中URL，但不加<code>/</code>，表示要调用的Servlet。</li>
 <li>请求转发时，url要加<code>/</code>。</li>
 </ol>
-<p> </p>
-<h2><span id="cookie保存密码免登录的例子"> cookie保存密码免登录的例子</span></h2>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Cookie04.java</span></span><br><span class="line"><span class="comment"> * 用例测试，保存密码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/cookie04"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cookie04</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span> hasName = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">boolean</span> hasPwd = <span class="keyword">false</span>;</span><br><span class="line">        String uname = <span class="keyword">null</span>;</span><br><span class="line">        String upwd = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先检测有无用户名和密码的cookie</span></span><br><span class="line">        String name = <span class="keyword">null</span>;</span><br><span class="line">        String value = <span class="keyword">null</span>;</span><br><span class="line">        Cookie[] cookies = req.getCookies();</span><br><span class="line">        <span class="keyword">if</span> (cookies != <span class="keyword">null</span> &amp;&amp; cookies.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Cookie cooike :</span><br><span class="line">                    cookies) &#123;</span><br><span class="line">                name = cooike.getName();</span><br><span class="line">                value = cooike.getValue();</span><br><span class="line">                <span class="keyword">if</span> (name.equals(<span class="string">"uname"</span>)) &#123;</span><br><span class="line">                    hasName = <span class="keyword">true</span>;</span><br><span class="line">                    uname = value;</span><br><span class="line">                    System.out.println(<span class="string">"has uname: "</span> + value);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (name.equals(<span class="string">"upwd"</span>)) &#123;</span><br><span class="line">                    hasPwd = <span class="keyword">true</span>;</span><br><span class="line">                    upwd = value;</span><br><span class="line">                    System.out.println(<span class="string">"has upwd: "</span> + value);</span><br><span class="line">                    <span class="comment">// resp.getWriter().write("uname: " + uname + ", upwd: " + upwd);</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (hasName &amp;&amp; hasPwd) &#123;</span><br><span class="line">            <span class="comment">// 姓名密码都有，不用登陆，直接转发至首页</span></span><br><span class="line">            System.out.println(<span class="string">"have two, index"</span>);</span><br><span class="line">            req.getRequestDispatcher(<span class="string">"index.jsp"</span>).forward(req, resp);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// cookie不足，需要登录，转发至登录页面</span></span><br><span class="line">            System.out.println(<span class="string">"have no, login"</span>);</span><br><span class="line">            req.getRequestDispatcher(<span class="string">"login.jsp"</span>).forward(req, resp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<h2><span id="cookie保存密码免登录的例子">cookie保存密码免登录的例子</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Cookie04.java</span></span><br><span class="line"><span class="comment"> * 用例测试，保存密码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/cookie04"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cookie04</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span> hasName = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">boolean</span> hasPwd = <span class="keyword">false</span>;</span><br><span class="line">        String uname = <span class="keyword">null</span>;</span><br><span class="line">        String upwd = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先检测有无用户名和密码的cookie</span></span><br><span class="line">        String name = <span class="keyword">null</span>;</span><br><span class="line">        String value = <span class="keyword">null</span>;</span><br><span class="line">        Cookie[] cookies = req.getCookies();</span><br><span class="line">        <span class="keyword">if</span> (cookies != <span class="keyword">null</span> &amp;&amp; cookies.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Cookie cooike :</span><br><span class="line">                    cookies) &#123;</span><br><span class="line">                name = cooike.getName();</span><br><span class="line">                value = cooike.getValue();</span><br><span class="line">                <span class="keyword">if</span> (name.equals(<span class="string">"uname"</span>)) &#123;</span><br><span class="line">                    hasName = <span class="keyword">true</span>;</span><br><span class="line">                    uname = value;</span><br><span class="line">                    System.out.println(<span class="string">"has uname: "</span> + value);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (name.equals(<span class="string">"upwd"</span>)) &#123;</span><br><span class="line">                    hasPwd = <span class="keyword">true</span>;</span><br><span class="line">                    upwd = value;</span><br><span class="line">                    System.out.println(<span class="string">"has upwd: "</span> + value);</span><br><span class="line">                    <span class="comment">// resp.getWriter().write("uname: " + uname + ", upwd: " + upwd);</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (hasName &amp;&amp; hasPwd) &#123;</span><br><span class="line">            <span class="comment">// 姓名密码都有，不用登陆，直接转发至首页</span></span><br><span class="line">            System.out.println(<span class="string">"have two, index"</span>);</span><br><span class="line">            req.getRequestDispatcher(<span class="string">"index.jsp"</span>).forward(req, resp);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// cookie不足，需要登录，转发至登录页面</span></span><br><span class="line">            System.out.println(<span class="string">"have no, login"</span>);</span><br><span class="line">            req.getRequestDispatcher(<span class="string">"login.jsp"</span>).forward(req, resp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Cookie05.java</span></span><br><span class="line"><span class="comment"> * 用例测试，保存密码</span></span><br><span class="line"><span class="comment"> * 登录页面调用此Servlet，设置cookie后转发至首页</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/cookie05"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cookie05</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        String uname = req.getParameter(<span class="string">"uname"</span>);</span><br><span class="line">        String upwd = req.getParameter(<span class="string">"upwd"</span>);</span><br><span class="line">        Cookie nameCookie = <span class="keyword">new</span> Cookie(<span class="string">"uname"</span>, uname);</span><br><span class="line">        Cookie pwdCookie = <span class="keyword">new</span> Cookie(<span class="string">"upwd"</span>, upwd);</span><br><span class="line">        resp.addCookie(nameCookie);</span><br><span class="line">        resp.addCookie(pwdCookie);</span><br><span class="line"></span><br><span class="line">        req.getRequestDispatcher(<span class="string">"index.jsp"</span>).forward(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
 
@@ -1371,5 +1133,25 @@
 </footer>
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

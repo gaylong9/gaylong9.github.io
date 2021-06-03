@@ -15,6 +15,7 @@
 
 
 <title>Spring-1-Spring_IoC概念 | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
 
 
 
@@ -226,35 +227,30 @@
         </header>
 
         <div class="post-content">
-            <p> </p>
+            <p>&nbsp;</p>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#spring-ioc">Spring IoC</a>
-<ul>
+<li><a href="#spring-ioc">Spring IoC</a><ul>
 <li><a href="#1-spring">1. Spring</a></li>
 <li><a href="#2-spring-ioc">2. Spring IoC</a></li>
-<li><a href="#3-spring-ioc%E5%AE%B9%E5%99%A8">3. Spring IoC容器</a>
-<ul>
-<li><a href="#31-%E5%AE%B9%E5%99%A8%E7%9A%84%E8%AE%BE%E8%AE%A1">3.1 容器的设计</a></li>
-<li><a href="#32-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5">3.2 初始化和依赖注入</a></li>
-<li><a href="#33-spring-bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">3.3 Spring Bean的生命周期</a></li>
+<li><a href="#3-spring-ioc容器">3. Spring IoC容器</a><ul>
+<li><a href="#31-容器的设计">3.1 容器的设计</a></li>
+<li><a href="#32-初始化和依赖注入">3.2 初始化和依赖注入</a></li>
+<li><a href="#33-spring-bean的生命周期">3.3 Spring Bean的生命周期</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p> </p>
+<p>&nbsp;</p>
 <p>[toc]</p>
-<h1><span id="spring-ioc"> Spring IoC</span></h1>
-<h2><span id="1-spring"> 1. Spring</span></h2>
-<p>因其先进的设计理念IoC控制反转和AOP面相切片编程，使它成为Java中最成功的框架。</p>
+<h1><span id="spring-ioc">Spring IoC</span></h1><h2><span id="1-spring">1. Spring</span></h2><p>因其先进的设计理念IoC控制反转和AOP面相切片编程，使它成为Java中最成功的框架。</p>
 <p>EJB笨重，通过EJB容器发布Bean，应用通过EJB容器获得Bean，过程缓慢，步骤复杂。</p>
 <p>Spring随后兴起，它认为一切Java类都是资源，资源都是Bean，容纳这些Bean的是Spring提供的IoC容器，故Spring是一种基于Bean的编程。对于POJO，提供轻量级和低侵入的编程，可以配置来扩展POJO功能；提供切面编程，消除了try-catch-finally的滥用；提供模板类，整合各个框架和技术。</p>
-<p> </p>
-<h2><span id="2-spring-ioc"> 2. Spring IoC</span></h2>
-<p>控制反转。</p>
+<p>&nbsp;</p>
+<h2><span id="2-spring-ioc">2. Spring IoC</span></h2><p>控制反转。</p>
 <p>eg：以前想喝橙汁需要自己买橙子榨汁，现在只需联系饮品店，就能喝到饮品店提供的橙汁。</p>
 <ol>
 <li>主动创造：需要创建Blender类、JuiceMaker类，创建对象；在实际任务中，要维护众多关系，并且一些还不熟悉，主动创造比较复杂</li>
@@ -275,10 +271,8 @@
 <li>如实际开发中，负责A模块的开发者完成接口模块开发后，将服务发布到IoC容器，B模块开发者若要调用，只需提供描述就可得到对应接口。</li>
 <li>总之，类的具体实现不需理解，只要知道它有什么用就可以；对象的产生依靠IoC容器，而不是开发者主动的行为。</li>
 </ol>
-<p> </p>
-<h2><span id="3-spring-ioc容器"> 3. Spring IoC容器</span></h2>
-<h3><span id="31-容器的设计"> 3.1 容器的设计</span></h3>
-<p>主要基于BeanFactory和ApplicationContext两个接口。其中后者是前者的子接口之一。大多数场景下都将ApplicationContext作为IoC容器。</p>
+<p>&nbsp;</p>
+<h2><span id="3-spring-ioc容器">3. Spring IoC容器</span></h2><h3><span id="31-容器的设计">3.1 容器的设计</span></h3><p>主要基于BeanFactory和ApplicationContext两个接口。其中后者是前者的子接口之一。大多数场景下都将ApplicationContext作为IoC容器。</p>
 <p>最底层的接口BeanFactory的一些方法：</p>
 <ul>
 <li>getBean：从容器中获取Bean。多态，多种参数类型，string、Class；但Class类型可以扩展接口也可继承父类，所以有可能使用父类类型无法准确获得实例。</li>
@@ -288,9 +282,8 @@
 </ul>
 <p>ApplicationContext对BeanFactory进行了扩展，实际使用较多；而ApplicationContext的实现类，虽然功能更多，但是是使用在某一个特定领域。</p>
 <p>如在上例做果汁中，Java代码中的ctx，就是通过<code>Application ctx = new ClassPathXmlApplicationContext(&quot;spring-cfg.xml&quot;);</code>创建的，此处的spring-cfg.xml中配置了两个bean元素。</p>
-<p> </p>
-<h3><span id="32-初始化和依赖注入"> 3.2 初始化和依赖注入</span></h3>
-<p>Bean的初始化有3步：</p>
+<p>&nbsp;</p>
+<h3><span id="32-初始化和依赖注入">3.2 初始化和依赖注入</span></h3><p>Bean的初始化有3步：</p>
 <ol>
 <li>Resource定位：容器根据开发者的配置，进行资源定位，通过XML或注解配置，就要定位到XML或注解</li>
 <li>BeanDefinition载入：根据配置，获取POJO，用以生成对应实例</li>
@@ -298,9 +291,8 @@
 </ol>
 <p>以上三步结束后，初始化完成，但还没有依赖注入，即没有将配置的资源注入给Bean。</p>
 <p>配置项lazy-init需要提一下：默认default（false），表示默认自动初始化Bean；若true，则容器getBean方法时才初始化并依赖注入。</p>
-<p> </p>
-<h3><span id="33-spring-bean的生命周期"> 3.3 Spring Bean的生命周期</span></h3>
-<p>IoC容器的本质目的就是为了管理Bean。</p>
+<p>&nbsp;</p>
+<h3><span id="33-spring-bean的生命周期">3.3 Spring Bean的生命周期</span></h3><p>IoC容器的本质目的就是为了管理Bean。</p>
 <p><strong>初始化步骤：</strong></p>
 <ol>
 <li>BeanNameAware.setBeanName()：若Bean实现了本接口方法，就会被调用</li>
@@ -319,7 +311,7 @@
 </ol>
 <p>另，自定义的init，destory方法，需要在xml中配置指明属性，属性值为方法名，才会运行：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"juiceMaker"</span> <span class="attr">class</span>=<span class="string">"xxx.JuiceMaker"</span> <span class="attr">init-method</span>=<span class="string">"init"</span> <span class="attr">destroy-method</span>=<span class="string">"destroy"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p> </p>
+<p>&nbsp;</p>
 
         </div>
 
@@ -362,5 +354,25 @@
 </footer>
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

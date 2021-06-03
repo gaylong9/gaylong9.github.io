@@ -15,6 +15,7 @@
 
 
 <title>SSM基础-认识SSM和Redis | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
 
 
 
@@ -226,14 +227,12 @@
         </header>
 
         <div class="post-content">
-            <p> </p>
+            <p>&nbsp;</p>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#%E8%AE%A4%E8%AF%86ssm%E6%A1%86%E6%9E%B6%E5%92%8Credis">认识SSM框架和Redis</a>
-<ul>
-<li><a href="#1-spring%E6%A1%86%E6%9E%B6">1. Spring框架</a>
-<ul>
+<li><a href="#认识ssm框架和redis">认识SSM框架和Redis</a><ul>
+<li><a href="#1-spring框架">1. Spring框架</a><ul>
 <li><a href="#11-spring-ioc">1.1 Spring IoC</a></li>
 <li><a href="#12-spring-aop">1.2 Spring AOP</a></li>
 </ul>
@@ -241,29 +240,24 @@
 <li><a href="#2-mybatis">2. MyBatis</a></li>
 <li><a href="#3-spring-mvc">3. Spring MVC</a></li>
 <li><a href="#4-redis">4. Redis</a></li>
-<li><a href="#5-%E6%A1%86%E6%9E%B6%E7%BB%93%E6%9E%84">5. 框架结构</a></li>
+<li><a href="#5-框架结构">5. 框架结构</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p> </p>
+<p>&nbsp;</p>
 <p>[toc]</p>
-<h1><span id="认识ssm框架和redis"> 认识SSM框架和Redis</span></h1>
-<h2><span id="1-spring框架"> 1. Spring框架</span></h2>
-<p>是Java应用最广的框架，其成功来自于IoC（Inversion of Control）控制反转和AOP（Aspect Oriented Programming）面向切片编程理念。</p>
-<h3><span id="11-spring-ioc"> 1.1 Spring IoC</span></h3>
-<p>IoC是一个容器，将一切Java资源看作Bean，容器IoC来管理这些Bean和它们之间的关系。并且IoC对于对象和关系的管理，不采用人为手动创建，而是由IoC自己通过描述创建。</p>
+<h1><span id="认识ssm框架和redis">认识SSM框架和Redis</span></h1><h2><span id="1-spring框架">1. Spring框架</span></h2><p>是Java应用最广的框架，其成功来自于IoC（Inversion of Control）控制反转和AOP（Aspect Oriented Programming）面向切片编程理念。</p>
+<h3><span id="11-spring-ioc">1.1 Spring IoC</span></h3><p>IoC是一个容器，将一切Java资源看作Bean，容器IoC来管理这些Bean和它们之间的关系。并且IoC对于对象和关系的管理，不采用人为手动创建，而是由IoC自己通过描述创建。</p>
 <p>如用户使用插座，有不同规格的插座，用Socket接口定义插座，Socket1、Socket2等表示不同插座类，则寻常Java代码要：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Socket socket = <span class="keyword">new</span> Socket1();</span><br><span class="line">user.setSocket(socket);</span><br><span class="line">user.useSocket();</span><br></pre></td></tr></table></figure>
 <p>若出现了其他更适用的插座，如Socket3、Socket4，则要深入代码各处，对源代码进行替换。实际工程中代码量巨大，如此替换，十分繁琐。故而引入Spring IoC 控制反转。只需在xml中配置，让IoC容器自己通过配置找到插座类，实例化给Socket接口后注入User对象即可：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"socket"</span> <span class="attr">class</span>=<span class="string">"Socket3"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"user"</span> <span class="attr">class</span>=<span class="string">"User"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"socket"</span> <span class="attr">ref</span>=<span class="string">"socket"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如此，只需改动配置文件即可实现改用不同的插座类。这就是控制反转，从人为创建对象，到IoC通过配置描述自动实现Bean资源的确定、实例化与注入，控制权到了IoC手里。**你不用去找资源，只需要向Spring IoC容器描述所需资源，它会自己找到你所需的资源。**这就实现了Bean资源之间的解耦。除此之外，IoC还提供对Bean的生命周期的管理等多种操作。</p>
-<h3><span id="12-spring-aop"> 1.2 Spring AOP</span></h3>
-<p>IoC用于管理Bean，Bean都是基于OOP。但有些问题OOP无法处理，如订单、生产部门、财务部门三个对象：订单发出，生产部门经审批后上报财务部门，但财务部门发现价格超支，需要取消订单，但取消订单这一操作除了当前的财务部门，还会影响之前生产部门所做的审批，它们也许取消。我们把预算超支这个条件称为切面，它影响了上述三个OOP对象。实际中，切面条件会影响很多对象，所以需要面向切面编程AOP，通过它来管理切面上一些对象的协作。</p>
+<p>如此，只需改动配置文件即可实现改用不同的插座类。这就是控制反转，从人为创建对象，到IoC通过配置描述自动实现Bean资源的确定、实例化与注入，控制权到了IoC手里。<strong>你不用去找资源，只需要向Spring IoC容器描述所需资源，它会自己找到你所需的资源。</strong>这就实现了Bean资源之间的解耦。除此之外，IoC还提供对Bean的生命周期的管理等多种操作。</p>
+<h3><span id="12-spring-aop">1.2 Spring AOP</span></h3><p>IoC用于管理Bean，Bean都是基于OOP。但有些问题OOP无法处理，如订单、生产部门、财务部门三个对象：订单发出，生产部门经审批后上报财务部门，但财务部门发现价格超支，需要取消订单，但取消订单这一操作除了当前的财务部门，还会影响之前生产部门所做的审批，它们也许取消。我们把预算超支这个条件称为切面，它影响了上述三个OOP对象。实际中，切面条件会影响很多对象，所以需要面向切面编程AOP，通过它来管理切面上一些对象的协作。</p>
 <p>Spring AOP常用于数据库事务编程，如上例中，数据库中第一步操作完成后，若第二部操作失败，需要数据库回滚，撤销第一步的更新。Spring AOP的数据库事务管理中，以异常作为消息。默认情况下，只要Spring接收到异常消息，就会将数据库回滚，保持数据一致性。代码中不需要繁琐的try-catch-finally语句，只需判断后<code>throw new RuntimeException(&quot;预算超支！&quot;);</code> 即可通知Spring AOP事务管理对数据库回滚。</p>
-<p> </p>
-<h2><span id="2-mybatis"> 2. MyBatis</span></h2>
-<p>前身是Apache的开源项目iBatis，是一个基于Java的持久层框架，先后由Apache software foundation、Google code迁至Github。其优势在于灵活，几乎可以替代JDBC，同时提供了接口编程。目前MyBatis的数据访问层DAO（Data Access Objects）不需要实现类，只需一个接口和XML（或注解）。它提供自动映射、动态SQL、级联、缓存、注解、代码和SQL分离等特性，也可对SQL优化。具有封装少，映射多样化、支持存储过程、可对SQL优化等特点，使其取代了Hibernate成为Java互联网中首选的持久框架。</p>
+<p>&nbsp;</p>
+<h2><span id="2-mybatis">2. MyBatis</span></h2><p>前身是Apache的开源项目iBatis，是一个基于Java的持久层框架，先后由Apache software foundation、Google code迁至Github。其优势在于灵活，几乎可以替代JDBC，同时提供了接口编程。目前MyBatis的数据访问层DAO（Data Access Objects）不需要实现类，只需一个接口和XML（或注解）。它提供自动映射、动态SQL、级联、缓存、注解、代码和SQL分离等特性，也可对SQL优化。具有封装少，映射多样化、支持存储过程、可对SQL优化等特点，使其取代了Hibernate成为Java互联网中首选的持久框架。</p>
 <p>POJO对象对数据库表相互映射的框架称为对象关系映射框架（Object Relational Mapping，ORM）。MyBatis和Hibernate都可算作ORM框架。Hibernate中，通过xml配置映射后，只需对POJO对象操作，即可自动实现对库表的修改，无法手动进行SQL编写。而MyBatis不屏蔽SQL，程序员可以自己制定SQL规则，能更加精确地定义SQL，优化性能，更能解决高并发、大数据、高性能、高响应的要求。</p>
 <p>如有一个表，存放角色，t_table，内有编号id和角色名称role_name两个属性。先创建一个POJO类Role：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> lcass Role implements Serializable &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String roleName;</span><br><span class="line">    <span class="comment">// setter and getter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -274,9 +268,8 @@
 <p>本接口不需要实现类，可直接在代码中使用：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">SqlSession sqlSession = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    sqlSession = MyBatisUtil.getSqlSession();</span><br><span class="line">    RoleMapeer roleMapper = sqlSession.getMapper(RoleMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    Role role = roleMapper.getRole(<span class="number">1</span>);	<span class="comment">// select</span></span><br><span class="line">    role.setRoleName(<span class="string">"new_name"</span>);</span><br><span class="line">    roleMapper.updateRole(role);	<span class="comment">// update</span></span><br><span class="line">    Role role2 = <span class="keyword">new</span> Role();</span><br><span class="line">    role2.setRoleName(<span class="string">"role2"</span>);</span><br><span class="line">    roleMapper.insertRole(role2);	<span class="comment">// insert</span></span><br><span class="line">    roleMapper.deleteRole(<span class="number">2</span>);	<span class="comment">// delete</span></span><br><span class="line">    sqlSession.commit();	<span class="comment">// 提交事务    </span></span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">    ex.printStackTrace();</span><br><span class="line">    <span class="keyword">if</span> (sqlSession != <span class="keyword">null</span>) &#123;</span><br><span class="line">        sqlSession.rollback();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="comment">// 关闭连接</span></span><br><span class="line">    <span class="keyword">if</span> (sqlSession != <span class="keyword">null</span>) &#123;</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>MyBatis相比Hibernate，还需要接口和SQL，虽然工作量大，但由于能自定义SQL和映射关系，所以更灵活，可优化性更好。</p>
-<p> </p>
-<h2><span id="3-spring-mvc"> 3. Spring MVC</span></h2>
-<p>Struts2与Spring的结合一直存在很多问题，如兼容性和类臃肿，并且近年来Struts漏洞问题频发，使用率大减。与此同时，基于Spring的MVC（Model-View-Controller）框架出现，Spring MVC结构层次清晰，类比较简单，并且与Spring的核心IoC和AOP无缝对接，成为互联网时代的主流框架。</p>
+<p>&nbsp;</p>
+<h2><span id="3-spring-mvc">3. Spring MVC</span></h2><p>Struts2与Spring的结合一直存在很多问题，如兼容性和类臃肿，并且近年来Struts漏洞问题频发，使用率大减。与此同时，基于Spring的MVC（Model-View-Controller）框架出现，Spring MVC结构层次清晰，类比较简单，并且与Spring的核心IoC和AOP无缝对接，成为互联网时代的主流框架。</p>
 <p>MVC把应用程序分为不同元素，提供松耦合：</p>
 <ol>
 <li>Model模型：封装了应用程序的数据和由它们组成的POJO</li>
@@ -284,9 +277,8 @@
 <li>Controller控制器：负责处理用户请求，并建立适当的模型传给视图渲染</li>
 </ol>
 <p>Spring MVC中还可以定义逻辑视图，通过其提供的视图解析器就能很方便地找到对应的视图进行渲染，或使用其消息转换功能，如Controller的方法内加入注解<code>@ResponseBody</code>后，Spring MVC就能通过其消息转换系统，将数据转换为JSON提供给前端Ajax请求使用。</p>
-<p> </p>
-<h2><span id="4-redis"> 4. Redis</span></h2>
-<p>是最流行的NoSQL（Not Only SQL）。NoSQL可以提高互联网系统的性能，具备一定持久层的功能，也可以作为一种缓存工具。对于NoSQL数据库，作为持久层，存储的数据是半结构化的，在读入内存时有更少的规则，速度更快，普通数据库是结构化、多范式规则；作为缓存，支持大数据存入内存，只要命中率高，就能快速响应（常用数据从数据库中读出后可放在NoSQL，由于是内存中，速度快很多，并且可先在NoSQL中写入，某一时刻再批量写入数据库）。</p>
+<p>&nbsp;</p>
+<h2><span id="4-redis">4. Redis</span></h2><p>是最流行的NoSQL（Not Only SQL）。NoSQL可以提高互联网系统的性能，具备一定持久层的功能，也可以作为一种缓存工具。对于NoSQL数据库，作为持久层，存储的数据是半结构化的，在读入内存时有更少的规则，速度更快，普通数据库是结构化、多范式规则；作为缓存，支持大数据存入内存，只要命中率高，就能快速响应（常用数据从数据库中读出后可放在NoSQL，由于是内存中，速度快很多，并且可先在NoSQL中写入，某一时刻再批量写入数据库）。</p>
 <p>NoSQL结构松散，功能有限，要替代数据库很难，但作为缓存工具很有效。</p>
 <p>Redis的以下优点使它成为主要的NoSQL工具：</p>
 <ol>
@@ -295,9 +287,8 @@
 <li>操作都是原子的：适合高并发，锁</li>
 <li>MultiUtility工具：可在缓存、消息传递队列、Web应用等多种场景使用</li>
 </ol>
-<p> </p>
-<h2><span id="5-框架结构"> 5. 框架结构</span></h2>
-<p><img src="/2021/03/10/SSM%E5%9F%BA%E7%A1%80-%E8%AE%A4%E8%AF%86SSM%E5%92%8CRedis/SSM+Redis%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="SSM+Redis结构图"></p>
+<p>&nbsp;</p>
+<h2><span id="5-框架结构">5. 框架结构</span></h2><p><img src="/2021/03/10/SSM%E5%9F%BA%E7%A1%80-%E8%AE%A4%E8%AF%86SSM%E5%92%8CRedis/SSM+Redis结构图.png" alt="SSM+Redis结构图"></p>
 <ul>
 <li>Spring IoC：承担了资源管理、整合、即插即拔的功能</li>
 <li>Spring AOP：提供切面管理，特别是数据库事务管理的功能</li>
@@ -346,5 +337,25 @@
 </footer>
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

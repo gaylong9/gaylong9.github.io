@@ -15,6 +15,7 @@
 
 
 <title>Spring-5-数据库事务管理 | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
 
 
 
@@ -226,42 +227,38 @@
         </header>
 
         <div class="post-content">
-            <p> </p>
+            <p>&nbsp;</p>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#1-spring%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8">1. Spring数据库事务管理器</a>
-<ul>
-<li><a href="#11-%E9%85%8D%E7%BD%AE%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8">1.1 配置事务管理器</a></li>
-<li><a href="#12-java%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0spring%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1">1.2 Java配置实现Spring数据库事务</a></li>
+<li><a href="#1-spring数据库事务管理器">1. Spring数据库事务管理器</a><ul>
+<li><a href="#11-配置事务管理器">1.1 配置事务管理器</a></li>
+<li><a href="#12-java配置实现spring数据库事务">1.2 Java配置实现Spring数据库事务</a></li>
 </ul>
 </li>
-<li><a href="#~~2-%E7%BC%96%E7%A8%8B%E5%BC%8F%E4%BA%8B%E5%8A%A1~~"><s>2. 编程式事务</s></a></li>
-<li><a href="#3-%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1">3. 声明式事务</a>
-<ul>
-<li><a href="#31-transactional%E9%85%8D%E7%BD%AE%E9%A1%B9">3.1 @Transactional配置项</a></li>
-<li><a href="#~~32-%E4%BD%BF%E7%94%A8xml%E9%85%8D%E7%BD%AE%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8~~"><s>3.2 使用XML配置事务管理器</s></a></li>
-<li><a href="#33-%E4%BA%8B%E5%8A%A1%E5%AE%9A%E4%B9%89%E5%99%A8">3.3 事务定义器</a></li>
-<li><a href="#34-%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E7%BA%A6%E5%AE%9A%E6%B5%81%E7%A8%8B">3.4 声明式事务的约定流程</a></li>
+<li><a href="#~~2-编程式事务~~"><del>2. 编程式事务</del></a></li>
+<li><a href="#3-声明式事务">3. 声明式事务</a><ul>
+<li><a href="#31-transactional配置项">3.1 @Transactional配置项</a></li>
+<li><a href="#~~32-使用xml配置事务管理器~~"><del>3.2 使用XML配置事务管理器</del></a></li>
+<li><a href="#33-事务定义器">3.3 事务定义器</a></li>
+<li><a href="#34-声明式事务的约定流程">3.4 声明式事务的约定流程</a></li>
 </ul>
 </li>
-<li><a href="#4-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3">4. 数据库相关</a>
-<ul>
-<li><a href="#41-%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB">4.1 隔离级别</a></li>
-<li><a href="#42-%E9%80%89%E6%8B%A9%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB">4.2 选择隔离级别</a></li>
-<li><a href="#43-%E4%BC%A0%E6%92%AD%E8%A1%8C%E4%B8%BA">4.3 传播行为</a></li>
+<li><a href="#4-数据库相关">4. 数据库相关</a><ul>
+<li><a href="#41-隔离级别">4.1 隔离级别</a></li>
+<li><a href="#42-选择隔离级别">4.2 选择隔离级别</a></li>
+<li><a href="#43-传播行为">4.3 传播行为</a></li>
 </ul>
 </li>
-<li><a href="#5-ms%E4%B8%AD%E4%BD%BF%E7%94%A8%E4%BA%8B%E5%8A%A1">5. MS中使用事务</a></li>
-<li><a href="#6-transactional%E7%9A%84%E8%87%AA%E8%B0%83%E7%94%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98">6. @Transactional的自调用失效问题</a></li>
-<li><a href="#7-%E5%85%B8%E5%9E%8B%E9%94%99%E8%AF%AF%E7%94%A8%E6%B3%95">7. 典型错误用法</a></li>
+<li><a href="#5-ms中使用事务">5. MS中使用事务</a></li>
+<li><a href="#6-transactional的自调用失效问题">6. @Transactional的自调用失效问题</a></li>
+<li><a href="#7-典型错误用法">7. 典型错误用法</a></li>
 </ul>
 <!-- tocstop -->
-<p> </p>
+<p>&nbsp;</p>
 <p>[toc]</p>
-<p> </p>
-<h1><span id="1-spring数据库事务管理器"> 1. Spring数据库事务管理器</span></h1>
-<p>Spring中数据库事务通过PlatformTransactionManager管理。</p>
+<p>&nbsp;</p>
+<h1><span id="1-spring数据库事务管理器">1. Spring数据库事务管理器</span></h1><p>Spring中数据库事务通过PlatformTransactionManager管理。</p>
 <p>jdbcTemplate是Spring中数据库功能的重要模板类，而TransactionTemplate是完成事务管理的重要模板类。</p>
 <p>在TransactionTemplate中：</p>
 <ul>
@@ -276,28 +273,24 @@
 <li><code>void commit(TransactionStatus) throws TransactionException;</code> 提交</li>
 <li><code>void rollback(TransactionStatus) throws TransactionException;</code> 回滚</li>
 </ol>
-<p> </p>
-<h2><span id="11-配置事务管理器"> 1.1 配置事务管理器</span></h2>
-<p>MyBatis最常用DataSourceTransactionManager事务管理器，Hibernate中常用spring-orm包中的HibernateTransactionManager。</p>
+<p>&nbsp;</p>
+<h2><span id="11-配置事务管理器">1.1 配置事务管理器</span></h2><p>MyBatis最常用DataSourceTransactionManager事务管理器，Hibernate中常用spring-orm包中的HibernateTransactionManager。</p>
 <p>XML配置时加入事务命名空间：</p>
 <p><code>http://www.springframework.org/schema/tx</code></p>
 <p><code>http://www.springframework.org/schema/tx/spring-tx-4.0.xsd</code></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>此时，Spring就知道已将数据库事务委托给事务管理器transactionManager管理了。且jdbcTemplate中，若数据库资源的产生和释放没有委托管理器就由jdbcTemplate自己管理；此时委托给事务管理器，所以数据库资源和事务就由事务管理器处理。</p>
 <p>Spring中可以使用声明式事务和编程式事务，后者因为冗余，几乎废弃；前者又可通过XML和注解配置，但XML也已不常用，主流使用@Transactional注解标识。即，<strong>主流使用注解配置的声明式事务</strong>。</p>
-<p> </p>
-<h2><span id="12-java配置实现spring数据库事务"> 1.2 Java配置实现Spring数据库事务</span></h2>
-<p>用Java配置的方式实现Spring数据库事务，需要在配置类中实现接口TransactionManagerConfigurer的annotationDrivenTransactionManager方法。Spring把此方法返回的事务管理器作为程序中的事务管理器。</p>
+<p>&nbsp;</p>
+<h2><span id="12-java配置实现spring数据库事务">1.2 Java配置实现Spring数据库事务</span></h2><p>用Java配置的方式实现Spring数据库事务，需要在配置类中实现接口TransactionManagerConfigurer的annotationDrivenTransactionManager方法。Spring把此方法返回的事务管理器作为程序中的事务管理器。</p>
 <p>？</p>
-<p> </p>
-<h1><span id="2-编程式事务"> <s>2. 编程式事务</s></span></h1>
-<p>逐渐弃用。</p>
+<p>&nbsp;</p>
+<h1><span id="2-编程式事务"><del>2. 编程式事务</del></span></h1><p>逐渐弃用。</p>
 <p>用代码实现事务管理。需要事务定义类接口TransactionDefinition，具有默认实现类DefaultTransactionDefinition。使用如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TransactionDefinition def = <span class="keyword">new</span> DefaultTransactionDefinition();</span><br><span class="line">PlatformTransactionManager transactionManager = ctx.getBean(PlatformTransactionManager<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">TransactionStatus status = transactionManager.getTransaction(def);</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    jdbcTemplate.update(sql);</span><br><span class="line">    transactionManager.commit(status);</span><br><span class="line">&#125; <span class="keyword">catch</span>(Exception) &#123;</span><br><span class="line">    transactionManager.rollback(status);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>事务已交给管理器控制，故jdbcTemplate完成SQL后不会提交，等待管理器的commit或rollback。</p>
-<p> </p>
-<h1><span id="3-声明式事务"> 3. 声明式事务</span></h1>
-<h2><span id="31-transactional配置项"> 3.1 @Transactional配置项</span></h2>
+<p>&nbsp;</p>
+<h1><span id="3-声明式事务">3. 声明式事务</span></h1><h2><span id="31-transactional配置项">3.1 @Transactional配置项</span></h2><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -348,43 +341,38 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>这些属性会被Spring放到TransactionDefinition事务定义器中。且使用声明式事务需要配置注解驱动，在Spring-cfg.xml中加入<code>&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;</code>。</p>
 <blockquote>
 <p>此处遇到一个小Bug：xml命名空间处，IDEA自动生成<code>xmlns:tx=&quot;http://www.springframework.org/schema/cache&quot;</code>，需改为<code>.../tx</code></p>
 </blockquote>
-<p> </p>
-<h2><span id="32-使用xml配置事务管理器"> <s>3.2 使用XML配置事务管理器</s></span></h2>
-<p>XML配置事务管理器方法很多但不常用，一般采用注解配置。</p>
+<p>&nbsp;</p>
+<h2><span id="32-使用xml配置事务管理器"><del>3.2 使用XML配置事务管理器</del></span></h2><p>XML配置事务管理器方法很多但不常用，一般采用注解配置。</p>
 <p>XML配置需要一个事务拦截器TransactionInterceptor。IoC启动时解析XML中拦截器的属性，放到事务定义类TransactionDefinition中，再运行时根据正则式匹配决定方法策略。显然，声明式事务的底层原理就是Spring AOP技术。</p>
 <p>此外还需配置BeanNameAutoProxyCreator，指明Spring要拦截哪些类。</p>
-<p> </p>
-<h2><span id="33-事务定义器"> 3.3 事务定义器</span></h2>
-<p>本接口中，有传播行为常量、隔离级别定义，有获取传播行为方法、获取隔离界别方法、获取事务超时时间方法、是否只读事务方法、获取事务定义器名称方法。事务的大多配置都可在此完成。</p>
-<p> </p>
-<h2><span id="34-声明式事务的约定流程"> 3.4 声明式事务的约定流程</span></h2>
-<p>@Transaction注解，可以用在类或方法上。在IoC容器初始化时，Spring读入注解（或XML）配置的事务信息，保存到一个事务定义类中（TransactionDefinition接口的子类）。运行时Spring拦截注解标注的方法或类，根据AOP，把自定义的功能织入AOP流程。</p>
+<p>&nbsp;</p>
+<h2><span id="33-事务定义器">3.3 事务定义器</span></h2><p>本接口中，有传播行为常量、隔离级别定义，有获取传播行为方法、获取隔离界别方法、获取事务超时时间方法、是否只读事务方法、获取事务定义器名称方法。事务的大多配置都可在此完成。</p>
+<p>&nbsp;</p>
+<h2><span id="34-声明式事务的约定流程">3.4 声明式事务的约定流程</span></h2><p>@Transaction注解，可以用在类或方法上。在IoC容器初始化时，Spring读入注解（或XML）配置的事务信息，保存到一个事务定义类中（TransactionDefinition接口的子类）。运行时Spring拦截注解标注的方法或类，根据AOP，把自定义的功能织入AOP流程。</p>
 <p>首先Spring通过事务管理器（PlatformTransactionManager的子类）创建事务，同时把事务定义中的隔离级别、超时等属性根据配置设置到事务上。根据传播行为配置采取特定策略。运行中，Spring反射调用代码，根据约定决定是回滚还是提交。整个过程中，只需要编写业务代码和对事务属性配置即可，代码量少逻辑清晰。</p>
-<p><img src="/2021/04/03/Spring-5-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%B5%81%E7%A8%8B.png" alt="声明式事务流程"></p>
+<p><img src="/2021/04/03/Spring-5-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86/声明式事务流程.png" alt="声明式事务流程"></p>
 <p>如插入角色：无需打开数据库，链接资源，提交回滚释放等，只需注解Transactional。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RoleDao roleDao = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Transactional</span>(propagation=Propagation.REQUIRED, isolation=Isolation.DEFAULT, timeout=<span class="number">3</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insertRole</span><span class="params">(Role role)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> roleDao.insert(role);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> </p>
-<h1><span id="4-数据库相关"> 4. 数据库相关</span></h1>
-<h2><span id="41-隔离级别"> 4.1 隔离级别</span></h2>
-<p>SQL标准把隔离级别定义为4层；脏读、读写提交、可重复读、序列化。</p>
+<p>&nbsp;</p>
+<h1><span id="4-数据库相关">4. 数据库相关</span></h1><h2><span id="41-隔离级别">4.1 隔离级别</span></h2><p>SQL标准把隔离级别定义为4层；脏读、读写提交、可重复读、序列化。</p>
 <ol>
 <li>脏读：可以读取另一个事务中未提交的数据，会引发脏读</li>
 <li>读写提交：只能读取其他事务已提交的数据，克服脏读但不能避免不可重复读</li>
 <li>可重复读：针对同一记录的概念，是同一记录的读写操作按照一个序列化进行，不交叉，实现了可重复读，但不能避免幻读</li>
 <li>序列化：让SQL按顺序读写，解决幻读</li>
 </ol>
-<p> </p>
-<h2><span id="42-选择隔离级别"> 4.2 选择隔离级别</span></h2>
-<p>为平衡性能与数据一致性，通常选择读/写提交（二级隔离 Isolation.READ_COMMIT）。之后还有其他方法维护数据一致性。注解Transactional的隔离级别默认Isolation.DEFAULT，代表随数据库默认值而变化。如MySQL中默认可重复读级别，Oracle只支持读写提交和可序列化两个级别，默认读写提交。</p>
-<p> </p>
-<h2><span id="43-传播行为"> 4.3 传播行为</span></h2>
-<p>指方法之间调用事务策略的问题。通常希望事务能同时成功或同时失败，但也有一些时候希望只回滚部分事务。如还款时，Batch类batch方法记录还款总人数等信息，Service类的repay完成某一张卡的还款，若仅一个事务，则一旦有一个人异常，则所有人回滚；此时可以改用batch方法调用repay，每次调用产生一个新事务，则有人异常只回滚他自己。</p>
+<p>&nbsp;</p>
+<h2><span id="42-选择隔离级别">4.2 选择隔离级别</span></h2><p>为平衡性能与数据一致性，通常选择读/写提交（二级隔离 Isolation.READ_COMMIT）。之后还有其他方法维护数据一致性。注解Transactional的隔离级别默认Isolation.DEFAULT，代表随数据库默认值而变化。如MySQL中默认可重复读级别，Oracle只支持读写提交和可序列化两个级别，默认读写提交。</p>
+<p>&nbsp;</p>
+<h2><span id="43-传播行为">4.3 传播行为</span></h2><p>指方法之间调用事务策略的问题。通常希望事务能同时成功或同时失败，但也有一些时候希望只回滚部分事务。如还款时，Batch类batch方法记录还款总人数等信息，Service类的repay完成某一张卡的还款，若仅一个事务，则一旦有一个人异常，则所有人回滚；此时可以改用batch方法调用repay，每次调用产生一个新事务，则有人异常只回滚他自己。</p>
 <p>这种一个方法调度另一个方法，可以对事务的特性进行传播配置，就成为传播行为。</p>
 <p>Spring中的传播特性是枚举类Propagation定义：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -423,10 +411,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>常用默认的REQUIRED，也会用到REQUIRES_NEW和NESTED。</p>
-<p> </p>
-<h1><span id="5-ms中使用事务"> 5. MS中使用事务</span></h1>
-<p>本例中使用两个接口与两个实现类，两类有调用关系，被调用类完成insert，以测试传播与隔离。</p>
+<p>&nbsp;</p>
+<h1><span id="5-ms中使用事务">5. MS中使用事务</span></h1><p>本例中使用两个接口与两个实现类，两类有调用关系，被调用类完成insert，以测试传播与隔离。</p>
 <p>首先新建两个接口：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BookService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insertBook</span><span class="params">(Book book)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BookListService</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 会调用BookService的insertBook方法，用于测试传播行为</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insertBookList</span><span class="params">(List&lt;Book&gt; bookList)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后实例化；类中包含Mapper实例对象，即MyBatis中所有数据库操作最终是通过Mapper执行，且注意此处两方法都设置了Transactional注解</p>
@@ -439,27 +427,22 @@
 <p>若改为REQUIRED和REQUIRED，则两本书的添加是同一事务，由于后者添加失败，前者也会被一并回滚。</p>
 <p>若改为REQUIRES_NEW和REQUIRED，也会一并回滚。</p>
 <p>若改为REQUIRED和NESTED，被调用方法内部单独回滚，程序仍能正常运行。</p>
-<p> </p>
-<h1><span id="6-transactional的自调用失效问题"> 6. @Transactional的自调用失效问题</span></h1>
-<p>注解Transactional的底层实现是AOP技术，使用动态代理，则<strong>对static、非public方法，注解是失效的</strong>。此外，自调用也是容易出现的错误。</p>
+<p>&nbsp;</p>
+<h1><span id="6-transactional的自调用失效问题">6. @Transactional的自调用失效问题</span></h1><p>注解Transactional的底层实现是AOP技术，使用动态代理，则<strong>对static、非public方法，注解是失效的</strong>。此外，自调用也是容易出现的错误。</p>
 <p>自调用：类的一个方法调用本类的其他方法。如上例中，BookServiceImpl类新增insertBookList方法调用自己的insertBook方法，且被调用方法使用REQUIRES_NEW传播行为，但观察日志可发现并没有每次新建事务，只使用了同一事务，即被调用方法的注解失效了。</p>
 <p>原因：动态代理过程中，类自己调用自己，不存在代理对象的调用，就不会产生AOP设置注解的参数。</p>
 <p>解决：如上例中使用两个服务类；或在调用方法中获取代理对象，然后用代理对象执行被调用方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法2</span></span><br><span class="line"><span class="meta">@Transactional</span>(...)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insertBookList</span> <span class="params">(List&lt;Book&gt; list)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 从容器获取代理对象</span></span><br><span class="line">    BookService service = ctx.getBean(RoleService<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    <span class="keyword">for</span> (Book book : list) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            service.insertBook(book);</span><br><span class="line">            count++;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">			...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> </p>
-<h1><span id="7-典型错误用法"> 7. 典型错误用法</span></h1>
-<ol>
-<li>
-<p>错误使用Service</p>
-<p>Service服务类。在MVC中的Controller中使用服务类很正常，如要在一个Controller中插入两个角色，并且要求两角色在同一事务中处理。但如果服务类的方法，指定了@Transactional的新建事务的传播行为，则简单地先后调用插入方法是无法完成同一事务中处理的要求的。</p>
+<p>&nbsp;</p>
+<h1><span id="7-典型错误用法">7. 典型错误用法</span></h1><ol>
+<li><p>错误使用Service</p>
+<p> Service服务类。在MVC中的Controller中使用服务类很正常，如要在一个Controller中插入两个角色，并且要求两角色在同一事务中处理。但如果服务类的方法，指定了@Transactional的新建事务的传播行为，则简单地先后调用插入方法是无法完成同一事务中处理的要求的。</p>
 </li>
-<li>
-<p>过长时间占用事务</p>
-<p>使用事务资源后要尽快释放，操作文件、对外连接等耗时且与数据库无关的操作应剥离，即不放在@Transactional标注的方法内。</p>
+<li><p>过长时间占用事务</p>
+<p> 使用事务资源后要尽快释放，操作文件、对外连接等耗时且与数据库无关的操作应剥离，即不放在@Transactional标注的方法内。</p>
 </li>
-<li>
-<p>错误捕捉异常</p>
-<p>在Transactional方法中，可以try-catch自行捕获异常，但如果需要Spring回滚，就要手动在catch中继续throw异常，让容器接收异常，自动回滚；否则try中代码部分完成部分异常执行失败，且没有异常出现，就不会自动回滚。</p>
+<li><p>错误捕捉异常</p>
+<p> 在Transactional方法中，可以try-catch自行捕获异常，但如果需要Spring回滚，就要手动在catch中继续throw异常，让容器接收异常，自动回滚；否则try中代码部分完成部分异常执行失败，且没有异常出现，就不会自动回滚。</p>
 </li>
 </ol>
 
@@ -504,5 +487,25 @@
 </footer>
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

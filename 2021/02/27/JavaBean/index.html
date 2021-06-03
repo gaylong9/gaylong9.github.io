@@ -15,6 +15,7 @@
 
 
 <title>JavaBean | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
 
 
 
@@ -226,89 +227,71 @@
         </header>
 
         <div class="post-content">
-            <p> </p>
+            <p>&nbsp;</p>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#javabean">JavaBean</a>
-<ul>
-<li><a href="#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
-<li><a href="#2-jsp%E8%AE%BF%E9%97%AEjavabean">2. JSP访问JavaBean</a></li>
-<li><a href="#3-javabean%E8%8C%83%E5%9B%B4">3. JavaBean范围</a></li>
+<li><a href="#javabean">JavaBean</a><ul>
+<li><a href="#1-简介">1. 简介</a></li>
+<li><a href="#2-jsp访问javabean">2. JSP访问JavaBean</a></li>
+<li><a href="#3-javabean范围">3. JavaBean范围</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p> </p>
+<p>&nbsp;</p>
 <p>[toc]</p>
-<h1><span id="javabean"> JavaBean</span></h1>
-<h2><span id="1-简介"> 1. 简介</span></h2>
-<ol>
+<h1><span id="javabean">JavaBean</span></h1><h2><span id="1-简介">1. 简介</span></h2><ol>
 <li>可重用、跨平台的软件组织，分为有UI的和没有UI主要负责业务数据或业务处理的。JSP通常访问后种</li>
 <li>JSP与JavaBean搭配的好处：分离HTML和Java，便于编写和维护；二者各司其职，充分利用JavaBean可重用特点，提高开发效率</li>
 <li>JavaBean特性：公共类、有一个不含参的构造方法、属性有get和set方法（且方法名中属性名首字母大写）、如需持久化可实现Serializable接口</li>
 <li>JavaBean存放位置：<code>web-app/WEB-INF/classes/mypack/MyBean.class</code></li>
 </ol>
-<p> </p>
-<h2><span id="2-jsp访问javabean"> 2. JSP访问JavaBean</span></h2>
+<p>&nbsp;</p>
+<h2><span id="2-jsp访问javabean">2. JSP访问JavaBean</span></h2><ol>
+<li><p>JSP中可通过代码访问JavaBean，也可通过特定JSP标签访问，后者能减少JSP中的程序代码</p>
+</li>
+<li><p>标签使用：</p>
 <ol>
-<li>
-<p>JSP中可通过代码访问JavaBean，也可通过特定JSP标签访问，后者能减少JSP中的程序代码</p>
+<li><p>导入JavaBean类 <code>&lt;%@ page import=&quot;mypack.MyBean&quot; %&gt;</code></p>
 </li>
-<li>
-<p>标签使用：</p>
+<li><p>声明JavaBean对象 <code>&lt;jsp:useBean id=&quot;myBean&quot; class=&quot;mypack.MyBean&quot; scope=&quot;session&quot; /&gt;</code></p>
 <ol>
-<li>
-<p>导入JavaBean类 <code>&lt;%@ page import=&quot;mypack.MyBean&quot; %&gt;</code></p>
+<li><p>id：对象ID/引用JavaBean对象的局部变量名/存放在特定范围内的属性名，且JSP规范要求此ID不可重复（生效期间的JavaBean）</p>
 </li>
-<li>
-<p>声明JavaBean对象 <code>&lt;jsp:useBean id=&quot;myBean&quot; class=&quot;mypack.MyBean&quot; scope=&quot;session&quot; /&gt;</code></p>
-<ol>
-<li>
-<p>id：对象ID/引用JavaBean对象的局部变量名/存放在特定范围内的属性名，且JSP规范要求此ID不可重复（生效期间的JavaBean）</p>
+<li><p>class：JavaBean类名</p>
 </li>
-<li>
-<p>class：JavaBean类名</p>
+<li><p>scope：JavaBean对象的存放范围，page、request、session、application，默认page</p>
 </li>
-<li>
-<p>scope：JavaBean对象的存放范围，page、request、session、application，默认page</p>
-</li>
-<li>
-<p>本标签处理流程：</p>
+<li><p>本标签处理流程：</p>
 <ol>
 <li>定义一个名为myBean的局部变量</li>
 <li>尝试从指定的范围内读取名为myBean的属性，并且使得myBean局部变量引用具体属性值，即MyBean的对象</li>
 <li>若指定范围内没有myBean属性，就通过MyBean的默认构造方法创建一个对象并存入该范围，属性名为myBean，并用局部变量myBean引用该对象</li>
 </ol>
 </li>
-<li>
-<p>本标签等价于以下Java代码</p>
+<li><p>本标签等价于以下Java代码</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mypack.MyBean myBean = <span class="keyword">null</span>;</span><br><span class="line">myBean = (mypack.MyBean) session.getAttribute(<span class="string">"myBean"</span>);</span><br><span class="line"><span class="keyword">if</span> (myBean == <span class="keyword">null</span>) &#123;</span><br><span class="line">    myBean = <span class="keyword">new</span> mypack.MyBean();</span><br><span class="line">    session.setAttribute(<span class="string">"myBean"</span>, myBean);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
-<li>
-<p>访问JavaBean属性：<code>&lt;jsp:getProperty name=&quot;myBean&quot; property=&quot;count&quot; /&gt;</code></p>
+<li><p>访问JavaBean属性：<code>&lt;jsp:getProperty name=&quot;myBean&quot; property=&quot;count&quot; /&gt;</code></p>
 <ol>
 <li>根据name找到对应ID的Bean对象，打印它的count属性，等价于<code>&lt;%= myBean.getCount() %&gt;</code>:</li>
 <li>Servlet容器运行本标签时，会根据指定属性名自动调用get方法</li>
 </ol>
 </li>
-<li>
-<p>给JavaBean属性赋值：<code>&lt;jsp:setProperty name=&quot;myBean&quot; property=&quot;count&quot; value=&quot;1&quot; /&gt;</code>，等价于<code>&lt;% myBean.setCount(1); %&gt;</code></p>
+<li><p>给JavaBean属性赋值：<code>&lt;jsp:setProperty name=&quot;myBean&quot; property=&quot;count&quot; value=&quot;1&quot; /&gt;</code>，等价于<code>&lt;% myBean.setCount(1); %&gt;</code></p>
 </li>
 </ol>
 </li>
 </ol>
-<p> </p>
-<h2><span id="3-javabean范围"> 3. JavaBean范围</span></h2>
-<ol>
-<li>page：
-<ol>
+<p>&nbsp;</p>
+<h2><span id="3-javabean范围">3. JavaBean范围</span></h2><ol>
+<li>page：<ol>
 <li>从客户请求访问一个JSP文件开始，到这个文件执行结束</li>
 <li>每当客户请求本JSP，标签都会创建一个JavaBean对象，存放到页面范围内</li>
-<li>何时结束生命周期：
-<ol>
+<li>何时结束生命周期：<ol>
 <li>客户请求访问的页面执行完毕，然后通过<code>&lt;jsp:forward&gt;</code>转发请求给其他Web组件</li>
 <li>客户请求访问的页面执行完毕冰箱客户端发回响应</li>
 </ol>
@@ -316,12 +299,10 @@
 <li>JSP中有pageContext默认对象</li>
 </ol>
 </li>
-<li>request：
-<ol>
+<li>request：<ol>
 <li>客户请求访问一个JSP开始，知道本JSP返回响应结果，或请求转发后其他Web组件返回响应结果</li>
 <li>每当客户请求本JSP，标签都会创建一个JavaBean对象，存放到请求范围内</li>
-<li>何时结束生命周期：
-<ol>
+<li>何时结束生命周期：<ol>
 <li>请求访问的当前JSp执行完毕并向客户端发回结果</li>
 <li>当前JSP请求转发给其他组件，其他组件执行完毕发回结果</li>
 </ol>
@@ -330,14 +311,12 @@
 <li>请求范围的JavaBean对象实际上作为属性保存在HttpServletRequest对象中，属性名是JavaBean的ID，属性值是JavaBean对象，故也可通过request.getAttribute()获取请求范围内的JavaBean对象</li>
 </ol>
 </li>
-<li>session：
-<ol>
+<li>session：<ol>
 <li>处于同一个绘画中的Web组件共享会话范围内的JavaBean对象</li>
 <li>实际上作为属性保存在HttpSession对象中，属性名是JavaBean的ID，属性值是JavaBean对象，故也可通过session.getAttribute()获取会话范围内的JavaBean对象</li>
 </ol>
 </li>
-<li>application：
-<ol>
+<li>application：<ol>
 <li>实际上作为属性保存在ServletContext对象中，属性名是JavaBean的ID，属性值是JavaBean对象，故也可通过application.getAttribute()获取应用范围内的JavaBean对象</li>
 </ol>
 </li>
@@ -384,5 +363,25 @@
 </footer>
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
