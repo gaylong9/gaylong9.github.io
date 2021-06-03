@@ -247,7 +247,7 @@
 <p>[toc]</p>
 <p><a href="https://www.bilibili.com/video/av52113951" target="_blank" rel="noopener">作者讲解视频&amp;PPT</a></p>
 <br>
-<h1><span id="siam特点">siam特点</span></h1>
+<h1><span id="siam特点"> siam特点</span></h1>
 <ol>
 <li>共享权重</li>
 <li>做检索，对比相似性。information经过相同网络，在空间中产生表征向量，计算距离代表相似性</li>
@@ -255,7 +255,7 @@
 </ol>
 <p><img src="/2020/03/04/SiamDW/simple_siam.png" alt="simple_siam"></p>
 <br>
-<h1><span id="siam历史">Siam历史</span></h1>
+<h1><span id="siam历史"> Siam历史</span></h1>
 <ol>
 <li>
 <p>SINT：在图像中抽取很多候选目标，经过同一网络，与模板比较，选择距离最小（最相似）</p>
@@ -271,7 +271,7 @@
 </li>
 </ol>
 <br>
-<h1><span id="motivation">Motivation</span></h1>
+<h1><span id="motivation"> Motivation</span></h1>
 <p>原有backbone很浅，改用深层，performance降低及思考：</p>
 <ol>
 <li>backbone的基本模块：res、inception、卷积</li>
@@ -281,49 +281,47 @@
 </ol>
 <p><img src="/2020/03/04/SiamDW/motivation.png" alt="motivation"></p>
 <br>
-<h1><span id="analysis-amp-guidelines">Analysis &amp; Guidelines</span></h1>
+<h1><span id="analysis-amp-guidelines"> Analysis &amp; Guidelines</span></h1>
 <p>通过修改感受野、步长、输出特征尺寸、padding与否、backbone类型，进行实验，发现padding会降点</p>
-<h2><span id="paddingpad">padding/PAD</span></h2>
+<h2><span id="paddingpad"> padding/PAD</span></h2>
 <p><img src="/2020/03/04/SiamDW/padding_test.png" alt="padding_test"></p>
 <p>padding导致掉点（但输出尺寸不一致，不能说完全都是padding影响）</p>
 <ol>
 <li>
 <p>无padding：</p>
-<p><img src="/2020/03/04/SiamDW/without_padding.png" alt="without_padding"><br>
-$$<br>
-R1=\phi(A)·\phi(E) \<br>
-R2=\phi(B)·\phi(E) \<br>
-R1 = R2<br>
-$$</p>
-<ol>
-<li>$E$：模板</li>
-<li>$A B$：目标位置</li>
-<li>$\phi$：backbone，提取特征向量</li>
-<li>$·$：cross-correlation</li>
-<li>$R$：响应</li>
+<p><img src="/2020/03/04/SiamDW/without_padding.png" alt="without_padding"></p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow></mrow><annotation encoding="application/x-tex"></annotation></semantics></math></span><span class="katex-html" aria-hidden="true"></span></span></span></p>
+<p>R2=\phi(B)·\phi(E) \<br>
+R1 = R2</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow></mrow><annotation encoding="application/x-tex">
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"></span></span></span></p>
+<ol start="2">
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">A B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span>：目标位置</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">ϕ</span></span></span></span>：backbone，提取特征向量</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo separator="true">⋅</mo></mrow><annotation encoding="application/x-tex">·</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mpunct">⋅</span></span></span></span>：cross-correlation</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span>：响应</li>
 <li>因为E相同、A和B是同一目标提取向量所得，相同，故两响应相同，满足平移不变性</li>
 </ol>
 </li>
 <li>
 <p>有padding：</p>
-<p><img src="/2020/03/04/SiamDW/with_padding.png" alt="with_padding"><br>
-$$<br>
-R1=\phi(A’)·\phi(E’) \<br>
-R2=\phi(B’)·\phi(E’) \<br>
-R1 \not= R2<br>
-$$</p>
-<ol>
-<li>padding引入外层感受野，目标位置变大，模板变大</li>
+<p><img src="/2020/03/04/SiamDW/with_padding.png" alt="with_padding"></p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow></mrow><annotation encoding="application/x-tex"></annotation></semantics></math></span><span class="katex-html" aria-hidden="true"></span></span></span></p>
+<p>R2=\phi(B’)·\phi(E’) \<br>
+R1 \not= R2</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow></mrow><annotation encoding="application/x-tex">
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"></span></span></span></p>
+<ol start="2">
 <li>扩大后的目标<strong>仍在</strong>画面中时，没有变化</li>
-<li>扩大后的目标<strong>不在</strong>画面中时，$\phi(A’)\not=\phi(B’)$，最终导致两响应不同，破坏平移不变性</li>
+<li>扩大后的目标<strong>不在</strong>画面中时，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><msup><mi>A</mi><mo mathvariant="normal">′</mo></msup><mo stretchy="false">)</mo><mo>≠</mo><mi>ϕ</mi><mo stretchy="false">(</mo><msup><mi>B</mi><mo mathvariant="normal">′</mo></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\phi(A&#x27;)\not=\phi(B&#x27;)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="mord mathdefault">ϕ</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="mord mathdefault">ϕ</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，最终导致两响应不同，破坏平移不变性</li>
 <li><strong>而深层网络中，感受野会快速扩大，很容易就会超出画面</strong></li>
 </ol>
 </li>
 </ol>
-<h2><span id="步长str">步长STR</span></h2>
+<h2><span id="步长str"> 步长STR</span></h2>
 <p><img src="/2020/03/04/SiamDW/other_test.png" alt="other_test"></p>
 <p>跟踪的位移较小，使用小步长捕捉微小变化（siam跟踪通常为8）</p>
-<h2><span id="感受野rf和输出尺寸ofs">感受野RF和输出尺寸OFS</span></h2>
+<h2><span id="感受野rf和输出尺寸ofs"> 感受野RF和输出尺寸OFS</span></h2>
 <ol>
 <li>
 <p>二者具有相关性，互影响，所以一起讨论</p>
@@ -340,14 +338,14 @@ $$</p>
 </ol>
 </li>
 </ol>
-<h2><span id="guidelines">Guidelines</span></h2>
+<h2><span id="guidelines"> Guidelines</span></h2>
 <ol>
 <li>步长：小，4或8，捕捉运动变化（4较慢）</li>
 <li>感受野：feature与输入的尺寸比在60%~80%</li>
 <li>步长、感受野、输出尺寸，应作为整体考虑，最终performance是每个环节共同决定。实验中不去掉padding，而通过CIR修改输出尺寸，也能获得不错的效果</li>
 </ol>
 <br>
-<h1><span id="method">Method</span></h1>
+<h1><span id="method"> Method</span></h1>
 <p>根据以上guidelines，设计新的网络</p>
 <ol>
 <li>

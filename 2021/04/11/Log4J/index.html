@@ -249,7 +249,7 @@
 <p> </p>
 <p>Log4J是Apache的一个开源项目，日志操作软件包。能够制定日志信息输出格式和目的地。通过配置文件灵活配置，不需修改程序代码。</p>
 <p> </p>
-<h1><span id="1-log4j简介">1. Log4J简介</span></h1>
+<h1><span id="1-log4j简介"> 1. Log4J简介</span></h1>
 <ol>
 <li>目的：监视变量变化情况、跟踪代码运行轨迹、调试器</li>
 <li>构成组件：
@@ -262,7 +262,7 @@
 </ol>
 </li>
 </ol>
-<h2><span id="11-logger组件">1.1 Logger组件</span></h2>
+<h2><span id="11-logger组件"> 1.1 Logger组件</span></h2>
 <p>核心组件，日志记录器，对日志信息分类筛选，决定信息是被输出还是被忽略。</p>
 <ol>
 <li>
@@ -318,7 +318,7 @@
 </li>
 </ol>
 <p> </p>
-<h2><span id="12-appender组件">1.2 Appender组件</span></h2>
+<h2><span id="12-appender组件"> 1.2 Appender组件</span></h2>
 <p>决定日志输出目的地，当前支持以下地址：</p>
 <ul>
 <li>Console 控制台</li>
@@ -330,7 +330,7 @@
 <p>一个Logger可以对应多个Appender：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">"helloappLogger"</span> <span class="attr">level</span>=<span class="string">"warn"</span> <span class="attr">additivity</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">"console"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">"file"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Logger</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p> </p>
-<h2><span id="13-layout组件">1.3 Layout组件</span></h2>
+<h2><span id="13-layout组件"> 1.3 Layout组件</span></h2>
 <p>决定日志输出格式，有以下类型：</p>
 <ul>
 <li>org.apache.log4j.PatternLayout 灵活地指定布局模式</li>
@@ -376,18 +376,18 @@
 <p>eg：为file的Appender配置PatternLayout布局：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">File</span> <span class="attr">name</span>=<span class="string">"file"</span> <span class="attr">fileName</span>=<span class="string">"app.log"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">"%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">File</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p> </p>
-<h1><span id="2-log4j基本使用方法">2. Log4J基本使用方法</span></h1>
-<h2><span id="21-创建log4j配置文件">2.1 创建Log4J配置文件</span></h2>
+<h1><span id="2-log4j基本使用方法"> 2. Log4J基本使用方法</span></h1>
+<h2><span id="21-创建log4j配置文件"> 2.1 创建Log4J配置文件</span></h2>
 <p>支持代码或XML配置。XML配置文件默认名log4j2.xml，默认路径classpath根路径：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Configuration</span> <span class="attr">status</span>=<span class="string">"WARN"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Appenders</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Console</span> <span class="attr">name</span>=<span class="string">"console"</span> <span class="attr">target</span>=<span class="string">"SYSTEM_OUT"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">"%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Console</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">File</span> <span class="attr">name</span>=<span class="string">"file"</span> <span class="attr">fileName</span>=<span class="string">"app.log"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">"%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">File</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Appenders</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">Loggers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Root</span> <span class="attr">level</span>=<span class="string">"info"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">"console"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Root</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">"helloappLogger"</span> <span class="attr">level</span>=<span class="string">"warn"</span> <span class="attr">additivity</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">"console"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">"file"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Logger</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">"helloappLogger.childLogger"</span> <span class="attr">level</span>=<span class="string">"INFO"</span> <span class="attr">additivity</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    		<span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">"console"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Logger</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Loggers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p> </p>
-<h2><span id="22-程序中使用log4j">2.2 程序中使用Log4J</span></h2>
+<h2><span id="22-程序中使用log4j"> 2.2 程序中使用Log4J</span></h2>
 <p><a href="https://logging.apache.org/log4j" target="_blank" rel="noopener">JAR下载地址</a> 主要是core和api两个包。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Logger rootLogger = LoggerManager.getRootLogger();</span><br><span class="line">Logger helloappLogger = LoggerManager.getLogger(<span class="string">"helloappLogger"</span>);</span><br><span class="line"><span class="keyword">var</span> childLogger = LoggerManager.getLogger(<span class="string">"helloappLogger.childLogger"</span>);</span><br><span class="line">helloappLogger.warn(<span class="string">"xxx"</span>);</span><br></pre></td></tr></table></figure>
 <p>若不存在指定名字的Logger，则创建并返回，所有属性继承父类。</p>
 <p>若不存在配置文件，则均采用默认配置：WARN、console、SYSTEM_OUT、<code>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</code> 。</p>
 <p> </p>
-<h1><span id="3-在web应用中使用log4j">3. 在Web应用中使用Log4J</span></h1>
+<h1><span id="3-在web应用中使用log4j"> 3. 在Web应用中使用Log4J</span></h1>
 <p>加入JAR包、在WEB-INF/classes下创建配置文件后即可在组件中使用。</p>
 <p>若将配置文件放在其他位置，还需在web.xml中通过<code>&lt;context-param&gt;</code>配置：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>log4jConfiguration<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>/WEB-INF/conf/log4j2.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure>

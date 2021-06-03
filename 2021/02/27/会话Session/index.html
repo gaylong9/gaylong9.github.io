@@ -253,9 +253,9 @@
 <!-- tocstop -->
 <p> </p>
 <p>[toc]</p>
-<h1><span id="http会话">HTTP会话</span></h1>
+<h1><span id="http会话"> HTTP会话</span></h1>
 <p>Web服务器需要跟踪客户状态，用户多步操作时要能够知道是哪个用户在进行后续操作。跟踪状态常由四种方法：表单加入隐藏字段、重写URL使包含数据、Cookie传送数据、会话机制。</p>
-<h2><span id="1-会话-session">1. 会话 Session</span></h2>
+<h2><span id="1-会话-session"> 1. 会话 Session</span></h2>
 <ol>
 <li>HTTP协议是无状态的，多次HTTP通信中，协议本身没有提供服务器连续跟踪特定浏览器端状态的规范。会话指在一段时间内，单个客户与Web应用的一连串相关的交互过程。在一个会话中，客户可能多次访问Web应用</li>
 <li>Servlet规范指定了基于Java的会话运作机制。Servlet API中定义了<code>javax.servlet.http.HttpSession</code>接口，容器要实现该接口。会话开始时，容器创建一个HttpSession对象，其中可以存放表示客户状态的信息。容器为每个HttpSession对象分配一个唯一标识符，称为 Session ID</li>
@@ -270,7 +270,7 @@
 <li>支持会话的组件才能访问HttpSession对象</li>
 </ol>
 <p> </p>
-<h2><span id="2-生命周期和范围">2. 生命周期和范围</span></h2>
+<h2><span id="2-生命周期和范围"> 2. 生命周期和范围</span></h2>
 <ol>
 <li>会话范围：浏览器端与一个Web应用进行一次会话的过程；实际与HttpSession对象的生命周期对应，故组件只需共享同一HttpSession对象即可共享会话范围数据</li>
 <li>HttpSession接口方法：
@@ -305,7 +305,7 @@
 </li>
 </ol>
 <p> </p>
-<h2><span id="3-跟踪会话其他方法之重写url">3. 跟踪会话其他方法之重写URL</span></h2>
+<h2><span id="3-跟踪会话其他方法之重写url"> 3. 跟踪会话其他方法之重写URL</span></h2>
 <ol>
 <li>
 <p>如浏览器不可用Cookie，容器可以重写Web组件的URL，把Session ID添加到URL信息中</p>
@@ -327,7 +327,7 @@
 </li>
 </ol>
 <p> </p>
-<h2><span id="4-会话持久化">4. 会话持久化</span></h2>
+<h2><span id="4-会话持久化"> 4. 会话持久化</span></h2>
 <p>会话开始时容器创建HttpSession对象，需要时容器会将其存入永久性存储设备（文件、数据库），需要访问时再加载到内存。</p>
 <ol>
 <li>好处：节约内存空间，把不活动状态的HttpSession对象移出内存，提高内存利用率；确保服务器重启或Web应用重启后能恢复会话</li>
@@ -348,13 +348,13 @@
 <li>会话的搁置和激活对客户端来说是透明的，客户端感觉上会话始终运行时状态</li>
 <li>Servlet API没有为持久化提供标准接口，持久化完全依赖于Servlet容器的具体实现，Tomcat采用会话管理器来管理会话，包含以下两种：标准会话管理器、持久化会话管理器</li>
 </ol>
-<h3><span id="41-标准会话管理器-standardmanager">4.1 标准会话管理器 StandardManager</span></h3>
+<h3><span id="41-标准会话管理器-standardmanager"> 4.1 标准会话管理器 StandardManager</span></h3>
 <p>​	<code>org.apache.catalina.session.StandardManager</code>类</p>
 <ol>
 <li>是默认的标准会话管理器</li>
 <li>实现机制：服务器终止或Web应用终止时，会对应用的HttpSession对象持久化，保存到文件系统中，默认文件<code>&lt;CATALINA_HOME&gt;/work/Catalina/[hostname]/[applicationname]/SESSIONS.ser)</code>，当服务器或应用重启时，激活</li>
 </ol>
-<h3><span id="42-持久化会话管理器-persistentmanager">4.2 持久化会话管理器 PersistentManager</span></h3>
+<h3><span id="42-持久化会话管理器-persistentmanager"> 4.2 持久化会话管理器 PersistentManager</span></h3>
 <p>更为灵活</p>
 <ol>
 <li>本管理器把存放HttpSession对象的永久性存储设备称为会话Store</li>
@@ -372,7 +372,7 @@
 </ol>
 </li>
 </ol>
-<h4><span id="421-配置filestore">4.2.1 配置FileStore</span></h4>
+<h4><span id="421-配置filestore"> 4.2.1 配置FileStore</span></h4>
 <ol>
 <li>
 <p>保存的目的文件的默认目录 <code>&lt;CATALINA_HOME&gt;/work/Catalina/[hostname]/[applicationname]</code>，每个HttpSession对象对应一个文件，以Session ID作为文件名，扩展名为.session</p>
@@ -397,7 +397,7 @@
 </ol>
 </li>
 </ol>
-<h4><span id="422-配置jdbcstore">4.2.2 配置JDBCStore：</span></h4>
+<h4><span id="422-配置jdbcstore"> 4.2.2 配置JDBCStore：</span></h4>
 <ol>
 <li>
 <p>数据库表的字段：</p>
@@ -433,7 +433,7 @@
 </li>
 </ol>
 <p> </p>
-<h2><span id="5-监听会话">5. 监听会话</span></h2>
+<h2><span id="5-监听会话"> 5. 监听会话</span></h2>
 <p>Servlet API中定义了四个用于监听会话中各种事件的监听器接口</p>
 <ol>
 <li>

@@ -243,18 +243,18 @@
 </ul>
 <!-- tocstop -->
 <br>
-<h2><span id="siamese">Siamese</span></h2>
+<h2><span id="siamese"> Siamese</span></h2>
 <ul>
 <li>Siamese和Chinese有点像。Siam是古时候泰国的称呼，中文译作暹罗。Siamese也就是“暹罗”人或“泰国”人。十九世纪泰国出生了一对连体婴儿，当时的医学技术无法使两人分离出来，于是两人顽强地生活了一生，两人均于63岁离开人间。两人的肝至今仍保存在费城的<a href="https://link.jianshu.com/?t=https%3A%2F%2Fwww.baidu.com%2Fs%3Fwd%3D%E9%A9%AC%E7%89%B9%E5%8D%9A%E7%89%A9%E9%A6%86%26tn%3D44039180_cpr%26fenlei%3Dmv6quAkxTZn0IZRqIHckPjm4nH00T1dWnAP9uWcvmhcvrADsnvmk0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHRYnHDvn163" target="_blank" rel="noopener">马特博物馆</a>内。从此之后“<a href="https://link.jianshu.com/?t=https%3A%2F%2Fwww.baidu.com%2Fs%3Fwd%3D%E6%9A%B9%E7%BD%97%E5%8F%8C%E8%83%9E%E8%83%8E%26tn%3D44039180_cpr%26fenlei%3Dmv6quAkxTZn0IZRqIHckPjm4nH00T1dWnAP9uWcvmhcvrADsnvmk0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHRYnHDvn163" target="_blank" rel="noopener">暹罗双胞胎</a>”（Siamese twins）就成了连体人的代名词</li>
 </ul>
 <p>![Siamese twins](Siamese系列\Siamese twins.jpg)</p>
 <br>
-<h2><span id="siamese-network">Siamese Network</span></h2>
+<h2><span id="siamese-network"> Siamese Network</span></h2>
 <ul>
 <li>判断两个输入相似性，核心思想是，两个子体网络通过权重共享来实现连体，寻找一个映射函数，能够将输入图像转换到一个特征空间，每幅图像对应一个特征向量，通过一些简单的“距离度量”（比如欧式距离）来表示向量之间的差异，最后通过这个距离来拟合输入图像的相似度差异（语义差异）</li>
 <li>对比损失Contrastive Loss：
 <ul>
-<li>$d=||a_n-b_n||_2$，代表两个样本特征的欧氏距离，</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mo>=</mo><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><msub><mi>a</mi><mi>n</mi></msub><mo>−</mo><msub><mi>b</mi><mi>n</mi></msub><mi mathvariant="normal">∣</mi><msub><mi mathvariant="normal">∣</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">d=||a_n-b_n||_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord">∣</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，代表两个样本特征的欧氏距离，</li>
 <li>d也可使用cosine距离，d=cos=x*y/|x||y|</li>
 <li>y为两个样本是否匹配的标签，y=1代表两个样本相似或者匹配，y=0则代表不匹配，</li>
 <li>margin为设定的阈值</li>
@@ -268,15 +268,15 @@
 <p>![Siamese Net_loss1](Siamese系列/Siamese Net_loss1.png)</p>
 <hr>
 <br>
-<h2><span id="siamfc">SiamFC</span></h2>
+<h2><span id="siamfc"> SiamFC</span></h2>
 <p><a href="https://blog.csdn.net/nightmare_dimple/article/details/74210147" target="_blank" rel="noopener">https://blog.csdn.net/nightmare_dimple/article/details/74210147</a></p>
 <ul>
 <li>全卷积孪生网络 fully-convolutional siamese networks for object tracking</li>
 <li>AlexNet</li>
 <li>以往：相关滤波之网络一层作为特征，深度学习之梯度下降，在线学习，存在问题；本法离线学习，tracking时只需进行相似性判断，计算量很小</li>
 <li>细节：在初始离线阶段把深度卷积网络看成一个更通用的<strong>相似性学习</strong>问题，然后在跟踪时对这个问题进行在线的简单估计。训练了一个孪生网络在一个较大的搜索区域搜索样本图片。本文另一个贡献在于，新的孪生网络结构是一个关于搜索区域的<strong>全卷积网络</strong>：密集高效的滑动窗口估计可通过计算两个输入的互相关性并插值得到。</li>
-<li>相似性学习：学习一个函数$f(x,z)$来比较样本图像（目标）z和搜索图像（画面）x的相似性</li>
-<li>用深度神经网络模拟$f$，深度卷积网络中<strong>相似性学习最典型的就是孪生结构</strong>。孪生网络对两个输入z和x进行相同的变换$\varphi$，然后将得到的输出送入函数g，最后得到相似性度量函数为：<em>f</em>(<em>z</em>,<em>x</em>)=<em>g</em>(<em>φ</em>(<em>z</em>),<em>φ</em>(<em>x</em>))
+<li>相似性学习：学习一个函数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x,z)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span>来比较样本图像（目标）z和搜索图像（画面）x的相似性</li>
+<li>用深度神经网络模拟<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span>，深度卷积网络中<strong>相似性学习最典型的就是孪生结构</strong>。孪生网络对两个输入z和x进行相同的变换<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>φ</mi></mrow><annotation encoding="application/x-tex">\varphi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">φ</span></span></span></span>，然后将得到的输出送入函数g，最后得到相似性度量函数为：<em>f</em>(<em>z</em>,<em>x</em>)=<em>g</em>(<em>φ</em>(<em>z</em>),<em>φ</em>(<em>x</em>))
 <ul>
 <li>1.函数g是一个简单的距离或相似性度量</li>
 <li>2.φ相当于特征提取器</li>
@@ -345,7 +345,7 @@
 </ul>
 <hr>
 <br>
-<h2><span id="rpn">RPN</span></h2>
+<h2><span id="rpn"> RPN</span></h2>
 <p>Region Proposal Network 区域推荐网络</p>
 <ul>
 <li>
@@ -371,7 +371,7 @@
 </ul>
 <hr>
 <br>
-<h2><span id="siamrpn">SiamRPN</span></h2>
+<h2><span id="siamrpn"> SiamRPN</span></h2>
 <p><a href="https://blog.csdn.net/fzp95/article/details/80982201" target="_blank" rel="noopener">https://blog.csdn.net/fzp95/article/details/80982201</a></p>
 <p><a href="https://www.jianshu.com/p/a3786b61031c" target="_blank" rel="noopener">https://www.jianshu.com/p/a3786b61031c</a></p>
 <p><a href="https://blog.csdn.net/leviopku/article/details/81068487" target="_blank" rel="noopener">https://blog.csdn.net/leviopku/article/details/81068487</a></p>
@@ -415,7 +415,7 @@
 <p><img src="/2020/06/18/Siamese%E7%B3%BB%E5%88%97/Siamese%E7%B3%BB%E5%88%97%5CSiamRPN_tracking.png" alt="SiamRPN_tracking"></p>
 <hr>
 <br>
-<h2><span id="dasiamrpn">DaSiamRPN</span></h2>
+<h2><span id="dasiamrpn"> DaSiamRPN</span></h2>
 <p>Distractor-aware Siamese Networks for Visual Object Tracking 添加干扰的</p>
 <p><a href="https://zhuanlan.zhihu.com/p/42546692" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/42546692</a></p>
 <p><a href="https://blog.csdn.net/fzp95/article/details/82380261" target="_blank" rel="noopener">https://blog.csdn.net/fzp95/article/details/82380261</a></p>
@@ -443,7 +443,7 @@
 </ul>
 <hr>
 <br>
-<h2><span id="siamrpn">SiamRPN++</span></h2>
+<h2><span id="siamrpn"> SiamRPN++</span></h2>
 <p>Evolution of Siamese Visual Tracking with Very Deep Networks</p>
 <p><a href="https://blog.csdn.net/baidu_36669549/article/details/85719585" target="_blank" rel="noopener">https://blog.csdn.net/baidu_36669549/article/details/85719585</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/56254712" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/56254712</a></p>
@@ -461,8 +461,8 @@
 <li>
 <p>孪生的相关操作（A☆B）要求：</p>
 <ul>
-<li>$f(z,x)=g(\phi(z), \phi(x))$，即f/g应满足以下</li>
-<li>要求1：绝对平移不变性 $f(z, x[\Delta \tau_j]) = f(z, x)[\Delta \tau_j]$ 平移移位子窗口操作器，检测帧的移动，结果也应移动。如果在图像中平移一个目标，那么proposal也会跟着平移，这时，同一个函数需要能够在任何位置都预测到这个proposal。</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>z</mi><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(z,x)=g(\phi(z), \phi(x))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">ϕ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">ϕ</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span>，即f/g应满足以下</li>
+<li>要求1：绝对平移不变性 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>z</mi><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">[</mo><mi mathvariant="normal">Δ</mi><msub><mi>τ</mi><mi>j</mi></msub><mo stretchy="false">]</mo><mo stretchy="false">)</mo><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>z</mi><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">[</mo><mi mathvariant="normal">Δ</mi><msub><mi>τ</mi><mi>j</mi></msub><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">f(z, x[\Delta \tau_j]) = f(z, x)[\Delta \tau_j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mopen">[</span><span class="mord">Δ</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.1132em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">]</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mopen">[</span><span class="mord">Δ</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.1132em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span> 平移移位子窗口操作器，检测帧的移动，结果也应移动。如果在图像中平移一个目标，那么proposal也会跟着平移，这时，同一个函数需要能够在任何位置都预测到这个proposal。</li>
 <li>要求2：基于correlation操作计算相似度的神经网络需要具备对称性。即：将模板图像和检测图像互换，计算出的两者之间的相似度应该是不变的。因为相似度计算本身就是一个对称操作。SiamRPN的监督在于回归的偏移量和分类的分数，而不再是相似度。而对这两个变量的计算都不是对称操作。因此会使神经网络丧失对称性。</li>
 </ul>
 </li>
@@ -473,7 +473,7 @@
 <p>解决1：采样的实现：训练的时候search region会移动，以前是以目标为中心crop 255的图片，现在是以目标周围的某个点为中心，让目标不再是search region的中心。这个只和训练有关，测试还是以上一帧目标位置为中心</p>
 </li>
 </ul>
-<h3><span id="深度交叉相关">深度交叉相关</span></h3>
+<h3><span id="深度交叉相关"> 深度交叉相关</span></h3>
 <ul>
 <li>
 <p>问题2：由于在SiamRPN的回归分支和分类分支上，都对模板图像的feature map进行了channel升维，导致模板图像的feature map的channel维度分别是检测图像的feature map的channel维度的2k倍和4k倍，因此，来自模板图像和检测图像的特征维度不对称（参数量不等），即两组特征并不是从相同的特征提取器中提取出来的，所以若将模板图像和检测图像互换再进行相关操作，必然会输出不同的结果，即失去操作的对称性。这种非对称性会给网络的训练优化带来困难，不利于训练的稳定性和网络的整体性能。</p>
