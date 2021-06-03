@@ -42,44 +42,7 @@
 
     
     
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
+        
     
 
 
@@ -227,67 +190,79 @@
         </header>
 
         <div class="post-content">
-            <p>&nbsp;</p>
+            <p> </p>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#动态sql">动态SQL</a><ul>
-<li><a href="#1-概述">1. 概述</a></li>
-<li><a href="#2-if元素">2. if元素</a></li>
-<li><a href="#3-choose-when-otherwise元素">3. choose, when, otherwise元素</a></li>
-<li><a href="#4-trim-where-set元素">4. trim, where, set元素</a></li>
-<li><a href="#5-foreach元素">5. foreach元素</a></li>
-<li><a href="#6-test属性判断字符串">6. test属性判断字符串</a></li>
-<li><a href="#7-bind元素">7. bind元素</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81sql">动态SQL</a>
+<ul>
+<li><a href="#1-%E6%A6%82%E8%BF%B0">1. 概述</a></li>
+<li><a href="#2-if%E5%85%83%E7%B4%A0">2. if元素</a></li>
+<li><a href="#3-choose-when-otherwise%E5%85%83%E7%B4%A0">3. choose, when, otherwise元素</a></li>
+<li><a href="#4-trim-where-set%E5%85%83%E7%B4%A0">4. trim, where, set元素</a></li>
+<li><a href="#5-foreach%E5%85%83%E7%B4%A0">5. foreach元素</a></li>
+<li><a href="#6-test%E5%B1%9E%E6%80%A7%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2">6. test属性判断字符串</a></li>
+<li><a href="#7-bind%E5%85%83%E7%B4%A0">7. bind元素</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p>&nbsp;</p>
+<p> </p>
 <p>[toc]</p>
-<h1><span id="动态sql">动态SQL</span></h1><h2><span id="1-概述">1. 概述</span></h2><p>包括以下元素，节省了许多拼接SQL的工作：</p>
+<h1><span id="动态sql">动态SQL</span></h1>
+<h2><span id="1-概述">1. 概述</span></h2>
+<p>包括以下元素，节省了许多拼接SQL的工作：</p>
 <ul>
 <li>if</li>
 <li>choose(when, otherwise)</li>
 <li>trim(where, set)</li>
 <li>foreach</li>
 </ul>
-<p>&nbsp;</p>
-<h2><span id="2-if元素">2. if元素</span></h2><p>常与test属性联合使用。</p>
+<p> </p>
+<h2><span id="2-if元素">2. if元素</span></h2>
+<p>常与test属性联合使用。</p>
 <p>eg：如角色名roleName为空就不用它作为查询条件</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findRoles"</span> <span class="attr">parameterType</span>=<span class="string">"string"</span> <span class="attr">resultMap</span>=<span class="string">"roleResultMap"</span>&gt;</span></span><br><span class="line">    select role_no, role_name from t_role where 1=1</span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"roleName != null and roleName != ''"</span>&gt;</span></span><br><span class="line">        and role_name like concat('%', #&#123;roleName&#125;, '%')</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h2><span id="3-choose-when-otherwise元素">3. choose, when, otherwise元素</span></h2><p>eg：roleNo不空，就用roleNo查询；若roleNo空且roleName不空，就用roleName查询；若都空，就要求note不空</p>
+<p> </p>
+<h2><span id="3-choose-when-otherwise元素">3. choose, when, otherwise元素</span></h2>
+<p>eg：roleNo不空，就用roleNo查询；若roleNo空且roleName不空，就用roleName查询；若都空，就要求note不空</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findRoles"</span> <span class="attr">parameterType</span>=<span class="string">"role"</span> <span class="attr">resultMap</span>=<span class="string">"roleResultMap"</span>&gt;</span></span><br><span class="line">    select role_no, role_name, note from t_role</span><br><span class="line">    where 1=1</span><br><span class="line">    <span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"roleNo != null and roleNo != ''"</span>&gt;</span></span><br><span class="line">            AND role_no = #&#123;roleNo&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"roleName != null and roleName != ''"</span>&gt;</span></span><br><span class="line">            AND role_name like concat('%', #&#123;roleName&#125;, '%')</span><br><span class="line">        <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">otherwise</span>&gt;</span></span><br><span class="line">            AND note is not null</span><br><span class="line">        <span class="tag">&lt;/<span class="name">otherwise</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h2><span id="4-trim-where-set元素">4. trim, where, set元素</span></h2><ol>
-<li><p>where：上例的<code>1=1</code>是为了避免SQL错误，可用where元素替代，where元素知道只有在一个以上的if条件有值的情况下才去插入“WHERE”子句。而且，若最后的内容是“AND”或“OR”开头的，where 元素也知道如何将他们去除。</p>
+<p> </p>
+<h2><span id="4-trim-where-set元素">4. trim, where, set元素</span></h2>
+<ol>
+<li>
+<p>where：上例的<code>1=1</code>是为了避免SQL错误，可用where元素替代，where元素知道只有在一个以上的if条件有值的情况下才去插入“WHERE”子句。而且，若最后的内容是“AND”或“OR”开头的，where 元素也知道如何将他们去除。</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    select role_no, role_name, note from t_role </span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"roleName != null and roleName != ''"</span>&gt;</span></span><br><span class="line">	        and role_name like concat('%', #&#123;roleName&#125;, '%')</span><br><span class="line">	    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"note != null and note !=''"</span>&gt;</span></span><br><span class="line">        	and note like concat('%', #&#123;note&#125;, '%')</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>trim：去掉一些特殊的SQL语法，如and or；有prefix和suffix表示前后缀；下例实现了与where元素相同的功能，若判断成功就前缀where并删去SQL前缀的and</p>
+<li>
+<p>trim：去掉一些特殊的SQL语法，如and or；有prefix和suffix表示前后缀；下例实现了与where元素相同的功能，若判断成功就前缀where并删去SQL前缀的and</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    select role_no, role_name from t_role</span><br><span class="line">    <span class="tag">&lt;<span class="name">trim</span> <span class="attr">prefix</span>=<span class="string">"where"</span> <span class="attr">preifxOverrides</span>=<span class="string">"and"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"roleName != null and roleName != ''"</span>&gt;</span></span><br><span class="line">            and role_name like concat('%', #&#123;roleName&#125;, '%')</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">trim</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>set：会动态前置SET关键字，同时也会消除无关的逗号</p>
+<li>
+<p>set：会动态前置SET关键字，同时也会消除无关的逗号</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"updateRole"</span> <span class="attr">parameterType</span>=<span class="string">"role"</span>&gt;</span></span><br><span class="line">    update t_role</span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"roleName != null and roleName != ''"</span>&gt;</span></span><br><span class="line">            role_name = #&#123;roleName&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"note != null and note != ''"</span>&gt;</span></span><br><span class="line">            note = #&#123;note&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    where role_no = #&#123;roleNo&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p> 转换为trim:</p>
+<p>转换为trim:</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">trim</span> <span class="attr">prefix</span>=<span class="string">"SET"</span> <span class="attr">suffixOverrides</span>=<span class="string">","</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">trim</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p> &nbsp;</p>
+<p> </p>
 </li>
 </ol>
-<h2><span id="5-foreach元素">5. foreach元素</span></h2><p>遍历集合，用于in关键字</p>
+<h2><span id="5-foreach元素">5. foreach元素</span></h2>
+<p>遍历集合，用于in关键字</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">resultType</span>=<span class="string">"user"</span>&gt;</span></span><br><span class="line">    select * from t_role where role_no in</span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">item</span>=<span class="string">"roleNo"</span> <span class="attr">index</span>=<span class="string">"index"</span> <span class="attr">collection</span>=<span class="string">"roleNoList"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></span><br><span class="line">        #&#123;roleNo&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>collection；配置传入的参数</p>
 <p>item：循环中的当前元素</p>
 <p>index：当前元素的下标</p>
 <p>open和close：以什么符号包装集合元素</p>
-<p>&nbsp;</p>
-<h2><span id="6-test属性判断字符串">6. test属性判断字符串</span></h2><p>前例中test用于判断非空，还可用于判断字符串。</p>
+<p> </p>
+<h2><span id="6-test属性判断字符串">6. test属性判断字符串</span></h2>
+<p>前例中test用于判断非空，还可用于判断字符串。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">parameterType</span>=<span class="string">"string"</span> <span class="attr">resultMap</span>=<span class="string">"roleResultMap"</span>&gt;</span></span><br><span class="line">    select role_no, role_name from t_role</span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"type == 'Y'.toString()"</span>&gt;</span></span><br><span class="line">        where 1=1</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>此时如果传入type==‘Y’，则会判断成功，加入where 1=1子句。</p>
 <p>test可判断数值型参数。</p>
 <p>枚举的话，取决于使用何种typeHandler。</p>
-<p>&nbsp;</p>
-<h2><span id="7-bind元素">7. bind元素</span></h2><p>通过OGNL表达式定义一个上下文变量，方便使用。如模糊查询时，MySQL使用concat，Oracle用其他方法。bind元素提供统一方法，不必为不同数据库配置不同SQL。</p>
+<p> </p>
+<h2><span id="7-bind元素">7. bind元素</span></h2>
+<p>通过OGNL表达式定义一个上下文变量，方便使用。如模糊查询时，MySQL使用concat，Oracle用其他方法。bind元素提供统一方法，不必为不同数据库配置不同SQL。</p>
 <p>eg：按角色名进行模糊查询</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span> <span class="attr">parameterType</span>=<span class="string">"string"</span> <span class="attr">resultType</span>=<span class="string">"RoleBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bind</span> <span class="attr">name</span>=<span class="string">"pattern"</span> <span class="attr">value</span>=<span class="string">"'%' + _parameter + '%'"</span>/&gt;</span></span><br><span class="line">    select id, role_name as roleName from t_role where role_name like #&#123;pattern&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>_parameter：代表传入的参数，和通配符连接后赋给pattern。</p>

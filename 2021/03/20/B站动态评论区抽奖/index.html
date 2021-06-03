@@ -42,44 +42,7 @@
 
     
     
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
+        
     
 
 
@@ -227,27 +190,29 @@
         </header>
 
         <div class="post-content">
-            <p>&nbsp;</p>
+            <p> </p>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#使用">使用</a></li>
-<li><a href="#效果">效果</a></li>
-<li><a href="#设置">设置</a></li>
-<li><a href="#可能遇到的问题">可能遇到的问题</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8">使用</a></li>
+<li><a href="#%E6%95%88%E6%9E%9C">效果</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE">设置</a></li>
+<li><a href="#%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">可能遇到的问题</a></li>
 </ul>
 <!-- tocstop -->
-<p>&nbsp;</p>
+<p> </p>
 <p><a href="https://blog.csdn.net/Ikaros_521/article/details/106483311" target="_blank" rel="noopener">参考项目</a></p>
 <p><a href="https://github.com/gaylong9/Bilibili_draw_luckydog/releases/download/v1.0/draw.js" target="_blank" rel="noopener">下载本代码</a></p>
-<p>&nbsp;</p>
+<p> </p>
 <p>语言：JavaScript</p>
 <p>实现过程：使用Set逐页存储用户ID和昵称，随后生成随机数，输出对应用户信息。</p>
-<p>&nbsp;</p>
-<h1><span id="使用">使用</span></h1><p>使用：动态详情页，选中“评论”而非“转发”时（默认即是，要求页面上有评论），随便右键选择“检查”（“审查元素”），或直接F12。在出现的选项卡中选中Console（控制台），将代码全部复制进去回车即可。</p>
+<p> </p>
+<h1><span id="使用">使用</span></h1>
+<p>使用：动态详情页，选中“评论”而非“转发”时（默认即是，要求页面上有评论），随便右键选择“检查”（“审查元素”），或直接F12。在出现的选项卡中选中Console（控制台），将代码全部复制进去回车即可。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置用全局变量</span></span><br><span class="line"><span class="keyword">var</span> luckySum = <span class="number">0</span>;                   <span class="comment">// 中奖总人数</span></span><br><span class="line"><span class="keyword">var</span> showId = <span class="literal">true</span>;                  <span class="comment">// 中奖结果显示ID true/false</span></span><br><span class="line"><span class="keyword">var</span> showLink = <span class="literal">true</span>;                <span class="comment">// 中奖结果显示发送私信连接 true/false</span></span><br><span class="line"><span class="keyword">var</span> storeInfoIntervalTime = <span class="number">1500</span>;   <span class="comment">// 存放用户信息的间隔ms</span></span><br><span class="line"><span class="keyword">var</span> waitIntervalNum = <span class="number">3</span>;            <span class="comment">// 出结果前等待次数</span></span><br><span class="line"><span class="keyword">var</span> waitIntervalTime = <span class="number">1500</span>;        <span class="comment">// 出结果前等待间隔ms</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 功能用全局变量</span></span><br><span class="line"><span class="keyword">var</span> idSet = <span class="keyword">new</span> <span class="built_in">Set</span>();          <span class="comment">// 存放所有参与的用户的id</span></span><br><span class="line"><span class="keyword">var</span> nameSet = <span class="keyword">new</span> <span class="built_in">Set</span>();        <span class="comment">// 存放所有参与的用户的昵称</span></span><br><span class="line"><span class="keyword">var</span> luckyInfo = <span class="keyword">new</span> <span class="built_in">Array</span>();    <span class="comment">// 存放所有抽奖结果信息</span></span><br><span class="line"><span class="keyword">var</span> pageSum;                    <span class="comment">// 评论总页数</span></span><br><span class="line"><span class="keyword">var</span> storeInfoInterval;          <span class="comment">// 存储信息用定时器</span></span><br><span class="line"><span class="keyword">var</span> waitResInterval;            <span class="comment">// 等待结果用定时器</span></span><br><span class="line"><span class="keyword">var</span> waitIntervalCnt = <span class="number">0</span>;        <span class="comment">// 出结果前等待计数器</span></span><br><span class="line"><span class="keyword">var</span> msgSitePrefix = <span class="string">"https://message.bilibili.com/#/whisper/mid"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用入口方法</span></span><br><span class="line">draw();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 入口</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    gotoFirstPage();</span><br><span class="line">    <span class="keyword">var</span> pages = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"tcd-number"</span>);</span><br><span class="line">    pageSum = pages[pages.length - <span class="number">1</span>].childNodes[<span class="number">0</span>].nodeValue;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"\n抽奖开始...\n逐页记录用户信息..."</span>);</span><br><span class="line">    storeInfoInterval = setInterval(getCurPageInfo, storeInfoIntervalTime);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取本页信息</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCurPageInfo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 当前页数进度</span></span><br><span class="line">    <span class="keyword">var</span> currentPage = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"current"</span>)[<span class="number">0</span>].childNodes[<span class="number">0</span>].nodeValue;</span><br><span class="line">    <span class="built_in">console</span>.log(currentPage + <span class="string">"/"</span> + pageSum + <span class="string">"..."</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加本页用户信息</span></span><br><span class="line">    <span class="keyword">var</span> cons = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"con "</span>);</span><br><span class="line">    <span class="keyword">var</span> length = cons.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> userInfo = cons[i].firstChild.getElementsByTagName(<span class="string">"a"</span>)[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">var</span> userId = userInfo.getAttribute(<span class="string">"data-usercard-mid"</span>);</span><br><span class="line">        <span class="keyword">var</span> userName = userInfo.childNodes[<span class="number">0</span>].nodeValue;</span><br><span class="line">        idSet.add(userId);</span><br><span class="line">        nameSet.add(userName);</span><br><span class="line">        <span class="comment">// console.log("加入用户 " + userName);</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 通过是否有“下一页”按键判断是否到达尾页</span></span><br><span class="line">    <span class="keyword">var</span> next = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"next"</span>)[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">if</span> (next == <span class="literal">undefined</span> || next == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// 到达页尾，开始抽奖</span></span><br><span class="line">        clearInterval(storeInfoInterval);</span><br><span class="line">        <span class="keyword">var</span> userNum = idSet.size;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"录入结束，共有"</span> + userNum + <span class="string">"名用户参与评论."</span>);</span><br><span class="line">        <span class="comment">// 获取获奖人数</span></span><br><span class="line">        <span class="keyword">if</span> (luckySum &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> getLuckySumMsg = <span class="string">"共有"</span> + userNum + <span class="string">"名用户参与，要抽几个人呢？"</span>;</span><br><span class="line">            luckySum = prompt(getLuckySumMsg);</span><br><span class="line">            <span class="keyword">while</span> (luckySum &gt; userNum) &#123;</span><br><span class="line">                luckySum = prompt(getLuckySumMsg);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="comment">// 生成幸运数字，从数组中取出放入最终结果</span></span><br><span class="line">        <span class="keyword">var</span> luckyNums = generateLuckyNums(userNum, luckySum);</span><br><span class="line">        <span class="keyword">var</span> idArray = <span class="built_in">Array</span>.from(idSet);</span><br><span class="line">        <span class="keyword">var</span> nameArray = <span class="built_in">Array</span>.from(nameSet);</span><br><span class="line">        <span class="keyword">var</span> luckyArray = <span class="built_in">Array</span>.from(luckyNums);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; luckySum; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> id = idArray[luckyArray[i]]</span><br><span class="line">            <span class="keyword">var</span> name = nameArray[luckyArray[i]];</span><br><span class="line">            <span class="keyword">var</span> msg ;</span><br><span class="line">            msg = <span class="string">""</span> + name; </span><br><span class="line">            <span class="keyword">if</span> (showId) &#123;</span><br><span class="line">                msg += <span class="string">"("</span> + id + <span class="string">")"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (showLink) &#123;</span><br><span class="line">                msg += <span class="string">" "</span> + msgSitePrefix + id;</span><br><span class="line">            &#125;</span><br><span class="line">            luckyInfo.push(msg);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 出结果前的等待</span></span><br><span class="line">        waitResInterval = setInterval(waitRes, waitIntervalTime);</span><br><span class="line">        </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 若不是尾页，就click进入下一页</span></span><br><span class="line">        next.click();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 前往评论首页</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gotoFirstPage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.getElementsByClassName(<span class="string">"current"</span>)[<span class="number">0</span>].childNodes[<span class="number">0</span>].nodeValue == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">document</span>.getElementsByClassName(<span class="string">"tcd-number"</span>)[<span class="number">0</span>].click();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在userNum总数中随机生成num个数字并返回</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateLuckyNums</span>(<span class="params">userNum, luckySum</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> temp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> luckyNums = <span class="keyword">new</span> <span class="built_in">Set</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; luckySum; i++) &#123;</span><br><span class="line">        <span class="comment">// floor([0, 1) * userNum) = [0, userNum - 1]，用作之后下标</span></span><br><span class="line">        temp = <span class="built_in">Math</span>.floor((<span class="built_in">Math</span>.random() * userNum));</span><br><span class="line">        <span class="keyword">while</span> (luckyNums.has(temp)) &#123;</span><br><span class="line">            temp = <span class="built_in">Math</span>.floor((<span class="built_in">Math</span>.random() * userNum));</span><br><span class="line">        &#125;</span><br><span class="line">        luckyNums.add(temp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> luckyNums;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示中奖用户</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">waitRes</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> waitMsg = <span class="string">"抽出的"</span> + luckySum + <span class="string">"名用户是"</span> + <span class="string">"."</span>.repeat(waitIntervalNum - waitIntervalCnt);</span><br><span class="line">    <span class="keyword">if</span> (waitIntervalCnt == waitIntervalNum) &#123;</span><br><span class="line">        clearInterval(waitResInterval);</span><br><span class="line">        <span class="keyword">if</span> (waitIntervalNum == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(waitMsg);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"\n"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; luckyInfo.length; i++) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"%c"</span> + luckyInfo[i], <span class="string">"color:blue"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"\n抽奖结束，恭喜！*(^o^)/*"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">console</span>.log(waitMsg);</span><br><span class="line">    waitIntervalCnt++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h1><span id="效果">效果</span></h1><p>动态详情页面F12，选中Console/控制台：</p>
+<p> </p>
+<h1><span id="效果">效果</span></h1>
+<p>动态详情页面F12，选中Console/控制台：</p>
 <p><img src="/2021/03/20/B%E7%AB%99%E5%8A%A8%E6%80%81%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%8A%BD%E5%A5%96/eg1.png" alt="效果图1"></p>
 <p>把代码复制进去，回车，程序开始执行：</p>
 <p><img src="/2021/03/20/B%E7%AB%99%E5%8A%A8%E6%80%81%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%8A%BD%E5%A5%96/eg2.png" alt="效果图2"></p>
@@ -255,8 +220,9 @@
 <p><img src="/2021/03/20/B%E7%AB%99%E5%8A%A8%E6%80%81%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%8A%BD%E5%A5%96/eg3.png" alt="效果图3"></p>
 <p>短暂等待，输出中奖者信息：</p>
 <p><img src="/2021/03/20/B%E7%AB%99%E5%8A%A8%E6%80%81%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%8A%BD%E5%A5%96/eg4.jpg" alt="效果图4"></p>
-<p>&nbsp;</p>
-<h1><span id="设置">设置</span></h1><p>在代码最开始的“设置用全局变量”中，是一些可以自行修改的设置项，不过默认状态即可使用，不修改也无妨。</p>
+<p> </p>
+<h1><span id="设置">设置</span></h1>
+<p>在代码最开始的“设置用全局变量”中，是一些可以自行修改的设置项，不过默认状态即可使用，不修改也无妨。</p>
 <p>以下介绍这些设置项：</p>
 <ul>
 <li><code>luckySum</code>：中奖总人数，即要抽出几个中奖者；默认0表示不设置，会在运行过程中弹窗提示输入；若修改则随后不会弹窗询问</li>
@@ -266,20 +232,25 @@
 <li><code>waitIntervalNum</code>：展示结果前有一个等待过程，输出几句<code>抽出的*名用户是...</code>，本设置项就是设置等待过程中输出次数；默认3</li>
 <li><code>waitIntervalTime</code>：上述等待过程，每次输出间隔多少毫秒；默认1500</li>
 </ul>
-<p>&nbsp;</p>
-<h1><span id="可能遇到的问题">可能遇到的问题</span></h1><p>本程序未大量做错误输入校验，使用中需要设置项与输入都保持正常合理的数值。</p>
+<p> </p>
+<h1><span id="可能遇到的问题">可能遇到的问题</span></h1>
+<p>本程序未大量做错误输入校验，使用中需要设置项与输入都保持正常合理的数值。</p>
 <ol>
-<li><p>同一页面连续多次运行本程序可能造成出错，建议刷新</p>
+<li>
+<p>同一页面连续多次运行本程序可能造成出错，建议刷新</p>
 </li>
-<li><p>运行一开始出现的<code>undefined</code>是正常现象 <del>（是Interval的原因吗，不太懂）</del></p>
+<li>
+<p>运行一开始出现的<code>undefined</code>是正常现象 <s>（是Interval的原因吗，不太懂）</s></p>
 </li>
-<li><p><code>storeInfoIntervalTime</code>设置过低时，页面读取顺序混乱，视网速与浏览器处理速度不同，应保证在1000或1500以上（默认1500）</p>
+<li>
+<p><code>storeInfoIntervalTime</code>设置过低时，页面读取顺序混乱，视网速与浏览器处理速度不同，应保证在1000或1500以上（默认1500）</p>
 </li>
-<li><p>曾遇到下图问题，是由于用户头像出错，无法加载图片，不影响程序使用</p>
-<p> <img src="/2021/03/20/B%E7%AB%99%E5%8A%A8%E6%80%81%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%8A%BD%E5%A5%96/error1.png" alt></p>
+<li>
+<p>曾遇到下图问题，是由于用户头像出错，无法加载图片，不影响程序使用</p>
+<p><img src="/2021/03/20/B%E7%AB%99%E5%8A%A8%E6%80%81%E8%AF%84%E8%AE%BA%E5%8C%BA%E6%8A%BD%E5%A5%96/error1.png" alt></p>
 </li>
 </ol>
-<p>&nbsp;</p>
+<p> </p>
 
         </div>
 

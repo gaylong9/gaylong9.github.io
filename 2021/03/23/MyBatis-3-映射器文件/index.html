@@ -42,44 +42,7 @@
 
     
     
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
+        
     
 
 
@@ -227,65 +190,74 @@
         </header>
 
         <div class="post-content">
-            <p>&nbsp;</p>
+            <p> </p>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#映射器">映射器</a><ul>
-<li><a href="#1-概述">1. 概述</a></li>
-<li><a href="#2-select-查询">2. select 查询</a><ul>
-<li><a href="#21-属性">2.1 属性</a></li>
-<li><a href="#22-简单应用">2.2 简单应用</a></li>
-<li><a href="#23-自动映射">2.3 自动映射</a></li>
-<li><a href="#24-传入多个参数">2.4 传入多个参数</a></li>
-<li><a href="#25-resultmap映射结果集">2.5 resultMap映射结果集</a></li>
-<li><a href="#26-分页参数rowbounds">2.6 分页参数RowBounds</a></li>
+<li><a href="#%E6%98%A0%E5%B0%84%E5%99%A8">映射器</a>
+<ul>
+<li><a href="#1-%E6%A6%82%E8%BF%B0">1. 概述</a></li>
+<li><a href="#2-select-%E6%9F%A5%E8%AF%A2">2. select 查询</a>
+<ul>
+<li><a href="#21-%E5%B1%9E%E6%80%A7">2.1 属性</a></li>
+<li><a href="#22-%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8">2.2 简单应用</a></li>
+<li><a href="#23-%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84">2.3 自动映射</a></li>
+<li><a href="#24-%E4%BC%A0%E5%85%A5%E5%A4%9A%E4%B8%AA%E5%8F%82%E6%95%B0">2.4 传入多个参数</a></li>
+<li><a href="#25-resultmap%E6%98%A0%E5%B0%84%E7%BB%93%E6%9E%9C%E9%9B%86">2.5 resultMap映射结果集</a></li>
+<li><a href="#26-%E5%88%86%E9%A1%B5%E5%8F%82%E6%95%B0rowbounds">2.6 分页参数RowBounds</a></li>
 </ul>
 </li>
-<li><a href="#3-insert-插入">3. insert 插入</a><ul>
-<li><a href="#31-属性">3.1 属性</a></li>
-<li><a href="#32-简单应用">3.2 简单应用</a></li>
-<li><a href="#33-主键回填">3.3 主键回填</a></li>
-<li><a href="#34-自定义主键">3.4 自定义主键</a></li>
+<li><a href="#3-insert-%E6%8F%92%E5%85%A5">3. insert 插入</a>
+<ul>
+<li><a href="#31-%E5%B1%9E%E6%80%A7">3.1 属性</a></li>
+<li><a href="#32-%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8">3.2 简单应用</a></li>
+<li><a href="#33-%E4%B8%BB%E9%94%AE%E5%9B%9E%E5%A1%AB">3.3 主键回填</a></li>
+<li><a href="#34-%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E9%94%AE">3.4 自定义主键</a></li>
 </ul>
 </li>
-<li><a href="#4-update和delete">4. update和delete</a></li>
-<li><a href="#5-sql元素">5. sql元素</a></li>
-<li><a href="#6-参数">6. 参数</a></li>
-<li><a href="#7-resultmap元素">7. resultMap元素</a><ul>
-<li><a href="#71-resultmap元素构成">7.1 resultMap元素构成</a></li>
-<li><a href="#72-使用map存储结果集">7.2 使用map存储结果集</a></li>
-<li><a href="#73-使用pojo存储结果集">7.3 使用POJO存储结果集</a></li>
+<li><a href="#4-update%E5%92%8Cdelete">4. update和delete</a></li>
+<li><a href="#5-sql%E5%85%83%E7%B4%A0">5. sql元素</a></li>
+<li><a href="#6-%E5%8F%82%E6%95%B0">6. 参数</a></li>
+<li><a href="#7-resultmap%E5%85%83%E7%B4%A0">7. resultMap元素</a>
+<ul>
+<li><a href="#71-resultmap%E5%85%83%E7%B4%A0%E6%9E%84%E6%88%90">7.1 resultMap元素构成</a></li>
+<li><a href="#72-%E4%BD%BF%E7%94%A8map%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%9C%E9%9B%86">7.2 使用map存储结果集</a></li>
+<li><a href="#73-%E4%BD%BF%E7%94%A8pojo%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%9C%E9%9B%86">7.3 使用POJO存储结果集</a></li>
 </ul>
 </li>
-<li><a href="#8-级联">8. 级联</a><ul>
-<li><a href="#81-mybatis中的级联">8.1 MyBatis中的级联</a></li>
-<li><a href="#82-建立pojo">8.2 建立POJO</a></li>
-<li><a href="#83-配置mapper文件">8.3 配置mapper文件</a></li>
-<li><a href="#84-n1问题">8.4 N+1问题</a></li>
-<li><a href="#85-延迟加载">8.5 延迟加载</a></li>
-<li><a href="#86-另一种级联">8.6 另一种级联</a></li>
-<li><a href="#87-多对多级联">8.7 多对多级联</a></li>
+<li><a href="#8-%E7%BA%A7%E8%81%94">8. 级联</a>
+<ul>
+<li><a href="#81-mybatis%E4%B8%AD%E7%9A%84%E7%BA%A7%E8%81%94">8.1 MyBatis中的级联</a></li>
+<li><a href="#82-%E5%BB%BA%E7%AB%8Bpojo">8.2 建立POJO</a></li>
+<li><a href="#83-%E9%85%8D%E7%BD%AEmapper%E6%96%87%E4%BB%B6">8.3 配置mapper文件</a></li>
+<li><a href="#84-n1%E9%97%AE%E9%A2%98">8.4 N+1问题</a></li>
+<li><a href="#85-%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD">8.5 延迟加载</a></li>
+<li><a href="#86-%E5%8F%A6%E4%B8%80%E7%A7%8D%E7%BA%A7%E8%81%94">8.6 另一种级联</a></li>
+<li><a href="#87-%E5%A4%9A%E5%AF%B9%E5%A4%9A%E7%BA%A7%E8%81%94">8.7 多对多级联</a></li>
 </ul>
 </li>
-<li><a href="#9-缓存">9. 缓存</a><ul>
-<li><a href="#91-一级二级缓存">9.1 一级二级缓存</a></li>
-<li><a href="#92-缓存配置与使用">9.2 缓存配置与使用</a></li>
+<li><a href="#9-%E7%BC%93%E5%AD%98">9. 缓存</a>
+<ul>
+<li><a href="#91-%E4%B8%80%E7%BA%A7%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98">9.1 一级二级缓存</a></li>
+<li><a href="#92-%E7%BC%93%E5%AD%98%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8">9.2 缓存配置与使用</a></li>
 </ul>
 </li>
-<li><a href="#10-存储过程">10. 存储过程</a><ul>
-<li><a href="#101-in和out参数">10.1 IN和OUT参数</a></li>
-<li><a href="#102-游标">10.2 游标</a></li>
+<li><a href="#10-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B">10. 存储过程</a>
+<ul>
+<li><a href="#101-in%E5%92%8Cout%E5%8F%82%E6%95%B0">10.1 IN和OUT参数</a></li>
+<li><a href="#102-%E6%B8%B8%E6%A0%87">10.2 游标</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p>&nbsp;</p>
+<p> </p>
 <p>[toc]</p>
-<h1><span id="映射器">映射器</span></h1><p>由一个接口和XML文件（注解不推荐）组成。映射器中可以配置参数、各类SQL语句、存储过程、缓存、级联等内容，并通过简易的映射规则映射到指定的POJO上，有效消除JDBC底层代码。</p>
-<h2><span id="1-概述">1. 概述</span></h2><p>有以下元素：</p>
+<h1><span id="映射器">映射器</span></h1>
+<p>由一个接口和XML文件（注解不推荐）组成。映射器中可以配置参数、各类SQL语句、存储过程、缓存、级联等内容，并通过简易的映射规则映射到指定的POJO上，有效消除JDBC底层代码。</p>
+<h2><span id="1-概述">1. 概述</span></h2>
+<p>有以下元素：</p>
 <ul>
 <li>select：查询，可以自定义参数、返回结果集等</li>
 <li>insert：插入，返回一个整数，代表插入的条数</li>
@@ -297,9 +269,12 @@
 <li>cache：给定命名空间的缓存配置</li>
 <li>chche-ref：其他命名空间缓存配置的引用</li>
 </ul>
-<p>&nbsp;</p>
-<h2><span id="2-select-查询">2. select 查询</span></h2><h3><span id="21-属性">2.1 属性</span></h3><pre><code>1. id：和Mapper的命名空间namespace组合起来是唯一的，供MyBatis调用
-</code></pre><ol>
+<p> </p>
+<h2><span id="2-select-查询">2. select 查询</span></h2>
+<h3><span id="21-属性">2.1 属性</span></h3>
+<pre><code>1. id：和Mapper的命名空间namespace组合起来是唯一的，供MyBatis调用
+</code></pre>
+<ol start="2">
 <li>parameterType：类全名/别名</li>
 <li>parameterMap：即将废弃</li>
 <li>resultType：定义类全路径，允许自动匹配时结果集自动映射；或int double等；也可用别名，但不能和resultMap同时使用</li>
@@ -315,13 +290,15 @@
 <li>resultSets：适用于多个结果集的情况，列出执行SQL后每个结果集的名称，逗号分隔</li>
 </ol>
 <p>用的最多的是id、parameterType、resultType、resultMap；若要设置缓存还用到flushCache、useCache；其他不常用。</p>
-<h3><span id="22-简单应用">2.2 简单应用</span></h3><p>eg：统计表中同一姓氏的用户数量：接口中声明方法：<code>public Integer countUserByFirstName(String firstName);</code>然后mapper.xml中：</p>
+<h3><span id="22-简单应用">2.2 简单应用</span></h3>
+<p>eg：统计表中同一姓氏的用户数量：接口中声明方法：<code>public Integer countUserByFirstName(String firstName);</code>然后mapper.xml中：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"countUserByFirstName"</span> <span class="attr">parameterType</span>=<span class="string">"string"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    select count(*) total from t_user </span><br><span class="line">    where user_name like concat(#&#123;firstName&#125;, '%')</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>​    id：配合主元素mapper的namespace属性，联合成为唯一标识</p>
-<p>​    parameterType：接受的参数类型，可以是别名或全名</p>
-<p>​    resultType：返回类型，同样可以全名或别名</p>
-<p>​    #{firstName}：传入的参数</p>
-<h3><span id="23-自动映射">2.3 自动映射</span></h3><pre><code>  1. MyBatis提供自动映射功能，默认开启，能有效减少大量的映射配置
+<p>​	id：配合主元素mapper的namespace属性，联合成为唯一标识</p>
+<p>​	parameterType：接受的参数类型，可以是别名或全名</p>
+<p>​	resultType：返回类型，同样可以全名或别名</p>
+<p>​	#{firstName}：传入的参数</p>
+<h3><span id="23-自动映射">2.3 自动映射</span></h3>
+<pre><code>  1. MyBatis提供自动映射功能，默认开启，能有效减少大量的映射配置
 
   2. 基础配置文件中的setting元素中有两个可配置选项autoMappingBehavior或mapUnderscoreToCamelCase，用于控制自动映射和驼峰映射的开关，前者使用的多，灵活，后者严苛，使用不广
   3. autoMappingBehavior的取值：
@@ -330,22 +307,32 @@
   3. FULL：对所有结果集进行自动映射
   4. 编写POJO中的属性，如果和表列名一致，就能自动映射；不一致也可在SQL中通过`as`改为一致
   5. 驼峰映射：表列名 user_name，POJO属性名userName，此时可以映射
-</code></pre><h3><span id="24-传入多个参数">2.4 传入多个参数</span></h3><ol>
-<li><p>使用map接口传递：此时将接口的方法定义为<code>public List&lt;Book&gt; findBooksByMap(Map&lt;String, Object&gt; parameterMap);</code>，此时传入映射器的就是一个map对象，使用这个map在SQL中设置参数：</p>
+</code></pre>
+<h3><span id="24-传入多个参数">2.4 传入多个参数</span></h3>
+<ol>
+<li>
+<p>使用map接口传递：此时将接口的方法定义为<code>public List&lt;Book&gt; findBooksByMap(Map&lt;String, Object&gt; parameterMap);</code>，此时传入映射器的就是一个map对象，使用这个map在SQL中设置参数：</p>
 </li>
-<li><p>```xml<br> <select id="findBooksByMap" parametertype="map" resulttype="book"></select></p>
-<pre><code> select id, book_name as bookName from books where book_name like concat(&#39;%&#39;, #{bookName}, &#39;%&#39;) and id like concat(&#39;%&#39;, #{id}, &#39;%&#39;)
-</code></pre><p> &lt;/select&gt;</p>
+<li>
+<pre><code class="language-xml"> &lt;select id=&quot;findBooksByMap&quot; parameterType=&quot;map&quot; resultType=&quot;book&quot;&gt;
+     select id, book_name as bookName from books where book_name like concat('%', #{bookName}, '%') and id like concat('%', #{id}, '%')
+ &lt;/select&gt;
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	SQL中#&#123;bookName&#125;是键，要在调用方法前填充map传入。但因map可读性差，不能限定传入参数类型，故使用不多</span><br><span class="line"></span><br><span class="line">3. 使用注解传递：&#96;public List&lt;Book&gt; findBooksByAnnotation(@Param(&quot;roleName&quot;) String roleName, @Param(&quot;id&quot;) String id);&#96;，可读性大大提高，在SQL中使用参数时，花括号内填入注解的内容即可，且此时不用指定parameterType属性，MyBatis可以自动探索</span><br><span class="line"></span><br><span class="line">4. 使用JavaBean传递：参数过多时注解繁琐，可用一个POJO代表参数</span><br><span class="line"></span><br><span class="line">	&#96;&#96;&#96;java</span><br><span class="line">	public class BookParams &#123;</span><br><span class="line">	    private String bookName;</span><br><span class="line">	    private String id;</span><br><span class="line">	    &#x2F;&#x2F; getter setter</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p> 此时接口方法定义：<code>public List&lt;Book&gt; findBooksByBean(BookParams bookParam);</code>；映射器中parameterType指定该JavaBean全名，花括号内用bean的属性即可</p>
+
+ 此时接口方法定义：`public List&lt;Book&gt; findBooksByBean(BookParams bookParam);`；映射器中parameterType指定该JavaBean全名，花括号内用bean的属性即可
+
+</code></pre>
 </li>
 </ol>
-<h3><span id="25-resultmap映射结果集">2.5 resultMap映射结果集</span></h3><p>自动映射规则简单，无法定义多的属性。复杂映射使用resultMap，首先需要定义resultMap元素，然后可在select中使用。</p>
+<h3><span id="25-resultmap映射结果集">2.5 resultMap映射结果集</span></h3>
+<p>自动映射规则简单，无法定义多的属性。复杂映射使用resultMap，首先需要定义resultMap元素，然后可在select中使用。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"roleMap"</span> <span class="attr">type</span>=<span class="string">"role"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"roleName"</span> <span class="attr">column</span>=<span class="string">"role_name"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getRole"</span> <span class="attr">parameterType</span>=<span class="string">"long"</span> <span class="attr">resultMap</span>=<span class="string">"roleMap"</span>&gt;</span></span><br><span class="line">    	sql</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>resultMap元素定义了一个roleMap，id是其标识，type标识要映射的类。</p>
 <p>子元素id是主键，result代表其他属性；property代表POJO的属性名，column是SQL的列名，如此便建立了映射联系。</p>
-<h3><span id="26-分页参数rowbounds">2.6 分页参数RowBounds</span></h3><ol>
-<li>对查询到的结果取部分。RowBounds类内有offset和limit两个属性。<ol>
+<h3><span id="26-分页参数rowbounds">2.6 分页参数RowBounds</span></h3>
+<ol>
+<li>对查询到的结果取部分。RowBounds类内有offset和limit两个属性。
+<ol>
 <li>offset表示偏移量，即从第几行开始读取，默认0。</li>
 <li>limit表示限制条数，默认Integer.MAX。</li>
 </ol>
@@ -353,8 +340,10 @@
 <li>要使用RowBounds，只需在接口参数最后增加一个<code>RowBounds rowBounds</code>即可，在映射文件中无需特别设置，MyBatis自动识别应用。</li>
 <li>小数据量适用，大量时用插件。</li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="3-insert-插入">3. insert 插入</span></h2><h3><span id="31-属性">3.1 属性</span></h3><ul>
+<p> </p>
+<h2><span id="3-insert-插入">3. insert 插入</span></h2>
+<h3><span id="31-属性">3.1 属性</span></h3>
+<ul>
 <li>id：SQL标号，标识</li>
 <li>parameterType：参数类型</li>
 <li>flushCache：是否刷新缓存，默认true表示插入后刷新一二级缓存</li>
@@ -366,33 +355,41 @@
 <li>databaseId</li>
 </ul>
 <p>insert后，返回一个整数表示影响了个条数。</p>
-<h3><span id="32-简单应用">3.2 简单应用</span></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insertRole"</span> <span class="attr">parameterType</span>=<span class="string">"role"</span>&gt;</span></span><br><span class="line">    insert into t_role (role_name, note) values(#&#123;roleName&#125;,#&#123;note&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3><span id="33-主键回填">3.3 主键回填</span></h3><ol>
+<h3><span id="32-简单应用">3.2 简单应用</span></h3>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insertRole"</span> <span class="attr">parameterType</span>=<span class="string">"role"</span>&gt;</span></span><br><span class="line">    insert into t_role (role_name, note) values(#&#123;roleName&#125;,#&#123;note&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3><span id="33-主键回填">3.3 主键回填</span></h3>
+<ol>
 <li>意义：MySQL中对主键有自增功能，故上述例子中没有插入id主键。但有时需要利用插入的元组的主键，就需要获取到库自增的主键的值。</li>
 <li>JDBC中Statement执行插入后，可以通过getGeneratedKeys方法获得生成的主键。MyBatis中的insert有开关属性useGeneratedKeys，默认false，打开后需要配置属性keyProperty或keyColumn，用于告诉系统将回填的主键填入哪个属性</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">parameterType</span>=<span class="string">""</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">	sql</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>如此，就将主键id回填到POJO的id属性内。</p>
-<h3><span id="34-自定义主键">3.4 自定义主键</span></h3><ol>
+<h3><span id="34-自定义主键">3.4 自定义主键</span></h3>
+<ol>
 <li>意义；有时主键不需自增，而是依赖某些规则，如本例的表空时id为1，不空时id为当前id+3</li>
 <li>MyBatis中此功能依赖于selectKey元素</li>
 <li>selectKey有order属性，其值BEFORE/AFTER表示此主键定义是在SQL前或后执行</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span> <span class="attr">parameterType</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span> <span class="attr">resultType</span>=<span class="string">"long"</span> <span class="attr">order</span>=<span class="string">"BEFORE"</span>&gt;</span></span><br><span class="line">        select if (max(id)=null, 1, max(id)+3) from t_role</span><br><span class="line">    <span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></span><br><span class="line">    sql</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h2><span id="4-update和delete">4. update和delete</span></h2><p>属性类似上面，且同样返回整数表示影响的行数。</p>
-<p>&nbsp;</p>
-<h2><span id="5-sql元素">5. sql元素</span></h2><p>定义一条SQL的一部分，随后可以引用，方便后续编写SQL。</p>
+<p> </p>
+<h2><span id="4-update和delete">4. update和delete</span></h2>
+<p>属性类似上面，且同样返回整数表示影响的行数。</p>
+<p> </p>
+<h2><span id="5-sql元素">5. sql元素</span></h2>
+<p>定义一条SQL的一部分，随后可以引用，方便后续编写SQL。</p>
 <p>如表中列多，可将所有列名设为一个sql元素，随后SQL语句中便可通过include引用。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">"roleCols"</span>&gt;</span></span><br><span class="line">        id, role_name, note</span><br><span class="line">    <span class="tag">&lt;/<span class="name">sql</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span> <span class="attr">parameterType</span>&gt;</span></span><br><span class="line">        select <span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"roleCols"</span>/&gt;</span> from t_role where id = #&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>甚至支持变量传递，将SQL中的变量传给sql元素，然后sql元素引入SQL执行：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">"roleCols"</span>&gt;</span></span><br><span class="line">    $&#123;alias&#125;.id, $&#123;alias&#125;.role_name</span><br><span class="line"><span class="tag">&lt;/<span class="name">sql</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span> <span class="attr">parameterType</span>&gt;</span></span><br><span class="line">    select</span><br><span class="line">    <span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"roleCols"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"alias"</span> <span class="attr">value</span>=<span class="string">"t_role"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>本例中，include元素将表名t_role赋值给alias变量。</p>
-<p>&nbsp;</p>
-<h2><span id="6-参数">6. 参数</span></h2><p>《Java EE互联网轻量级框架整合开发》 MyBatis 5.6，暂不展开。</p>
-<p>&nbsp;</p>
-<h2><span id="7-resultmap元素">7. resultMap元素</span></h2><p>定义映射规则、级联的更新、定制类型转化器等。主要是一个结果集的映射关系，将SQL映射到JavaBean。MyBatis暂只支持resultMap查询，不支持更新或保存、级联的更新删除修改。</p>
-<h3><span id="71-resultmap元素构成">7.1 resultMap元素构成</span></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">idArg</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">arg</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">constructor</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">discriminator</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">case</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">discriminator</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p> </p>
+<h2><span id="6-参数">6. 参数</span></h2>
+<p>《Java EE互联网轻量级框架整合开发》 MyBatis 5.6，暂不展开。</p>
+<p> </p>
+<h2><span id="7-resultmap元素">7. resultMap元素</span></h2>
+<p>定义映射规则、级联的更新、定制类型转化器等。主要是一个结果集的映射关系，将SQL映射到JavaBean。MyBatis暂只支持resultMap查询，不支持更新或保存、级联的更新删除修改。</p>
+<h3><span id="71-resultmap元素构成">7.1 resultMap元素构成</span></h3>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">idArg</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">arg</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">constructor</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">discriminator</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">case</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">discriminator</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>id表示主键。</p>
 <p>result配置POJO到SQL列名的映射关系。</p>
 <p>Constructor用于配置构造方法。POJO可能没有无参构造方法，就需要把有参构造方法配置进此，如<code>public RoleBean(Integer id, String roleName)</code>：</p>
@@ -405,18 +402,23 @@
 <li>jdbcType</li>
 <li>typeHandler</li>
 </ul>
-<h3><span id="72-使用map存储结果集">7.2 使用map存储结果集</span></h3><p>map支持任何select的结果集存储，只需在select元素中配置属性<code>resultType=&quot;map&quot;</code>即可。但可读性差，一般使用POJO存储。</p>
-<h3><span id="73-使用pojo存储结果集">7.3 使用POJO存储结果集</span></h3><p>POJO存储，就可以使用自动映射，或自定义更复杂的映射，当然这就要先创建一个resultMap元素（映射），见<a href="###2.5 resultMap映射结果集">2.5 resultMap映射结果集</a></p>
-<p>&nbsp;</p>
-<h2><span id="8-级联">8. 级联</span></h2><h3><span id="81-mybatis中的级联">8.1 MyBatis中的级联</span></h3><p>分为三种：</p>
+<h3><span id="72-使用map存储结果集">7.2 使用map存储结果集</span></h3>
+<p>map支持任何select的结果集存储，只需在select元素中配置属性<code>resultType=&quot;map&quot;</code>即可。但可读性差，一般使用POJO存储。</p>
+<h3><span id="73-使用pojo存储结果集">7.3 使用POJO存储结果集</span></h3>
+<p>POJO存储，就可以使用自动映射，或自定义更复杂的映射，当然这就要先创建一个resultMap元素（映射），见[2.5 resultMap映射结果集](###2.5 resultMap映射结果集)</p>
+<p> </p>
+<h2><span id="8-级联">8. 级联</span></h2>
+<h3><span id="81-mybatis中的级联">8.1 MyBatis中的级联</span></h3>
+<p>分为三种：</p>
 <ol>
 <li>鉴别器discriminator：根据某些条件决定采用具体实现类级联的方案</li>
 <li>一对一association</li>
 <li>一对多collection</li>
 </ol>
 <p>本例以学生Student、任务表Task、任务安排表ST、男女体检表Female/MaleForm、学生证表ID说明，学生与任务表一对多、与男女体检表属于鉴别器类型、与学生证一对一。</p>
-<p>&nbsp;</p>
-<h3><span id="82-建立pojo">8.2 建立POJO</span></h3><p>为每个实体建立POJO。</p>
+<p> </p>
+<h3><span id="82-建立pojo">8.2 建立POJO</span></h3>
+<p>为每个实体建立POJO。</p>
 <p>男女体检表，多数项目相同，可建立父类后继承：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">HealthForm</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> Long stuId;</span><br><span class="line">    <span class="keyword">private</span> String heart;</span><br><span class="line">    <span class="comment">// setter getter</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FemaleForm</span> <span class="keyword">extends</span> <span class="title">HealthForm</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String uterus;</span><br><span class="line">    <span class="comment">// settter getter</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaleForm</span> <span class="keyword">extends</span> <span class="title">HealthForm</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String prostate;</span><br><span class="line">    <span class="comment">// setter getter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>学生证表：</p>
@@ -428,8 +430,9 @@
 <p>学生表：建立父类，并继承男女学生，以适配男女体检单</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> SexEnum sex = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// 学生证一对一</span></span><br><span class="line">    <span class="keyword">private</span> IDCard idCard;</span><br><span class="line">    <span class="comment">// 任务，一对多</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Task&gt; stuTasks = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// settter getter</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaleStudent</span> <span class="keyword">extends</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> MaleForm maleForm = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// setter getter</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FemaleStudent</span> <span class="keyword">extends</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> FemaleForm femaleForm = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// setter getter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>综上可见，MyBatis中级联，在POJO中的属性就应体现出级联。</p>
-<p>&nbsp;</p>
-<h3><span id="83-配置mapper文件">8.3 配置mapper文件</span></h3><p>级联核心，对每个实体类创建接口后配置mapper文件。</p>
+<p> </p>
+<h3><span id="83-配置mapper文件">8.3 配置mapper文件</span></h3>
+<p>级联核心，对每个实体类创建接口后配置mapper文件。</p>
 <p>Task</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"xxx.TaskMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getTask"</span> <span class="attr">parameterType</span>=<span class="string">"long"</span> <span class="attr">resultType</span>=<span class="string">"xxx.Task"</span>&gt;</span></span><br><span class="line">        select id, title from t_task where id = #&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span>            </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>IDCard</p>
@@ -438,14 +441,16 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"xxx.STMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"ST"</span> <span class="attr">id</span>=<span class="string">"STMap"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"stu_id"</span> <span class="attr">property</span>=<span class="string">"stuId"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"task"</span> <span class="attr">column</span>=<span class="string">"task_id"</span> <span class="attr">select</span>=<span class="string">"xxx.TaskMapper.getTask"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getSTByStuId"</span> <span class="attr">parameterType</span>=<span class="string">"long"</span> <span class="attr">resultMap</span>=<span class="string">"STMap"</span>&gt;</span></span><br><span class="line">        select id, stuId, name from t_card where stuId = #&#123;stuId&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span>            </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>男女体检表：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"xxx.MaleFormMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getMaleForm"</span> <span class="attr">parameterType</span>=<span class="string">"long"</span> <span class="attr">resultType</span>=<span class="string">"xxx.MaleForm"</span>&gt;</span></span><br><span class="line">        select id, stuId, name from t_card where stuId = #&#123;stuId&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span>            </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>学生映射：</strong>本例核心，与其他实体类关联，resultMap元素也可继承</p>
+<p>**学生映射：**本例核心，与其他实体类关联，resultMap元素也可继承</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"xxx.StudentMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"xxx.Student"</span> <span class="attr">id</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">reslut</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"idCard"</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">select</span>=<span class="string">"xxx.IDCardMapper.getCardByStuId"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"studentTasks"</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">select</span>=<span class="string">"xxx.STMapper.getSTByStuId"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">discriminator</span> <span class="attr">javaType</span>=<span class="string">"long"</span> <span class="attr">column</span>=<span class="string">"sex"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">case</span> <span class="attr">value</span>=<span class="string">"1"</span> <span class="attr">resultMap</span>=<span class="string">"maleFormMapper"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">case</span> <span class="attr">value</span>=<span class="string">"2"</span> <span class="attr">resultMap</span>=<span class="string">"famaleFormMapper"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">discriminator</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"FemaleStudent"</span> <span class="attr">id</span>=<span class="string">"femaleFormMapper"</span> <span class="attr">extends</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"femaleForm"</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">select</span>=<span class="string">"xxx.FemalFormMapper.getFemaleForm"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"MaleStudent"</span> <span class="attr">id</span>=<span class="string">"maleFormMapper"</span> <span class="attr">extends</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"maleForm"</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">select</span>=<span class="string">"xxx.MalFormMapper.getMaleForm"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getSTByStuId"</span> <span class="attr">parameterType</span>=<span class="string">"long"</span> <span class="attr">resultMap</span>=<span class="string">"STMap"</span>&gt;</span></span><br><span class="line">        select id, stuId, name from t_card where stuId = #&#123;stuId&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span>            </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>discriminator：column属性代表用此列进行鉴别，resultMap属性表示采用哪个resultMap映射</p>
-<p>&nbsp;</p>
-<h3><span id="84-n1问题">8.4 N+1问题</span></h3><p>以上级联方式，在使用时会引发所有级联共同执行，如只需要部分数据，多余的SQL会浪费资源。如已有N个关联关系完成了级联，只要再加入一个关联关系，就变成了N+1个关联，所有级联SQL都会被执行，但并非所有数据都需要。</p>
+<p> </p>
+<h3><span id="84-n1问题">8.4 N+1问题</span></h3>
+<p>以上级联方式，在使用时会引发所有级联共同执行，如只需要部分数据，多余的SQL会浪费资源。如已有N个关联关系完成了级联，只要再加入一个关联关系，就变成了N+1个关联，所有级联SQL都会被执行，但并非所有数据都需要。</p>
 <p>为解决此问题，MyBatis提出延迟加载功能，一开始取学生信息时，不将学生证表、体检表、任务表取出，只取学生表和任务安排表信息。当通过学生POJO访问学生证、体检表、任务表时才通过相应SQL取出。</p>
-<p>&nbsp;</p>
-<h3><span id="85-延迟加载">8.5 延迟加载</span></h3><p>希望一次性把常用的级联数据取出，而不常用的级联数据等到用时才取出。对于这些不常用的级联表采用延迟加载。</p>
+<p> </p>
+<h3><span id="85-延迟加载">8.5 延迟加载</span></h3>
+<p>希望一次性把常用的级联数据取出，而不常用的级联数据等到用时才取出。对于这些不常用的级联表采用延迟加载。</p>
 <p>在settings配置中有以下两子元素配置级联：</p>
 <ul>
 <li>lazyLoadingEnabled：全局开关，默认false，开启后所有关联对象都延迟加载；特定关联关系中可设置fetchType覆盖该全局开关</li>
@@ -458,26 +463,33 @@
 <li>lazy：获得当前POJO后延迟加载对应数据</li>
 </ul>
 <p>当开启延迟加载，关闭层级加载后，使用此属性即可自定义设置。</p>
-<p>&nbsp;</p>
-<h3><span id="86-另一种级联">8.6 另一种级联</span></h3><p>基于SQL表连接的基础上，再次设计。虽能消除N+1问题，但较为复杂，浪费内存，不甚推荐，暂不展开。</p>
-<p>&nbsp;</p>
-<h3><span id="87-多对多级联">8.7 多对多级联</span></h3><p>程序中将此拆分成两个一对多级联来处理。</p>
+<p> </p>
+<h3><span id="86-另一种级联">8.6 另一种级联</span></h3>
+<p>基于SQL表连接的基础上，再次设计。虽能消除N+1问题，但较为复杂，浪费内存，不甚推荐，暂不展开。</p>
+<p> </p>
+<h3><span id="87-多对多级联">8.7 多对多级联</span></h3>
+<p>程序中将此拆分成两个一对多级联来处理。</p>
 <p>本例中，用户可以是多个角色，一个角色可以有多个用户。</p>
 <p>POJO：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Role</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="comment">// 关联用户一对多</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;User&gt; users;</span><br><span class="line">    <span class="comment">// setter getter</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="comment">// 关联角色一对多</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Role&gt; roles;</span><br><span class="line">    <span class="comment">// setter getter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Mapper：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"xxx.RoleMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"Role"</span> <span class="attr">id</span>=<span class="string">"RoleMapper"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"role_name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"users"</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">fetchType</span>=<span class="string">"lazy"</span> <span class="attr">select</span>=<span class="string">"xxx.UserMapper.findUserByRoleId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findRoleByUserId"</span> <span class="attr">parameterType</span>=<span class="string">"long"</span> <span class="attr">resultMap</span>=<span class="string">"RoleMapper"</span>&gt;</span></span><br><span class="line">        select r.id, r.name from t_role r, t_userrole ur where r.id = ur.role_id and r.id=#&#123;userId&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span>            </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"xxx.UserMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"User"</span> <span class="attr">id</span>=<span class="string">"UserMapper"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"user_name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"roles"</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">fetchType</span>=<span class="string">"lazy"</span> <span class="attr">select</span>=<span class="string">"xxx.RoleMapper.findRoleByUserId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findUserByRoleId"</span> <span class="attr">parameterType</span>=<span class="string">"long"</span> <span class="attr">resultMap</span>=<span class="string">"UserMapper"</span>&gt;</span></span><br><span class="line">        select</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span>            </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h2><span id="9-缓存">9. 缓存</span></h2><p>MyBatis支持缓存，一般放在内存中，提高性能。数据库位于磁盘，速度慢。一般只将命中率高的数据放在缓存。</p>
-<h3><span id="91-一级二级缓存">9.1 一级二级缓存</span></h3><p>MyBatis分为一级缓存和二级缓存。</p>
+<p> </p>
+<h2><span id="9-缓存">9. 缓存</span></h2>
+<p>MyBatis支持缓存，一般放在内存中，提高性能。数据库位于磁盘，速度慢。一般只将命中率高的数据放在缓存。</p>
+<h3><span id="91-一级二级缓存">9.1 一级二级缓存</span></h3>
+<p>MyBatis分为一级缓存和二级缓存。</p>
 <p>一级缓存是在SqlSession上的缓存，二级缓存是在SqlSessionFactory上的缓存。默认时MyBatis开启一级缓存，且一级缓存不需要POJO可序列化。</p>
 <p>一级缓存：用一个SqlSession获取mapper，用这个mapper先后get同一数据，实际上是用一个SqlSession获取同一数据；此时只执行一次SQL语句；当一个SqlSession第一次通过SQL和参数获取对象后，会将其缓存，若下次SQL和参数都没有变化，并且缓存未超时或声明不需刷新时，就可以从缓存中读取数据。</p>
 <p>二级缓存：一级缓存位于SqlSession层面，不同SqlSession缓存不能共享；如需共享就要开启二级缓存，位于Factory层，更高一层；只需在映射文件中加入<code>&lt;cache/&gt;</code>即可。查询结束后需要SqlSession.commit()提交，才会缓存对象到Factory层面。此时需要可序列化。</p>
-<p>&nbsp;</p>
-<h3><span id="92-缓存配置与使用">9.2 缓存配置与使用</span></h3><ol>
-<li><p>只配置<code>&lt;cache/&gt;</code>后，MyBatis会将select的结果缓存，而增删改之后会刷新缓存。</p>
+<p> </p>
+<h3><span id="92-缓存配置与使用">9.2 缓存配置与使用</span></h3>
+<ol>
+<li>
+<p>只配置<code>&lt;cache/&gt;</code>后，MyBatis会将select的结果缓存，而增删改之后会刷新缓存。</p>
 </li>
-<li><p><code>&lt;cache/&gt;</code>配置属性：</p>
+<li>
+<p><code>&lt;cache/&gt;</code>配置属性：</p>
 </li>
 </ol>
 <ul>
@@ -488,21 +500,26 @@
 <li>type：自定义缓存类，要实现接口Cache</li>
 <li>size：缓存对象个数，默认1024</li>
 </ul>
-<ol>
-<li><p>如需自定义缓存类就要实现Cache接口，但一般可使用Redis、MongoDB等常用缓存。如有一个Redis实现类RedisCache，则如下配置：</p>
+<ol start="3">
+<li>
+<p>如需自定义缓存类就要实现Cache接口，但一般可使用Redis、MongoDB等常用缓存。如有一个Redis实现类RedisCache，则如下配置：</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cache</span> <span class="attr">type</span>=<span class="string">"xxx.RedisCache"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"host"</span> <span class="attr">value</span>=<span class="string">"localhost"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>可对SQL单独配置以自定义是否缓存</p>
+<li>
+<p>可对SQL单独配置以自定义是否缓存</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">...</span> <span class="attr">flushCache</span>=<span class="string">"false"</span> <span class="attr">useCache</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">...</span> <span class="attr">flushCache</span>=<span class="string">"true"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<p> 此为默认配置，flushCache对四种SQL都有效；useCache仅select特有。</p>
-<p> 如其他mapper文件需要使用本mapper文件的cache配置，可以引用：</p>
-<p> <code>&lt;cache-ref namespace=&quot;xxx.Mapper&quot;/&gt;</code></p>
+<p>此为默认配置，flushCache对四种SQL都有效；useCache仅select特有。</p>
+<p>如其他mapper文件需要使用本mapper文件的cache配置，可以引用：</p>
+<p><code>&lt;cache-ref namespace=&quot;xxx.Mapper&quot;/&gt;</code></p>
 </li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="10-存储过程">10. 存储过程</span></h2><p>数据库概念，是库预先编译好的，放在库内存中的程序片段，具有高性能，可重用的特点。定义了3种类型参数：输入、输出、输入输出。</p>
+<p> </p>
+<h2><span id="10-存储过程">10. 存储过程</span></h2>
+<p>数据库概念，是库预先编译好的，放在库内存中的程序片段，具有高性能，可重用的特点。定义了3种类型参数：输入、输出、输入输出。</p>
 <p>暂不展开。</p>
-<h3><span id="101-in和out参数">10.1 IN和OUT参数</span></h3><h3><span id="102-游标">10.2 游标</span></h3>
+<h3><span id="101-in和out参数">10.1 IN和OUT参数</span></h3>
+<h3><span id="102-游标">10.2 游标</span></h3>
+
         </div>
 
         

@@ -42,44 +42,7 @@
 
     
     
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
+        
     
 
 
@@ -227,38 +190,43 @@
         </header>
 
         <div class="post-content">
-            <p>&nbsp;</p>
+            <p> </p>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#mybatis核心组件">MyBatis核心组件</a><ul>
-<li><a href="#1-持久层概念与mybatis特点">1. 持久层概念与MyBatis特点</a></li>
-<li><a href="#2-核心组件">2. 核心组件</a></li>
-<li><a href="#3-sqlsessionfactory-工厂接口">3. SqlSessionFactory 工厂接口</a></li>
+<li><a href="#mybatis%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6">MyBatis核心组件</a>
+<ul>
+<li><a href="#1-%E6%8C%81%E4%B9%85%E5%B1%82%E6%A6%82%E5%BF%B5%E4%B8%8Emybatis%E7%89%B9%E7%82%B9">1. 持久层概念与MyBatis特点</a></li>
+<li><a href="#2-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6">2. 核心组件</a></li>
+<li><a href="#3-sqlsessionfactory-%E5%B7%A5%E5%8E%82%E6%8E%A5%E5%8F%A3">3. SqlSessionFactory 工厂接口</a></li>
 <li><a href="#4-sqlsession">4. SqlSession</a></li>
-<li><a href="#5-mapper-映射器">5. Mapper 映射器</a></li>
-<li><a href="#6-两种发送sql方式">6. 两种发送SQL方式</a></li>
-<li><a href="#7-生命周期">7. 生命周期</a></li>
-<li><a href="#8-实例">8. 实例</a></li>
+<li><a href="#5-mapper-%E6%98%A0%E5%B0%84%E5%99%A8">5. Mapper 映射器</a></li>
+<li><a href="#6-%E4%B8%A4%E7%A7%8D%E5%8F%91%E9%80%81sql%E6%96%B9%E5%BC%8F">6. 两种发送SQL方式</a></li>
+<li><a href="#7-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">7. 生命周期</a></li>
+<li><a href="#8-%E5%AE%9E%E4%BE%8B">8. 实例</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p>&nbsp;</p>
+<p> </p>
 <p>[toc]</p>
-<h1><span id="mybatis核心组件">MyBatis核心组件</span></h1><p><a href="https://github.com/mybatis/mybatis-3" target="_blank" rel="noopener">github</a></p>
-<h2><span id="1-持久层概念与mybatis特点">1. 持久层概念与MyBatis特点</span></h2><ol>
+<h1><span id="mybatis核心组件">MyBatis核心组件</span></h1>
+<p><a href="https://github.com/mybatis/mybatis-3" target="_blank" rel="noopener">github</a></p>
+<h2><span id="1-持久层概念与mybatis特点">1. 持久层概念与MyBatis特点</span></h2>
+<ol>
 <li>持久层：将业务数据存到磁盘，具有长期存储能力。一般执行持久任务的都是数据库系统。磁盘空间大且廉价，但速度慢。对于高并发任务可加入Redis等NoSQL。</li>
 <li>MyBatis：Java Web应用可以通过本框架访问数据库。</li>
-<li>MyBatis优点：<ol>
+<li>MyBatis优点：
+<ol>
 <li>不屏蔽SQL，可以优化SQL语句</li>
 <li>灵活的映射机制，动态SQL，可以根据情况组装SQL</li>
 <li>提供了使用Mapper的接口编程，只需一个接口和一个xml就能创建映射器，工作简化</li>
 </ol>
 </li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="2-核心组件">2. 核心组件</span></h2><p>共有4个核心组件：</p>
+<p> </p>
+<h2><span id="2-核心组件">2. 核心组件</span></h2>
+<p>共有4个核心组件：</p>
 <ol>
 <li>SqlSessionFactoryBuilder：构造器，根据配置或代码生成SqlSessionFactory，采用的是分步构建的Builder模式（在Java设计模式中有介绍）</li>
 <li>SqlSessionFactory：工厂接口，负责生成SqlSession，使用工厂模式</li>
@@ -266,8 +234,9 @@
 <li>SQL Mapper：映射器，MyBatis新设计出的组件，由一个接口和xml/注解构成，给出对应的SQL和映射规则，负责发送SQL去执行，并返回结果</li>
 <li>注：SQL Mapper只是对SqlSession的改进，二者都能发送SQL给数据库执行</li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="3-sqlsessionfactory-工厂接口">3. SqlSessionFactory 工厂接口</span></h2><p>要使用MyBatis，首先要用配置或代码生成SqlSessionFactory，用SqlSessionFactoryBuilder完成。它提供了类org.apache.ibatis.session.Configuration作为引导，Builder模式，分步创建过程就在Configuration中完成。即SqlSessionFactoryBuilder和Configuration共同生成工厂接口。</p>
+<p> </p>
+<h2><span id="3-sqlsessionfactory-工厂接口">3. SqlSessionFactory 工厂接口</span></h2>
+<p>要使用MyBatis，首先要用配置或代码生成SqlSessionFactory，用SqlSessionFactoryBuilder完成。它提供了类org.apache.ibatis.session.Configuration作为引导，Builder模式，分步创建过程就在Configuration中完成。即SqlSessionFactoryBuilder和Configuration共同生成工厂接口。</p>
 <p>虽然代码和xml配置均可生成工厂接口，但xml配置后修改起来更方便。配置完成后，MyBatis读取配置文件，通过Configuration对象构建MyBatis的上下文。</p>
 <p>本接口有两个实现类：SqlSessionManager和DefaultSqlSessionFactory。通常由后者实现，前者适用于多线程。</p>
 <p>每个MyBatis应用都以一个SqlSessionFactory的实例为中心，其唯一作用就是生产MyBatis的核心接口对象SqlSession。因其作用唯一，故常用单例模式。</p>
@@ -277,24 +246,26 @@
 <p>MyBatis中有两类XML，一类是基础配置文件，通常仅一个，配置一些基本的上下文参数和运行环境；另一类是映射文件，配置映射关系、SQL、参数等信息。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 基础配置文件 --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span>   <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Config 3.0//EN"</span></span></span><br><span class="line"><span class="meta">  <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-config.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span><span class="comment">&lt;!-- 别名 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">"role"</span> <span class="attr">type</span>=<span class="string">"com.learn.ssm.chapter3.pojo.Role"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 数据库环境 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/chapter3"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"123456"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 映射文件 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"com/learn/ssm/chapter3/mapper/RoleMapper.xml"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">"com.learn.ssm.chapter3.mapper.RoleMapper2"</span>/&gt;</span> </span><br><span class="line">  <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>typeAliases给Role类定义别名，在上下文中用别名代替全限定名。</p>
-<p>environment定义数据库，dataSource type=”POOLED”配置数据库，采用MyBatis提供的连接池方式。</p>
+<p>environment定义数据库，dataSource type=&quot;POOLED&quot;配置数据库，采用MyBatis提供的连接池方式。</p>
 <p>mapper元素引入映射器，若映射器是XML构建，则如上述代码 使用resource属性，若是代码构建，则使用class=“xxx.RoleMapper”。</p>
 <p>通过基础配置文件即可生成工厂接口：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SqlSessionFactory factory = <span class="keyword">null</span>;</span><br><span class="line">String resource = <span class="string">"mybatis-config.xml"</span>;</span><br><span class="line">InputStream in;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    in = Resource.getResourceAsStream(resource);</span><br><span class="line">    factory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(in);</span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>读取基本配置文件，通过SqlSessionFactoryBuilder的build方法创建工厂接口。具体实现繁琐，MyBatis通过Builder模式隐藏了。</p>
-<ol>
+<ol start="2">
 <li>代码构建工厂接口</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据库连接池信息</span></span><br><span class="line">PooledDataSource dataSource = <span class="keyword">new</span> PooledDataSource();</span><br><span class="line">dataSource.setDriver(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">dataSource.setUsername(<span class="string">"root"</span>);</span><br><span class="line">dataSource.setPassword(<span class="string">"123"</span>);</span><br><span class="line">dataSource.setUrl(<span class="string">"jdbc:mysql://localhost:3306/ssm"</span>);</span><br><span class="line">dataSource.setDefaultAutoCommit(<span class="keyword">false</span>);</span><br><span class="line"><span class="comment">// MyBatis的JDBC事务方式</span></span><br><span class="line">TransactionFactory transfactory = <span class="keyword">new</span> JdbcTransactionFactory();</span><br><span class="line">Environment environment = <span class="keyword">new</span> Environment(<span class="string">"development"</span>, transfactory, dataSource);</span><br><span class="line"><span class="comment">// 创建Configuration对象</span></span><br><span class="line">Configuration conf = <span class="keyword">new</span> Configuration(environment);</span><br><span class="line"><span class="comment">// 注册MyBatis上下文别名</span></span><br><span class="line">conf.getTypeAliasRegistry().registerAlias(<span class="string">"role"</span>, Role<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"><span class="comment">// 加入一个映射器</span></span><br><span class="line">conf.addMapper(RoleMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"><span class="comment">// 使用Builder构建工厂接口</span></span><br><span class="line">SqlSessionFactory factory = <span class="keyword">new</span> <span class="keyword">new</span> SqlSessionFactoryBuilder().build(conf);</span><br><span class="line"><span class="keyword">return</span> factory;</span><br></pre></td></tr></table></figure>
 <p>如果系统修改，需要重新编译代码，本方式并不好。除非有特殊需要，如在配置文件中，需要配置加密过的用户名和密码，需要在生成工厂接口时先解密，才考虑代码构建。</p>
-<p>&nbsp;</p>
-<h2><span id="4-sqlsession">4. SqlSession</span></h2><p>MyBatis中SqlSession是核心接口，有两个实现类，DefaultSqlSession和SqlSessionManager。前者单线程，后者多线程。本接口类似JDBC中的Connection对象，代表一个连接资源的启用。</p>
+<p> </p>
+<h2><span id="4-sqlsession">4. SqlSession</span></h2>
+<p>MyBatis中SqlSession是核心接口，有两个实现类，DefaultSqlSession和SqlSessionManager。前者单线程，后者多线程。本接口类似JDBC中的Connection对象，代表一个连接资源的启用。</p>
 <p>作用：获取Mapper接口、发送SQL给数据库、控制数据库事务。</p>
 <p>创建：<code>SqlSession sqlSession = sqlSessionFactory.openSession();</code></p>
 <p>用SqlSession控制数据库事务：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SqlSession sqlSession = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">    <span class="comment">// 增删改查</span></span><br><span class="line">    sqlSession.commit();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    sqlSession.rollback();</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (sqlSession != <span class="keyword">null</span>) &#123;</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h2><span id="5-mapper-映射器">5. Mapper 映射器</span></h2><p>是MyBatis中最重要、最复杂的组件，由一个接口和对应的XML/注解组成，可用于：描述映射规则；提供SQL语句，并可配置SQL参数类型、返回类型、缓存刷新等；配置缓存；提供动态SQL。</p>
+<p> </p>
+<h2><span id="5-mapper-映射器">5. Mapper 映射器</span></h2>
+<p>是MyBatis中最重要、最复杂的组件，由一个接口和对应的XML/注解组成，可用于：描述映射规则；提供SQL语句，并可配置SQL参数类型、返回类型、缓存刷新等；配置缓存；提供动态SQL。</p>
 <p>映射器只需接口，不用实现类。MyBatis采用动态代理技术，会为接口生成一个代理对象，故仅接口也能运行。</p>
 <p>使用映射器前首先需要一个POJO，用于映射查询结果。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Role</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> string roleName;</span><br><span class="line">    <span class="comment">// setter getter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -307,70 +278,77 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"xxx.RoleMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getRole"</span> <span class="attr">parameterType</span>=<span class="string">"long"</span> <span class="attr">resultType</span>=<span class="string">"role"</span>&gt;</span></span><br><span class="line">        select id, role_name as roleName from t_role where id = #&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>MyBatis默认提供自动映射，只要SQL返回的列名能和POJO对应，就能自动映射为一个POJO对象。</p>
 <p>注：XML创建SqlSessionFactory时，配置文件中有一个<code>&lt;mapper resource=&quot;.../RoleMapper.xml&quot;/&gt;</code>，就是用于指定此处的XML。</p>
-<ol>
+<ol start="2">
 <li>用注解实现映射器</li>
 </ol>
 <p>注解实现时仅需一个接口，可以通过MyBatis的注解来注入SQL。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">RoleMapper</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Select</span>(<span class="string">"select id, role_name as roleName from t_role where id = #&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Role <span class="title">getRole</span><span class="params">(Long id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果两种方式同时实现，则XML优先级更高。但推荐XML方式。</p>
-<p>&nbsp;</p>
-<h2><span id="6-两种发送sql方式">6. 两种发送SQL方式</span></h2><ol>
-<li><p>用SqlSession发送SQL <code>Role role = (Role) sqlSession.selectOne(&quot;xxx.RoleMapper.getRole&quot;, 1L)</code>，这是iBatis时代留下的方式</p>
+<p> </p>
+<h2><span id="6-两种发送sql方式">6. 两种发送SQL方式</span></h2>
+<ol>
+<li>
+<p>用SqlSession发送SQL <code>Role role = (Role) sqlSession.selectOne(&quot;xxx.RoleMapper.getRole&quot;, 1L)</code>，这是iBatis时代留下的方式</p>
 </li>
-<li><p>用Mapper接口发送SQL </p>
+<li>
+<p>用Mapper接口发送SQL</p>
 </li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RoleMapper mapper = sqlSession.getMapper(RoleMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">Role role = roleMapper.getRole(<span class="number">1L</span>);</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="3">
 <li>后一个方式更佳</li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="7-生命周期">7. 生命周期</span></h2><ol>
+<p> </p>
+<h2><span id="7-生命周期">7. 生命周期</span></h2>
+<ol>
 <li>SqlSessionFactoryBuilder：用于创建SqlSessionFactory，故创建成功后就应删除</li>
 <li>SqlSessionFactory：可看作数据库连接池，用于生成SqlSession，故应和MyBatis同样周期。同时为了避免过度消耗数据库连接资源，通常使用单例模式</li>
 <li>SqlSession：相当于一个数据库连接，故应存活在一次业务请求中，处理结束后应关闭</li>
 <li>Mapper：由SqlSession创建的接口，故最多和SqlSession一致，请求结束后就销毁</li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="8-实例">8. 实例</span></h2><ol>
-<li><p>需要的文件：</p>
+<p> </p>
+<h2><span id="8-实例">8. 实例</span></h2>
 <ol>
-<li>Book.java POJO<ol>
+<li>
+<p>需要的文件：</p>
+</li>
+<li>
+<p>Book.java POJO</p>
+<ol>
 <li>BookMapper.java 映射器接口</li>
 <li>BookMapper.xml 映射器XML</li>
 <li>mybatis-config.xml 基础配置文件</li>
 <li>SqlSessionFactoryUtils.java 工具类，创建工厂，获取SqlSession</li>
 </ol>
 </li>
-</ol>
-</li>
-<li><p>POJO</p>
+<li>
+<p>POJO</p>
 </li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="comment">// getter setter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="3">
 <li>Mapper-接口：</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BookMapper</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insertBook</span> <span class="params">(Book book)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">deleteBook</span> <span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">updateBook</span> <span class="params">(Book book)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Book <span class="title">getBook</span> <span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Book&gt; <span class="title">findBooks</span> <span class="params">(String bookName)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="4">
 <li>Mapper-XML：</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"MyBatis_test.BookMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insertBook"</span> <span class="attr">parameterType</span>=<span class="string">"book"</span>&gt;</span></span><br><span class="line">        insert into books (id, title) values (#&#123;id&#125;, #&#123;title&#125;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"deleteBook"</span> <span class="attr">parameterType</span>=<span class="string">"string"</span>&gt;</span></span><br><span class="line">        delete from books where id = #&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"updateBook"</span> <span class="attr">parameterType</span>=<span class="string">"book"</span>&gt;</span></span><br><span class="line">        update books set id = #&#123;id&#125;, title = #&#123;title&#125; where id = #&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getBook"</span> <span class="attr">parameterType</span>=<span class="string">"string"</span> <span class="attr">resultType</span>=<span class="string">"book"</span>&gt;</span></span><br><span class="line">        select id, title from books where id = #&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="5">
 <li>基础配置文件 mybatis_config.xml</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">"book"</span> <span class="attr">type</span>=<span class="string">"MyBatis_test.Book"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>&gt;</span><span class="tag">&lt;/<span class="name">transactionManager</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/bookdb"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"jsy"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"jiumima1870353-"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"book_mapper.xml"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="6">
 <li>此时前期设置完成，接下来需要创建工具类用于创建工厂</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SqlSessionFactoryUtils</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Class&lt;SqlSessionFactoryUtils&gt; LOCK = SqlSessionFactoryUtils<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SqlSessionFactory sqlSessionFactory = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SqlSessionFactoryUtils</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SqlSessionFactory <span class="title">getSqlSessionFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (LOCK) &#123;</span><br><span class="line">            <span class="keyword">if</span> (sqlSessionFactory != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> sqlSessionFactory;</span><br><span class="line">            &#125;</span><br><span class="line">            String resource = <span class="string">"mybatis_config.xml"</span>;</span><br><span class="line">            InputStream in;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                in = Resources.getResourceAsStream(resource);</span><br><span class="line">                sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(in);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> sqlSessionFactory;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SqlSession <span class="title">openSqlSession</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (sqlSessionFactory == <span class="keyword">null</span>) &#123;</span><br><span class="line">            getSqlSessionFactory();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sqlSessionFactory.openSession();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>全部private属性保证单例化；synchronized锁保证多线程中也不会被多次实例化；共同保证工厂对象的唯一性。</p>
 <p>openSqlSession方法在此处实现的话，可以实现对外隐藏工厂接口，调用时直接用Utils.openSqlSession()即可获得SqlSession对象。</p>
-<ol>
+<ol start="7">
 <li>运行测试：</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Logger log = Logger.getLogger(String.valueOf(Test<span class="class">.<span class="keyword">class</span>))</span>;</span><br><span class="line">        SqlSession sqlSession = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            sqlSession = SqlSessionFactoryUtils.openSqlSession();</span><br><span class="line">            BookMapper mapper = sqlSession.getMapper(BookMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            Book book = mapper.getBook(<span class="string">"001"</span>);</span><br><span class="line">            log.info(book.getId() + <span class="string">" "</span> + book.getTitle());</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (sqlSession != <span class="keyword">null</span>) &#123;</span><br><span class="line">                sqlSession.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
+<p> </p>
 
         </div>
 

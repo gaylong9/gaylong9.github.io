@@ -42,44 +42,7 @@
 
     
     
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
+        
     
 
 
@@ -227,154 +190,183 @@
         </header>
 
         <div class="post-content">
-            <p>&nbsp;</p>
+            <p> </p>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#过滤器">过滤器</a><ul>
-<li><a href="#1-简介">1. 简介</a></li>
-<li><a href="#2-创建过滤器">2. 创建过滤器</a></li>
-<li><a href="#3-发布过滤器">3. 发布过滤器</a><ul>
-<li><a href="#31-webxml配置过滤器">3.1 web.xml配置过滤器</a></li>
-<li><a href="#32-webfilter标注配置">3.2 @WebFilter标注配置</a></li>
-<li><a href="#33-发布步骤">3.3 发布步骤</a></li>
+<li><a href="#%E8%BF%87%E6%BB%A4%E5%99%A8">过滤器</a>
+<ul>
+<li><a href="#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
+<li><a href="#2-%E5%88%9B%E5%BB%BA%E8%BF%87%E6%BB%A4%E5%99%A8">2. 创建过滤器</a></li>
+<li><a href="#3-%E5%8F%91%E5%B8%83%E8%BF%87%E6%BB%A4%E5%99%A8">3. 发布过滤器</a>
+<ul>
+<li><a href="#31-webxml%E9%85%8D%E7%BD%AE%E8%BF%87%E6%BB%A4%E5%99%A8">3.1 web.xml配置过滤器</a></li>
+<li><a href="#32-webfilter%E6%A0%87%E6%B3%A8%E9%85%8D%E7%BD%AE">3.2 @WebFilter标注配置</a></li>
+<li><a href="#33-%E5%8F%91%E5%B8%83%E6%AD%A5%E9%AA%A4">3.3 发布步骤</a></li>
 </ul>
 </li>
-<li><a href="#4-串联过滤器">4. 串联过滤器</a><ul>
-<li><a href="#41-包装设计模式简介">4.1 包装设计模式简介</a></li>
-<li><a href="#42-servletoutputstream的包装类">4.2 ServletOutputStream的包装类</a></li>
-<li><a href="#43-httpservletresponse的包装类">4.3 HttpServletResponse的包装类</a></li>
-<li><a href="#44-创建过滤器">4.4 创建过滤器</a></li>
-<li><a href="#45-本例过滤器的工作时序">4.5 本例过滤器的工作时序</a></li>
-<li><a href="#46-发布应用">4.6 发布应用</a></li>
+<li><a href="#4-%E4%B8%B2%E8%81%94%E8%BF%87%E6%BB%A4%E5%99%A8">4. 串联过滤器</a>
+<ul>
+<li><a href="#41-%E5%8C%85%E8%A3%85%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B">4.1 包装设计模式简介</a></li>
+<li><a href="#42-servletoutputstream%E7%9A%84%E5%8C%85%E8%A3%85%E7%B1%BB">4.2 ServletOutputStream的包装类</a></li>
+<li><a href="#43-httpservletresponse%E7%9A%84%E5%8C%85%E8%A3%85%E7%B1%BB">4.3 HttpServletResponse的包装类</a></li>
+<li><a href="#44-%E5%88%9B%E5%BB%BA%E8%BF%87%E6%BB%A4%E5%99%A8">4.4 创建过滤器</a></li>
+<li><a href="#45-%E6%9C%AC%E4%BE%8B%E8%BF%87%E6%BB%A4%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%97%B6%E5%BA%8F">4.5 本例过滤器的工作时序</a></li>
+<li><a href="#46-%E5%8F%91%E5%B8%83%E5%BA%94%E7%94%A8">4.6 发布应用</a></li>
 </ul>
 </li>
-<li><a href="#5-异步处理过滤器">5. 异步处理过滤器</a></li>
+<li><a href="#5-%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E8%BF%87%E6%BB%A4%E5%99%A8">5. 异步处理过滤器</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p>&nbsp;</p>
+<p> </p>
 <p>[toc]</p>
-<p>&nbsp;</p>
-<h1><span id="过滤器">过滤器</span></h1><p>可以执行 对请求进行预处理、不同组件公共部分统一处理、最终响应进行修改 等操作。</p>
-<p>&nbsp;</p>
-<h2><span id="1-简介">1. 简介</span></h2><ol>
-<li>功能：对容器传给Web组件的ServletRequest和ServletResponse对象进行检查和修改：<ol>
+<p> </p>
+<h1><span id="过滤器">过滤器</span></h1>
+<p>可以执行 对请求进行预处理、不同组件公共部分统一处理、最终响应进行修改 等操作。</p>
+<p> </p>
+<h2><span id="1-简介">1. 简介</span></h2>
+<ol>
+<li>功能：对容器传给Web组件的ServletRequest和ServletResponse对象进行检查和修改：
+<ol>
 <li>在调用Web组件前检查ServletRequest对象，修改请求头和请求正文，或对请求预处理</li>
 <li>在调用Web组件后检查ServletResponse对象，修改响应头和响应正文</li>
 </ol>
 </li>
 <li>Web组件可以是Servlet、JSP或HTML。</li>
 <li>流程：客户Web端$\iff$Servlet容器$\iff$过滤器$\iff$Web组件</li>
-<li>特点：<ol>
+<li>特点：
+<ol>
 <li>可以检查ServletRequest和ServletResponse对象，并用ServletRequestWrapper和SErvletResponseWrapper包装类来修改</li>
 <li>可以在web.xml中为过滤器映射特定的URL，当请求此URL时就先触发过滤器</li>
 <li>多个过滤器可以串联，协同为Web组件过滤请求对象和响应对象</li>
 </ol>
 </li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="2-创建过滤器">2. 创建过滤器</span></h2><ol>
-<li><p>自定义过滤器类要实现javax.servlet.Filter接口，该接口含有3个必须实现方法：</p>
+<p> </p>
+<h2><span id="2-创建过滤器">2. 创建过滤器</span></h2>
+<ol>
+<li>
+<p>自定义过滤器类要实现javax.servlet.Filter接口，该接口含有3个必须实现方法：</p>
 <ol>
 <li>init(FilterConfig)：初始化；Web应用启动时，容器先创建包含了过滤器配置信息的FilterConfig对象，然后创建Filter对象，接着调用init方法；该方法中可通过config参数来读取web.xml中为过滤器配置的初始化参数</li>
 <li>doFilter(ServletRequest, ServletResponse, FilterChain)：完成实际过滤操作，请求URL与过滤器URL匹配时，容器调用过滤器的doFilter方法；FilterChain用于访问后续过滤器或Web组件</li>
 <li>destroy()：容器销毁过滤器对象前调用，可在其中释放资源</li>
 </ol>
 </li>
-<li><p>过滤器由容器创建，其生命周期：</p>
+<li>
+<p>过滤器由容器创建，其生命周期：</p>
 <ol>
 <li>初始化阶段：Web应用启动，容器加载过滤器类，创建过滤器配置对象FilterConfig和过滤器对象，调用过滤器对象的init方法</li>
 <li>运行时阶段：请求URL与过滤器URL匹配时，容器调用过滤器doFilter方法</li>
 <li>销毁阶段：Web应用终止时，容器先调用过滤器对象的destroy方法，然后销毁对象</li>
 </ol>
 </li>
-<li><p>NoteFilter类例子，为NoteServlet过滤，若访问IP或用户名处于黑名单就直接拒绝访问</p>
+<li>
+<p>NoteFilter类例子，为NoteServlet过滤，若访问IP或用户名处于黑名单就直接拒绝访问</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoteFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> FilterConfig config = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">private</span> String blackList=<span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">private</span> String ipblock=<span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.config = config;</span><br><span class="line">    <span class="comment">// 读取ipblock初始化参数</span></span><br><span class="line">    ipblock=config.getInitParameter(<span class="string">"ipblock"</span>);</span><br><span class="line">    <span class="comment">// 读取blacklist初始化参数</span></span><br><span class="line">    blackList=config.getInitParameter(<span class="string">"blacklist"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response,</span></span></span><br><span class="line"><span class="function"><span class="params">                     FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">      <span class="comment">// 如果ip和用户名已被拉入黑名单，就直接返回拒绝信息，不再调用后续组件</span></span><br><span class="line">    <span class="keyword">if</span>(!checkRemoteIP(request,response))<span class="keyword">return</span>;    </span><br><span class="line">    <span class="keyword">if</span>(!checkUsername(request,response))<span class="keyword">return</span>;</span><br><span class="line">       </span><br><span class="line">    <span class="comment">// 把请求转发给后续组件</span></span><br><span class="line">    chain.doFilter(request, response);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkRemoteIP</span><span class="params">(ServletRequest request, ServletResponse response)</span> </span></span><br><span class="line"><span class="function">                        <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">    <span class="comment">// 读取客户IP</span></span><br><span class="line">    String addr=request.getRemoteAddr();</span><br><span class="line">    <span class="keyword">if</span>(addr.indexOf(ipblock)==<span class="number">0</span>)&#123;</span><br><span class="line">      response.setContentType(<span class="string">"text/html;charset=GB2312"</span>);</span><br><span class="line">      PrintWriter out = response.getWriter();</span><br><span class="line">      out.println(<span class="string">"&lt;h1&gt;拒绝访问&lt;/h1&gt;"</span>);</span><br><span class="line">      out.flush();</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkUsername</span><span class="params">(ServletRequest request, ServletResponse response)</span></span></span><br><span class="line"><span class="function">                      <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line"></span><br><span class="line">    String username =((HttpServletRequest) request).getParameter(<span class="string">"username"</span>);</span><br><span class="line">    <span class="keyword">if</span>(username!=<span class="keyword">null</span>)</span><br><span class="line">      username=<span class="keyword">new</span> String(username.getBytes(<span class="string">"ISO-8859-1"</span>),<span class="string">"GB2312"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (username!=<span class="keyword">null</span> &amp;&amp; username.indexOf(blackList) != -<span class="number">1</span>  )  &#123;</span><br><span class="line">      response.setContentType(<span class="string">"text/html;charset=GB2312"</span>);</span><br><span class="line">      PrintWriter out = response.getWriter();</span><br><span class="line">      out.println(<span class="string">"&lt;h1&gt;对不起,"</span>+username + <span class="string">",你无权访问 &lt;/h1&gt;"</span>);</span><br><span class="line">      out.flush();</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    config = <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> 初始化方法中，<code>config.getInitParameter(&quot;ipblock&quot;)</code>这一方法，从web.xml中读取初始化参数ipblock。</p>
+<p>初始化方法中，<code>config.getInitParameter(&quot;ipblock&quot;)</code>这一方法，从web.xml中读取初始化参数ipblock。</p>
 </li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="3-发布过滤器">3. 发布过滤器</span></h2><p>两种方法：</p>
+<p> </p>
+<h2><span id="3-发布过滤器">3. 发布过滤器</span></h2>
+<p>两种方法：</p>
 <ol>
-<li>web.xml中通过\<filter>元素和\<filter-mapping>元素配置</filter-mapping></filter></li>
+<li>web.xml中通过&lt;filter&gt;元素和&lt;filter-mapping&gt;元素配置</li>
 <li>过滤器类中用@WebFilter标注来配置</li>
 </ol>
-<h3><span id="31-webxml配置过滤器">3.1 web.xml配置过滤器</span></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>NoteFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>mypack.NoteFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span> </span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>ipblock<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>221.45<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>blacklist<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>捣蛋鬼<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>NoteFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/note<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3><span id="31-webxml配置过滤器">3.1 web.xml配置过滤器</span></h3>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>NoteFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>mypack.NoteFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span> </span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>ipblock<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>221.45<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>blacklist<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>捣蛋鬼<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>NoteFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/note<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>若url-pattern为/*，则为所有组件过滤。</p>
-<h3><span id="32-webfilter标注配置">3.2 @WebFilter标注配置</span></h3><ol>
-<li><p>常用属性：</p>
+<h3><span id="32-webfilter标注配置">3.2 @WebFilter标注配置</span></h3>
 <ol>
-<li>filterName：String，指定过滤器名字，相当于\<filter-name></filter-name></li>
-<li>urlPatterns：String[]，一组匹配模式，\<url-pattern></url-pattern></li>
+<li>
+<p>常用属性：</p>
+<ol>
+<li>filterName：String，指定过滤器名字，相当于&lt;filter-name&gt;</li>
+<li>urlPatterns：String[]，一组匹配模式，&lt;url-pattern&gt;</li>
 <li>value：String[]，等价于urlPatterns属性，但不可同时使用</li>
-<li>initParams：WebInitParam[]，一组过滤器初始化参数，\<init-param></init-param></li>
-<li>asyncSupported：boolean，是否支持异步处理模式，\<async-supported></async-supported></li>
-<li>Description：String，\<description></description></li>
-<li>displayName：String，显示名，需配合其他工具，\<display-name></display-name></li>
+<li>initParams：WebInitParam[]，一组过滤器初始化参数，&lt;init-param&gt;</li>
+<li>asyncSupported：boolean，是否支持异步处理模式，&lt;async-supported&gt;</li>
+<li>Description：String，&lt;description&gt;</li>
+<li>displayName：String，显示名，需配合其他工具，&lt;display-name&gt;</li>
 <li>dispatcherTypes：DispatcherType，指定过滤器调用模式，可选ASYNC, ERROR, FORWARD, INCLUDE, REQUEST</li>
 </ol>
 </li>
-<li><p>如上例中的NoteFilter类，用如此配置：</p>
+<li>
+<p>如上例中的NoteFilter类，用如此配置：</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter</span>(</span><br><span class="line">    filterName = <span class="string">"NoteFilter"</span>,</span><br><span class="line">    urlPatterns = <span class="string">"/note"</span>,</span><br><span class="line">    initParams = &#123;</span><br><span class="line">        <span class="meta">@WebInitParam</span>(name = <span class="string">"ipblock"</span>, value = <span class="string">"221.45"</span>),</span><br><span class="line">        <span class="meta">@WebInitParam</span>(name = <span class="string">"blacklist"</span>, value = <span class="string">"捣蛋鬼"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>dispatcherTypes属性：指定调用过滤器模式，取值：</p>
+<li>
+<p>dispatcherTypes属性：指定调用过滤器模式，取值：</p>
 <ol>
 <li>DispatcherType.ASYNC：待过滤目标被异步访问时，容器先调用过滤器</li>
 <li>DispatcherType.ERROR：待过滤目标是通过声明式异常处理机制被访问时，容器先调用过滤器</li>
 <li>DispatcherType.FORWARD：当待过滤目标是通过RequestDispatcher.forward()/请求转发被调用时，容器先调用过滤器</li>
 <li>DispatcherType.INCLUDE：当待过滤目标是通过RequestDispatcher.include()/请求包含被调用时，容器先调用过滤器</li>
 <li>DispatcherType.REQUEST：客户端直接请求访问待过滤的目标时，容器先调用过滤器</li>
-<li>本属性允许取多个值，如<code>dispatcherTypes=DispatcherType.FORWARD</code>，或<code>`dispatcherTypes={DispatcherType.REQUEST, DispatcherType.INCLUDE}</code></li>
+<li>本属性允许取多个值，如<code>dispatcherTypes=DispatcherType.FORWARD</code>，或``dispatcherTypes={DispatcherType.REQUEST, DispatcherType.INCLUDE}`</li>
 </ol>
 </li>
 </ol>
-<h3><span id="33-发布步骤">3.3 发布步骤</span></h3><ol>
-<li>编译Filter对象和目标组件Servlet，编译时需要在classpath下加入servlet-api.jar，位于\<catalina_home>/lib下；编译结果class位于\<catalina_home>/webapps/webapp/WEB-INF/classes/mypack下</catalina_home></catalina_home></li>
+<h3><span id="33-发布步骤">3.3 发布步骤</span></h3>
+<ol>
+<li>编译Filter对象和目标组件Servlet，编译时需要在classpath下加入servlet-api.jar，位于&lt;CATALINA_HOME&gt;/lib下；编译结果class位于&lt;CATALINA_HOME&gt;/webapps/webapp/WEB-INF/classes/mypack下</li>
 <li>web.xml中配置，或用标注配置（配置xml时，若有中文需指定编码 <code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;GB2312&quot;?&gt;</code>），且xml中所有过滤器先于Servlet配置</li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="4-串联过滤器">4. 串联过滤器</span></h2><ol>
+<p> </p>
+<h2><span id="4-串联过滤器">4. 串联过滤器</span></h2>
+<ol>
 <li>多个过滤器串联工作，容器根据其在web.xml中定义的先后顺序依次调用doFilter方法</li>
 <li>流程举例：两个过滤器：客户请求-&gt;容器-&gt;过滤器1的chain.doFilter前的代码-&gt;过滤器1执行chain.doFilter-&gt;过滤器2的chain.doFilter前的代码-&gt;过滤器2执行chain.doFilter-&gt;执行Servlet的service方法-&gt;过滤器2的chain.doFilter后的代码-&gt;过滤器1的chain.doFilter后的代码-&gt;容器返回给客户</li>
-<li>以下举例，过滤器修改response中的内容，本例中是更改特定字符串；实现本功能需要3个类：<ol>
+<li>以下举例，过滤器修改response中的内容，本例中是更改特定字符串；实现本功能需要3个类：
+<ol>
 <li>ReplaceTextStream类：ServletOutputStream的包装类，对容器创建的ServletOutputStream对象进行包装</li>
 <li>ReplaceTextWrapper类：HttpServletResponse的包装类，对容器创建的HttpServletResponse对象进行包装</li>
 <li>ReplaceTextFilter类：过滤器类，对响应结果进行字符串替换</li>
 </ol>
 </li>
 </ol>
-<p>&nbsp;</p>
-<h3><span id="41-包装设计模式简介">4.1 包装设计模式简介</span></h3><p>ReplaceTextStream类和ReplaceTextWrapper类都采用了包装设计模式（装饰器设计模式）。</p>
+<p> </p>
+<h3><span id="41-包装设计模式简介">4.1 包装设计模式简介</span></h3>
+<p>ReplaceTextStream类和ReplaceTextWrapper类都采用了包装设计模式（装饰器设计模式）。</p>
 <p>包装设计模式特点：</p>
 <ol>
 <li>对客户透明，动态地给对象附加更多功能，或修改对象部分功能</li>
 <li>若A是B的包装类，则A与B有同样的接口，且A有B的实例，A借助B的实例来实现接口</li>
 </ol>
 <p>容器已提供了HttpServletResponse的包装类HttpServletResponseWrapper，它继承了ServletResponseWrapper，内含一个HttpServletResponse对象；这个包装类并没有修改被包装的对象的功能，主要作用是提供本包装类的默认实现，用户自定义HttpServletResponse的包装类时只要继承这个已有包装类，并修改方法，就能修改被包装对象的功能。</p>
-<h3><span id="42-servletoutputstream的包装类">4.2 ServletOutputStream的包装类</span></h3><p>本例中ReplaceTextStream类是ServletOutputStream的包装类，它包装了容器提供的ServletOutputStream对象，并覆盖了它的一些方法。在构造包装类实例时，要先把容器提供的ServletOutputStream对象传入。</p>
+<h3><span id="42-servletoutputstream的包装类">4.2 ServletOutputStream的包装类</span></h3>
+<p>本例中ReplaceTextStream类是ServletOutputStream的包装类，它包装了容器提供的ServletOutputStream对象，并覆盖了它的一些方法。在构造包装类实例时，要先把容器提供的ServletOutputStream对象传入。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReplaceTextStream</span> <span class="keyword">extends</span> <span class="title">ServletOutputStream</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> ServletOutputStream intStream; <span class="comment">// 容器提供的ServletResponse对象</span></span><br><span class="line">  <span class="keyword">private</span> ByteArrayOutputStream baStream; <span class="comment">// 前组件生成的响应结果的缓存</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">boolean</span> closed = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> String oldStr; <span class="comment">//需要被替换的旧字符串</span></span><br><span class="line">  <span class="keyword">private</span> String newStr; </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ReplaceTextStream</span><span class="params">(ServletOutputStream outStream,</span></span></span><br><span class="line"><span class="function"><span class="params">           String searchStr, String replaceStr)</span> </span>&#123;</span><br><span class="line">    intStream = outStream;</span><br><span class="line">    baStream = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">    oldStr = searchStr;</span><br><span class="line">    newStr = replaceStr;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> a)</span><span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">    baStream.write(a);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 把数据写到ByteArrayOutputStream缓存</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(String s)</span><span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">    s=s+<span class="string">"\n"</span>;</span><br><span class="line">    <span class="keyword">byte</span>[] bs=s.getBytes();</span><br><span class="line">    baStream.write(bs);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> <span class="keyword">throws</span> java.io.IOException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!closed) &#123;</span><br><span class="line">       processStream();</span><br><span class="line">       intStream.close();</span><br><span class="line">       closed = <span class="keyword">true</span>;</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span> <span class="keyword">throws</span> java.io.IOException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (baStream.size() != <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (! closed) &#123;</span><br><span class="line">        processStream();   </span><br><span class="line">        baStream = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 以下两方法在支持非阻塞IO下才需要，本例不支持，故不实现</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setWriteListener</span><span class="params">(WriteListener listener)</span></span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isReady</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> <span class="keyword">true</span>;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 对缓存中的数据进行替换操作，并将结果写到容器提供的ServletOutputStream对象</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processStream</span><span class="params">()</span> <span class="keyword">throws</span> java.io.IOException </span>&#123;</span><br><span class="line">    intStream.write(replaceContent(baStream.toByteArray()));</span><br><span class="line">    intStream.flush(); <span class="comment">//向客户端提交</span></span><br><span class="line">  &#125;</span><br><span class="line">	<span class="comment">// 替换功能</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">byte</span> []  replaceContent(<span class="keyword">byte</span> [] inBytes) &#123;</span><br><span class="line">    String str = <span class="keyword">new</span> String(inBytes);</span><br><span class="line">    <span class="keyword">return</span> str.replaceAll(oldStr,newStr).getBytes();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3><span id="43-httpservletresponse的包装类">4.3 HttpServletResponse的包装类</span></h3><p>本例中的ReplaceTextWrapper是HttpServletResponseWrapper的子类，包装了容器提供的HttpServletResponse对象，覆盖了父类的getOutputStream方法。</p>
+<h3><span id="43-httpservletresponse的包装类">4.3 HttpServletResponse的包装类</span></h3>
+<p>本例中的ReplaceTextWrapper是HttpServletResponseWrapper的子类，包装了容器提供的HttpServletResponse对象，覆盖了父类的getOutputStream方法。</p>
 <p>ReplaceTextWrapper在构造方法中创建了一个ReplaceTextStream对象，getOutputStream方法返回这个对象，而非返回容器提供的ServletOutputStream。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReplaceTextWrapper</span> <span class="keyword">extends</span> <span class="title">HttpServletResponseWrapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> ReplaceTextStream tpStream; <span class="comment">//ServletOutputStream的包装对象</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ReplaceTextWrapper</span><span class="params">(ServletResponse inResp, String searchText,</span></span></span><br><span class="line"><span class="function"><span class="params">                              String replaceText)</span><span class="keyword">throws</span> java.io.IOException </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>((HttpServletResponse) inResp);</span><br><span class="line">    tpStream = <span class="keyword">new</span> ReplaceTextStream(inResp.getOutputStream(),</span><br><span class="line">                                       searchText,replaceText);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> ServletOutputStream <span class="title">getOutputStream</span><span class="params">()</span> <span class="keyword">throws</span> java.io.IOException </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> tpStream;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3><span id="44-创建过滤器">4.4 创建过滤器</span></h3><p>本例中的ReplaceTextFilter过滤器，在init初始化中调用config.geetInitParameter(“”)方法读取旧串和新串。</p>
+<h3><span id="44-创建过滤器">4.4 创建过滤器</span></h3>
+<p>本例中的ReplaceTextFilter过滤器，在init初始化中调用config.geetInitParameter(“”)方法读取旧串和新串。</p>
 <p>随后doFilter中，创建一个ReplaceTextWrapper对象，调用chain.doFilter(req, myWrapperResp)，将ReplaceTextWrapper对象传给后续过滤器或Servlet，本例中是NoteServlet。如此，当NoteServlet调用response.getOutputStream时，获取到的并非容器提供的ServletOutputStream对象，而是包装对象ReplaceTextStream对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReplaceTextFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> FilterConfig config = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">private</span> String searchStr=<span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">private</span> String replaceStr=<span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.config = config;</span><br><span class="line">    searchStr=config.getInitParameter(<span class="string">"search"</span>);</span><br><span class="line">    replaceStr=config.getInitParameter(<span class="string">"replace"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response,</span></span></span><br><span class="line"><span class="function"><span class="params">                     FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;  </span><br><span class="line">    <span class="comment">//创建Servlet容器提供的ServletResponse的包装类对象</span></span><br><span class="line">    ReplaceTextWrapper myWrappedResp= </span><br><span class="line">              <span class="keyword">new</span> ReplaceTextWrapper( response,searchStr, replaceStr);</span><br><span class="line">    config.getServletContext().log(<span class="string">"ReplaceTextFilter:before call chain.doFilter()"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//把ServletResponse的包装类传给后续Web组件</span></span><br><span class="line">    chain.doFilter(request,  myWrappedResp);</span><br><span class="line"></span><br><span class="line">    config.getServletContext().log(<span class="string">"ReplaceTextFilter:after call chain.doFilter()"</span>);</span><br><span class="line">    myWrappedResp.getOutputStream().close();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"ReplaceTextFilter:destroy()"</span>);</span><br><span class="line">    config = <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>补：本例修改response，若需修改request，则要创建HttpServletRequest的包装类，继承HttpServletRequestWrapper类，覆盖部分方法。过滤器把这个包装类传给后续Web组件。</p>
-<h3><span id="45-本例过滤器的工作时序">4.5 本例过滤器的工作时序</span></h3><p>若未安装过滤器，则NoteServlet的service方法，从参数中获得容器提供的HttpServletResponse对象，则response.getOutputStream()得到容器提供的ServletOutputStream对象。通过这个流输出数据，无法修改内容。</p>
+<h3><span id="45-本例过滤器的工作时序">4.5 本例过滤器的工作时序</span></h3>
+<p>若未安装过滤器，则NoteServlet的service方法，从参数中获得容器提供的HttpServletResponse对象，则response.getOutputStream()得到容器提供的ServletOutputStream对象。通过这个流输出数据，无法修改内容。</p>
 <p>若安装过滤器，则NoteServlet得到的是ReplaceTextWrapper对象（ServletResponse的包装类），此时response.getOutputStream()得到ReplaceTextStream对象（ServletOutputStream的包装类）。通过这个输出流输出，就能先将输出内容存入缓存，替换后再输出到ServletOutputStream。</p>
 <p>即，实际的替换工作是在输出流的包装类中进行的；不过为了使工作Servlet能够将内容输出到该流类，就需要包装流类、包装response类。</p>
-<h3><span id="46-发布应用">4.6 发布应用</span></h3><ol>
-<li><p>编译各个类 <a href="3.3 发布步骤">参考3.3 发布步骤</a></p>
+<h3><span id="46-发布应用">4.6 发布应用</span></h3>
+<ol>
+<li>
+<p>编译各个类 [参考3.3 发布步骤](3.3 发布步骤)</p>
 </li>
-<li><p>web.xml中配置过滤器</p>
+<li>
+<p>web.xml中配置过滤器</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>ReplaceTextFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>mypack.ReplaceTextFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>search<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>暴力<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>replace<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>和平<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>ReplaceTextFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/note<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p> 本例中配置为将“暴力”替换为“和平”。</p>
+<p>本例中配置为将“暴力”替换为“和平”。</p>
 </li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="5-异步处理过滤器">5. 异步处理过滤器</span></h2><p>处理器也支持异步处理机制，此时需要在配置中开启asyncSupported。</p>
+<p> </p>
+<h2><span id="5-异步处理过滤器">5. 异步处理过滤器</span></h2>
+<p>处理器也支持异步处理机制，此时需要在配置中开启asyncSupported。</p>
 <p>过滤器AsyncFilter</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter</span>(</span><br><span class="line">filterName = <span class="string">"AsyncFilter"</span>, 	</span><br><span class="line">urlPatterns = <span class="string">"/async"</span>, 	</span><br><span class="line">asyncSupported=<span class="keyword">true</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AsyncFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 引用容器提供的FilterConfig对象</span></span><br><span class="line">  <span class="keyword">private</span> FilterConfig config = <span class="keyword">null</span>;  </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.config = config; </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request,ServletResponse response, </span></span></span><br><span class="line"><span class="function"><span class="params">          FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">    AsyncContext asyncContext = request.startAsync();</span><br><span class="line">    <span class="comment">// 异步操作超时时间</span></span><br><span class="line">    asyncContext.setTimeout(<span class="number">60</span>*<span class="number">1000</span>);  </span><br><span class="line">    asyncContext.start(<span class="keyword">new</span> MyTask(asyncContext));</span><br><span class="line">    <span class="comment">// 转发请求给后续组件</span></span><br><span class="line">    chain.doFilter(request, response);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    config = <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyTask</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AsyncContext asyncContext;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyTask</span><span class="params">(AsyncContext asyncContext)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.asyncContext = asyncContext;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">try</span>&#123;</span><br><span class="line">        config.getServletContext().log(</span><br><span class="line">              <span class="string">"AsyncFilter:doFilter()"</span>);</span><br><span class="line">       &#125;<span class="keyword">catch</span>(Exception e)&#123;e.printStackTrace();&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>AsyncServlet</p>
@@ -383,7 +375,8 @@
 <pre><code>1. 在过滤器的doFilter方法中，通过req.startAsync方法，创建AsyncContext对象
 2. 在Servlet的service方法中，通过req.getAsyncContext方法获取之前创建的对象
 3. 由Servlet的内部类MyTask调用AsyncContext对象的complete方法，提交任务
-</code></pre><p>另，若过滤器使用异步，则串联的过滤器和Servlet都要异步。</p>
+</code></pre>
+<p>另，若过滤器使用异步，则串联的过滤器和Servlet都要异步。</p>
 
         </div>
 

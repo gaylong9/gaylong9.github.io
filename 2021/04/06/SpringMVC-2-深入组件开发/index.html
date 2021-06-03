@@ -42,44 +42,7 @@
 
     
     
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
+        
     
 
 
@@ -227,73 +190,83 @@
         </header>
 
         <div class="post-content">
-            <p>&nbsp;</p>
+            <p> </p>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#1-控制器接收请求参数">1. 控制器接收请求参数</a><ul>
-<li><a href="#11-接收普通请求参数">1.1 接收普通请求参数</a></li>
-<li><a href="#12-requestparam获取参数">1.2 @RequestParam获取参数</a></li>
-<li><a href="#13-使用url传递参数">1.3 使用URL传递参数</a></li>
-<li><a href="#14-传递json参数">1.4 传递JSON参数</a></li>
-<li><a href="#15-接收列表数据的表单序列化">1.5 接收列表数据的表单序列化</a></li>
+<li><a href="#1-%E6%8E%A7%E5%88%B6%E5%99%A8%E6%8E%A5%E6%94%B6%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0">1. 控制器接收请求参数</a>
+<ul>
+<li><a href="#11-%E6%8E%A5%E6%94%B6%E6%99%AE%E9%80%9A%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0">1.1 接收普通请求参数</a></li>
+<li><a href="#12-requestparam%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0">1.2 @RequestParam获取参数</a></li>
+<li><a href="#13-%E4%BD%BF%E7%94%A8url%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0">1.3 使用URL传递参数</a></li>
+<li><a href="#14-%E4%BC%A0%E9%80%92json%E5%8F%82%E6%95%B0">1.4 传递JSON参数</a></li>
+<li><a href="#15-%E6%8E%A5%E6%94%B6%E5%88%97%E8%A1%A8%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A1%A8%E5%8D%95%E5%BA%8F%E5%88%97%E5%8C%96">1.5 接收列表数据的表单序列化</a></li>
 </ul>
 </li>
-<li><a href="#2-重定向">2. 重定向</a><ul>
-<li><a href="#21-简单数据的传递">2.1 简单数据的传递</a></li>
-<li><a href="#22-pojo传递">2.2 POJO传递</a></li>
+<li><a href="#2-%E9%87%8D%E5%AE%9A%E5%90%91">2. 重定向</a>
+<ul>
+<li><a href="#21-%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE%E7%9A%84%E4%BC%A0%E9%80%92">2.1 简单数据的传递</a></li>
+<li><a href="#22-pojo%E4%BC%A0%E9%80%92">2.2 POJO传递</a></li>
 </ul>
 </li>
-<li><a href="#3-保存并获取属性参数">3. 保存并获取属性参数</a><ul>
+<li><a href="#3-%E4%BF%9D%E5%AD%98%E5%B9%B6%E8%8E%B7%E5%8F%96%E5%B1%9E%E6%80%A7%E5%8F%82%E6%95%B0">3. 保存并获取属性参数</a>
+<ul>
 <li><a href="#31-requestattribute">3.1 @RequestAttribute</a></li>
-<li><a href="#32-sessionattribute和sessionattributes">3.2 @SessionAttribute和@SessionAttributes</a></li>
-<li><a href="#33-cookievalue和requestheader">3.3 @CookieValue和@RequestHeader</a></li>
+<li><a href="#32-sessionattribute%E5%92%8Csessionattributes">3.2 @SessionAttribute和@SessionAttributes</a></li>
+<li><a href="#33-cookievalue%E5%92%8Crequestheader">3.3 @CookieValue和@RequestHeader</a></li>
 </ul>
 </li>
-<li><a href="#4-拦截器">4. 拦截器</a><ul>
-<li><a href="#41-拦截器定义">4.1 拦截器定义</a></li>
-<li><a href="#42-拦截器执行流程">4.2 拦截器执行流程</a></li>
-<li><a href="#43-拦截器开发">4.3 拦截器开发</a></li>
-<li><a href="#44-多个拦截器执行顺序">4.4 多个拦截器执行顺序</a></li>
+<li><a href="#4-%E6%8B%A6%E6%88%AA%E5%99%A8">4. 拦截器</a>
+<ul>
+<li><a href="#41-%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9A%E4%B9%89">4.1 拦截器定义</a></li>
+<li><a href="#42-%E6%8B%A6%E6%88%AA%E5%99%A8%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B">4.2 拦截器执行流程</a></li>
+<li><a href="#43-%E6%8B%A6%E6%88%AA%E5%99%A8%E5%BC%80%E5%8F%91">4.3 拦截器开发</a></li>
+<li><a href="#44-%E5%A4%9A%E4%B8%AA%E6%8B%A6%E6%88%AA%E5%99%A8%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F">4.4 多个拦截器执行顺序</a></li>
 </ul>
 </li>
-<li><a href="#5-验证表单">5. 验证表单</a><ul>
-<li><a href="#51-使用jsr-303注解校验">5.1 使用JSR 303注解校验</a></li>
-<li><a href="#52-使用验证器校验">5.2 使用验证器校验</a></li>
+<li><a href="#5-%E9%AA%8C%E8%AF%81%E8%A1%A8%E5%8D%95">5. 验证表单</a>
+<ul>
+<li><a href="#51-%E4%BD%BF%E7%94%A8jsr-303%E6%B3%A8%E8%A7%A3%E6%A0%A1%E9%AA%8C">5.1 使用JSR 303注解校验</a></li>
+<li><a href="#52-%E4%BD%BF%E7%94%A8%E9%AA%8C%E8%AF%81%E5%99%A8%E6%A0%A1%E9%AA%8C">5.2 使用验证器校验</a></li>
 </ul>
 </li>
-<li><a href="#6-数据模型">6. 数据模型</a><ul>
-<li><a href="#61-数据模型关系">6.1 数据模型关系</a></li>
-<li><a href="#62-使用">6.2 使用</a></li>
+<li><a href="#6-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B">6. 数据模型</a>
+<ul>
+<li><a href="#61-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E5%85%B3%E7%B3%BB">6.1 数据模型关系</a></li>
+<li><a href="#62-%E4%BD%BF%E7%94%A8">6.2 使用</a></li>
 </ul>
 </li>
-<li><a href="#7-视图和视图解析器">7. 视图和视图解析器</a><ul>
-<li><a href="#71-视图">7.1 视图</a></li>
-<li><a href="#72-视图解析器">7.2 视图解析器</a></li>
-<li><a href="#73-实例excel视图的使用">7.3 实例：Excel视图的使用</a></li>
+<li><a href="#7-%E8%A7%86%E5%9B%BE%E5%92%8C%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E5%99%A8">7. 视图和视图解析器</a>
+<ul>
+<li><a href="#71-%E8%A7%86%E5%9B%BE">7.1 视图</a></li>
+<li><a href="#72-%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E5%99%A8">7.2 视图解析器</a></li>
+<li><a href="#73-%E5%AE%9E%E4%BE%8Bexcel%E8%A7%86%E5%9B%BE%E7%9A%84%E4%BD%BF%E7%94%A8">7.3 实例：Excel视图的使用</a></li>
 </ul>
 </li>
-<li><a href="#8-上传文件">8. 上传文件</a><ul>
+<li><a href="#8-%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6">8. 上传文件</a>
+<ul>
 <li><a href="#81-standardservletmultipartresolver">8.1 StandardServletMultipartResolver</a></li>
 <li><a href="#82-commonsmultipartresolver">8.2 CommonsMultipartResolver</a></li>
-<li><a href="#83-mvc中文件上传原理">8.3 MVC中文件上传原理</a></li>
-<li><a href="#84-提交上传文件表单">8.4 提交上传文件表单</a></li>
+<li><a href="#83-mvc%E4%B8%AD%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%8E%9F%E7%90%86">8.3 MVC中文件上传原理</a></li>
+<li><a href="#84-%E6%8F%90%E4%BA%A4%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E8%A1%A8%E5%8D%95">8.4 提交上传文件表单</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p>&nbsp;</p>
+<p> </p>
 <p>[toc]</p>
-<p>&nbsp;</p>
-<h1><span id="1-控制器接收请求参数">1. 控制器接收请求参数</span></h1><p><strong>Parameter。</strong></p>
+<p> </p>
+<h1><span id="1-控制器接收请求参数">1. 控制器接收请求参数</span></h1>
+<p><strong>Parameter。</strong></p>
 <p>Spring MVC提供诸多注解用于获取参数，以避免繁琐的Servlet API。</p>
 <p>建立一个接收各类参数的控制器ParamsController</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"params"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParamsController</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
 <p>随后通过各种方法演示接收各类参数。</p>
 <p>另外建立一个页面，内有书籍表单：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;书籍表单&lt;/title&gt;</span><br><span class="line">    &lt;script src="https://code.jquery.com/jquery-3.2.0.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form id=<span class="string">"form"</span> action=<span class="string">"./params/commonParams"</span>&gt;</span><br><span class="line">        &lt;table&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;书籍编号&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;input id="bookId" name="bookId" value=""&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;书籍名称&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&lt;input id="bookTitle" name="bookTitle"&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;&lt;/td&gt;</span><br><span class="line">                &lt;td align="right"&gt;&lt;input type="submit" value="提交"&gt;&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">        &lt;/table&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h2><span id="11-接收普通请求参数">1.1 接收普通请求参数</span></h2><p>若方法参数名称和HTTP的保存一致，那么无需注解也可获取。</p>
+<p> </p>
+<h2><span id="11-接收普通请求参数">1.1 接收普通请求参数</span></h2>
+<p>若方法参数名称和HTTP的保存一致，那么无需注解也可获取。</p>
 <p>在ParamsController中添加方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/commonParams"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">commonParams</span> <span class="params">(String bookId, String bookTitle)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"bookId: "</span> + bookId);</span><br><span class="line">    System.out.println(<span class="string">"bookTitle: "</span> + bookTitle);</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView(<span class="string">"index"</span>);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>但若参数过多，则此法不便，改用POJO管理参数。不用注解的情况下MVC也有映射POJO的能力。可新建类BookParams，内含表单具有的各项参数，且POJO属性和HTTP请求的参数一一对应；</p>
@@ -301,8 +274,9 @@
 <p>随后在控制器中新增方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/commonParamsPojo"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">commonParamsPojo</span> <span class="params">(BookParams bookParams)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"bookId: "</span> + bookParams.getBookId());</span><br><span class="line">    System.out.println(<span class="string">"bookTitle: "</span> + bookParams.getBookTitle());</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView(<span class="string">"index"</span>);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>此时还需更改JSP代码中的action <code>&lt;form id=&quot;form&quot; action=&quot;./params/commonParamsPojo&quot;&gt;</code></p>
-<p>&nbsp;</p>
-<h2><span id="12-requestparam获取参数">1.2 @RequestParam获取参数</span></h2><p>以上方法要求前后端对参数命名一致，则不需注解即可获取参数。不一致时可采用@RequestParam解决。</p>
+<p> </p>
+<h2><span id="12-requestparam获取参数">1.2 @RequestParam获取参数</span></h2>
+<p>以上方法要求前后端对参数命名一致，则不需注解即可获取参数。不一致时可采用@RequestParam解决。</p>
 <p>如将JSP页面参数name属性修改 <code>&lt;td&gt;&lt;input id=&quot;bookId&quot; name=&quot;book_id&quot; value=&quot;&quot;&gt;&lt;/td&gt;</code>，就无法完成自动对应。此时可使用@RequestParam：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/requestParam"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">requestParam</span> <span class="params">(@RequestParam(<span class="string">"book_id"</span>)</span> String bookId,</span></span><br><span class="line"><span class="function">                                  @<span class="title">RequestParam</span><span class="params">(<span class="string">"book_title"</span>)</span> String bookTitle) </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"requestParam"</span>);</span><br><span class="line">    System.out.println(<span class="string">"bookId: "</span> + bookId);</span><br><span class="line">    System.out.println(<span class="string">"bookTitle: "</span> + bookTitle);</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView(<span class="string">"index"</span>);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>本注解有两个可配置项：</p>
@@ -310,14 +284,16 @@
 <li>value：即参数前端名称</li>
 <li>required：默认true，即被标注参数不能为空</li>
 </ul>
-<p>&nbsp;</p>
-<h2><span id="13-使用url传递参数">1.3 使用URL传递参数</span></h2><p>符合RESTul风格，在业务简单的应用中比较常见。</p>
+<p> </p>
+<h2><span id="13-使用url传递参数">1.3 使用URL传递参数</span></h2>
+<p>符合RESTul风格，在业务简单的应用中比较常见。</p>
 <p>如<code>/params/getBook/001</code>，URL中的001就是参数，代表书籍编号。自然这种方法与GET匹配。</p>
 <p>本例中使用到@PathVariable注解，并返回打印出JSON数据。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">BookService bookService;</span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/getBook/&#123;id&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">pathVariable</span> <span class="params">(@PathVariable(<span class="string">"id"</span>)</span> String id) </span>&#123;</span><br><span class="line">    Book book = bookService.getBook(id);</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">    mv.addObject(book);</span><br><span class="line">    mv.setView(<span class="keyword">new</span> MappingJackson2JsonView());</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>@PathVariable允许对应参数为空。</p>
-<p>&nbsp;</p>
-<h2><span id="14-传递json参数">1.4 传递JSON参数</span></h2><p>本例中，假设需要分页相关参数（开始行start和限制返回大小limit），则连同书籍两参数共四个参数，分给两个POJO（BookParams和PageParams）。</p>
+<p> </p>
+<h2><span id="14-传递json参数">1.4 传递JSON参数</span></h2>
+<p>本例中，假设需要分页相关参数（开始行start和限制返回大小limit），则连同书籍两参数共四个参数，分给两个POJO（BookParams和PageParams）。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageParams</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> start;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> limit;</span><br><span class="line">    <span class="comment">// g s</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>此时需要在BookParams中新增一个属性PageParams，以实现两个POJO的传递：</p>
 <p><code>private PageParams pageParams;</code> （getter setter）</p>
@@ -325,8 +301,9 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    $(document).ready(function() &#123;</span><br><span class="line">       <span class="keyword">var</span> data = &#123;</span><br><span class="line">           bookTitle: <span class="string">'title1'</span>,</span><br><span class="line">           bookId: <span class="string">'id1'</span>,</span><br><span class="line">           pageParams: &#123;</span><br><span class="line">               start: <span class="number">1</span>,</span><br><span class="line">               limit: <span class="number">20</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       $.post(&#123;</span><br><span class="line">           url: <span class="string">"./params/findRoles"</span>,</span><br><span class="line">           contentType: <span class="string">"application/json"</span>,</span><br><span class="line">           data: JSON.stringify(data),</span><br><span class="line">           success: function(result)&#123;&#125;</span><br><span class="line">       &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <p>此时即可使用@RequestBody接收参数：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/findBooks"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">findBooks</span> <span class="params">(@RequestBody BookParams bookParams)</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h2><span id="15-接收列表数据的表单序列化">1.5 接收列表数据的表单序列化</span></h2><p>当需要传递集合、数组时：</p>
+<p> </p>
+<h2><span id="15-接收列表数据的表单序列化">1.5 接收列表数据的表单序列化</span></h2>
+<p>当需要传递集合、数组时：</p>
 <p>使用JS模拟：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> idList = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">    $.post(&#123;</span><br><span class="line">        url: <span class="string">"./params/deleteBooks"</span>,</span><br><span class="line">        data: <span class="built_in">JSON</span>.stringify(idList),</span><br><span class="line">        contentType: <span class="string">"application/json"</span>,</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;&#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/deleteBooks"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">deleteBooks</span> <span class="params">(@RequestBody List&lt;Integer&gt; idList)</span> </span>&#123;</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">    <span class="comment">// delete books</span></span><br><span class="line">    mv.addObject(<span class="string">"res"</span>, <span class="number">123</span>);</span><br><span class="line">    mv.setView(<span class="keyword">new</span> MappingJackson2JsonView());</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -338,36 +315,43 @@
 <p>表单序列化方法大致相同：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">"#commit"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="keyword">var</span> str = $(<span class="string">"form"</span>).serialize();</span><br><span class="line">        $.post(&#123;</span><br><span class="line">            url: <span class="string">"./params/commonParamsPojo2"</span>,</span><br><span class="line">            data: $(<span class="string">"form"</span>).serialize(),</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;&#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>将表单序列化后，数据将以<code>bookId=xxx&amp;&amp;bookTitle=xxx</code>的形式传递，故此时后台接收参数只需按照最简单的常规方式即可，即不使用注解，参数名和前端属性名一致即可。</p>
-<p>&nbsp;</p>
-<h1><span id="2-重定向">2. 重定向</span></h1><h2><span id="21-简单数据的传递">2.1 简单数据的传递</span></h2><p>如有一个方法showBookJsonInfo内，能将传入的书籍信息，以JSON视图形式返回展示。现需插入书籍后，将信息展示，则可将插入放在一个方法内，使用重定向将信息传个showBookJsonInfo展示。</p>
+<p> </p>
+<h1><span id="2-重定向">2. 重定向</span></h1>
+<h2><span id="21-简单数据的传递">2.1 简单数据的传递</span></h2>
+<p>如有一个方法showBookJsonInfo内，能将传入的书籍信息，以JSON视图形式返回展示。现需插入书籍后，将信息展示，则可将插入放在一个方法内，使用重定向将信息传个showBookJsonInfo展示。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/showBookJsonInfo"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">showBookJsonInfo</span> <span class="params">(String id, String title)</span> </span>&#123;</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">    mv.setView(<span class="keyword">new</span> MappingJackson2JsonView());</span><br><span class="line">    mv.addObject(<span class="string">"id"</span>, id);</span><br><span class="line">    mv.addObject(<span class="string">"title"</span>, title);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/addBook"</span>)</span><br><span class="line"><span class="comment">// model是重定向数据模型，MVC会自动初始化</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">addBook</span> <span class="params">(Model model, String title)</span> </span>&#123;</span><br><span class="line">    Book book = <span class="keyword">new</span> Book();</span><br><span class="line">    book.setTitle(title);</span><br><span class="line">    <span class="comment">// 主键回填</span></span><br><span class="line">    bookService.insertBook(book);</span><br><span class="line">    <span class="comment">// 绑定重定向数据</span></span><br><span class="line">    model.addAttribute(<span class="string">"bookId"</span>, book.getId());</span><br><span class="line">    model.addAttribute(<span class="string">"bookTitle"</span>, title);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"redirect:./showBookJsonInfo"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Spring MVC约定，字符串带有redirect时就是需要重定向。当然还可以通过返回视图来完成重定向。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"addBook2"</span>)</span><br><span class="line"><span class="comment">// ModelAndView会自动初始化</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">addBook2</span> <span class="params">(ModelAndView mv, String bookTitle)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> book = <span class="keyword">new</span> Book();</span><br><span class="line">    <span class="comment">// insert</span></span><br><span class="line">    mv.addObject(<span class="string">"bookId"</span>, book.getId());</span><br><span class="line">    mv.addObject(<span class="string">"bookTitle"</span>, bookTitle);</span><br><span class="line">    mv.setViewName(<span class="string">"redirect:./showBookJsonInfo"</span>);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>以上方法，访问<code>/params/addBook?bookId=1&amp;bookTitle=2</code>时，会自动重定向到<code>/params/showBookJsonInfo?bookId=1&amp;bookTitle=2</code>，可见在重定向时会将属性以参数形式并入字符串传递。</p>
-<p>&nbsp;</p>
-<h2><span id="22-pojo传递">2.2 POJO传递</span></h2><p>功能同上，一方法展示POJO的JSON</p>
+<p> </p>
+<h2><span id="22-pojo传递">2.2 POJO传递</span></h2>
+<p>功能同上，一方法展示POJO的JSON</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/showBookJsonInfo2"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">showBookJsonInfo2</span> <span class="params">(Book book)</span> </span>&#123;</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">    mv.setView(<span class="keyword">new</span> MappingJackson2JsonView());</span><br><span class="line">    mv.addObject(<span class="string">"book"</span>, book);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>但要通过重定向将POJO传递给它就比较复杂，URL在重定向过程中不能传递对象，HTTP重定向参数是字符串形式。此时要使用MVC提供的flash属性和RedirectAttributes数据模型：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/addBook3"</span>)</span><br><span class="line"><span class="comment">// RedirectAttributes会自动初始化</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">addBook3</span> <span class="params">(RedirectAttributes ra, Book book)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// insert</span></span><br><span class="line">    ra.addFlashAttribute(<span class="string">"book"</span>, book);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"redirect:./showBookJsonInfo2"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>原理：使用addFlashAttribute后，MVC将数据保存到Session中，重定向后再清除。</p>
-<p>&nbsp;</p>
-<h1><span id="3-保存并获取属性参数">3. 保存并获取属性参数</span></h1><p>即Java EE的request、session对象的<strong>attribute</strong>。Spring MVC中主要通过以下3个注解代替：</p>
+<p> </p>
+<h1><span id="3-保存并获取属性参数">3. 保存并获取属性参数</span></h1>
+<p>即Java EE的request、session对象的<strong>attribute</strong>。Spring MVC中主要通过以下3个注解代替：</p>
 <ul>
 <li>@RequestAttribute：获取request的属性值，用来传递给控制器的参数</li>
 <li>@SessionAttribute：获取Session的属性值，用来传递给控制器的参数</li>
 <li>@SessionAttributes：设置字符串数组，对应数据模型的键值对，保存在Session中</li>
 </ul>
 <p>没有RequestAttributes，在request范围中MVC更希望使用数据模型（数据模型本身就是请求的生命周期）。</p>
-<h2><span id="31-requestattribute">3.1 @RequestAttribute</span></h2><p>从HTTP的request对象中取出请求属性。</p>
+<h2><span id="31-requestattribute">3.1 @RequestAttribute</span></h2>
+<p>从HTTP的request对象中取出请求属性。</p>
 <p>默认不能为空，可用required设置。</p>
 <p>本例，使用AttributeController完成属性相关控制。</p>
 <p>方法reqAttribute接收request中的属性。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/attribute"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AttributeController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> BookService bookService = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/requestAttribute"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">reqAttribute</span> <span class="params">(@RequestAttribute(<span class="string">"id"</span>)</span> String id) </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"requestAttribute"</span>);</span><br><span class="line">        System.out.println(id);</span><br><span class="line">        ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">        Book book = bookService.getBook(id);</span><br><span class="line">        mv.addObject(<span class="string">"book"</span>, book);</span><br><span class="line">        mv.setView(<span class="keyword">new</span> MappingJackson2JsonView());</span><br><span class="line">        <span class="keyword">return</span> mv;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>新建一个JSP，用于测试属性：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;attribute&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">        request.setAttribute(<span class="string">"id"</span>, <span class="string">"001"</span>);    </span><br><span class="line">        request.getRequestDispatcher(<span class="string">"./attribute/requestAttribute"</span>)</span><br><span class="line">        .forward(request, response);</span><br><span class="line">    %&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h2><span id="32-sessionattribute和sessionattributes">3.2 @SessionAttribute和@SessionAttributes</span></h2><ol>
-<li><p>@SessionAttributes：</p>
+<p> </p>
+<h2><span id="32-sessionattribute和sessionattributes">3.2 @SessionAttribute和@SessionAttributes</span></h2>
+<ol>
+<li>
+<p>@SessionAttributes：</p>
 <ol>
 <li>设置Session的属性</li>
 <li>只能注解在类，注解后，MVC执行完控制器逻辑后，将数据模型中对应的属性名或属性类型保存到HTTP的Session对象中</li>
@@ -375,49 +359,60 @@
 <li>在JSP中即可通过Java代码<code>session.getAttribute(&quot;newbook&quot;)</code>以键获取值</li>
 </ol>
 </li>
-<li><p>@SessionAttribute：</p>
+<li>
+<p>@SessionAttribute：</p>
 <ol>
-<li><p>读取Session的属性</p>
+<li>
+<p>读取Session的属性</p>
 </li>
-<li><p>可现在JSP中用Java代码，设置一个属性后跳转到控制器</p>
+<li>
+<p>可现在JSP中用Java代码，设置一个属性后跳转到控制器</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">session.setAttribute(<span class="string">"id"</span>, <span class="string">"002"</span>);</span><br><span class="line">response.sendRedirect(<span class="string">"./..."</span>);</span><br></pre></td></tr></table></figure>
-<p> 控制器方法参数中：<code>(@SessionAttribute(&quot;id&quot;) String id)</code></p>
+<p>控制器方法参数中：<code>(@SessionAttribute(&quot;id&quot;) String id)</code></p>
 </li>
-<li><p>默认不为空，required修改</p>
+<li>
+<p>默认不为空，required修改</p>
 </li>
 </ol>
 </li>
 </ol>
-<p>&nbsp;</p>
-<h2><span id="33-cookievalue和requestheader">3.3 @CookieValue和@RequestHeader</span></h2><p>从Cookie和HTTP请求头部获取信息，用法相似。</p>
+<p> </p>
+<h2><span id="33-cookievalue和requestheader">3.3 @CookieValue和@RequestHeader</span></h2>
+<p>从Cookie和HTTP请求头部获取信息，用法相似。</p>
 <p>加在控制器方法参数中：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/..."</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testHeaderAndCookie</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	@RequestHeader(value=<span class="string">"User-Agent"</span>, required=<span class="keyword">false</span>, defaultValue=<span class="string">"attribute"</span>)</span> String userAgent,</span></span><br><span class="line"><span class="function">    @<span class="title">CookieValue</span><span class="params">(value=<span class="string">"JSESSIONID"</span>, reqired=<span class="keyword">true</span>, defaultValue=<span class="string">"MyJsessionId"</span>)</span> String jsessionId) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h1><span id="4-拦截器">4. 拦截器</span></h1><p>拦截器可以在进入处理器之前/处理器完成后进行一些操作。如前所说，MVC启动期间通过@RequestMapping解析URI和处理器的对应关系，运行时通过请求找到对应的HandlerMapping，构建HandlerExecutionChain对象，执行的责任链对象。这个责任链对象中的handler只想了控制器对应的方法和拦截器。以下介绍Spring4中的拦截器。</p>
-<h2><span id="41-拦截器定义">4.1 拦截器定义</span></h2><p>需实现接口HandlerInterceptor，内含3个方法：</p>
+<p> </p>
+<h1><span id="4-拦截器">4. 拦截器</span></h1>
+<p>拦截器可以在进入处理器之前/处理器完成后进行一些操作。如前所说，MVC启动期间通过@RequestMapping解析URI和处理器的对应关系，运行时通过请求找到对应的HandlerMapping，构建HandlerExecutionChain对象，执行的责任链对象。这个责任链对象中的handler只想了控制器对应的方法和拦截器。以下介绍Spring4中的拦截器。</p>
+<h2><span id="41-拦截器定义">4.1 拦截器定义</span></h2>
+<p>需实现接口HandlerInterceptor，内含3个方法：</p>
 <ul>
 <li><code>boolean preHandle(HttpServletRequest, HttpServletResponse, Object handler) throws Exception</code>  在处理器之前执行的方法，返回的boolean会影响后面MVC流程</li>
 <li><code>void postHandle(HttpServletRequest, HttpServletResponse, Object handler, ModelAndView) throws Exception</code> 在处理器之后执行的方法</li>
 <li><code>void afterCompletion(HttpServletRequest, HttpServletResponse, Object handler, Exception ex) throws Exception</code> 无论是否产生异常都会在渲染视图后执行的方法</li>
 </ul>
-<p>&nbsp;</p>
-<h2><span id="42-拦截器执行流程">4.2 拦截器执行流程</span></h2><p><img src="/2021/04/06/SpringMVC-2-%E6%B7%B1%E5%85%A5%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91/拦截器流程.png" alt="拦截器流程"></p>
-<p>&nbsp;</p>
-<h2><span id="43-拦截器开发">4.3 拦截器开发</span></h2><p>需要实现HandlerInterceptor接口，但Spring已开发了一些自带的拦截器。</p>
-<p><img src="/2021/04/06/SpringMVC-2-%E6%B7%B1%E5%85%A5%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91/拦截器设计.png" alt="拦截器设计"></p>
+<p> </p>
+<h2><span id="42-拦截器执行流程">4.2 拦截器执行流程</span></h2>
+<p><img src="/2021/04/06/SpringMVC-2-%E6%B7%B1%E5%85%A5%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91/%E6%8B%A6%E6%88%AA%E5%99%A8%E6%B5%81%E7%A8%8B.png" alt="拦截器流程"></p>
+<p> </p>
+<h2><span id="43-拦截器开发">4.3 拦截器开发</span></h2>
+<p>需要实现HandlerInterceptor接口，但Spring已开发了一些自带的拦截器。</p>
+<p><img src="/2021/04/06/SpringMVC-2-%E6%B7%B1%E5%85%A5%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91/%E6%8B%A6%E6%88%AA%E5%99%A8%E8%AE%BE%E8%AE%A1.png" alt="拦截器设计"></p>
 <p>当XML加入<code>&lt;mvc:annotation-driven&gt;</code>或Java配置加入注解@EnableWebMvc时，系统会初始化拦截器ConversionServiceExposingInterceptor，是一个一开始就被MVC默认加载的拦截器，主要作用是根据配置在控制器上的注解来完成对应的功能。</p>
 <p>另有HandlerInterceptorAdapter拦截器，若只想实现拦截器部分方法，只要继承它复写即可。</p>
 <p>先Java定义拦截器类，随后在MVC配置文件（如dispatcher-servlet.xml）中加入配置：mapping指定要拦截的请求，class指定使用的拦截器</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mvc:interceptors</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">"/..."</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"xxx.MyInterceptor"</span>/&gt;</span>                    </span><br><span class="line">    <span class="tag">&lt;/<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mvc:interceptors</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h2><span id="44-多个拦截器执行顺序">4.4 多个拦截器执行顺序</span></h2><p>与责任链模式相同。</p>
+<p> </p>
+<h2><span id="44-多个拦截器执行顺序">4.4 多个拦截器执行顺序</span></h2>
+<p>与责任链模式相同。</p>
 <p>pre全部true时：pre方法按配置顺序执行，post和after方法按配置逆序执行，如： pre1 pre2  控制器逻辑 post2 post1 after2 after1</p>
 <p>pre有false时：false的pre后的pre不再执行，控制器和所有post不再执行，执行过pre的拦截器的after逆序执行，如：pre1 pre2(false) after1</p>
-<p>&nbsp;</p>
-<h1><span id="5-验证表单">5. 验证表单</span></h1><p>校验数据正确性。录入问题通过注解即可校验，逻辑错误需要Spring提供的验证器Validator。</p>
+<p> </p>
+<h1><span id="5-验证表单">5. 验证表单</span></h1>
+<p>校验数据正确性。录入问题通过注解即可校验，逻辑错误需要Spring提供的验证器Validator。</p>
 <p>所有验证都要先注册验证器，验证器MVC自动加载。需要validation–api（注解的定义）、hibernate-validator（通过hibernate检验规则）、classmate、jboss-logging（运行依赖）包。</p>
-<h2><span id="51-使用jsr-303注解校验">5.1 使用JSR 303注解校验</span></h2><p>Spring对Bean的功能检验，@Valid标明。javax.validation.constraints.*中定义了一系列JSR 303规范的注解，可用于类中属性，实现一些简单的校验：</p>
-<div class="table-container">
+<h2><span id="51-使用jsr-303注解校验">5.1 使用JSR 303注解校验</span></h2>
+<p>Spring对Bean的功能检验，@Valid标明。javax.validation.constraints.*中定义了一系列JSR 303规范的注解，可用于类中属性，实现一些简单的校验：</p>
 <table>
 <thead>
 <tr>
@@ -480,7 +475,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>可建立表单POJO Transaction，接收表单信息，可对每个属性加入注解，此处补充两点：</p>
 <ol>
 <li>@DateTimeFormat(pattern=“yyyy-MM-dd”) 转换日期格式，加给Date属性</li>
@@ -489,8 +483,9 @@
 <p>在控制器中：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/..."</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">annotationValidate</span><span class="params">(@Valid Transaction trans, Errors errors)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (errors.hasErrors()) &#123;</span><br><span class="line">        List&lt;FieldError&gt; errorList = errors.getFieldErrors();</span><br><span class="line">        <span class="keyword">for</span> (FieldError error : errorList) &#123;</span><br><span class="line">            sout(error.getField() + error.getDefaultMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView(<span class="string">"index"</span>);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>@Valid表示Transaction这个Bean将会被校验，Errors是JSR 303规范检验后保存错误信息的对象。通过以上代码可在后台校验表单并得到message，至于如何渲染到原表单，就是渲染视图的内容了。</p>
-<p>&nbsp;</p>
-<h2><span id="52-使用验证器校验">5.2 使用验证器校验</span></h2><p>复杂的业务校验，需要通过实现Validator接口实现，将在进入控制器逻辑之前对参数检验。</p>
+<p> </p>
+<h2><span id="52-使用验证器校验">5.2 使用验证器校验</span></h2>
+<p>复杂的业务校验，需要通过实现Validator接口实现，将在进入控制器逻辑之前对参数检验。</p>
 <p>接口包含两个方法：</p>
 <ul>
 <li>boolean supports(Class&lt;?&gt; class); 判断当前验证器是否用于检验clazz类型的POJO，若true则启动检验</li>
@@ -502,52 +497,63 @@
 <p>随后需要在Controller中显式地将验证器和控制器绑定起来：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@InitBinder</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initBinder</span> <span class="params">(DataBinder binder)</span> </span>&#123;</span><br><span class="line">    binder.setValidator(<span class="keyword">new</span> TransactionValidator());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/..."</span>)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>JSR 303注解和验证器两种方法不能同时使用。</p>
-<p>&nbsp;</p>
-<h1><span id="6-数据模型">6. 数据模型</span></h1><h2><span id="61-数据模型关系">6.1 数据模型关系</span></h2><p>控制器获取数据后，会装载数据到数据模型和视图中，将视图名称转发到视图解析器，得到最终视图，将数据模型渲染到视图中。</p>
-<p><img src="/2021/04/06/SpringMVC-2-%E6%B7%B1%E5%85%A5%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91/MVC数据模型关系.png" alt="MVC数据模型关系"></p>
-<p>前例中一直用ModelAndView定义视图类型，也用来加载数据模型。它由一个名为ModelMap的属性model，继承自LinkedHashMap<string,object>。Spring还创建了ExtendedModelMap进一步定义数据模型功能，实现了数据模型定义的Model接口，派生了数据绑定类BindingAwareModelMap。</string,object></p>
+<p> </p>
+<h1><span id="6-数据模型">6. 数据模型</span></h1>
+<h2><span id="61-数据模型关系">6.1 数据模型关系</span></h2>
+<p>控制器获取数据后，会装载数据到数据模型和视图中，将视图名称转发到视图解析器，得到最终视图，将数据模型渲染到视图中。</p>
+<p><img src="/2021/04/06/SpringMVC-2-%E6%B7%B1%E5%85%A5%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91/MVC%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E5%85%B3%E7%B3%BB.png" alt="MVC数据模型关系"></p>
+<p>前例中一直用ModelAndView定义视图类型，也用来加载数据模型。它由一个名为ModelMap的属性model，继承自LinkedHashMap&lt;String,Object&gt;。Spring还创建了ExtendedModelMap进一步定义数据模型功能，实现了数据模型定义的Model接口，派生了数据绑定类BindingAwareModelMap。</p>
 <p>在控制器方法中，可以把ModelAndView、Model、ModelMap作为参数，MVC运行时会自动初始化，故而可以选择ModelMap或Model作为数据模型。实际上这个过程是MVC创建一个BindingAwareModelMap实例，在Model和ModelMap之间强制转换。ModelAndView初始化后，model属性为空，调用它增加数据模型方法后，会自动创建一个ModelMap实例，用以保存数据模型。</p>
-<p>&nbsp;</p>
-<h2><span id="62-使用">6.2 使用</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/getBookByModelMap"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">getBookByModelMap</span> <span class="params">(@RequestParam(<span class="string">"id"</span>)</span> String id, ModelMap modelMap) </span>&#123;</span><br><span class="line">    Book book = bookService.getBook(id);</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView(<span class="string">"bookDetails"</span>);</span><br><span class="line">    modelMap.addAttribute(<span class="string">"book"</span>, book);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/getBookByModel"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">getBookByModel</span> <span class="params">(@RequestParam(<span class="string">"id"</span>)</span> String id, Model model) </span>&#123;</span><br><span class="line">    Book book = bookService.getBook(id);</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView(<span class="string">"bookDetails"</span>);</span><br><span class="line">    model.addAttribute(<span class="string">"book"</span>, book);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/getBookByMv"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">getBookByMv</span> <span class="params">(@RequestParam(<span class="string">"id"</span>)</span> String id, ModelAndView mv) </span>&#123;</span><br><span class="line">    Book book = bookService.getBook(id);</span><br><span class="line">    mv.setViewName(<span class="string">"bookDetails"</span>);</span><br><span class="line">    mv.addObject(<span class="string">"book"</span>, book);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> </p>
+<h2><span id="62-使用">6.2 使用</span></h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/getBookByModelMap"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">getBookByModelMap</span> <span class="params">(@RequestParam(<span class="string">"id"</span>)</span> String id, ModelMap modelMap) </span>&#123;</span><br><span class="line">    Book book = bookService.getBook(id);</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView(<span class="string">"bookDetails"</span>);</span><br><span class="line">    modelMap.addAttribute(<span class="string">"book"</span>, book);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/getBookByModel"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">getBookByModel</span> <span class="params">(@RequestParam(<span class="string">"id"</span>)</span> String id, Model model) </span>&#123;</span><br><span class="line">    Book book = bookService.getBook(id);</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView(<span class="string">"bookDetails"</span>);</span><br><span class="line">    model.addAttribute(<span class="string">"book"</span>, book);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/getBookByMv"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">getBookByMv</span> <span class="params">(@RequestParam(<span class="string">"id"</span>)</span> String id, ModelAndView mv) </span>&#123;</span><br><span class="line">    Book book = bookService.getBook(id);</span><br><span class="line">    mv.setViewName(<span class="string">"bookDetails"</span>);</span><br><span class="line">    mv.addObject(<span class="string">"book"</span>, book);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在getBookByModel和getBookByModelMap中，都没有把数据模型绑定给视图和模型，这一步是MVC在完成控制器逻辑后自动进行的，无需代码显式绑定。</p>
-<p>&nbsp;</p>
-<h1><span id="7-视图和视图解析器">7. 视图和视图解析器</span></h1><p>视图是展示给用户的内容。要先通过控制器得到数据模型。若是非逻辑视图，则不经过视图解析器定位视图，而是直接渲染数据模型即可。逻辑视图就需要进一步解析，以定位真实视图。这就是视图解析器的作用。视图则是把从控制器查询回来的数据模型进行渲染与显示。</p>
-<h2><span id="71-视图">7.1 视图</span></h2><p>MVC中定义了多种视图，都满足了视图的要求——实现接口View，有以下字段：</p>
+<p> </p>
+<h1><span id="7-视图和视图解析器">7. 视图和视图解析器</span></h1>
+<p>视图是展示给用户的内容。要先通过控制器得到数据模型。若是非逻辑视图，则不经过视图解析器定位视图，而是直接渲染数据模型即可。逻辑视图就需要进一步解析，以定位真实视图。这就是视图解析器的作用。视图则是把从控制器查询回来的数据模型进行渲染与显示。</p>
+<h2><span id="71-视图">7.1 视图</span></h2>
+<p>MVC中定义了多种视图，都满足了视图的要求——实现接口View，有以下字段：</p>
 <ul>
 <li>RESPOSNE_VARIABLES 响应状态属性</li>
 <li>PATH_VARIABLES 数据模型下取出变量路径</li>
 <li>SELECTED_CONTENT_TYPE 选择相应内容类型</li>
 <li>String getContentType() 响应客户端类型</li>
-<li>void render(Map<string, ?> model, HttpServletRequest, HttpServletResponse) throws Exception() 渲染方法，model是数据模型</string,></li>
+<li>void render(Map&lt;String, ?&gt; model, HttpServletRequest, HttpServletResponse) throws Exception() 渲染方法，model是数据模型</li>
 </ul>
 <p>当控制器返回ModelAndView时，视图解析器解析，将数据模型传递给render方法渲染视图。MVC中视图类很多，JSTL视图JstlView、JSON视图MappingJacksonJsonView、PDF视图AbstractPdfView、甚至还有报表AbstractJasperReportSingleFormatView等等。</p>
-<p><img src="/2021/04/06/SpringMVC-2-%E6%B7%B1%E5%85%A5%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91/常用视图类.png" alt="常用视图类"></p>
+<p><img src="/2021/04/06/SpringMVC-2-%E6%B7%B1%E5%85%A5%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91/%E5%B8%B8%E7%94%A8%E8%A7%86%E5%9B%BE%E7%B1%BB.png" alt="常用视图类"></p>
 <p>视图又分逻辑视图和非逻辑视图：</p>
 <ul>
-<li><p>如JSON视图就是非逻辑视图，目的就是将数据模型转换为JSON视图，无需对视图名字进行解析。<code>mv.setView(new MappingJackson2JsonView())</code></p>
+<li>
+<p>如JSON视图就是非逻辑视图，目的就是将数据模型转换为JSON视图，无需对视图名字进行解析。<code>mv.setView(new MappingJackson2JsonView())</code></p>
 </li>
-<li><p>InternalResourceView是逻辑视图，就需要视图解析器了。</p>
+<li>
+<p>InternalResourceView是逻辑视图，就需要视图解析器了。</p>
 </li>
 </ul>
 <p>视图解析器配置：</p>
 <ul>
-<li><p>XML形式：dispatcher-servlet.xml中，以下代码表示要在/WEB-INF/JSP文件夹下寻找.jsp格式文件作为映射</p>
+<li>
+<p>XML形式：dispatcher-servlet.xml中，以下代码表示要在/WEB-INF/JSP文件夹下寻找.jsp格式文件作为映射</p>
   <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    视图解析器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"viewResolver"</span> </span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">p:prefix</span>=<span class="string">"/WEB-INF/jsp/"</span> <span class="attr">p:suffix</span>=<span class="string">".jsp"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Java配置方式：</p>
+<li>
+<p>Java配置方式：</p>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(name=<span class="string">"viewResolver"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ViewResolver <span class="title">initViewResolver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    InternalResourceViewResolver viewResolver = <span class="keyword">new</span> InternalResourceViewResolver();</span><br><span class="line">    viewResolver.setPrefix(<span class="string">"/WEB-INF/jsp/"</span>);</span><br><span class="line">    viewResolver.setSuffix(<span class="string">".jsp"</span>);</span><br><span class="line">    <span class="keyword">return</span> viewResolver;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>不论何种方式配置，都是在创建一个视图解析器，通过前后缀加上视图名称就能找到JSP文件，把数据模型渲染到JSP中。</p>
-<p>&nbsp;</p>
-<h2><span id="72-视图解析器">7.2 视图解析器</span></h2><p>对于逻辑视图，需要解析器将视图名称转换为逻辑视图，如上配置的InternalResourceView，配置后就会加载到MVC的视图解析器列表中，当返回ModelAndView时，MVC就会在视图解析器列表中遍历，找到对应解析器解析。</p>
+<p> </p>
+<h2><span id="72-视图解析器">7.2 视图解析器</span></h2>
+<p>对于逻辑视图，需要解析器将视图名称转换为逻辑视图，如上配置的InternalResourceView，配置后就会加载到MVC的视图解析器列表中，当返回ModelAndView时，MVC就会在视图解析器列表中遍历，找到对应解析器解析。</p>
 <p>视图解析器接口：ViewResolver，只有一个方法 <code>View resolveViewName(String viewName, Locale locale)</code>。</p>
 <p>各种视图解析器：</p>
-<p><img src="/2021/04/06/SpringMVC-2-%E6%B7%B1%E5%85%A5%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91/视图解析器.png" alt="视图解析器"></p>
+<p><img src="/2021/04/06/SpringMVC-2-%E6%B7%B1%E5%85%A5%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91/%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E5%99%A8.png" alt="视图解析器"></p>
 <p>有时控制器返回的并非ModelAndView，而是字符串，也能够渲染视图，因为视图解析器生成了对应的视图，如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/..."</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">index</span><span class="params">(@RequestParam(<span class="string">"id"</span>)</span> String id, ModelMap model) </span>&#123;</span><br><span class="line">    Book book = bookservice.getBook(id);</span><br><span class="line">    model.addAttribute(<span class="string">"book"</span>, book);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"bookDetails"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h2><span id="73-实例excel视图的使用">7.3 实例：Excel视图的使用</span></h2><p>对于导出Excel，MVC推荐使用AbstractXlsView，需要实现buildExcelDocument方法 </p>
+<p> </p>
+<h2><span id="73-实例excel视图的使用">7.3 实例：Excel视图的使用</span></h2>
+<p>对于导出Excel，MVC推荐使用AbstractXlsView，需要实现buildExcelDocument方法</p>
 <p><code>protected abstract void buildExcelDocument (Map&lt;String,Object&gt; model, Workbook workbook, HttpServletRequest, HttpServletResponse)</code></p>
 <p>方法主要任务是创建一个Workbook，用到POI的API，需要自行下载导入。</p>
 <p>实现功能时，本例中先定义一个接口，让开发者自定义生成Excel的规则：</p>
@@ -556,36 +562,41 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExcelView</span> <span class="keyword">extends</span> <span class="title">AbstractXlsView</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String filename = <span class="keyword">null</span>;	<span class="comment">// 导出文件的名称</span></span><br><span class="line">    <span class="keyword">private</span> ExcelExportService excelExportService = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ExcelView</span><span class="params">(ExcelExportService excelExportService)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.excelExportService = excelExportService;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ExcelView</span><span class="params">(ExcelExportService service, String viewName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setBeanName(viewName);</span><br><span class="line">        <span class="keyword">this</span>.excelExportService = service;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">buildExcelDocument</span><span class="params">(Map&lt;String, Object&gt; map, Workbook workbook, javax.servlet.http.HttpServletRequest httpServletRequest, javax.servlet.http.HttpServletResponse httpServletResponse)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (excelExportService == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"导出服务接口为空"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!StringUtils.isEmptyOrWhitespaceOnly(filename)) &#123;</span><br><span class="line">            String reqCharset = httpServletRequest.getCharacterEncoding();</span><br><span class="line">            reqCharset = reqCharset == <span class="keyword">null</span>? <span class="string">"UTF-8"</span>:reqCharset;</span><br><span class="line">            filename = <span class="keyword">new</span> String(filename.getBytes(reqCharset), <span class="string">"ISO8859-1"</span>);</span><br><span class="line">            httpServletResponse.setHeader(<span class="string">"Content-disposition"</span>, <span class="string">"attachment;filename="</span>+filename);</span><br><span class="line">            excelExportService.makeWorkBook(map, workbook);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//getter setter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/export"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">export</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">    ExcelView ev = <span class="keyword">new</span> ExcelView(excelExportService());</span><br><span class="line">    ev.setFilename(<span class="string">"所有书籍.xlsx"</span>);</span><br><span class="line">    BookParams bookParams = <span class="keyword">new</span> BookParams();</span><br><span class="line">    List&lt;Book&gt; bookList = bookService.getBooks(bookParams);</span><br><span class="line">    mv.addObject(<span class="string">"bookList"</span>, bookList);</span><br><span class="line">    mv.setView(ev);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings</span>(&#123;<span class="string">"unchecked"</span>&#125;)</span><br><span class="line"><span class="function"><span class="keyword">private</span> ExcelExportService <span class="title">excelExportService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (Map&lt;String, Object&gt; model, Workbook workbook) -&gt; &#123;</span><br><span class="line">        List&lt;Book&gt; bookList = (List&lt;Book&gt;) model.get(<span class="string">"bookList"</span>);</span><br><span class="line">        Sheet sheet = workbook.createSheet(<span class="string">"所有书籍"</span>);</span><br><span class="line">        Row title = sheet.createRow(<span class="number">0</span>);</span><br><span class="line">        title.createCell(<span class="number">0</span>).setCellValue(<span class="string">"编号"</span>);</span><br><span class="line">        title.createCell(<span class="number">1</span>).setCellValue(<span class="string">"名称"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bookList.size(); i++) &#123;</span><br><span class="line">            Book book = bookList.get(i);</span><br><span class="line">            <span class="keyword">int</span> rowIdx = i+ <span class="number">1</span>;</span><br><span class="line">            Row row = sheet.createRow(rowIdx);</span><br><span class="line">            row.createCell(<span class="number">0</span>).setCellValue(book.getId());</span><br><span class="line">            row.createCell(<span class="number">1</span>).setCellValue(book.getTitle());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h1><span id="8-上传文件">8. 上传文件</span></h1><p>Spring MVC的文件上传通过MultipartResolver接口处理，有两个实现类：</p>
+<p> </p>
+<h1><span id="8-上传文件">8. 上传文件</span></h1>
+<p>Spring MVC的文件上传通过MultipartResolver接口处理，有两个实现类：</p>
 <ul>
 <li>CommonsMultipartResolver：依赖于Apache的jakarta Common FileUpload项目解析Multipart请求，可以在Spring各版本使用，依赖于第三方包</li>
 <li>StandardServletMultipartResolver：Spring 3.1后出现，依赖于Servlet 3.0或更高版本，不过不依赖于第三方包</li>
 </ul>
 <p>不论用哪个方式，都要配置一个MultipartResolver。</p>
-<h2><span id="81-standardservletmultipartresolver">8.1 StandardServletMultipartResolver</span></h2><p>配置同样有两种方式：XML和Java。</p>
+<h2><span id="81-standardservletmultipartresolver">8.1 StandardServletMultipartResolver</span></h2>
+<p>配置同样有两种方式：XML和Java。</p>
 <p>Java注解：Bean name是约定好的，不可修改。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(<span class="string">"multipartResolver"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> MultipartResolver <span class="title">initMultipartResolver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> StandardServletMultipartResolver();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如需进行一些上传相关设置，就要在MVC初始化器中设置。该初始化器是继承了AbstractAnnotationConfigDispatcherServletInitializer，其中customizeRegistration方法用于初始化DispatcherServlet设置的方法，是在Servlet 3.0及以上版本实现的，通过它配置文件上传的一些属性。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">customizeRegistration</span><span class="params">(ServletRegistration.Dynamic registration)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 上传路径</span></span><br><span class="line">    String filepath = <span class="string">"e:/mvc/uploads"</span>;</span><br><span class="line">    <span class="comment">// 5MB</span></span><br><span class="line">    Long singleMax = (<span class="keyword">long</span>) (<span class="number">5</span> * Math.pow(<span class="number">2</span>, <span class="number">20</span>));</span><br><span class="line">    <span class="comment">// 10MB</span></span><br><span class="line">    Long totalMax = (<span class="keyword">long</span>) (<span class="number">10</span> * Math.pow(<span class="number">2</span>, <span class="number">20</span>));</span><br><span class="line">    <span class="comment">// 配置MultipartResolver</span></span><br><span class="line">    registration.setMultipartConfig(<span class="keyword">new</span> MultipartConfigElement(filepath, singleMax, totalMax, <span class="number">0</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>XML配置：在dweb.xml的DispatcherServlet位置配置，随后生成一个StandardServletMultipartResolver即可</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcher<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>2<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">&lt;!--        MultipartResolver--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">multipart-config</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">location</span>&gt;</span>e:/mvc/uploads<span class="tag">&lt;/<span class="name">location</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">max-file-size</span>&gt;</span>5242800<span class="tag">&lt;/<span class="name">max-file-size</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">max-request-size</span>&gt;</span>10485760<span class="tag">&lt;/<span class="name">max-request-size</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">file-size-threshold</span>&gt;</span>0<span class="tag">&lt;/<span class="name">file-size-threshold</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">multipart-config</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
-<h2><span id="82-commonsmultipartresolver">8.2 CommonsMultipartResolver</span></h2><p>Spring或Servlet版本过低时只能使用此法。</p>
+<p> </p>
+<h2><span id="82-commonsmultipartresolver">8.2 CommonsMultipartResolver</span></h2>
+<p>Spring或Servlet版本过低时只能使用此法。</p>
 <p>bean name约定，不可改变。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(name=<span class="string">"multipartResolver"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> MultipartResolver <span class="title">initCommonsMultipartResolver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String filepath = <span class="string">"e:/mvc/uploads"</span>;</span><br><span class="line">    <span class="comment">// 5MB</span></span><br><span class="line">    Long singleMax = (<span class="keyword">long</span>) (<span class="number">5</span> * Math.pow(<span class="number">2</span>, <span class="number">20</span>));</span><br><span class="line">    <span class="comment">// 10MB</span></span><br><span class="line">    Long totalMax = (<span class="keyword">long</span>) (<span class="number">10</span> * Math.pow(<span class="number">2</span>, <span class="number">20</span>));</span><br><span class="line">    CommonsMultipartResolver multipartResolver = <span class="keyword">new</span> CommonsMultipartResolver();</span><br><span class="line">    multipartResolver.setMaxUploadSizePerFile(singleMax);</span><br><span class="line">    multipartResolver.setMaxUploadSize(totalMax);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        multipartResolver.setUploadTempDir(<span class="keyword">new</span> FileSystemResource(filepath));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> multipartResolver;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>XML方式仿照上文，暂不列出。</p>
-<p>&nbsp;</p>
-<h2><span id="83-mvc中文件上传原理">8.3 MVC中文件上传原理</span></h2><p>MVC中，对MultipartResolver解析的调度是通过DispatcherServlet进行的。首先判定请求是否是一种<code>enctype=&quot;multipart/*&quot;</code>的类型，若是且存在multipartResolver的Bean，那么就把HttpServletRequest请求转换为MultipartHttpServletRequest请求对象。后者是一个Spring MVC自定义的接口，扩展了HttpServletRequest和文件操作接口MultipartRequest。MultipartHttpServletRequest接口有一抽象实现类AbstractMultipartHttpServletRequest，派生两个实现类DefaultMultipartHttpServletRequest和StandardMultipartHttpServletRequest。此外，文件请求还会被转换成MultipartFile对象，进一步增强操作文件能力。</p>
-<p>&nbsp;</p>
-<h2><span id="84-提交上传文件表单">8.4 提交上传文件表单</span></h2><p>即上传文件。</p>
+<p> </p>
+<h2><span id="83-mvc中文件上传原理">8.3 MVC中文件上传原理</span></h2>
+<p>MVC中，对MultipartResolver解析的调度是通过DispatcherServlet进行的。首先判定请求是否是一种<code>enctype=&quot;multipart/*&quot;</code>的类型，若是且存在multipartResolver的Bean，那么就把HttpServletRequest请求转换为MultipartHttpServletRequest请求对象。后者是一个Spring MVC自定义的接口，扩展了HttpServletRequest和文件操作接口MultipartRequest。MultipartHttpServletRequest接口有一抽象实现类AbstractMultipartHttpServletRequest，派生两个实现类DefaultMultipartHttpServletRequest和StandardMultipartHttpServletRequest。此外，文件请求还会被转换成MultipartFile对象，进一步增强操作文件能力。</p>
+<p> </p>
+<h2><span id="84-提交上传文件表单">8.4 提交上传文件表单</span></h2>
+<p>即上传文件。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form method=<span class="string">"post"</span> action=<span class="string">"./file/upload"</span> enctype=<span class="string">"multipart/form-data"</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">"file"</span> name=<span class="string">"file"</span> value=<span class="string">"选择上传文件"</span>/&gt;</span><br><span class="line">    &lt;input type=<span class="string">"submit"</span> value=<span class="string">"提交"</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
 <p>FileController类，处理文件相关请求：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/file"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/upload"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">upload</span> <span class="params">(HttpServletRequest req)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 进行转换</span></span><br><span class="line">        MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest)req;</span><br><span class="line">        <span class="comment">// 获得请求上传的文件</span></span><br><span class="line">        MultipartFile file = mhsr.getFile(<span class="string">"file"</span>);</span><br><span class="line">        <span class="comment">// 设置视图</span></span><br><span class="line">        ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">        mv.setView(<span class="keyword">new</span> MappingJackson2JsonView());</span><br><span class="line">        <span class="comment">// 获取原始文件名</span></span><br><span class="line">        String name = file.getOriginalFilename();</span><br><span class="line">        <span class="comment">// 目标文件</span></span><br><span class="line">        File dest = <span class="keyword">new</span> File(name);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            file.transferTo(dest);</span><br><span class="line">            mv.addObject(<span class="string">"success"</span>, <span class="keyword">true</span>);</span><br><span class="line">            mv.addObject(<span class="string">"msg"</span>, <span class="string">"上传成功"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalStateException | IOException e) &#123;</span><br><span class="line">            mv.addObject(<span class="string">"success"</span>, <span class="keyword">false</span>);</span><br><span class="line">            mv.addObject(<span class="string">"msg"</span>, <span class="string">"上传失败"</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> mv;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>不过本法使用了HttpServletRequest，用其方法作为参数时造成API入侵，可改为MultipartFile或Part类对象。</p>
 <p>MultipartFile是Spring MVC的类，Part是Servlet的类。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MultipartFile</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/uploadMultipartFile"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">uploadMultipartFile</span> <span class="params">(MultipartFile file)</span> </span>&#123;</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">    mv.setView(<span class="keyword">new</span> MappingJackson2JsonView());</span><br><span class="line">    String name = file.getOriginalFilename();</span><br><span class="line">    file.getContentType();</span><br><span class="line">    File dest = <span class="keyword">new</span> File(name);</span><br><span class="line">     <span class="keyword">try</span> &#123;</span><br><span class="line">         file.transferTo(dest);</span><br><span class="line">         mv.addObject(<span class="string">"success"</span>, <span class="keyword">true</span>);</span><br><span class="line">         mv.addObject(<span class="string">"msg"</span>, <span class="string">"上传成功"</span>);</span><br><span class="line">     &#125; <span class="keyword">catch</span> (IllegalStateException | IOException e) &#123;</span><br><span class="line">         mv.addObject(<span class="string">"success"</span>, <span class="keyword">false</span>);</span><br><span class="line">         mv.addObject(<span class="string">"msg"</span>, <span class="string">"上传失败"</span>);</span><br><span class="line">         e.printStackTrace();</span><br><span class="line">     &#125;</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Part</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/uploadPart"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ModelAndView</span> <span class="params">(Part file)</span> </span>&#123;</span><br><span class="line">    ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">    mv.setView(<span class="keyword">new</span> MappingJackson2JsonView());</span><br><span class="line">    String name = file.getSubmittedFileName();</span><br><span class="line">    File dest = <span class="keyword">new</span> File(name);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        file.write(<span class="string">"e:/mvc/uploads/"</span> + name);</span><br><span class="line">        mv.addObject(<span class="string">"success"</span>, <span class="keyword">true</span>);</span><br><span class="line">        mv.addObject(<span class="string">"msg"</span>, <span class="string">"上传成功"</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IllegalStateException | IOException e) &#123;</span><br><span class="line">        mv.addObject(<span class="string">"success"</span>, <span class="keyword">false</span>);</span><br><span class="line">        mv.addObject(<span class="string">"msg"</span>, <span class="string">"上传失败"</span>);</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;</p>
+<p> </p>
 
         </div>
 

@@ -42,7 +42,8 @@
 
     
     
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
     "HTML-CSS": {
@@ -76,10 +77,13 @@
 </script>
 <!-- 通过连接CDN加载MathJax的js代码 -->
 <script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+        src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <!-- src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"> -->
+        
 </script>
 
 
+        
     
 
 
@@ -231,76 +235,85 @@
 <!-- toc -->
 <ul>
 <li><a href="#project">Project</a></li>
-<li><a href="#cs231n">CS231n</a><ul>
-<li><a href="#data-driven数据驱动">Data Driven/数据驱动</a></li>
-<li><a href="#linear-classifier线性分类">Linear Classifier/线性分类</a></li>
-<li><a href="#loss-function损失函数">Loss Function/损失函数</a></li>
-<li><a href="#optimization优化梯度下降">Optimization/优化/梯度下降</a><ul>
-<li><a href="#stochastic-gradient-descentsgd随机梯度下降">Stochastic Gradient Descent(SGD)/随机梯度下降</a></li>
-<li><a href="#sgdmomentum结合动量的sgd">SGD+Momentum/结合动量的SGD</a></li>
+<li><a href="#cs231n">CS231n</a>
+<ul>
+<li><a href="#data-driven%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8">Data Driven/数据驱动</a></li>
+<li><a href="#linear-classifier%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB">Linear Classifier/线性分类</a></li>
+<li><a href="#loss-function%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0">Loss Function/损失函数</a></li>
+<li><a href="#optimization%E4%BC%98%E5%8C%96%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D">Optimization/优化/梯度下降</a>
+<ul>
+<li><a href="#stochastic-gradient-descentsgd%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D">Stochastic Gradient Descent(SGD)/随机梯度下降</a></li>
+<li><a href="#sgdmomentum%E7%BB%93%E5%90%88%E5%8A%A8%E9%87%8F%E7%9A%84sgd">SGD+Momentum/结合动量的SGD</a></li>
 <li><a href="#sgdnesterov">SGD+Nesterov</a></li>
 <li><a href="#adagrad">AdaGrad</a></li>
 <li><a href="#rmsprop">RMSProp</a></li>
 <li><a href="#adam">Adam</a></li>
 <li><a href="#gif">GIF</a></li>
-<li><a href="#adabound">AdaBound</a><ul>
-<li><a href="#背景">背景</a></li>
-<li><a href="#论文内容">论文内容</a></li>
+<li><a href="#adabound">AdaBound</a>
+<ul>
+<li><a href="#%E8%83%8C%E6%99%AF">背景</a></li>
+<li><a href="#%E8%AE%BA%E6%96%87%E5%86%85%E5%AE%B9">论文内容</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#back-propagation反向传播">Back-propagation/反向传播</a></li>
-<li><a href="#regularization正则化">Regularization/正则化</a><ul>
-<li><a href="#lp范数惩罚">Lp范数惩罚</a></li>
+<li><a href="#back-propagation%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD">Back-propagation/反向传播</a></li>
+<li><a href="#regularization%E6%AD%A3%E5%88%99%E5%8C%96">Regularization/正则化</a>
+<ul>
+<li><a href="#lp%E8%8C%83%E6%95%B0%E6%83%A9%E7%BD%9A">Lp范数惩罚</a></li>
 <li><a href="#dropout">Dropout</a></li>
-<li><a href="#data-augmentation数据增强">Data Augmentation/数据增强</a></li>
+<li><a href="#data-augmentation%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA">Data Augmentation/数据增强</a></li>
 </ul>
 </li>
-<li><a href="#transfer-learing迁移学习">Transfer Learing/迁移学习</a></li>
-<li><a href="#neural-network神经网络">Neural Network/神经网络</a></li>
-<li><a href="#convolutional-neural-networks-cnn卷积神经网络">Convolutional Neural Networks, CNN/卷积神经网络</a></li>
-<li><a href="#pooling池化">Pooling/池化</a></li>
-<li><a href="#activation-functions激活函数">Activation Functions/激活函数</a><ul>
+<li><a href="#transfer-learing%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0">Transfer Learing/迁移学习</a></li>
+<li><a href="#neural-network%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">Neural Network/神经网络</a></li>
+<li><a href="#convolutional-neural-networks-cnn%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">Convolutional Neural Networks, CNN/卷积神经网络</a></li>
+<li><a href="#pooling%E6%B1%A0%E5%8C%96">Pooling/池化</a></li>
+<li><a href="#activation-functions%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0">Activation Functions/激活函数</a>
+<ul>
 <li><a href="#sigmoidx">sigmoid(x)​</a></li>
 <li><a href="#tanhx">tanh(x)​</a></li>
 <li><a href="#relurectified-linear-unit">ReLU(Rectified Linear Unit)</a></li>
 <li><a href="#leaky-relu">Leaky ReLU</a></li>
 <li><a href="#eluexponential-linear-units">ELU(Exponential Linear units)</a></li>
 <li><a href="#maxout">Maxout</a></li>
-<li><a href="#总结">总结</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
 </li>
-<li><a href="#data-preprocessing数据预处理">Data Preprocessing/数据预处理</a></li>
-<li><a href="#weight-initialization初始化权重">Weight Initialization/初始化权重</a></li>
-<li><a href="#batch-normalization批量归一化">Batch Normalization/批量归一化</a></li>
-<li><a href="#babysitting-the-learning-process观察学习过程">Babysitting the Learning Process/观察学习过程</a></li>
-<li><a href="#hyper-parameter-optimization超参数设置">Hyper-parameter Optimization/超参数设置</a></li>
-<li><a href="#pytorch">PyTorch</a><ul>
-<li><a href="#tensor张量">Tensor/张量</a></li>
-<li><a href="#variable变量">Variable/变量</a></li>
-<li><a href="#nn高级封装">nn/高级封装</a></li>
-<li><a href="#optimizer优化器">optimizer/优化器</a></li>
-<li><a href="#module类">Module/类</a></li>
-<li><a href="#dataloader数据加载">DataLoader/数据加载</a></li>
-<li><a href="#pretrained-model预训练模型">Pretrained Model/预训练模型</a></li>
-<li><a href="#else其他">else/其他</a></li>
+<li><a href="#data-preprocessing%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86">Data Preprocessing/数据预处理</a></li>
+<li><a href="#weight-initialization%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%87%8D">Weight Initialization/初始化权重</a></li>
+<li><a href="#batch-normalization%E6%89%B9%E9%87%8F%E5%BD%92%E4%B8%80%E5%8C%96">Batch Normalization/批量归一化</a></li>
+<li><a href="#babysitting-the-learning-process%E8%A7%82%E5%AF%9F%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B">Babysitting the Learning Process/观察学习过程</a></li>
+<li><a href="#hyper-parameter-optimization%E8%B6%85%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE">Hyper-parameter Optimization/超参数设置</a></li>
+<li><a href="#pytorch">PyTorch</a>
+<ul>
+<li><a href="#tensor%E5%BC%A0%E9%87%8F">Tensor/张量</a></li>
+<li><a href="#variable%E5%8F%98%E9%87%8F">Variable/变量</a></li>
+<li><a href="#nn%E9%AB%98%E7%BA%A7%E5%B0%81%E8%A3%85">nn/高级封装</a></li>
+<li><a href="#optimizer%E4%BC%98%E5%8C%96%E5%99%A8">optimizer/优化器</a></li>
+<li><a href="#module%E7%B1%BB">Module/类</a></li>
+<li><a href="#dataloader%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD">DataLoader/数据加载</a></li>
+<li><a href="#pretrained-model%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B">Pretrained Model/预训练模型</a></li>
+<li><a href="#else%E5%85%B6%E4%BB%96">else/其他</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p><br></p>
-<h1><span id="project">Project</span></h1><ul>
+<br>
+<h1><span id="project">Project</span></h1>
+<ul>
 <li>判别式方法 -&gt; 深度学习类</li>
 <li><a href="https://wenku.baidu.com/view/552db3a780c758f5f61fb7360b4c2e3f56272517.html" target="_blank" rel="noopener">目标跟踪算法综述</a></li>
-<li><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/主流.png" alt></li>
+<li><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/%E4%B8%BB%E6%B5%81.png" alt></li>
 <li>为了扩展CNN在目标跟踪领域的能力，需要大量的训练数据，但这在目标跟踪中是很难做到的。MDNet[14]算法提出了一种解决该问题的思路。算法采用VGG-M作为网络初始化模型，后接多个全连接层用作分类器。训练时，每一个跟踪视频对应一个全连接层，学习普遍的特征表示用来跟踪。跟踪时，去掉训练时的全连接层，使用第一帧样本初始化一个全连接层，新的全连接层在跟踪的过程中继续微调，来适应新的目标变化。这种方法使得特征更适合于目标跟踪，效果大大提升。由此可以看出，通过视频训练的网络更适合目标跟踪这一任务</li>
-<li>速度改进：虽然深度特征具有传统特征无法比拟的抗干扰能力，但是一般提取速度较慢，而且特征中存在大量冗余。当算法精度达到一定标准之后，很多方法开始着力解决算法速度问题。<strong>孪生网络</strong>[19]是其中的一个典型例子，采用两路神经网络分别输入目标模板和搜索图像块，用来进行模板匹配或候选样本分类。其中一路神经网络对于模板信息的保存可以提供跟踪物体先验信息，取代网络在线更新，大大节省了速度。另外，<strong>对深度特征进行降维或自适应选择</strong>也是加速算法的有效途径。由于深度神经网络复杂的计算及模型更新时繁琐的系数，现存大部分深度目标跟踪算法速度都比较慢。很多深度目标跟踪算法采用<strong>小型神经网络（如VGG-M）</strong>来提特征。另外，跟踪中只给定第一帧目标位置，缺少跟踪物体先验信息，这就<strong>要求模型实时更新</strong>来确保跟踪精度，而这在深度目标跟踪算法中往往非常耗时。一些算法采用孪生网络结构来保存先验信息，代替模型在线更新，使得算法速度得以提高。深度特征的高维度也会影响跟踪算法的速度，如果能够提出有效的特征压缩方法，不管对算法速度还是精度都会有所帮助。只有高速且有效地算法才具有实际的应用价值</li>
+<li>速度改进：虽然深度特征具有传统特征无法比拟的抗干扰能力，但是一般提取速度较慢，而且特征中存在大量冗余。当算法精度达到一定标准之后，很多方法开始着力解决算法速度问题。<strong>孪生网络</strong>[19]是其中的一个典型例子，采用两路神经网络分别输入目标模板和搜索图像块，用来进行模板匹配或候选样本分类。其中一路神经网络对于模板信息的保存可以提供跟踪物体先验信息，取代网络在线更新，大大节省了速度。另外，<strong>对深度特征进行降维或自适应选择</strong>也是加速算法的有效途径。由于深度神经网络复杂的计算及模型更新时繁琐的系数，现存大部分深度目标跟踪算法速度都比较慢。很多深度目标跟踪算法采用<strong>小型神经网络（如VGG-M）<strong>来提特征。另外，跟踪中只给定第一帧目标位置，缺少跟踪物体先验信息，这就</strong>要求模型实时更新</strong>来确保跟踪精度，而这在深度目标跟踪算法中往往非常耗时。一些算法采用孪生网络结构来保存先验信息，代替模型在线更新，使得算法速度得以提高。深度特征的高维度也会影响跟踪算法的速度，如果能够提出有效的特征压缩方法，不管对算法速度还是精度都会有所帮助。只有高速且有效地算法才具有实际的应用价值</li>
 </ul>
 <hr>
-<h1><span id="cs231n">CS231n</span></h1><h2><span id="data-driven数据驱动">Data Driven/数据驱动</span></h2><ul>
+<h1><span id="cs231n">CS231n</span></h1>
+<h2><span id="data-driven数据驱动">Data Driven/数据驱动</span></h2>
+<ul>
 <li>以数据/样本驱动，训练模型，进行预测</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(images, labels)</span>:</span></span><br><span class="line">    <span class="comment">#Machine learning</span></span><br><span class="line">    <span class="keyword">return</span> model</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(model, test_images)</span>:</span></span><br><span class="line">    <span class="comment">#use model to predict labels</span></span><br><span class="line">    <span class="keyword">return</span> test_labels</span><br></pre></td></tr></table></figure>
@@ -310,33 +323,37 @@
 <li>test_data/测试集：仅预测算法在未见新数据上的</li>
 </ul>
 <hr>
-<h2><span id="linear-classifier线性分类">Linear Classifier/线性分类</span></h2><ul>
-<li><p>将训练数据浓缩于参数W/θ中，但每个类别只能学习一个单独模板</p>
-</li>
-<li><p>$f(x,W)=Wx+b$</p>
+<h2><span id="linear-classifier线性分类">Linear Classifier/线性分类</span></h2>
 <ul>
-<li>W:$10*3072$ ，有十类时<ul>
+<li>
+<p>将训练数据浓缩于参数W/θ中，但每个类别只能学习一个单独模板</p>
+</li>
+<li>
+<p>$f(x,W)=Wx+b$</p>
+</li>
+<li>
+<p>W:$10*3072$ ，有十类时</p>
+<ul>
 <li>x:$3072<em>1$ ， 图片为$32</em>32*3$时</li>
 <li>b:$10*1$ ， 有十类时</li>
 <li>结果得分:$10*1$</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <hr>
-<h2><span id="loss-function损失函数">Loss Function/损失函数</span></h2><ul>
+<h2><span id="loss-function损失函数">Loss Function/损失函数</span></h2>
+<ul>
 <li>将W输入，输出得分，定量地估计W的好坏</li>
 <li>$f(x, W)=Wx$</li>
-<li>$L=\frac{1}{N}\sum_iL_i(f(x_i,W),y_i)+\lambda R(W)$<ul>
-<li>N：样本数<ul>
+<li>$L=\frac{1}{N}\sum_iL_i(f(x_i,W),y_i)+\lambda R(W)$</li>
+<li>N：样本数
+<ul>
 <li>$\lambda R(W)$：正则化项</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>Multi-class SVM LOSS：<ul>
-<li>$L_i=\sum_{j\not=y_i}\max(0,s_j-s_{y_i}+margin)$<ul>
+<li>Multi-class SVM LOSS：</li>
+<li>$L_i=\sum_{j\not=y_i}\max(0,s_j-s_{y_i}+margin)$
+<ul>
 <li>$s=f(x,W)$</li>
 <li>i：当前对第i个样本的得分计算</li>
 <li>$s_j$：当前样本对第j类的得分</li>
@@ -345,31 +362,31 @@
 <li>释义：不正确分类上损失之和，且正确分类得分超出错误分类得分margin以上时损失为0</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>Softmax Loss：<ul>
-<li>$P(Y=k\mid X=x_i)=\frac{e^s k}{\sum_j e^s j}$<ul>
+<li>Softmax Loss：</li>
+<li>$P(Y=k\mid X=x_i)=\frac{e^s k}{\sum_j e^s j}$
+<ul>
 <li>$s=f(x_i;W)$</li>
 <li>最小化$L_i=-\log P(Y=y_i\mid X=x_i)$</li>
 <li>希望正确分类的概率趋近1</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <hr>
-<h2><span id="optimization优化梯度下降">Optimization/优化/梯度下降</span></h2><p>梯度下降是指，在给定待优化的模型参数$\theta\in R^d$和目标函数$J(\theta)$，算法通过沿梯度 $\nabla _\theta J(\theta)$的相反方向更新$\theta$来最小化$J(\theta)$。学习率$\eta$决定了每一时刻的更新步长。</p>
+<h2><span id="optimization优化梯度下降">Optimization/优化/梯度下降</span></h2>
+<p>梯度下降是指，在给定待优化的模型参数$\theta\in R^d$和目标函数$J(\theta)$，算法通过沿梯度 $\nabla _\theta J(\theta)$的相反方向更新$\theta$来最小化$J(\theta)$。学习率$\eta$决定了每一时刻的更新步长。</p>
 <p>流程如下：</p>
 <ol>
-<li><p>计算目标函数关于参数的梯度</p>
-<p> $g_t=\nabla_\theta J(\theta)$</p>
+<li>
+<p>计算目标函数关于参数的梯度</p>
+<p>$g_t=\nabla_\theta J(\theta)$</p>
 </li>
-<li><p>根据历史梯度计算一阶和二阶动量</p>
+<li>
+<p>根据历史梯度计算一阶和二阶动量</p>
 </li>
 </ol>
 <p>$m_t=\phi (g_1,g_2,\cdots ,g_t)$</p>
-<p>$v_t=\psi(g_1,,g_2,\cdots ,g_t)$</p>
-<ol>
+<p>$v_t=\psi(g_1,g_2,\cdots ,g_t)$</p>
+<ol start="3">
 <li>更新模型参数</li>
 </ol>
 <p>$\theta_{t+1}=\theta_t-\frac{1}{\sqrt{v_t+\epsilon}}m_t$</p>
@@ -378,100 +395,126 @@
 <li>梯度和X的形状一样，元素告诉我们相关方向上函数f的斜率</li>
 <li>梯度指向函数增加最快的方向，负梯度方向即下降最快方向</li>
 <li>则位置任意方向斜率=梯度与单位方向向量的点积</li>
-<li>根据梯度决定下一次更新方向 </li>
+<li>根据梯度决定下一次更新方向</li>
 <li>$\nabla_WL=\frac{1}{N}\sum_i\nabla_WL_i(f(x_i,W),y_i)+\lambda \nabla_WR(W)$</li>
 <li>Gradient Descent/梯度下降</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">  dw = compute_grad(loss_fun, data, weights)</span><br><span class="line">  weight += - step_size * dw</span><br></pre></td></tr></table></figure>
-<h3><span id="stochastic-gradient-descentsgd随机梯度下降">Stochastic Gradient Descent(SGD)/随机梯度下降</span></h3><ul>
-<li><p>$m_t=\eta g_t$</p>
+<h3><span id="stochastic-gradient-descentsgd随机梯度下降">Stochastic Gradient Descent(SGD)/随机梯度下降</span></h3>
+<ul>
+<li>
+<p>$m_t=\eta g_t$</p>
 </li>
-<li><p>$v_t=I^2$</p>
-<p>  $\epsilon=0$</p>
-<p>  $\theta_{i+1}=\theta_i-\eta g_t$</p>
+<li>
+<p>$v_t=I^2$</p>
+<p>$\epsilon=0$</p>
+<p>$\theta_{i+1}=\theta_i-\eta g_t$</p>
 </li>
-<li><p>N过大，只取部分data计算，以估计整体梯度</p>
+<li>
+<p>N过大，只取部分data计算，以估计整体梯度</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">	data_batch = sample_training_data(data, <span class="number">256</span>)</span><br><span class="line">  dw = compute_grad(loss_fun, data_batch, weights)</span><br><span class="line">  weight += - step_size * dw</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>SGD的问题：</p>
+<li>
+<p>SGD的问题：</p>
 <ul>
-<li><p>当对一个方向敏感，对其他方向迟钝，会形成之字形路径，收敛极其缓慢。下图仅二维两个参数</p>
-<p>  <img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/sgd_problem.png" alt></p>
+<li>
+<p>当对一个方向敏感，对其他方向迟钝，会形成之字形路径，收敛极其缓慢。下图仅二维两个参数</p>
+<p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/sgd_problem.png" alt></p>
 </li>
-<li><p>局部最小值和鞍点处，会卡住。维度增加，鞍点会快速增加</p>
-<p>  <img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/sgd_problem2.png" alt></p>
+<li>
+<p>局部最小值和鞍点处，会卡住。维度增加，鞍点会快速增加</p>
+<p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/sgd_problem2.png" alt></p>
 </li>
-<li><p>易受噪声影响</p>
+<li>
+<p>易受噪声影响</p>
 </li>
-<li><p>步长恒定，速度慢</p>
+<li>
+<p>步长恒定，速度慢</p>
 </li>
 </ul>
 </li>
 </ul>
-<h3><span id="sgdmomentum结合动量的sgd">SGD+Momentum/结合动量的SGD</span></h3><ul>
-<li><p>引入一阶动量</p>
-<p>  $m_t=\gamma m_{t-1}+\eta g_t$</p>
+<h3><span id="sgdmomentum结合动量的sgd">SGD+Momentum/结合动量的SGD</span></h3>
+<ul>
+<li>
+<p>引入一阶动量</p>
+<p>$m_t=\gamma m_{t-1}+\eta g_t$</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vx = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">  dx = compute_grad(x)</span><br><span class="line">  vx = rho * vx + learning_rate * dx</span><br><span class="line">  x -= vx</span><br></pre></td></tr></table></figure>
 <p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/sgd_problem1.png" alt></p>
 <p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/SGDM.jpg" alt="SGDM"></p>
-<h3><span id="sgdnesterov">SGD+Nesterov</span></h3><ul>
+<h3><span id="sgdnesterov">SGD+Nesterov</span></h3>
+<ul>
 <li>不同于SGDM的梯度与速度向量之和的方向作为新的步进方向，Nesterov动量，是先从当前点，沿速度方向步进，在新位置求梯度向量，然后返回起始点向梯度方向步进。</li>
 </ul>
 <p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/SGD+Nesterov.png" alt></p>
 <ul>
-<li>凸优化问题较好，非凸会有问题</li>
-<li>$v_{t+1}=\rho v_t-\alpha\nabla f(x_t+\rho v_t)$</li>
-<li><p>$x_{t+1}=x_t+v_{t+1}$</p>
+<li>
+<p>凸优化问题较好，非凸会有问题</p>
 </li>
-<li><p>以上形式，会导致运算增加。变量代换，便于网络同时求梯度和损失</p>
+<li>
+<p>$v_{t+1}=\rho v_t-\alpha\nabla f(x_t+\rho v_t)$</p>
+</li>
+<li>
+<p>$x_{t+1}=x_t+v_{t+1}$</p>
+</li>
+<li>
+<p>以上形式，会导致运算增加。变量代换，便于网络同时求梯度和损失</p>
 </li>
 </ul>
 <p>$y_t=x_t+\rho v_t$</p>
 <p>$v_{t+1}=\rho v_t-\alpha\nabla f(y_t)$</p>
 <p>$y_{t+1}=y_t-\rho v_t + (1+\rho)v_{t+1}=y_t+v_{t+1}+\rho(v_{t+1}-v_t)$</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dx = compute_gradient(x)</span><br><span class="line">old_v = v</span><br><span class="line">v = rho * v - lr * dx</span><br><span class="line">x += -rho * old_v + (<span class="number">1</span> + rho) * v</span><br></pre></td></tr></table></figure>
-<h3><span id="adagrad">AdaGrad</span></h3><p><strong>SGD、SGD-M均是以相同的学习率去更新$\theta$的各个分量。而深度学习模型中往往涉及大量的参数，不同参数的更新频率往往有所区别。对于更新不频繁的参数，我们希望单次步长更大，多学习一些知识；对于更新频繁的参数，我们则希望步长较小，使得学习到的参数更稳定，不至于被单个样本影响太多。即自适应学习率。</strong></p>
+<h3><span id="adagrad">AdaGrad</span></h3>
+<p><strong>SGD、SGD-M均是以相同的学习率去更新$\theta$的各个分量。而深度学习模型中往往涉及大量的参数，不同参数的更新频率往往有所区别。对于更新不频繁的参数，我们希望单次步长更大，多学习一些知识；对于更新频繁的参数，我们则希望步长较小，使得学习到的参数更稳定，不至于被单个样本影响太多。即自适应学习率。</strong></p>
 <ul>
 <li>引入二阶动量，加速非敏方向，减慢敏感方向速度</li>
 </ul>
-<p>$v_t=diag(\sum^t_{i=1}g^2_{i,1},\sum^t_{i=1}g^2_{i,2},\cdots,\sum^t_{i=1}g^2_{i,d})$</p>
+<p>$v_t=diag(\sum<sup>t_{i=1}g</sup>2_{i,1},\sum<sup>t_{i=1}g</sup>2_{i,2},\cdots,\sum<sup>t_{i=1}g</sup>2_{i,d})$</p>
 <p>$v_t\in R^{d\times d}$，对角矩阵，元素为参数第$i$维从初始时刻到$t$时的梯度平方和，学习率等效为$\eta/\sqrt{v_t+\epsilon}$，对此前频繁更新的参数，其二阶动量的对应分量较大，学习率就小，反之同理</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">grad_squared = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">  dx = compute_grad(x)</span><br><span class="line">  grad_squared += dx * dx</span><br><span class="line">  x -= learning_rate * dx / (np.sqrt(grad_squared) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>步长越来越小，凸函数时是好的特性（接近极值时减慢、收敛），非凸时不好（局部极值卡住）</li>
 </ul>
-<h3><span id="rmsprop">RMSProp</span></h3><ul>
-<li><p>计算二阶动量时只关注最近的下降梯度，其二阶动量采用<em>指数移动平均公式</em>计算，这样即可避免二阶动量持续累积的问题。优点保留，但存在平方项持续减少，训练缓慢的隐患</p>
-<p>  $v_t=\beta_2 v_{t-1}+(1-\beta_2)\cdot diag(g_t\bigodot g_t)​$</p>
+<h3><span id="rmsprop">RMSProp</span></h3>
+<ul>
+<li>
+<p>计算二阶动量时只关注最近的下降梯度，其二阶动量采用<em>指数移动平均公式</em>计算，这样即可避免二阶动量持续累积的问题。优点保留，但存在平方项持续减少，训练缓慢的隐患</p>
+<p>$v_t=\beta_2 v_{t-1}+(1-\beta_2)\cdot diag(g_t\bigodot g_t)​$</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">grad_squared = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">  dx = compute_grad(x)</span><br><span class="line">  grad_squared = decay_rate * grad_squared + (<span class="number">1</span> - decay_rate) * dx * dx</span><br><span class="line">  x -= learning_rate * dx / (np.sqrt(grad_squared) + <span class="number">1e-7</span>)</span><br></pre></td></tr></table></figure>
-<h3><span id="adam">Adam</span></h3><ul>
-<li><p>对一阶动量也用指数移动平均公式</p>
-<p>  $m_t=\eta[\beta_1m_{t-1}+(1-\beta_1)g_t]$</p>
-<p>  $m_t=\beta_1m_{t-1}+(1-\beta_1)g_t$</p>
-<p>  $v_t=\beta_2 v_{t-1}+（1-\beta_2)\cdot diag(g_t\bigodot g_t)$</p>
-<p>  $\hat{m_t}=\frac{m_t}{1-\beta^t_1}$</p>
-<p>  $\hat{v_t}=\frac{v_t}{1-\beta^t_2}$</p>
-<p>  $\theta_{t+1}=\theta_t-\frac{1}{\sqrt{\hat{v_t}+\epsilon}}\hat{m_t}$</p>
+<h3><span id="adam">Adam</span></h3>
+<ul>
+<li>
+<p>对一阶动量也用指数移动平均公式</p>
+<p>$m_t=\eta[\beta_1m_{t-1}+(1-\beta_1)g_t]$</p>
+<p>$m_t=\beta_1m_{t-1}+(1-\beta_1)g_t$</p>
+<p>$v_t=\beta_2 v_{t-1}+（1-\beta_2)\cdot diag(g_t\bigodot g_t)$</p>
+<p>$\hat{m_t}=\frac{m_t}{1-\beta^t_1}$</p>
+<p>$\hat{v_t}=\frac{v_t}{1-\beta^t_2}$</p>
+<p>$\theta_{t+1}=\theta_t-\frac{1}{\sqrt{\hat{v_t}+\epsilon}}\hat{m_t}$</p>
 </li>
-<li><p>结合了SGD、动量、AdaGrad/RMSProp</p>
+<li>
+<p>结合了SGD、动量、AdaGrad/RMSProp</p>
 <ul>
 <li>动量momentum：克服鞍点、梯度为0但非极值点等一系列问题</li>
 <li>AdaGrad/RMSProp：减少敏感方向的权重，增加非敏方向权重</li>
 <li>偏置校正：以防初始化不佳时初期除以很小的数导致步长过长</li>
 </ul>
 </li>
-<li><p>实践证明，虽然在训练早期 Adam 拥有出色的收敛速度，使用其训练的模型的最终泛化能力却并不如使用朴素 SGD 训练的好（体现在 Adam 训练的模型最终收敛时的 test error 更大），结果可能不收敛，可能找不到全局最优解。二阶动量是固定时间窗口内的累积，随着时间窗口的变化，遇到的数据可能发生巨变，使得二阶动量可能会时大时小，不是单调变化。这就可能在训练后期引起学习率的震荡，导致模型无法收敛。</p>
+<li>
+<p>实践证明，虽然在训练早期 Adam 拥有出色的收敛速度，使用其训练的模型的最终泛化能力却并不如使用朴素 SGD 训练的好（体现在 Adam 训练的模型最终收敛时的 test error 更大），结果可能不收敛，可能找不到全局最优解。二阶动量是固定时间窗口内的累积，随着时间窗口的变化，遇到的数据可能发生巨变，使得二阶动量可能会时大时小，不是单调变化。这就可能在训练后期引起学习率的震荡，导致模型无法收敛。</p>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">first_moment = <span class="number">0</span></span><br><span class="line">second_moment = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(num_iterations):</span><br><span class="line">  dx = compute_gradient(x)</span><br><span class="line">  first_moment = rho * first_moment + (<span class="number">1</span> - rho) * dx	<span class="comment"># Momentum</span></span><br><span class="line">  second_moment = decay_rate * second_moment + (<span class="number">1</span> - decay_rate) * dx * dx	<span class="comment"># AdaGrad/RMSProp</span></span><br><span class="line">  first_unbias = first_moment / (<span class="number">1</span> - rho ** t)</span><br><span class="line">  second_unbias = second_moment/ (<span class="number">1</span> - decay_rate ** t)	<span class="comment"># Bias correction</span></span><br><span class="line">  x -= learning_rate * first_unbias / (np.sqrt(second_unbias) + <span class="number">1e-7</span>)	<span class="comment"># AdaGrad/RMSProp</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>典型起始参数设置：</p>
+<li>
+<p>典型起始参数设置：</p>
 <ul>
 <li>beta1 = 0.9</li>
 <li>beta2 = 0.999</li>
@@ -479,165 +522,226 @@
 </ul>
 </li>
 </ul>
-<h3><span id="gif">GIF</span></h3><p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/optimizations on loss surface contours.gif" alt></p>
+<h3><span id="gif">GIF</span></h3>
+<p>![](CS231n笔记/optimizations on loss surface contours.gif)</p>
 <p>不同算法在损失面等高线图中的学习过程，它们均同同一点出发，但沿着不同路径达到最小值点。其中 Adagrad、Adadelta、RMSprop 从最开始就找到了正确的方向并快速收敛；SGD 找到了正确方向但收敛速度很慢；SGD-M 和 NAG 最初都偏离了航道，但也能最终纠正到正确方向，SGD-M 偏离的惯性比 NAG 更大。</p>
-<p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/optimizations on saddle point.gif" alt></p>
+<p>![](CS231n笔记/optimizations on saddle point.gif)</p>
 <p>不同算法在鞍点处的表现。这里，SGD、SGD-M、NAG 都受到了鞍点的严重影响，尽管后两者最终还是逃离了鞍点；而 Adagrad、RMSprop、Adadelta 都很快找到了正确的方向。</p>
-<h3><span id="adabound">AdaBound</span></h3><p><em>Adaptive Gradient Methods with Dynamic Bound of Learning Rate 动态裁剪学习率的自适应梯度下降方法</em></p>
-<h4><span id="背景">背景</span></h4><ul>
-<li><p><a href="http://link.zhihu.com/?target=http%3A//papers.nips.cc/paper/7003-the-marginal-value-of-adaptive-gradient-methods-in-machine-learning">The Marginal Value of Adaptive Gradient Methods in Machine Learning</a>. 作者给出了一个有趣的二分类问题构造，证明了在此构造下 SGD 可以收敛至最优解而 Adaptive 方法会收敛至一个泛化能力很差的结果（模型对所有输入都会始终预测为true）；并在若干个经典任务上实验证实 SGD 方法都达到了最低的test error。<strong>推测Adaptive方法泛化能力不强的原因是各个参数的更新步长不同所致。</strong></p>
+<h3><span id="adabound">AdaBound</span></h3>
+<p><em>Adaptive Gradient Methods with Dynamic Bound of Learning Rate 动态裁剪学习率的自适应梯度下降方法</em></p>
+<h4><span id="背景">背景</span></h4>
+<ul>
+<li>
+<p><a href="http://link.zhihu.com/?target=http%3A//papers.nips.cc/paper/7003-the-marginal-value-of-adaptive-gradient-methods-in-machine-learning">The Marginal Value of Adaptive Gradient Methods in Machine Learning</a>. 作者给出了一个有趣的二分类问题构造，证明了在此构造下 SGD 可以收敛至最优解而 Adaptive 方法会收敛至一个泛化能力很差的结果（模型对所有输入都会始终预测为true）；并在若干个经典任务上实验证实 SGD 方法都达到了最低的test error。<strong>推测Adaptive方法泛化能力不强的原因是各个参数的更新步长不同所致。</strong></p>
 </li>
-<li><p><a href="http://link.zhihu.com/?target=https%3A//openreview.net/forum%3Fid%3DryQu7f-RZ">On the Convergence of Adam and Beyond</a>. ICLR 2018 best paper。文章包含了大量理论推导，证明了在特定初始条件下 Adam 存在收敛问题，并将问题归因于更新步长不是单调下降的；作者给出了一个修正方案保证了单调性，声称可以达到更低的 training loss。</p>
-<p>  主要攻击的是 Adam 有可能无法收敛至全局最优解。虽然本文荣获 ICLR 2018 best paper，但个人认为这篇 paper 的<strong>意义十分有限，同时有很大误导性</strong>。</p>
-<p>  其一，作者通过构造一个非常极端的例子证明 Adam 可能不收敛，但该构造是极其极端且不应该在实际情况中出现的：拥有少量频次非常低的、梯度却非常大的数据点的数据 —— 在实际应用中，这些点难道不就是 outlier 么？如果按作者的构造，一百份数据中才有一组这样的数据，而如果这本身不是由于数据的 bias 造成的，那模型理应去拟合数量多的数据以达到更好的泛化能力。同时，在作者的构造下，如果去除这些罕见数据点，那么 Adam 会与不去除一样收敛到相同位置；而 AMSGrad (作者提出的新方法) 则会因为罕见数据点是否存在的不同而收敛到完全不同的结果。个人认为<strong>这个构造反而是证明了 Adam 比 AMSGrad 更能应对 outlier 值</strong>，极端构造下的收敛性，并不意味着什么。</p>
-<p>  其二，作者的实验中用修正方法 AMSGrad 和原始 Adam 进行比较，证明修正方案可以获得比 Adam 更低的 training loss。然而，<strong>training loss 的意义对于一个模型是十分有限的</strong>。模型的 test loss 和 test performance (通常用与 loss function 不同的评价指标反映，例如分类问题中使用 accuracy 而不是 cross entropy) 远比 training loss 重要。事实上，<strong>Adam 很多时候都能在训练集上获得比 SGD 更低的 loss 却在测试集上表现更差</strong>。 追求低的 training loss 很有可能是本末倒置的。有同样质疑的人也对文章进行了复现，博客 <a href="http://link.zhihu.com/?target=https%3A//fdlm.github.io/post/amsgrad/">Experiments with AMSGrad</a> 也通过实验打脸作者 claim 的 「AMSGrad training loss 低也带来 test loss 低」的说法是错误的。</p>
-<p>  其三，最后说作者的修正方案，是通过手动维护二阶动量单调增从而使得更新步长单调减。而这与我的实验直觉是相悖的：Adam 最后的步长往往不是过大而是过小了。事实上，[3] 中的实验也证明了 Adam 训练末期过小的步长是导致泛化性能差的重要原因。</p>
-<p>  相对于收敛性，泛化能力，也即模型在未知数据（狭义的讲，即测试集）上的 performance 对模型而言才是更加重要的性质。</p>
+<li>
+<p><a href="http://link.zhihu.com/?target=https%3A//openreview.net/forum%3Fid%3DryQu7f-RZ">On the Convergence of Adam and Beyond</a>. ICLR 2018 best paper。文章包含了大量理论推导，证明了在特定初始条件下 Adam 存在收敛问题，并将问题归因于更新步长不是单调下降的；作者给出了一个修正方案保证了单调性，声称可以达到更低的 training loss。</p>
+<p>主要攻击的是 Adam 有可能无法收敛至全局最优解。虽然本文荣获 ICLR 2018 best paper，但个人认为这篇 paper 的<strong>意义十分有限，同时有很大误导性</strong>。</p>
+<p>其一，作者通过构造一个非常极端的例子证明 Adam 可能不收敛，但该构造是极其极端且不应该在实际情况中出现的：拥有少量频次非常低的、梯度却非常大的数据点的数据 —— 在实际应用中，这些点难道不就是 outlier 么？如果按作者的构造，一百份数据中才有一组这样的数据，而如果这本身不是由于数据的 bias 造成的，那模型理应去拟合数量多的数据以达到更好的泛化能力。同时，在作者的构造下，如果去除这些罕见数据点，那么 Adam 会与不去除一样收敛到相同位置；而 AMSGrad (作者提出的新方法) 则会因为罕见数据点是否存在的不同而收敛到完全不同的结果。个人认为<strong>这个构造反而是证明了 Adam 比 AMSGrad 更能应对 outlier 值</strong>，极端构造下的收敛性，并不意味着什么。</p>
+<p>其二，作者的实验中用修正方法 AMSGrad 和原始 Adam 进行比较，证明修正方案可以获得比 Adam 更低的 training loss。然而，<strong>training loss 的意义对于一个模型是十分有限的</strong>。模型的 test loss 和 test performance (通常用与 loss function 不同的评价指标反映，例如分类问题中使用 accuracy 而不是 cross entropy) 远比 training loss 重要。事实上，<strong>Adam 很多时候都能在训练集上获得比 SGD 更低的 loss 却在测试集上表现更差</strong>。 追求低的 training loss 很有可能是本末倒置的。有同样质疑的人也对文章进行了复现，博客 <a href="http://link.zhihu.com/?target=https%3A//fdlm.github.io/post/amsgrad/">Experiments with AMSGrad</a> 也通过实验打脸作者 claim 的 「AMSGrad training loss 低也带来 test loss 低」的说法是错误的。</p>
+<p>其三，最后说作者的修正方案，是通过手动维护二阶动量单调增从而使得更新步长单调减。而这与我的实验直觉是相悖的：Adam 最后的步长往往不是过大而是过小了。事实上，[3] 中的实验也证明了 Adam 训练末期过小的步长是导致泛化性能差的重要原因。</p>
+<p>相对于收敛性，泛化能力，也即模型在未知数据（狭义的讲，即测试集）上的 performance 对模型而言才是更加重要的性质。</p>
 </li>
-<li><p><a href="http://link.zhihu.com/?target=https%3A//arxiv.org/abs/1712.07628">Improving Generalization Performance by Switching from Adam to SGD</a>. 该文章指出了 Adam 最终的 test error 往往小于 SGD 的现象，给出一个先用 Adam 在初期进行训练加速收敛，并在合适时机切换为 SGD，追求更好的最终泛化能力的训练策略。<strong>实验表明训练后期更新步长过小也是原因之一。</strong></p>
+<li>
+<p><a href="http://link.zhihu.com/?target=https%3A//arxiv.org/abs/1712.07628">Improving Generalization Performance by Switching from Adam to SGD</a>. 该文章指出了 Adam 最终的 test error 往往小于 SGD 的现象，给出一个先用 Adam 在初期进行训练加速收敛，并在合适时机切换为 SGD，追求更好的最终泛化能力的训练策略。<strong>实验表明训练后期更新步长过小也是原因之一。</strong></p>
 </li>
-<li><p>综上而言，<strong>在训练后期通过限制更新步长下界并且想办法使得各个参数更新步长相近，是修正 Adam 的大的方向</strong>。先用 Adam 后切 SGD 固然是可行的，但仍然显得不够优雅，如果能用一个统一的迭代算法兼顾Adam的快速收敛能力和SGD的好的泛化能力那就很棒了。</p>
+<li>
+<p>综上而言，<strong>在训练后期通过限制更新步长下界并且想办法使得各个参数更新步长相近，是修正 Adam 的大的方向</strong>。先用 Adam 后切 SGD 固然是可行的，但仍然显得不够优雅，如果能用一个统一的迭代算法兼顾Adam的快速收敛能力和SGD的好的泛化能力那就很棒了。</p>
 </li>
 </ul>
-<h4><span id="论文内容">论文内容</span></h4><ol>
-<li><p>初步试验：</p>
-<p> 使用Adam算法，在ResNet-34（残差网络模型，复杂度低）中随机选取了9个卷积核和1个全连接层偏置向量，并从中再各随机取样一个维度的变量，统计其在CIFAR-10上训练末期的学习率。采样参数的学习率，每个单元格包含一个通过对学习率进行对数运算得到的值。颜色越浅的单元格代表越小的学习率。可见在后期确实存在学习率的极端值。</p>
-<p> <img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/AdaBound_figure1.png" alt></p>
+<h4><span id="论文内容">论文内容</span></h4>
+<ol>
+<li>
+<p>初步试验：</p>
+<p>使用Adam算法，在ResNet-34（残差网络模型，复杂度低）中随机选取了9个卷积核和1个全连接层偏置向量，并从中再各随机取样一个维度的变量，统计其在CIFAR-10上训练末期的学习率。采样参数的学习率，每个单元格包含一个通过对学习率进行对数运算得到的值。颜色越浅的单元格代表越小的学习率。可见在后期确实存在学习率的极端值。</p>
+<p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/AdaBound_figure1.png" alt></p>
 </li>
-<li><p>theorem3 证明极端学习率确实存在潜在的负面影响。</p>
+<li>
+<p>theorem3 证明极端学习率确实存在潜在的负面影响。</p>
 </li>
-<li><p>对学习率动态裁剪，将实际学习率限制在下界$\eta_l$ 和上界$\eta_u$之间。</p>
+<li>
+<p>对学习率动态裁剪，将实际学习率限制在下界$\eta_l$ 和上界$\eta_u$之间。</p>
+</li>
+</ol>
 <p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/AdaBound_clip.png" alt></p>
-<p>容易发现，SGD 和 Adam 分别是应用梯度裁剪的特殊情况：学习率为$\alpha^{<em>}$的SGD可视为$\eta_𝑙=\eta_𝑢=𝛼^∗$；Adam可视为 $\eta_𝑙=0$ ,$\eta_𝑢=\infty$。其他取值则介于两者之间。那么，如果用两个关于 t 的函数来取代固定值作为新的上下界，其中$\eta_l(t)$从0逐渐收敛至$\alpha^</em>$，$\eta_u(t)$从$\infty$也逐渐收敛至$\alpha^*$，那么我们就成功实现了从Adam到SGD的动态过渡。在这一设置下，在训练早期由于上下界对学习率的影响很小，算法更加接近于Adam；而随着时间增长裁减区间越来越收紧，模型的学习率逐渐趋于稳定，在末期更加贴近于SGD。</p>
+<p>容易发现，SGD 和 Adam 分别是应用梯度裁剪的特殊情况：学习率为$\alpha<sup>{*}$的SGD可视为$\eta_𝑙=\eta_𝑢=𝛼</sup>∗$；Adam可视为 $\eta_𝑙=0$ ,$\eta_𝑢=\infty$。其他取值则介于两者之间。那么，如果用两个关于 t 的函数来取代固定值作为新的上下界，其中$\eta_l(t)$从0逐渐收敛至$\alpha<sup>*$，$\eta_u(t)$从$\infty$也逐渐收敛至$\alpha</sup>*$，那么我们就成功实现了从Adam到SGD的动态过渡。在这一设置下，在训练早期由于上下界对学习率的影响很小，算法更加接近于Adam；而随着时间增长裁减区间越来越收紧，模型的学习率逐渐趋于稳定，在末期更加贴近于SGD。</p>
+<ol start="4">
+<li>
+<p>结果在训练前期可以快速且平滑收敛的情况下，同时在末期得到了优秀的最终性能，可以取得与 SGD 类似甚至更好的结果。</p>
 </li>
-<li><p>结果在训练前期可以快速且平滑收敛的情况下，同时在末期得到了优秀的最终性能，可以取得与 SGD 类似甚至更好的结果。</p>
-</li>
-<li><p>对超参数更低的敏感性，更高的鲁棒性。</p>
+<li>
+<p>对超参数更低的敏感性，更高的鲁棒性。</p>
 </li>
 </ol>
 <hr>
-<h2><span id="back-propagation反向传播">Back-propagation/反向传播</span></h2><ul>
-<li><p>将复杂函数化为计算图的形式，递归地调用链式法则，计算每个变量的梯度</p>
+<h2><span id="back-propagation反向传播">Back-propagation/反向传播</span></h2>
+<ul>
+<li>
+<p>将复杂函数化为计算图的形式，递归地调用链式法则，计算每个变量的梯度</p>
 </li>
-<li><p>加法门</p>
+<li>
+<p>加法门</p>
 <ul>
 <li>gradient distributor/梯度传递</li>
 <li>两下游梯度 = 上游的梯度</li>
 </ul>
 </li>
-<li><p>max门</p>
+<li>
+<p>max门</p>
 <ul>
 <li>gradient router/梯度路由</li>
 <li>小的下游梯度为0，大的下游梯度 = 上游的梯度</li>
 </ul>
 </li>
-<li><p>乘法门</p>
+<li>
+<p>乘法门</p>
 <ul>
 <li>gradient switcher/梯度转换</li>
 <li>获取上游梯度，根据另一下游分支的值对本下游缩放</li>
 </ul>
 </li>
-<li><p>当一个下游节点接两个上游节点时，梯度再次相加</p>
+<li>
+<p>当一个下游节点接两个上游节点时，梯度再次相加</p>
 </li>
-<li><p>Jacobian matrix/雅可比矩阵</p>
-<script type="math/tex; mode=display">
-  \begin{matrix}
-  \frac{\partial y_1}{\partial x_1} & \cdots & \frac{\partial y_1}{\partial x_n}\\\
-  \vdots & \ddots & \vdots\\\
-  \frac{\partial y_m}{\partial x_1} & \cdots & \frac{\partial y_m}{\partial x_n}\\\
-  \end{matrix}</script></li>
-<li><p>高维情况时，如输入为向量，梯度变为了雅可比矩阵</p>
+<li>
+<p>Jacobian matrix/雅可比矩阵<br>
+$$<br>
+\begin{matrix}<br>
+\frac{\partial y_1}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_1}{\partial x_n}\<br>
+\vdots &amp; \ddots &amp; \vdots\<br>
+\frac{\partial y_m}{\partial x_1} &amp; \cdots &amp; \frac{\partial y_m}{\partial x_n}\<br>
+\end{matrix}<br>
+$$</p>
 </li>
-<li><p>$\frac{\partial L}{\partial x}=\frac{\partial f}{\partial x} \frac{\partial L}{\partial f}$，$\frac{\partial f}{\partial x}$即为雅可比矩阵</p>
+<li>
+<p>高维情况时，如输入为向量，梯度变为了雅可比矩阵</p>
 </li>
-<li><p>$<br>  q = Wx =<br>  \begin{pmatrix}<br>  W_{1,1}x_1+\cdots+W_{1,n}x_n\\\<br>  \vdots\\\<br>  W_{n,1}x_1+\cdots+W_{n,n}x_n\\\<br>  \end{pmatrix}<br>  $</p>
+<li>
+<p>$\frac{\partial L}{\partial x}=\frac{\partial f}{\partial x} \frac{\partial L}{\partial f}$，$\frac{\partial f}{\partial x}$即为雅可比矩阵</p>
 </li>
-<li><p>$<br>  \frac{\partial q_k}{\partial W_{i,j}}=1_{k=j}x_j<br>  $</p>
+<li>
+<p>$<br>
+q = Wx =<br>
+\begin{pmatrix}<br>
+W_{1,1}x_1+\cdots+W_{1,n}x_n\<br>
+\vdots\<br>
+W_{n,1}x_1+\cdots+W_{n,n}x_n\<br>
+\end{pmatrix}<br>
+$</p>
 </li>
-<li><p>$\frac{\partial q_k}{\partial x_i}=W_{k,i}$</p>
+<li>
+<p>$<br>
+\frac{\partial q_k}{\partial W_{i,j}}=1_{k=j}x_j<br>
+$</p>
 </li>
-<li><p>向量梯度大小与原向量保持一致，梯度的每个元素代表对最终函数的影响大小</p>
+<li>
+<p>$\frac{\partial q_k}{\partial x_i}=W_{k,i}$</p>
+</li>
+<li>
+<p>向量梯度大小与原向量保持一致，梯度的每个元素代表对最终函数的影响大小</p>
 </li>
 </ul>
 <hr>
-<h2><span id="regularization正则化">Regularization/正则化</span></h2><ul>
+<h2><span id="regularization正则化">Regularization/正则化</span></h2>
+<ul>
 <li>减轻模型复杂度，避免过拟合，提高模型效果</li>
 <li>增加随机噪声</li>
 <li>通常采用Batch Normalization即可，过拟合时采用以下方法</li>
 </ul>
-<h3><span id="lp范数惩罚">Lp范数惩罚</span></h3><ul>
-<li><p>$L=… + \lambda R(W)$</p>
+<h3><span id="lp范数惩罚">Lp范数惩罚</span></h3>
+<ul>
+<li>
+<p>$L=… + \lambda R(W)$</p>
 </li>
-<li><p>L2 regularization：$R(W)=\sum_k\sum_lW_{k,l}^2$</p>
+<li>
+<p>L2 regularization：$R(W)=\sum_k\sum_lW_{k,l}^2$</p>
 <ul>
 <li>对W的欧式范数进行惩罚</li>
 </ul>
 </li>
-<li>L1 regularization：$R(W)=\sum_k\sum_l\mid W_{k,l}\mid$<ul>
+<li>
+<p>L1 regularization：$R(W)=\sum_k\sum_l\mid W_{k,l}\mid$</p>
+<ul>
 <li>鼓励W稀疏</li>
 </ul>
 </li>
 </ul>
-<h3><span id="dropout">Dropout</span></h3><ul>
+<h3><span id="dropout">Dropout</span></h3>
+<ul>
 <li>每次正向传递时，在每一层随机将一部分神经元置0，且每次被置0的神经元不完全相同</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_step</span><span class="params">(X)</span>：</span></span><br><span class="line">	H1 = np.maximum(0, np.dot(W1, X) + b1)</span><br><span class="line">	U1 = np.random.rand(*H1.shape) &lt; p <span class="comment"># dropout mask</span></span><br><span class="line">	H1 *= U1 <span class="comment"># drop!</span></span><br><span class="line">  out = np.dot(W2, H1) + b2</span><br></pre></td></tr></table></figure>
 <ul>
-<li>避免特征相适应，降低过拟合 </li>
+<li>避免特征相适应，降低过拟合</li>
 <li>单一模型集成学习</li>
 <li>测试时，乘以dropout概率</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(X)</span>:</span></span><br><span class="line">  H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1) * p</span><br><span class="line">  out = np.dot(W2, H1) + b2</span><br></pre></td></tr></table></figure>
-<h3><span id="data-augmentation数据增强">Data Augmentation/数据增强</span></h3><ul>
+<h3><span id="data-augmentation数据增强">Data Augmentation/数据增强</span></h3>
+<ul>
 <li>使用翻转、裁剪、色彩抖动等方法处理过的图片进行训练</li>
 </ul>
 <hr>
-<h2><span id="transfer-learing迁移学习">Transfer Learing/迁移学习</span></h2><ul>
+<h2><span id="transfer-learing迁移学习">Transfer Learing/迁移学习</span></h2>
+<ul>
 <li>大模型，小数据训练，易过拟合，此法同样解决过拟合</li>
 <li>小数据集与大数据集相似时：先在大数据集预训练的模型，要适应小数据集，可先冻结卷积、池化层，仅重新训练全连接层或线性分类器</li>
 <li>不相似时要重训练大部分层</li>
 </ul>
 <hr>
-<h2><span id="neural-network神经网络">Neural Network/神经网络</span></h2><p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/1062917-20161117212457248-1468090428.png" alt></p>
+<h2><span id="neural-network神经网络">Neural Network/神经网络</span></h2>
+<p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/1062917-20161117212457248-1468090428.png" alt></p>
 <ul>
-<li><p>包含若干个线性层，层与层之间用非线性函数连接</p>
+<li>
+<p>包含若干个线性层，层与层之间用非线性函数连接</p>
 </li>
-<li><p>2-layer Neural Network $f=W_2*max(0,W_1 x)$</p>
+<li>
+<p>2-layer Neural Network $f=W_2*max(0,W_1 x)$</p>
 <ul>
 <li>此处max为非线性函数且有很多可选</li>
 </ul>
 </li>
-<li><p>每个节点接收多个输入，输出为$f(\sum_i w_i x_i +b)$</p>
+<li>
+<p>每个节点接收多个输入，输出为$f(\sum_i w_i x_i +b)$</p>
 <ul>
 <li>f为activation function/激活函数</li>
 </ul>
 </li>
-<li><p>将每层看作一个向量，一组神经元的集合，进而利用矩阵乘法计算输出结果</p>
+<li>
+<p>将每层看作一个向量，一组神经元的集合，进而利用矩阵乘法计算输出结果</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h1 = f(np.dot(W1, x) + b1)</span><br><span class="line">out = np.dot(W2, h1) + b2</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>多个输入x1, x2, x3为样本的多个特征值；多个样本时采用vectorization向量化，把样本压缩为向量/矩阵？同时计算。</p>
+<li>
+<p>多个输入x1, x2, x3为样本的多个特征值；多个样本时采用vectorization向量化，把样本压缩为向量/矩阵？同时计算。</p>
 </li>
-<li><p>输入$(N,D)$，隐层$(D,H)$，<strong>隐层神经元个数</strong>$H$，从数学角度来说感觉是每个sample都输入所有神经元。</p>
+<li>
+<p>输入$(N,D)$，隐层$(D,H)$，<strong>隐层神经元个数</strong>$H$，从数学角度来说感觉是每个sample都输入所有神经元。</p>
 </li>
-<li><p>前向传播Forward Propagation：从input，经过一层层的layer，不断计算每一层的结果z和激活值a，最后得到输出y^ 的过程，计算出了y^，就可以根据它和真实值y的差别来计算损失（loss）。</p>
+<li>
+<p>前向传播Forward Propagation：从input，经过一层层的layer，不断计算每一层的结果z和激活值a，最后得到输出y^ 的过程，计算出了y^，就可以根据它和真实值y的差别来计算损失（loss）。</p>
 <ul>
-<li>Layer i:<ul>
+<li>Layer i:
+<ul>
 <li>Z[i] = W[i]·A[i-1] + b[i]</li>
 <li>A[i] = σ(Z[i]) (sigmoid)</li>
 </ul>
 </li>
 <li>L(loss)：样本损失</li>
-<li>J(cost)：样本集的损失，L和的平均<ul>
+<li>J(cost)：样本集的损失，L和的平均
+<ul>
 <li>J(W,b) = ΣL()/n</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>反向传播Backward Propagation：根据L(y^,y)、J(W,b)来反方向地计算每一层的z、a、w、b的偏导数（梯度），从而更新参数。</p>
+<li>
+<p>反向传播Backward Propagation：根据L(y^,y)、J(W,b)来反方向地计算每一层的z、a、w、b的偏导数（梯度），从而更新参数。</p>
 </li>
-<li><p>深层神经网络中，常采用RelU激活函数（求梯度更快，防止梯度消失），输出层采用sigmoid。</p>
+<li>
+<p>深层神经网络中，常采用RelU激活函数（求梯度更快，防止梯度消失），输出层采用sigmoid。</p>
 </li>
-<li><p>参数维度：m个样本，共L层，当前l层，第l层单元数n[l]，</p>
+<li>
+<p>参数维度：m个样本，共L层，当前l层，第l层单元数n[l]，</p>
 <ul>
 <li>W[l]:(n[l],n[l-1]), 即n[l]行、n[l-1]列</li>
 <li>b[l]:(n[l],1)</li>
@@ -648,180 +752,226 @@
 </li>
 </ul>
 <hr>
-<h2><span id="convolutional-neural-networks-cnn卷积神经网络">Convolutional Neural Networks, CNN/卷积神经网络</span></h2><ul>
+<h2><span id="convolutional-neural-networks-cnn卷积神经网络">Convolutional Neural Networks, CNN/卷积神经网络</span></h2>
+<ul>
 <li>保持空间结构；在传统神经网络中每个神经元都要与图片上每个像素相连接，这样的话就会造成权重的数量巨大造成网络难以训练，而在含有卷积层的的神经网络中每个神经元的权重个数都是卷积核的大小，这样就相当于没有神经元只与对应图片部分的像素相连接。这样就极大的减少了权重的数量。</li>
 <li>核filter，例如$5<em>5</em>3$。参数学习得到。卷积过程中参数不变，<strong>通过一个卷积核的操作提取了原图的不同位置的同样特征。</strong></li>
-<li><strong>每个卷积核，在输入的整个深度上点积。</strong>运算时，实质上也是先化为一维向量做点积。但有多个卷积核，所以输出为output size <em> output size </em> output num。</li>
-<li>卷积输出size：$(N-F)/stride+1$<ul>
+<li>**每个卷积核，在输入的整个深度上点积。**运算时，实质上也是先化为一维向量做点积。但有多个卷积核，所以输出为output size * output size * output num。</li>
+<li>卷积输出size：$(N-F)/stride+1$
+<ul>
 <li>N：输入size，F：卷积核size，stride：步长</li>
 </ul>
 </li>
 <li>也有用0填充输入图片四周，使输出size保持不变。</li>
 </ul>
 <hr>
-<h2><span id="pooling池化">Pooling/池化</span></h2><ul>
+<h2><span id="pooling池化">Pooling/池化</span></h2>
+<ul>
 <li>对输入的特征图进行压缩，一方面使特征图变小，简化网络计算复杂度；一方面进行特征压缩，提取主要特征</li>
 <li>深度不变。通常filter不重叠，不填0</li>
 <li>常用：$2<em>2$ 步长2，或$3</em>3$ 步长3</li>
 </ul>
 <hr>
-<h2><span id="activation-functions激活函数">Activation Functions/激活函数</span></h2><h3><span id="sigmoidx">sigmoid(x)​</span></h3><p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/sigmoid.png" alt></p>
+<h2><span id="activation-functions激活函数">Activation Functions/激活函数</span></h2>
+<h3><span id="sigmoidx">sigmoid(x)​</span></h3>
+<p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/sigmoid.png" alt></p>
 <ul>
 <li>$\sigma(x) = \frac{1}{1+e^{-x}}$</li>
 <li>元素压缩至$[0,1]$范围</li>
-<li>问题：<ul>
-<li>饱和神经元使得梯度为0，无法得到合适的梯度流<ul>
+<li>问题：</li>
+<li>饱和神经元使得梯度为0，无法得到合适的梯度流
+<ul>
 <li>输出不以0为中心，x为正时w总为正或负，梯度更新效率低</li>
 <li>指数计算代价较大</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h3><span id="tanhx">tanh(x)​</span></h3><p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/tanh.png" alt></p>
+<h3><span id="tanhx">tanh(x)​</span></h3>
+<p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/tanh.png" alt></p>
 <ul>
 <li>压缩至$[-1,1]$</li>
 <li>输出以0为中心</li>
-<li>问题：饱和时梯度为0 </li>
+<li>问题：饱和时梯度为0</li>
 </ul>
-<h3><span id="relurectified-linear-unit">ReLU(Rectified Linear Unit)</span></h3><p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/relu.png" alt></p>
+<h3><span id="relurectified-linear-unit">ReLU(Rectified Linear Unit)</span></h3>
+<p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/relu.png" alt></p>
 <ul>
 <li>$f(x)=max(0,x)$</li>
 <li>正区域不会饱和</li>
 <li>函数简单，计算快，收敛快</li>
 <li>生物学上更合理</li>
-<li>问题<ul>
-<li>输出不以0为中心<ul>
+<li>问题</li>
+<li>输出不以0为中心
+<ul>
 <li>负半轴全饱和</li>
 <li>及其导致的Dead ReLU：反向传播中，大的梯度更新，使w变化，输入负数增加，函数关闭，参数w得不到更新，导致永久关闭</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h3><span id="leaky-relu">Leaky ReLU</span></h3><p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/leaky relu.png" alt></p>
+<h3><span id="leaky-relu">Leaky ReLU</span></h3>
+<p>![](CS231n笔记/leaky relu.png)</p>
 <ul>
 <li>$f(x)=max(0.01x,x)$</li>
 <li>不会挂掉</li>
 </ul>
-<h3><span id="eluexponential-linear-units">ELU(Exponential Linear units)</span></h3><p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/elu.png" alt></p>
+<h3><span id="eluexponential-linear-units">ELU(Exponential Linear units)</span></h3>
+<p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/elu.png" alt></p>
 <ul>
-<li><p>$f(x)=\begin{cases}x\qquad\qquad if x&gt;0\\\ \alpha(e^x-1)\quad ifx\leq0 \end{cases}$</p>
+<li>
+<p>$f(x)=\begin{cases}x\qquad\qquad if x&gt;0\\ \alpha(e^x-1)\quad ifx\leq0 \end{cases}$</p>
 </li>
-<li><p>输出均值近0</p>
+<li>
+<p>输出均值近0</p>
 </li>
-<li>负半轴近似饱和</li>
+<li>
+<p>负半轴近似饱和</p>
+</li>
 </ul>
-<h3><span id="maxout">Maxout</span></h3><ul>
-<li>$max(w_1^Tx+b_1,w_2^Tx+b_2)$</li>
+<h3><span id="maxout">Maxout</span></h3>
+<ul>
+<li>$max(w_1<sup>Tx+b_1,w_2</sup>Tx+b_2)$</li>
 <li>不提前点积</li>
-<li>泛化ReLU，不饱和，不消亡 </li>
+<li>泛化ReLU，不饱和，不消亡</li>
 <li>问题：参数加倍</li>
 </ul>
-<h3><span id="总结">总结</span></h3><ul>
+<h3><span id="总结">总结</span></h3>
+<ul>
 <li>常用ReLU，注意学习率</li>
 <li>少用sigmoid</li>
 </ul>
 <hr>
-<h2><span id="data-preprocessing数据预处理">Data Preprocessing/数据预处理</span></h2><ul>
-<li><p>zero-centered data/零中心化</p>
-<p>  X -= np.mean(X, axis = 0)</p>
+<h2><span id="data-preprocessing数据预处理">Data Preprocessing/数据预处理</span></h2>
+<ul>
+<li>
+<p>zero-centered data/零中心化</p>
+<p>X -= np.mean(X, axis = 0)</p>
 </li>
-<li><p>normalized data/归一化，图像处理不常用</p>
-<p>  X /= np.std(X, axis = 0)</p>
+<li>
+<p>normalized data/归一化，图像处理不常用</p>
+<p>X /= np.std(X, axis = 0)</p>
 </li>
-<li><p>减去mean image</p>
+<li>
+<p>减去mean image</p>
 </li>
-<li><p>减去单通道均值</p>
+<li>
+<p>减去单通道均值</p>
 </li>
-<li><p>训练与预测阶段都需进行同样预处理（应用同样的参数、均值）</p>
+<li>
+<p>训练与预测阶段都需进行同样预处理（应用同样的参数、均值）</p>
 </li>
 </ul>
 <hr>
-<h2><span id="weight-initialization初始化权重">Weight Initialization/初始化权重</span></h2><ul>
-<li><p>输入输出方差相同，Xavier initialization</p>
-<p>  W = np.random.randn(fan_in, fan_out) / np.sqrt(fan_in/2)</p>
+<h2><span id="weight-initialization初始化权重">Weight Initialization/初始化权重</span></h2>
+<ul>
+<li>
+<p>输入输出方差相同，Xavier initialization</p>
+<p>W = np.random.randn(fan_in, fan_out) / np.sqrt(fan_in/2)</p>
 </li>
 </ul>
 <hr>
-<h2><span id="batch-normalization批量归一化">Batch Normalization/批量归一化</span></h2><ul>
-<li><p>背景：深层网络在非线性变化前，激活的输入值的分布逐渐发生偏移变动。当整体分布靠近激活函数上下限端时，反向传播时的梯度消失，最终导致深层网络收敛越来越慢</p>
+<h2><span id="batch-normalization批量归一化">Batch Normalization/批量归一化</span></h2>
+<ul>
+<li>
+<p>背景：深层网络在非线性变化前，激活的输入值的分布逐渐发生偏移变动。当整体分布靠近激活函数上下限端时，反向传播时的梯度消失，最终导致深层网络收敛越来越慢</p>
 </li>
-<li><p>目的：数据转化为单位高斯数据，降低层之间输入数据分布变化，即使数据落入非线性函数的敏感区域，避免梯度消失，提速</p>
+<li>
+<p>目的：数据转化为单位高斯数据，降低层之间输入数据分布变化，即使数据落入非线性函数的敏感区域，避免梯度消失，提速</p>
 </li>
-<li><p>带来的问题：每层都通过BN，相当于多层线性函数，深度网络失去意义</p>
+<li>
+<p>带来的问题：每层都通过BN，相当于多层线性函数，深度网络失去意义</p>
 </li>
-<li><p>解决：对经过BN的x：$y=scale<em>x+shift$。对每个神经元增加两个学习参数，相当于使非线性函数的值从线性区往非线性区偏移挪动。变换重构$y^{(k)}=\gamma^{(k)}\hat{x}^{(k)}+\beta^{(k)}$，则$\gamma^{(k)}=\sqrt{Var[x^{(k)}]} \quad \beta^{(k)}=E[x^{(k)}]$时可恢复原始数据，控制饱和程度。<em>*核心思想应该是想找到一个线性和非线性的较好平衡点，既能享受非线性的较强表达能力的好处，又避免太靠非线性区两头使得网络收敛速度太慢</em></em></p>
+<li>
+<p>解决：对经过BN的x：$y=scale*x+shift$。对每个神经元增加两个学习参数，相当于使非线性函数的值从线性区往非线性区偏移挪动。变换重构$y<sup>{(k)}=\gamma</sup>{(k)}\hat{x}<sup>{(k)}+\beta</sup>{(k)}$，则$\gamma<sup>{(k)}=\sqrt{Var[x</sup>{(k)}]} \quad \beta<sup>{(k)}=E[x</sup>{(k)}]$时可恢复原始数据，控制饱和程度。<strong>核心思想应该是想找到一个线性和非线性的较好平衡点，既能享受非线性的较强表达能力的好处，又避免太靠非线性区两头使得网络收敛速度太慢</strong></p>
 </li>
-<li><p>通常在FC、卷积层后插入</p>
+<li>
+<p>通常在FC、卷积层后插入</p>
 </li>
-<li><p>训练过程：$\hat{x}^{(k)}=\frac{x^{(k)}-E[x^{(k)}]}{\sqrt Var[x^{(k)}]}$</p>
-<p>  <img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/bn_forward.png" alt="Batch Normalization" title="forward"></p>
-<p>  <img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/bn_backward.jpg" alt="bn_backward" title="backward"></p>
-<p>  预测过程：用从所有训练实例中获得的统计量代表期望和方差</p>
+<li>
+<p>训练过程：$\hat{x}<sup>{(k)}=\frac{x</sup>{(k)}-E[x^{(k)}]}{\sqrt Var[x^{(k)}]}$</p>
+<p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/bn_forward.png" alt="Batch Normalization" title="forward"></p>
+<p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/bn_backward.jpg" alt="bn_backward" title="backward"></p>
+<p>预测过程：用从所有训练实例中获得的统计量代表期望和方差</p>
 </li>
 </ul>
-<script type="math/tex; mode=display">
-E[x]\leftarrow E_B[\mu_B]    \\
-Var[x]\leftarrow\frac{m}{m-1}E_B[\sigma_B^2] \\
-y=\frac{\gamma}{\sqrt{Var[x]+\varepsilon}}*x+(\beta-\frac{\gamma*E[x]}{\sqrt{Var[x]+\varepsilon}})</script><hr>
-<h2><span id="babysitting-the-learning-process观察学习过程">Babysitting the Learning Process/观察学习过程</span></h2><ul>
+<p>$$<br>
+E[x]\leftarrow E_B[\mu_B]	\<br>
+Var[x]\leftarrow\frac{m}{m-1}E_B[\sigma_B^2] \<br>
+y=\frac{\gamma}{\sqrt{Var[x]+\varepsilon}}<em>x+(\beta-\frac{\gamma</em>E[x]}{\sqrt{Var[x]+\varepsilon}})<br>
+$$</p>
+<hr>
+<h2><span id="babysitting-the-learning-process观察学习过程">Babysitting the Learning Process/观察学习过程</span></h2>
+<ul>
 <li>数据预处理</li>
 <li>选择网络结构</li>
 <li>初始化网络，前向传播</li>
 <li>观察损失，和添加正则化项后的损失</li>
 <li>从小数据集训练，关闭正则化，sgd，观察loss能否为0、accuracy能否为1</li>
 <li>正式训练，全部数据，开启正则化</li>
-<li>调整学习率（最重要参数），过小时梯度更新小，loss变化小，$\eta$常为$1e-3$到$1e-5$之间 </li>
+<li>调整学习率（最重要参数），过小时梯度更新小，loss变化小，$\eta$常为$1e-3$到$1e-5$之间</li>
 </ul>
 <hr>
-<h2><span id="hyper-parameter-optimization超参数设置">Hyper-parameter Optimization/超参数设置</span></h2><ul>
+<h2><span id="hyper-parameter-optimization超参数设置">Hyper-parameter Optimization/超参数设置</span></h2>
+<ul>
 <li>交叉验证，训练集训练，验证集验证</li>
 <li>首先几个epoch粗略观察超参是否合理，确定合理区间</li>
 <li>loss激增时说明方向有误</li>
 </ul>
-<p><img src="/2020/06/18/CS231n%E7%AC%94%E8%AE%B0/loss-learing rate.png" alt title="loss~learning rate"> </p>
+<p>![](CS231n笔记/loss-learing rate.png “loss~learning rate”)</p>
 <hr>
-<h2><span id="pytorch">PyTorch</span></h2><ul>
-<li>定义三个抽象<ul>
+<h2><span id="pytorch">PyTorch</span></h2>
+<ul>
+<li>定义三个抽象
+<ul>
 <li>Tensor 张量，类似数组</li>
 <li>Variable 变量，计算图中节点，储存数据和梯度</li>
 <li>Module 类/模块，是一个神经网络层，储存状态和参数</li>
 </ul>
 </li>
 </ul>
-<h3><span id="tensor张量">Tensor/张量</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 简单的神经网络示例(使用张量)</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="comment"># dtype = torch.FloatTensor</span></span><br><span class="line">dtype = torch.cuda.FloatTensor	<span class="comment"># GPU</span></span><br><span class="line"></span><br><span class="line">N, D_in, H, D_out = <span class="number">64</span>, <span class="number">1000</span>, <span class="number">100</span>, <span class="number">10</span></span><br><span class="line">x = torch.randn(N, D_in).type(dtype)</span><br><span class="line">y = torch.randn(N, D_out).type(dtype)</span><br><span class="line">w1 = torch.randn(D_in, H).type(dtype)</span><br><span class="line">w2 = torch.randn(H, D_out).type(dtype)</span><br><span class="line"></span><br><span class="line">learning_rate = <span class="number">1e-6</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">500</span>):</span><br><span class="line">  h = x.mm(w1)</span><br><span class="line">  h_relu = h.clamp(min=<span class="number">0</span>)</span><br><span class="line">  y_pred = h_relu.mm(w2)</span><br><span class="line">  loss = (y_pred - y).pow(<span class="number">2</span>).sum()</span><br><span class="line">  </span><br><span class="line">  grad_y_pred = <span class="number">2.0</span> * (y_pred - y)</span><br><span class="line">  grad_w2 = h_relu.t().mm(grad_y_pred)</span><br><span class="line">  grad_h_relu = grad_y_pred.mm(w2.t())</span><br><span class="line">  grad_h = grad_h_relu.clone()</span><br><span class="line">  grad_h[h &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">  grad_w1 = x.t().mm(grad_h)</span><br><span class="line">  </span><br><span class="line">  w1 -= learning_rate * grad_w1</span><br><span class="line">  w2 -= learning_rate * grad_w2</span><br></pre></td></tr></table></figure>
-<h3><span id="variable变量">Variable/变量</span></h3><ul>
+<h3><span id="tensor张量">Tensor/张量</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 简单的神经网络示例(使用张量)</span></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="comment"># dtype = torch.FloatTensor</span></span><br><span class="line">dtype = torch.cuda.FloatTensor	<span class="comment"># GPU</span></span><br><span class="line"></span><br><span class="line">N, D_in, H, D_out = <span class="number">64</span>, <span class="number">1000</span>, <span class="number">100</span>, <span class="number">10</span></span><br><span class="line">x = torch.randn(N, D_in).type(dtype)</span><br><span class="line">y = torch.randn(N, D_out).type(dtype)</span><br><span class="line">w1 = torch.randn(D_in, H).type(dtype)</span><br><span class="line">w2 = torch.randn(H, D_out).type(dtype)</span><br><span class="line"></span><br><span class="line">learning_rate = <span class="number">1e-6</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">500</span>):</span><br><span class="line">  h = x.mm(w1)</span><br><span class="line">  h_relu = h.clamp(min=<span class="number">0</span>)</span><br><span class="line">  y_pred = h_relu.mm(w2)</span><br><span class="line">  loss = (y_pred - y).pow(<span class="number">2</span>).sum()</span><br><span class="line">  </span><br><span class="line">  grad_y_pred = <span class="number">2.0</span> * (y_pred - y)</span><br><span class="line">  grad_w2 = h_relu.t().mm(grad_y_pred)</span><br><span class="line">  grad_h_relu = grad_y_pred.mm(w2.t())</span><br><span class="line">  grad_h = grad_h_relu.clone()</span><br><span class="line">  grad_h[h &lt; <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">  grad_w1 = x.t().mm(grad_h)</span><br><span class="line">  </span><br><span class="line">  w1 -= learning_rate * grad_w1</span><br><span class="line">  w2 -= learning_rate * grad_w2</span><br></pre></td></tr></table></figure>
+<h3><span id="variable变量">Variable/变量</span></h3>
+<ul>
 <li>X.data 张量类型</li>
 <li>X.grad 变量类型，梯度，与data同shape</li>
 <li>X.grad.data 张量类型，梯度的张量</li>
 <li>PyTorch中，张量、变量相同API</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"></span><br><span class="line">N, D_in, H, D_out = <span class="number">64</span>, <span class="number">1000</span>, <span class="number">100</span>, <span class="number">10</span></span><br><span class="line">x = Variable(torch.randn(N, D_in), requires_grad=<span class="literal">False</span>)</span><br><span class="line">y = Variable(torch.randn(N, D_out), requires_grad=<span class="literal">False</span>)</span><br><span class="line">w1 = Variable(torch.randn(D_in, H), requires_grad=<span class="literal">True</span>)</span><br><span class="line">w2 = Variable(torch.randn(H, D_out), requires_grad=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">learning_rate = <span class="number">1e-6</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">500</span>):</span><br><span class="line">  y_prred = x.mm(w1).clamp(min=<span class="number">0</span>).mm(w2)</span><br><span class="line">  loss = (y_pred - y).pow(<span class="number">2</span>).sum()</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> w1.grad: w1.grad.data.zero_()</span><br><span class="line">  <span class="keyword">if</span> w2.grad: w2.grad.data.zero_()</span><br><span class="line">  loss.backward()</span><br><span class="line">  </span><br><span class="line">  w1.data -= learning_rate * w1.grad.data</span><br><span class="line">  w2.data -= learning_rate * w2.grad.data</span><br></pre></td></tr></table></figure>
-<h3><span id="nn高级封装">nn/高级封装</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Varible</span><br><span class="line"></span><br><span class="line">N, D_in, H, D_out = <span class="number">64</span>, <span class="number">1000</span>, <span class="number">100</span>, <span class="number">10</span></span><br><span class="line">x = Variable(torch.randn(N, D_in))</span><br><span class="line">y = Variable(torch.randn(N, D_out), requires_grad=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把模型定义为层的序列</span></span><br><span class="line">model = torch.nn.Sequential(torch.nn.Linear(D_in, H), torch.nn.ReLU(), torch.nn.Linear(H, D_out))</span><br><span class="line"><span class="comment"># nn中定义了一些损失函数</span></span><br><span class="line">loss_fn = torch.nn.MSELoss(size_average=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给模型喂数据，得到预测以计算损失</span></span><br><span class="line">learning_rate = <span class="number">1e-4</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> tange(<span class="number">500</span>):</span><br><span class="line">  y_pred = model(x)</span><br><span class="line">  loss = loss_fn(y_pred, y)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 计算梯度</span></span><br><span class="line">  model.zero_grad()</span><br><span class="line">  loss.backward()</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 在所有参数上循环，更新参数 </span></span><br><span class="line">  <span class="keyword">for</span> param <span class="keyword">in</span> model.parameters():</span><br><span class="line">    param.data -= learning_rate * param.grad.data</span><br></pre></td></tr></table></figure>
-<h3><span id="optimizer优化器">optimizer/优化器</span></h3><ul>
-<li><p>将参数更新的流程抽象出来，并执行更新法则</p>
+<h3><span id="nn高级封装">nn/高级封装</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Varible</span><br><span class="line"></span><br><span class="line">N, D_in, H, D_out = <span class="number">64</span>, <span class="number">1000</span>, <span class="number">100</span>, <span class="number">10</span></span><br><span class="line">x = Variable(torch.randn(N, D_in))</span><br><span class="line">y = Variable(torch.randn(N, D_out), requires_grad=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把模型定义为层的序列</span></span><br><span class="line">model = torch.nn.Sequential(torch.nn.Linear(D_in, H), torch.nn.ReLU(), torch.nn.Linear(H, D_out))</span><br><span class="line"><span class="comment"># nn中定义了一些损失函数</span></span><br><span class="line">loss_fn = torch.nn.MSELoss(size_average=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给模型喂数据，得到预测以计算损失</span></span><br><span class="line">learning_rate = <span class="number">1e-4</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> tange(<span class="number">500</span>):</span><br><span class="line">  y_pred = model(x)</span><br><span class="line">  loss = loss_fn(y_pred, y)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 计算梯度</span></span><br><span class="line">  model.zero_grad()</span><br><span class="line">  loss.backward()</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 在所有参数上循环，更新参数 </span></span><br><span class="line">  <span class="keyword">for</span> param <span class="keyword">in</span> model.parameters():</span><br><span class="line">    param.data -= learning_rate * param.grad.data</span><br></pre></td></tr></table></figure>
+<h3><span id="optimizer优化器">optimizer/优化器</span></h3>
+<ul>
+<li>
+<p>将参数更新的流程抽象出来，并执行更新法则</p>
 </li>
-<li><p>以上例为基础：</p>
+<li>
+<p>以上例为基础：</p>
 </li>
-<li><p>14行后添加如下，意为要对参数采用此法则、此学习率更新</p>
-<p>  <code>optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)</code></p>
+<li>
+<p>14行后添加如下，意为要对参数采用此法则、此学习率更新</p>
+<p><code>optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)</code></p>
 </li>
-<li><p>23~25行的参数更新改为：<code>optimizer.step()</code></p>
+<li>
+<p>23~25行的参数更新改为：<code>optimizer.step()</code></p>
 </li>
 </ul>
-<h3><span id="module类">Module/类</span></h3><ul>
+<h3><span id="module类">Module/类</span></h3>
+<ul>
 <li>神经网络层，输入输出为变量类型</li>
 <li>包含参数或其他模块</li>
 <li>可以使用autograd定义新Module</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">form torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这个类把整个模型定义成nn类中的一个新类，</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TwoLayerNet</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">_init_</span><span class="params">(self, D_in, H, D_out)</span>:</span></span><br><span class="line">    super(TwoLayerNet, self)._init_()</span><br><span class="line">    self.linear1 = torch.nn.Linear(D_in, H)</span><br><span class="line">    self.linear2 = torch.nn.Linear(H, D_out)</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">    h_relu = self.linear1(x).clamp(min=<span class="number">0</span>)</span><br><span class="line">    y_pred = self.linear2(h_relu)</span><br><span class="line">    <span class="keyword">return</span> y_pred</span><br><span class="line">  </span><br><span class="line">N, D_in, H, D_out = <span class="number">64</span>, <span class="number">1000</span>, <span class="number">100</span>, <span class="number">10</span></span><br><span class="line"></span><br><span class="line">x = Variable(torch.randn(N, D_in))</span><br><span class="line">y = Variable(torch.randn(N, D_out), requires_grad=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">model = TwoLayerNet(D_in,, H, D_out)</span><br><span class="line"></span><br><span class="line">criterion = torch.nn.MSELoss(size_average=<span class="literal">False</span>)</span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(), lr=<span class="number">1e-4</span>)</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">500</span>):</span><br><span class="line">  y_pred = model(x)</span><br><span class="line">  loss = criterion(y_pred, y)</span><br><span class="line">  </span><br><span class="line">  optimizer.zero_grad()</span><br><span class="line">  loss.backward()</span><br><span class="line">  optimizer.step()</span><br></pre></td></tr></table></figure>
-<h3><span id="dataloader数据加载">DataLoader/数据加载</span></h3><ul>
-<li>可以建立分批处理，也可以执行多线程 </li>
+<h3><span id="dataloader数据加载">DataLoader/数据加载</span></h3>
+<ul>
+<li>可以建立分批处理，也可以执行多线程</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line">form torch.utils.data <span class="keyword">import</span> TensorDataset, DataLoader</span><br><span class="line"></span><br><span class="line">N, D_in, H, D_out = <span class="number">64</span>, <span class="number">1000</span>, <span class="number">100</span>, <span class="number">10</span></span><br><span class="line"></span><br><span class="line">x = torch.randn(N, D_in)</span><br><span class="line">y = torch.randn(N, D_out)</span><br><span class="line"></span><br><span class="line">loader = DataLoader(TensorDataset(x, y), batch_size=<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line">model = TwoLayerNet(D_in, H, D_out)</span><br><span class="line"></span><br><span class="line">ceiterion = torch.nn.MSELoss(size_average=<span class="literal">False</span>)</span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(), lr=<span class="number">1e-4</span>)</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">  <span class="keyword">for</span> x_batch, y_batch <span class="keyword">in</span> loader:</span><br><span class="line">    x_var, y_var = Variable(x), Variable(y)</span><br><span class="line">    y_pred = model(x_var)</span><br><span class="line">    loss = criterion(y_pred, y_var)</span><br><span class="line">    </span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    loss.backward()</span><br><span class="line">    optimizer.step()</span><br></pre></td></tr></table></figure>
-<h3><span id="pretrained-model预训练模型">Pretrained Model/预训练模型</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"></span><br><span class="line">alexnet = torchvision.models.alexnet(pretrained=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-<h3><span id="else其他">else/其他</span></h3><ul>
+<h3><span id="pretrained-model预训练模型">Pretrained Model/预训练模型</span></h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"></span><br><span class="line">alexnet = torchvision.models.alexnet(pretrained=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<h3><span id="else其他">else/其他</span></h3>
+<ul>
 <li>visdom 可视化的包</li>
 <li>可以通过重写前向、反向传播函数定义新的Autograd Function</li>
 </ul>
