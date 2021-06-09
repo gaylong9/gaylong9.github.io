@@ -542,8 +542,8 @@ $$</p>
 <p>绘制ROC：对每个测试样本计算判别式$\omega^T\phi(x)+b$的值，并升序排列；把每个值当作分类时的阈值（判别值&gt;阈值则为正样本），计算此时的TP和FP，保存下来，连成曲线。</p>
 <p>越靠近左上的曲线，性能越好。故有以下性能标准：</p>
 <ul>
-<li>AUC（Area Under Curve）：曲线与横轴包围面积，越大越好</li>
-<li>EER（Equal Error Rate）等错误率：连接<code>(0,1)</code>和<code>(1,0)</code>两点，交ROC曲线于一点，交点横坐标即为EER，此处$FP=FN$。越低越小。</li>
+<li>AUC（Area Under Curve）：曲线与横轴包围面积，越大越好，代表一个概率值，当随机挑选一个正样本以及一个负样本，当前的分类算法根据计算得到的Score值将这个正样本排在负样本前面的（判别值更高？）概率就是AUC值</li>
+<li>EER（Equal Error Rate）等错误率：连接<code>(0,1)</code>和<code>(1,0)</code>两点，交ROC曲线于一点，交点横坐标即为EER，此处$FP=FN$。越低越好</li>
 </ul>
 <p> </p>
 <h1><span id="11-多分类问题">11. 多分类问题</span></h1>
@@ -591,6 +591,8 @@ $$</p>
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/06/09/Redis-1-%E5%9F%BA%E7%A1%80/">Redis_1.基础</a>
             
             
             <a class="next" rel="next" href="/2021/06/03/ML%E6%A6%82%E8%BF%B0/">ML概述</a>
