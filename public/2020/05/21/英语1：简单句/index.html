@@ -15,6 +15,7 @@
 
 
 <title>英语1：简单句 | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
 
 
 
@@ -41,44 +42,7 @@
 
     
     
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
+        
     
 
 
@@ -228,78 +192,94 @@
         <div class="post-content">
             <p>《刘晓艳语法长难句》第一章笔记</p>
 <a id="more"></a>
-<p><br></p>
+<br>
 <!-- toc -->
 <ul>
-<li><a href="#1-英语句子特点">1. 英语句子特点</a></li>
-<li><a href="#2-基本结构">2. 基本结构</a><ul>
-<li><a href="#21-主谓">2.1 主谓</a></li>
-<li><a href="#22-主谓宾-主谓表">2.2 主谓宾 &amp; 主谓表</a></li>
-<li><a href="#23-主谓双宾">2.3 主谓双宾</a></li>
-<li><a href="#24-主谓宾宾补">2.4 主谓宾宾补</a></li>
+<li><a href="#1-%E8%8B%B1%E8%AF%AD%E5%8F%A5%E5%AD%90%E7%89%B9%E7%82%B9">1. 英语句子特点</a></li>
+<li><a href="#2-%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84">2. 基本结构</a>
+<ul>
+<li><a href="#21-%E4%B8%BB%E8%B0%93">2.1 主谓</a></li>
+<li><a href="#22-%E4%B8%BB%E8%B0%93%E5%AE%BE-%E4%B8%BB%E8%B0%93%E8%A1%A8">2.2 主谓宾 &amp; 主谓表</a></li>
+<li><a href="#23-%E4%B8%BB%E8%B0%93%E5%8F%8C%E5%AE%BE">2.3 主谓双宾</a></li>
+<li><a href="#24-%E4%B8%BB%E8%B0%93%E5%AE%BE%E5%AE%BE%E8%A1%A5">2.4 主谓宾宾补</a></li>
 </ul>
 </li>
-<li><a href="#3-句子成分">3. 句子成分</a><ul>
-<li><a href="#31-谓语">3.1 谓语</a></li>
-<li><a href="#32-主语">3.2 主语</a></li>
-<li><a href="#33-宾语">3.3 宾语</a></li>
-<li><a href="#34-表语">3.4 表语</a></li>
+<li><a href="#3-%E5%8F%A5%E5%AD%90%E6%88%90%E5%88%86">3. 句子成分</a>
+<ul>
+<li><a href="#31-%E8%B0%93%E8%AF%AD">3.1 谓语</a></li>
+<li><a href="#32-%E4%B8%BB%E8%AF%AD">3.2 主语</a></li>
+<li><a href="#33-%E5%AE%BE%E8%AF%AD">3.3 宾语</a></li>
+<li><a href="#34-%E8%A1%A8%E8%AF%AD">3.4 表语</a></li>
 </ul>
 </li>
-<li><a href="#4-动词时态">4. 动词时态</a><ul>
-<li><a href="#41-一般现在时">4.1 一般现在时</a></li>
-<li><a href="#42-一般将来时">4.2 一般将来时</a></li>
-<li><a href="#43-现在进行时">4.3 现在进行时</a></li>
-<li><a href="#44-一般过去时">4.4 一般过去时</a></li>
-<li><a href="#45-现在完成时">4.5 现在完成时</a></li>
-<li><a href="#46-不常见时态">4.6 不常见时态：</a></li>
+<li><a href="#4-%E5%8A%A8%E8%AF%8D%E6%97%B6%E6%80%81">4. 动词时态</a>
+<ul>
+<li><a href="#41-%E4%B8%80%E8%88%AC%E7%8E%B0%E5%9C%A8%E6%97%B6">4.1 一般现在时</a></li>
+<li><a href="#42-%E4%B8%80%E8%88%AC%E5%B0%86%E6%9D%A5%E6%97%B6">4.2 一般将来时</a></li>
+<li><a href="#43-%E7%8E%B0%E5%9C%A8%E8%BF%9B%E8%A1%8C%E6%97%B6">4.3 现在进行时</a></li>
+<li><a href="#44-%E4%B8%80%E8%88%AC%E8%BF%87%E5%8E%BB%E6%97%B6">4.4 一般过去时</a></li>
+<li><a href="#45-%E7%8E%B0%E5%9C%A8%E5%AE%8C%E6%88%90%E6%97%B6">4.5 现在完成时</a></li>
+<li><a href="#46-%E4%B8%8D%E5%B8%B8%E8%A7%81%E6%97%B6%E6%80%81">4.6 不常见时态：</a></li>
 </ul>
 </li>
-<li><a href="#5-动词分类">5. 动词分类</a><ul>
-<li><a href="#51-实义动词">5.1 实义动词</a></li>
-<li><a href="#52-连系动词">5.2 连系动词</a></li>
-<li><a href="#53-情态动词">5.3 情态动词</a></li>
-<li><a href="#54-助动词">5.4 助动词</a></li>
+<li><a href="#5-%E5%8A%A8%E8%AF%8D%E5%88%86%E7%B1%BB">5. 动词分类</a>
+<ul>
+<li><a href="#51-%E5%AE%9E%E4%B9%89%E5%8A%A8%E8%AF%8D">5.1 实义动词</a></li>
+<li><a href="#52-%E8%BF%9E%E7%B3%BB%E5%8A%A8%E8%AF%8D">5.2 连系动词</a></li>
+<li><a href="#53-%E6%83%85%E6%80%81%E5%8A%A8%E8%AF%8D">5.3 情态动词</a></li>
+<li><a href="#54-%E5%8A%A9%E5%8A%A8%E8%AF%8D">5.4 助动词</a></li>
 </ul>
 </li>
-<li><a href="#6-写作">6. 写作</a></li>
-<li><a href="#7-长难句分析">7. 长难句分析</a></li>
+<li><a href="#6-%E5%86%99%E4%BD%9C">6. 写作</a></li>
+<li><a href="#7-%E9%95%BF%E9%9A%BE%E5%8F%A5%E5%88%86%E6%9E%90">7. 长难句分析</a></li>
 </ul>
 <!-- tocstop -->
-<p><br></p>
+<br>
 <p>[toc]</p>
-<p><br></p>
-<h1><span id="1-英语句子特点">1. 英语句子特点</span></h1><ol>
-<li><p>有主谓</p>
+<br>
+<h1><span id="1-英语句子特点">1. 英语句子特点</span></h1>
+<ol>
+<li>
+<p>有主谓</p>
 </li>
-<li><p>主语是谓语的发出者</p>
+<li>
+<p>主语是谓语的发出者</p>
 </li>
-<li><p>宾语是谓语的承受者</p>
+<li>
+<p>宾语是谓语的承受者</p>
 </li>
-<li><p>一个句子只能有一个主语、一个谓语，否则需要连词</p>
+<li>
+<p>一个句子只能有一个主语、一个谓语，否则需要连词</p>
 </li>
-<li><p>:exclamation: 写作避免出现主语、谓语、宾语不匹配的情况</p>
+<li>
+<p>❗️ 写作避免出现主语、谓语、宾语不匹配的情况</p>
 </li>
-<li><p>eg：我的英语说得很好</p>
-<p> :o: I speak English well.</p>
-<p> :x: My English speaks well. </p>
+<li>
+<p>eg：我的英语说得很好</p>
+<p>⭕️ I speak English well.</p>
+<p>❌ My English speaks well.</p>
 </li>
 </ol>
-<p><br></p>
+<br>
 <hr>
-<p><br></p>
-<h1><span id="2-基本结构">2. 基本结构</span></h1><ol>
+<br>
+<h1><span id="2-基本结构">2. 基本结构</span></h1>
+<ol>
 <li>主谓</li>
 <li>主谓宾</li>
 <li>主谓表</li>
 <li>主谓双宾</li>
 <li>主谓宾宾补</li>
 </ol>
-<h2><span id="21-主谓">2.1 主谓</span></h2><p>一个主语、一个<strong>带有时态的</strong>谓语构成</p>
-<h2><span id="22-主谓宾-amp-主谓表">2.2 主谓宾 &amp; 主谓表</span></h2><ol>
-<li><p>主谓宾的谓语是<strong>实义动词/行为动词</strong>，能够表达实际动作</p>
+<h2><span id="21-主谓">2.1 主谓</span></h2>
+<p>一个主语、一个<strong>带有时态的</strong>谓语构成</p>
+<h2><span id="22-主谓宾-amp-主谓表">2.2 主谓宾 &amp; 主谓表</span></h2>
+<ol>
+<li>
+<p>主谓宾的谓语是<strong>实义动词/行为动词</strong>，能够表达实际动作</p>
 </li>
-<li><p>主谓表的谓语是<strong>系动词/连系动词</strong>，分为六类：</p>
+<li>
+<p>主谓表的谓语是<strong>系动词/连系动词</strong>，分为六类：</p>
 <ol>
 <li>状态：be</li>
 <li>感官：look, sound, taste, smell, feel + adj.</li>
@@ -309,21 +289,25 @@
 <li>终止：prove</li>
 </ol>
 </li>
-<li><p>部分系动词也可作实义动词</p>
-<p> eg：grow</p>
-<p> I grew up in this town. 实义动词</p>
-<p> The coat grew dirty. 系动词</p>
+<li>
+<p>部分系动词也可作实义动词</p>
+<p>eg：grow</p>
+<p>I grew up in this town. 实义动词</p>
+<p>The coat grew dirty. 系动词</p>
 </li>
 </ol>
-<h2><span id="23-主谓双宾">2.3 主谓双宾</span></h2><p>主语+谓语+间接宾语+直接宾语，两个宾语的区分影响不大</p>
+<h2><span id="23-主谓双宾">2.3 主谓双宾</span></h2>
+<p>主语+谓语+间接宾语+直接宾语，两个宾语的区分影响不大</p>
 <ol>
 <li>常用双宾语动词：buy, pass, lend, give, tell, teach, show, bring, send, etc.</li>
 <li>eg: He brought <strong>me a gift</strong>.</li>
 </ol>
-<h2><span id="24-主谓宾宾补">2.4 主谓宾宾补</span></h2><p>宾语+补语 → 复合宾语</p>
+<h2><span id="24-主谓宾宾补">2.4 主谓宾宾补</span></h2>
+<p>宾语+补语 → 复合宾语</p>
 <ol>
 <li>宾语补足语：补充说明宾语特点、身份、让宾语完成动作</li>
-<li>宾补常见类型：<ol>
+<li>宾补常见类型：
+<ol>
 <li>You should keep room <strong>clean</strong>. 形容词</li>
 <li>We made him <strong>our leader</strong>. 名词</li>
 <li>He told me <strong>not to play in the street</strong>. 不定式</li>
@@ -331,12 +315,13 @@
 <li>Yesterday I had a picture <strong>taken with a cat</strong>. 过去分词</li>
 </ol>
 </li>
-<li><del>双宾和宾宾补，区分不清又有什么关系呢</del></li>
+<li><s>双宾和宾宾补，区分不清又有什么关系呢</s></li>
 </ol>
-<p><br></p>
+<br>
 <hr>
-<p><br></p>
-<h1><span id="3-句子成分">3. 句子成分</span></h1><p>句子的组成成分，由词或词组构成；从而词性会决定其所担任的成分 <del>（但是怎么可能能把词性也背下来呢，单词都背不会呢）</del></p>
+<br>
+<h1><span id="3-句子成分">3. 句子成分</span></h1>
+<p>句子的组成成分，由词或词组构成；从而词性会决定其所担任的成分 <s>（但是怎么可能能把词性也背下来呢，单词都背不会呢）</s></p>
 <ol>
 <li>主语</li>
 <li>谓语</li>
@@ -347,18 +332,22 @@
 <li>补足语</li>
 <li>同位语</li>
 </ol>
-<h2><span id="31-谓语">3.1 谓语</span></h2><p>具有时态的实义动词（词组）或系动词。</p>
+<h2><span id="31-谓语">3.1 谓语</span></h2>
+<p>具有时态的实义动词（词组）或系动词。</p>
 <ol>
-<li><p>成分：谓语只能是动词（词组），一般的动词（词组）也只能做谓语</p>
+<li>
+<p>成分：谓语只能是动词（词组），一般的动词（词组）也只能做谓语</p>
 </li>
-<li><p>谓语要做其他成分时，要变成非谓语结构（非动词结构）：</p>
+<li>
+<p>谓语要做其他成分时，要变成非谓语结构（非动词结构）：</p>
 <ol>
 <li>动词-ing，表示主动或进行</li>
 <li>动词-ed，表示被动或完成</li>
 <li>to-动词，表示目的或将来</li>
 </ol>
 </li>
-<li><p>非谓语结构可做任何成分：</p>
+<li>
+<p>非谓语结构可做任何成分：</p>
 <ol>
 <li>主语：-ing，或to do；to do（动词不定式）时常用it做主语，to do后置</li>
 <li>表语：His job is <strong>to look after</strong> the baby.</li>
@@ -368,245 +357,423 @@
 <li>同位语：His habit, eating snack before sleeping, has not been changed.</li>
 </ol>
 </li>
-<li><p>多个动词时，<strong>只能有一个做谓语</strong>，其余要用非谓语结构：</p>
-<p> He <strong>pushed</strong> the door, <strong>walking</strong> into the room and <strong>seeing</strong> a girl <strong>sitting</strong> on the bed.</p>
+<li>
+<p>多个动词时，<strong>只能有一个做谓语</strong>，其余要用非谓语结构：</p>
+<p>He <strong>pushed</strong> the door, <strong>walking</strong> into the room and <strong>seeing</strong> a girl <strong>sitting</strong> on the bed.</p>
 </li>
 </ol>
-<h2><span id="32-主语">3.2 主语</span></h2><ol>
-<li><p>成分：从句、代词、名词、非谓语</p>
-</li>
-<li><p>主语不能缺失；祈使句中为加强语气而省略，但不能说没有</p>
+<h2><span id="32-主语">3.2 主语</span></h2>
 <ol>
-<li>下雨了 :arrow_right: It is raining.</li>
-<li>有很多人喜欢我 :arrow_right: There are loads of individuals <strong>having</strong> affection for me.</li>
+<li>
+<p>成分：从句、代词、名词、非谓语</p>
+</li>
+<li>
+<p>主语不能缺失；祈使句中为加强语气而省略，但不能说没有</p>
+<ol>
+<li>下雨了 ➡️ It is raining.</li>
+<li>有很多人喜欢我 ➡️ There are loads of individuals <strong>having</strong> affection for me.</li>
 <li><strong>多用高级词汇</strong></li>
 <li>以There be句型为代表，容易出现多个谓语的错误，注意要用非谓语结构</li>
 </ol>
 </li>
-<li><p>减少以人称代词做主语；变主动为被动：</p>
+<li>
+<p>减少以人称代词做主语；变主动为被动：</p>
 <ol>
-<li>必须指出语法在考试中还是很重要的 :arrow_right: Grammar must be pointed out to be quite crucial in the examination.</li>
-<li>我们不应该盲目追星 :arrow_right: Superstart should never be pursued blindly. </li>
-<li>孝敬父母很重要 :arrow_right: Respecting parents is argued to be of great importance by a sea of private individuals.</li>
+<li>必须指出语法在考试中还是很重要的 ➡️ Grammar must be pointed out to be quite crucial in the examination.</li>
+<li>我们不应该盲目追星 ➡️ Superstart should never be pursued blindly.</li>
+<li>孝敬父母很重要 ➡️ Respecting parents is argued to be of great importance by a sea of private individuals.</li>
 </ol>
 </li>
-<li><p>think :arrow_right: argue, contend, assume, presume, insist, maintain, assert, claim, be of the option that, have been convinced that, cling to the perspective that</p>
+<li>
+<p>think ➡️ argue, contend, assume, presume, insist, maintain, assert, claim, be of the option that, have been convinced that, cling to the perspective that</p>
 </li>
-<li><p>important :arrow_right: be of great importance, vital, significant, essential, indispensable, play a key role in sth.</p>
+<li>
+<p>important ➡️ be of great importance, vital, significant, essential, indispensable, play a key role in sth.</p>
 </li>
-<li><p>实在难以解决时，使用人称代词做主语</p>
+<li>
+<p>实在难以解决时，使用人称代词做主语</p>
 </li>
-<li><p>被动语态：</p>
+<li>
+<p>被动语态：</p>
 <ol>
-<li><p>语态：主语谓语之间的关系是主动还是被动；主语无法发出动作，就使用被动语态</p>
+<li>
+<p>语态：主语谓语之间的关系是主动还是被动；主语无法发出动作，就使用被动语态</p>
 </li>
-<li><p>与时态是独立的两个概念，所以被动语态也有时态</p>
-<p>| 时态         | 结构                 |<br>| —————— | —————————— |<br>| 原型（基础） | be done              |<br>| 一般现在时   | am/is/are done       |<br>| 一般过去时   | was/were done        |<br>| 一般将来时   | will be done         |<br>| 现在进行时   | am/is/are being done |<br>| 过去进行时   | was/were being done  |<br>| 现在完成时   | have/has been done   |<br>| 过去完成时   | had been done        |<br>| 情态动词     | 情态动词 be done     |</p>
+<li>
+<p>与时态是独立的两个概念，所以被动语态也有时态</p>
 </li>
-<li><p>部分动词无被动：</p>
+</ol>
+<table>
+<thead>
+<tr>
+<th>时态</th>
+<th>结构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原型（基础）</td>
+<td>be done</td>
+</tr>
+<tr>
+<td>一般现在时</td>
+<td>am/is/are done</td>
+</tr>
+<tr>
+<td>一般过去时</td>
+<td>was/were done</td>
+</tr>
+<tr>
+<td>一般将来时</td>
+<td>will be done</td>
+</tr>
+<tr>
+<td>现在进行时</td>
+<td>am/is/are being done</td>
+</tr>
+<tr>
+<td>过去进行时</td>
+<td>was/were being done</td>
+</tr>
+<tr>
+<td>现在完成时</td>
+<td>have/has been done</td>
+</tr>
+<tr>
+<td>过去完成时</td>
+<td>had been done</td>
+</tr>
+<tr>
+<td>情态动词</td>
+<td>情态动词 be done</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>
+<p>部分动词无被动：</p>
+</li>
+<li>
+<p>have、own、possess等意为“拥有”的词</p>
+</li>
+<li>
+<p>系动词</p>
+</li>
+<li>
+<p>happen、break out等意为“发生”或“爆发”的词</p>
+</li>
+<li>
+<p>不及物动词（主谓） eg：The sun rose.</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2><span id="33-宾语">3.3 宾语</span></h2>
 <ol>
-<li>have、own、possess等意为“拥有”的词</li>
-<li>系动词</li>
-<li>happen、break out等意为“发生”或“爆发”的词</li>
-<li>不及物动词（主谓） eg：The sun rose.</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h2><span id="33-宾语">3.3 宾语</span></h2><ol>
 <li>成分：代词、名词、非谓语、从句</li>
 </ol>
-<h2><span id="34-表语">3.4 表语</span></h2><ol>
+<h2><span id="34-表语">3.4 表语</span></h2>
+<ol>
 <li>成分：代词、名词、非谓语、形容词、介词短语</li>
 </ol>
-<p><br></p>
+<br>
 <hr>
-<p><br></p>
-<h1><span id="4-动词时态">4. 动词时态</span></h1><ol>
-<li><p>不同时间内所发生的动作（主谓宾）或存在的状态（主系表）</p>
+<br>
+<h1><span id="4-动词时态">4. 动词时态</span></h1>
+<ol>
+<li>
+<p>不同时间内所发生的动作（主谓宾）或存在的状态（主系表）</p>
 </li>
-<li><p>时态的判断，要<strong>通过谓语判断</strong>；时间短语或副词性标志词仅仅能够描述该动作发生的具体时间</p>
-<p> eg：I always swam at the weekend. 我以前周末经常游泳。</p>
+<li>
+<p>时态的判断，要<strong>通过谓语判断</strong>；时间短语或副词性标志词仅仅能够描述该动作发生的具体时间</p>
+<p>eg：I always swam at the weekend. 我以前周末经常游泳。</p>
 </li>
-<li><p>时态种类：</p>
-<p> | 时态     | 一般     | 进行           | 完成            | 完成进行              |<br> | ———— | ———— | ——————— | ———————- | ——————————- |<br> | 现在     | do       | be doing       | have done       | have been doing       |<br> | 过去     | did      | was doing      | had done        | had been doing        |<br> | 将来     | will do  | will be doing  | will have done  | will have been doing  |<br> | 过去将来 | would do | would be doing | would have done | would have been doing |</p>
+<li>
+<p>时态种类：</p>
+<table>
+<thead>
+<tr>
+<th>时态</th>
+<th>一般</th>
+<th>进行</th>
+<th>完成</th>
+<th>完成进行</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>现在</td>
+<td>do</td>
+<td>be doing</td>
+<td>have done</td>
+<td>have been doing</td>
+</tr>
+<tr>
+<td>过去</td>
+<td>did</td>
+<td>was doing</td>
+<td>had done</td>
+<td>had been doing</td>
+</tr>
+<tr>
+<td>将来</td>
+<td>will do</td>
+<td>will be doing</td>
+<td>will have done</td>
+<td>will have been doing</td>
+</tr>
+<tr>
+<td>过去将来</td>
+<td>would do</td>
+<td>would be doing</td>
+<td>would have done</td>
+<td>would have been doing</td>
+</tr>
+</tbody>
+</table>
 </li>
-<li><p>助动词：帮助谓语构成肯定句、否定句和疑问句的时态</p>
+<li>
+<p>助动词：帮助谓语构成肯定句、否定句和疑问句的时态</p>
 </li>
-<li><p>有be：否定句be not；疑问句be提前</p>
+<li>
+<p>有be：否定句be not；疑问句be提前</p>
 </li>
-<li><p>有动词：疑问句用助动词的不同时态形式</p>
+<li>
+<p>有动词：疑问句用助动词的不同时态形式</p>
 </li>
 </ol>
-<h2><span id="41-一般现在时">4.1 一般现在时</span></h2><ol>
-<li>定义：现阶段经常发生的事；客观真理及自然现象；人/物永久状态</li>
-<li>助动词：do/does</li>
-<li>肯定句：<ol>
+<h2><span id="41-一般现在时">4.1 一般现在时</span></h2>
+<ol>
+<li>
+<p>定义：现阶段经常发生的事；客观真理及自然现象；人/物永久状态</p>
+</li>
+<li>
+<p>助动词：do/does</p>
+</li>
+<li>
+<p>肯定句：</p>
+<ol>
 <li>He <strong>loves</strong> me.</li>
 <li>I <strong>am</strong> a student.</li>
 </ol>
 </li>
-<li>否定句：do/does not；be not<ol>
-<li>He <strong>does not like</strong> his work.</li>
-<li>He <strong>is not</strong> a child anymore.</li>
-</ol>
+<li>
+<p>否定句：do/does not；be not</p>
 </li>
-<li><p>疑问句：do/does/be提前、</p>
+<li>
+<p>He <strong>does not like</strong> his work.</p>
+</li>
+<li>
+<p>He <strong>is not</strong> a child anymore.</p>
+</li>
+<li>
+<p>疑问句：do/does/be提前、</p>
+</li>
+<li>
+<p><strong>Do</strong> you like dogs？</p>
+</li>
+<li>
+<p><strong>Are</strong> they friends？</p>
+</li>
+<li>
+<p>常见标志词：频度、频率副词；其他具体时间段（in the morning、on Sundays）</p>
+</li>
+</ol>
+<h2><span id="42-一般将来时">4.2 一般将来时</span></h2>
 <ol>
-<li><strong>Do</strong> you like dogs？</li>
-<li><strong>Are</strong> they friends？</li>
-</ol>
+<li>
+<p>将来某时间发生的动作/存在的状态</p>
 </li>
-<li><p>常见标志词：频度、频率副词；其他具体时间段（in the morning、on Sundays）</p>
+<li>
+<p>助动词：will（所有人称）、shall（第一人称）</p>
 </li>
-</ol>
-<h2><span id="42-一般将来时">4.2 一般将来时</span></h2><ol>
-<li>将来某时间发生的动作/存在的状态</li>
-<li>助动词：will（所有人称）、shall（第一人称）</li>
-<li><p>肯定句：</p>
+<li>
+<p>肯定句：</p>
 <ol>
 <li>I <strong>will bring</strong> him a present.</li>
 <li>I <strong>will be</strong> a teacher soon.</li>
 </ol>
 </li>
-<li><p>否定句：</p>
+<li>
+<p>否定句：</p>
 <ol>
 <li>He <strong>won`t fulfill</strong> his promise.</li>
 <li>He <strong>will not be</strong> there next day.</li>
 </ol>
 </li>
-<li>疑问句：<ol>
+<li>
+<p>疑问句：</p>
+<ol>
 <li><strong>Will you travel</strong> to Beijing?</li>
 <li><strong>Will you be</strong> a nurse?</li>
 </ol>
 </li>
-<li>标志词：将来时间、soon、in 段时间</li>
-<li>其他结构：be going to, be about to do, be to do</li>
+<li>
+<p>标志词：将来时间、soon、in 段时间</p>
+</li>
+<li>
+<p>其他结构：be going to, be about to do, be to do</p>
+</li>
 </ol>
-<h2><span id="43-现在进行时">4.3 现在进行时</span></h2><ol>
+<h2><span id="43-现在进行时">4.3 现在进行时</span></h2>
+<ol>
 <li><strong>仅表示动作</strong>正在发生，不表示状态</li>
 <li>助动词：be</li>
-<li>肯定句：<ol>
+<li>肯定句：
+<ol>
 <li>We <strong>are having</strong> classes.</li>
 </ol>
 </li>
-<li>否定句：<ol>
+<li>否定句：
+<ol>
 <li>We <strong>are not having</strong> classes.</li>
 </ol>
 </li>
-<li>疑问句：<ol>
+<li>疑问句：
+<ol>
 <li><strong>Are you having</strong> classes?</li>
 </ol>
 </li>
 <li>标志词：right now, at present, at this time, these days, look, listen</li>
 </ol>
-<h2><span id="44-一般过去时">4.4 一般过去时</span></h2><ol>
+<h2><span id="44-一般过去时">4.4 一般过去时</span></h2>
+<ol>
 <li>过去某段时间的动作/状态</li>
 <li>助动词：did</li>
-<li>肯定句：<ol>
+<li>肯定句：
+<ol>
 <li>I <strong>saw</strong> him in the library yesterday.</li>
 <li>I <strong>was</strong> late for school yesterday.</li>
 </ol>
 </li>
-<li>否定句：<ol>
+<li>否定句：
+<ol>
 <li>I <strong>didn`t</strong> live there before.</li>
 <li>He <strong>was not</strong> a student long ago.</li>
 </ol>
 </li>
-<li>疑问句：<ol>
+<li>疑问句：
+<ol>
 <li><strong>Did</strong> you study English at 10?</li>
 <li><strong>Were</strong> they in the park just now?</li>
 </ol>
 </li>
 <li>标志词：ago、last、just now、once upon a time</li>
 </ol>
-<h2><span id="45-现在完成时">4.5 现在完成时</span></h2><ol>
-<li><p>动作持续到现在才完成，强调已经或曾经；但也可能延续下去</p>
+<h2><span id="45-现在完成时">4.5 现在完成时</span></h2>
+<ol>
+<li>
+<p>动作持续到现在才完成，强调已经或曾经；但也可能延续下去</p>
 </li>
-<li><p>助动词：have has</p>
+<li>
+<p>助动词：have has</p>
 </li>
-<li><p>肯定句：过去分词</p>
+<li>
+<p>肯定句：过去分词</p>
 <ol>
 <li>He <strong>has already obtained</strong> a scholarship.</li>
 <li>I <strong>have been</strong> in the city for more than 5 years.</li>
 </ol>
 </li>
-<li><p>否定句：have not/haven`t + done/been</p>
+<li>
+<p>否定句：have not/haven`t + done/been</p>
 </li>
-<li><p>疑问句：</p>
+<li>
+<p>疑问句：</p>
 <ol>
 <li><strong>Have</strong> you <strong>found</strong> the missing child?</li>
 <li><strong>Have</strong> you ever <strong>been</strong> to the UK?</li>
 </ol>
 </li>
-<li><p>标志词：already, ever, never, just, yet, still, since + 段时间（since引导时间状语从句用一般过去时，主句现在完成时）</p>
+<li>
+<p>标志词：already, ever, never, just, yet, still, since + 段时间（since引导时间状语从句用一般过去时，主句现在完成时）</p>
 </li>
-<li><p>瞬时动词可以完成时，但是不能接时间段，除非转换为延续性动词：</p>
-<p> <img src="/2020/05/21/%E8%8B%B1%E8%AF%AD1%EF%BC%9A%E7%AE%80%E5%8D%95%E5%8F%A5/搜狗截图20200316222055.png" alt="搜狗截图20200316222055"></p>
+<li>
+<p>瞬时动词可以完成时，但是不能接时间段，除非转换为延续性动词：</p>
+<p><img src="/2020/05/21/%E8%8B%B1%E8%AF%AD1%EF%BC%9A%E7%AE%80%E5%8D%95%E5%8F%A5/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20200316222055.png" alt="搜狗截图20200316222055"></p>
 </li>
-<li><p>与一般过去时区别：</p>
+<li>
+<p>与一般过去时区别：</p>
 <ol>
 <li>一般过去时强调以前做过，与现在无关</li>
 <li>现在完成时强调持续到现在/已完成/可能继续持续</li>
 </ol>
 </li>
 </ol>
-<h2><span id="46-不常见时态">4.6 不常见时态：</span></h2><p>不常用不常见，但可能出现的难点时态</p>
+<h2><span id="46-不常见时态">4.6 不常见时态：</span></h2>
+<p>不常用不常见，但可能出现的难点时态</p>
 <ol>
-<li><p>过去进行时：过去某个时间点正在发生的动作：</p>
-<p> I <strong>was watching</strong> TV at 9 last night.</p>
+<li>
+<p>过去进行时：过去某个时间点正在发生的动作：</p>
+<p>I <strong>was watching</strong> TV at 9 last night.</p>
 </li>
-<li><p>过去将来时：过去视角将要发生的动作：</p>
-<p> She promised that she <strong>would come</strong> to China some day.</p>
+<li>
+<p>过去将来时：过去视角将要发生的动作：</p>
+<p>She promised that she <strong>would come</strong> to China some day.</p>
 </li>
-<li><p>过去完成时：过去某一时间之前就已完成：</p>
-<p> My father <strong>had slept</strong> before I came back home.</p>
+<li>
+<p>过去完成时：过去某一时间之前就已完成：</p>
+<p>My father <strong>had slept</strong> before I came back home.</p>
 </li>
-<li><p>现在完成进行时：过去持续到现在，并可能一直持续下去，译为一直做：</p>
-<p> I <strong>have been doing</strong> the experience these days.</p>
+<li>
+<p>现在完成进行时：过去持续到现在，并可能一直持续下去，译为一直做：</p>
+<p>I <strong>have been doing</strong> the experience these days.</p>
 </li>
-<li><p>过去完成进行时：过去时间段持续进行：</p>
-<p> I <strong>had been writing</strong> this paper those days.</p>
+<li>
+<p>过去完成进行时：过去时间段持续进行：</p>
+<p>I <strong>had been writing</strong> this paper those days.</p>
 </li>
-<li><p>将来完成时：将来某段时间内将要完成的动作：</p>
-<p> I <strong>will have finished</strong> my paper by the end of this semester.</p>
+<li>
+<p>将来完成时：将来某段时间内将要完成的动作：</p>
+<p>I <strong>will have finished</strong> my paper by the end of this semester.</p>
 </li>
-<li><p>将来进行时：将来时间点正在进行：</p>
-<p> I <strong>will be meeting</strong> him this time tomorrow.</p>
+<li>
+<p>将来进行时：将来时间点正在进行：</p>
+<p>I <strong>will be meeting</strong> him this time tomorrow.</p>
 </li>
-<li><p>过去将来进行时：过去角度，将来时刻正在进行：</p>
-<p> Li told me that he <strong>would be living</strong> in China some day.</p>
+<li>
+<p>过去将来进行时：过去角度，将来时刻正在进行：</p>
+<p>Li told me that he <strong>would be living</strong> in China some day.</p>
 </li>
-<li><p>过去将来完成时：过去角度，某一时间前将完成：</p>
-<p> David told me that he <strong>would have finished</strong> homework by 9.</p>
+<li>
+<p>过去将来完成时：过去角度，某一时间前将完成：</p>
+<p>David told me that he <strong>would have finished</strong> homework by 9.</p>
 </li>
-<li><p>将来完成进行时：在将来某时间段内持续进行：</p>
+<li>
+<p>将来完成进行时：在将来某时间段内持续进行：</p>
 <p>He <strong>will have been living</strong> here for 5 years by the end of this month.</p>
 </li>
-<li><p>过去将来完成进行时：从过去某一时间，持续到过去将来某一时间：</p>
+<li>
+<p>过去将来完成进行时：从过去某一时间，持续到过去将来某一时间：</p>
 <p>He said that he <strong>would have been living</strong> here for 10 years by the end of last year.</p>
 </li>
-<li><p>时态区分不出也无关紧要，从动词的意义和过去式、过去分词也能猜出几分</p>
+<li>
+<p>时态区分不出也无关紧要，从动词的意义和过去式、过去分词也能猜出几分</p>
 </li>
 </ol>
-<p><br></p>
+<br>
 <hr>
-<p><br></p>
-<h1><span id="5-动词分类">5. 动词分类</span></h1><h2><span id="51-实义动词">5.1 实义动词</span></h2><ol>
+<br>
+<h1><span id="5-动词分类">5. 动词分类</span></h1>
+<h2><span id="51-实义动词">5.1 实义动词</span></h2>
+<ol>
 <li>就是表示具体动作的词</li>
-<li>分类：及物动词、不及物动词<ol>
+<li>分类：及物动词、不及物动词
+<ol>
 <li>及物动词Vt.：+ 宾语</li>
 <li>不及物动词Vi.：+ 介词 + 宾语</li>
 <li>V.表示均可</li>
 </ol>
 </li>
 </ol>
-<h2><span id="52-连系动词">5.2 连系动词</span></h2><p>即系动词，前面总结过</p>
-<h2><span id="53-情态动词">5.3 情态动词</span></h2><ol>
+<h2><span id="52-连系动词">5.2 连系动词</span></h2>
+<p>即系动词，前面总结过</p>
+<h2><span id="53-情态动词">5.3 情态动词</span></h2>
+<ol>
 <li>含义：本身有一定词义，表示说话人态度</li>
 <li>用法：不单独出现，+实义动词/系动词</li>
-<li>分类<ol>
+<li>分类
+<ol>
 <li>can、could 能、会、请求 = be capable of、be competent in</li>
 <li>may、might 许可，可能性 = be likely to</li>
 <li>must必须、have to不得不 = be bound to、be bound for</li>
@@ -615,7 +782,8 @@
 <li>dare 敢</li>
 </ol>
 </li>
-<li>情态动词的完成时表示推测：<ol>
+<li>情态动词的完成时表示推测：
+<ol>
 <li>must have done：一定做过</li>
 <li>needn`t have done：没必要，但做了</li>
 <li>could have done：本能做，但没做，遗憾</li>
@@ -623,9 +791,11 @@
 </ol>
 </li>
 </ol>
-<h2><span id="54-助动词">5.4 助动词</span></h2><ol>
+<h2><span id="54-助动词">5.4 助动词</span></h2>
+<ol>
 <li>含义：帮助谓语动词一起构成否定、疑问、时态、语态的词</li>
-<li>分类<ol>
+<li>分类
+<ol>
 <li>be：进行时，被动语态</li>
 <li>do：现在时、过去式、否定、疑问，强调，倒装</li>
 <li>have：完成时</li>
@@ -634,24 +804,26 @@
 </ol>
 </li>
 </ol>
-<p><br></p>
+<br>
 <hr>
-<p><br></p>
-<h1><span id="6-写作">6. 写作</span></h1><ol>
+<br>
+<h1><span id="6-写作">6. 写作</span></h1>
+<ol>
 <li>难词替换成会的词，正确最重要</li>
 <li>写不来的长难句用简单句表示</li>
 </ol>
-<p><br></p>
+<br>
 <hr>
-<p><br></p>
-<h1><span id="7-长难句分析">7. 长难句分析</span></h1><p>步骤：</p>
+<br>
+<h1><span id="7-长难句分析">7. 长难句分析</span></h1>
+<p>步骤：</p>
 <ol>
 <li>找动词/词组，以有无连接词判断并确定主句的谓语（从句也有谓语）</li>
 <li>解释谓语</li>
 <li>翻译主干</li>
 </ol>
-<p>eg： </p>
-<p>​    The coming of age of the postwar baby boom and an entry of women into the male-dominated job market have limited the opportunities of teenagers who are already questioning the heavy personal sacrifices involved in climbing Japan`s rigid social ladder to good schools and jobs.</p>
+<p>eg：</p>
+<p>​	The coming of age of the postwar baby boom and an entry of women into the male-dominated job market have limited the opportunities of teenagers who are already questioning the heavy personal sacrifices involved in climbing Japan`s rigid social ladder to good schools and jobs.</p>
 <ol>
 <li>谓语：have limited</li>
 <li>解释：限制</li>
@@ -700,5 +872,25 @@
 </footer>
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

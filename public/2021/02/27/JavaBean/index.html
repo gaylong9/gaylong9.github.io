@@ -15,6 +15,7 @@
 
 
 <title>JavaBean | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
 
 
 
@@ -41,44 +42,7 @@
 
     
     
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
+        
     
 
 
@@ -241,8 +205,8 @@
 <!-- tocstop -->
 <p> </p>
 <p>[toc]</p>
-<h1><span id="javabean"> JavaBean</span></h1>
-<h2><span id="1-简介"> 1. 简介</span></h2>
+<h1><span id="javabean">JavaBean</span></h1>
+<h2><span id="1-简介">1. 简介</span></h2>
 <ol>
 <li>可重用、跨平台的软件组织，分为有UI的和没有UI主要负责业务数据或业务处理的。JSP通常访问后种</li>
 <li>JSP与JavaBean搭配的好处：分离HTML和Java，便于编写和维护；二者各司其职，充分利用JavaBean可重用特点，提高开发效率</li>
@@ -250,7 +214,7 @@
 <li>JavaBean存放位置：<code>web-app/WEB-INF/classes/mypack/MyBean.class</code></li>
 </ol>
 <p> </p>
-<h2><span id="2-jsp访问javabean"> 2. JSP访问JavaBean</span></h2>
+<h2><span id="2-jsp访问javabean">2. JSP访问JavaBean</span></h2>
 <ol>
 <li>
 <p>JSP中可通过代码访问JavaBean，也可通过特定JSP标签访问，后者能减少JSP中的程序代码</p>
@@ -301,7 +265,7 @@
 </li>
 </ol>
 <p> </p>
-<h2><span id="3-javabean范围"> 3. JavaBean范围</span></h2>
+<h2><span id="3-javabean范围">3. JavaBean范围</span></h2>
 <ol>
 <li>page：
 <ol>
@@ -384,5 +348,25 @@
 </footer>
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

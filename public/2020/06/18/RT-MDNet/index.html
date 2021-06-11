@@ -15,6 +15,7 @@
 
 
 <title>RT-MDNet | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
 
 
 
@@ -41,44 +42,7 @@
 
     
     
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
+        
     
 
 
@@ -229,33 +193,39 @@
             <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#real-time-mdnet">Real-Time MDNet</a><ul>
-<li><a href="#adaptive-roialign">Adaptive RoIAlign</a><ul>
+<li><a href="#real-time-mdnet">Real-Time MDNet</a>
+<ul>
+<li><a href="#adaptive-roialign">Adaptive RoIAlign</a>
+<ul>
 <li><a href="#roipooling">RoIPooling</a></li>
 <li><a href="#roialign">RoIAlign</a></li>
 <li><a href="#adaptive-roialign-1">Adaptive RoIAlign</a></li>
 </ul>
 </li>
-<li><a href="#内嵌判别实例的预训练">内嵌判别实例的预训练</a></li>
-<li><a href="#参考博客">参考博客</a></li>
+<li><a href="#%E5%86%85%E5%B5%8C%E5%88%A4%E5%88%AB%E5%AE%9E%E4%BE%8B%E7%9A%84%E9%A2%84%E8%AE%AD%E7%BB%83">内嵌判别实例的预训练</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E5%8D%9A%E5%AE%A2">参考博客</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p><br></p>
-<h1><span id="real-time-mdnet">Real-Time MDNet</span></h1><h2><span id="adaptive-roialign">Adaptive RoIAlign</span></h2><p>​    对于前面的全卷积特征映射，用RoIAlign层提取对象表示：构建高分辨率特征图，扩大每个激活的感受野。</p>
-<p><br></p>
-<h3><span id="roipooling">RoIPooling</span></h3><p>​    用于Faster RCNN，使生成的候选框region proposal映射产生固定大小的feature map。</p>
-<p><img src="/2020/06/18/RT-MDNet/RoIPooling.png" alt="RoIPooling"> </p>
+<br>
+<h1><span id="real-time-mdnet">Real-Time MDNet</span></h1>
+<h2><span id="adaptive-roialign">Adaptive RoIAlign</span></h2>
+<p>​    对于前面的全卷积特征映射，用RoIAlign层提取对象表示：构建高分辨率特征图，扩大每个激活的感受野。</p>
+<br>
+<h3><span id="roipooling">RoIPooling</span></h3>
+<p>​    用于Faster RCNN，使生成的候选框region proposal映射产生固定大小的feature map。</p>
+<p><img src="/2020/06/18/RT-MDNet/RoIPooling.png" alt="RoIPooling"></p>
 <ol>
 <li>800*800的原图经过VGG16，stride=32，得到800/32=25.</li>
 <li>原图中一个665*665的候选框，变为655/32=20.78。此处有一次取整（量化），变为20.</li>
 <li>此处，对RoI继续池化，变为7*7。即从400格变为49格。20/7=2.86，此处进行第二次量化，为2.</li>
-<li>即，最终从RoI的每2<em>2的部分中取max作为代表组成7 </em> 7的结果（池化）。</li>
+<li>即，最终从RoI的每2*2的部分中取max作为代表组成7 * 7的结果（池化）。</li>
 </ol>
 <p>​    两次量化自然会带来很大的偏差，影响后面的回归定位。</p>
-<p><br></p>
-<h3><span id="roialign">RoIAlign</span></h3><p>​    Mask RCNN中使用，目的相同。</p>
+<br>
+<h3><span id="roialign">RoIAlign</span></h3>
+<p>​    Mask RCNN中使用，目的相同。</p>
 <ol>
 <li>类似上图，对于20.78*20.78，不取整，保留。</li>
 <li>池化时，20.78/7=2.97，得到每2.97*2.97部分，选一个代表。</li>
@@ -264,23 +234,26 @@
 </ol>
 <p><img src="/2020/06/18/RT-MDNet/RoIAlign.png" alt="RoIAlign"></p>
 <p>​    因小目标相较大目标对于偏差更敏感，故小目标上效果更好。</p>
-<p><br></p>
-<h3><span id="adaptive-roialign">Adaptive RoIAlign</span></h3><p>​    RT-MDnet提出，以解决原始RoIAlign提取特征粗略，和双线性差值仅使用临近格点计算导致大目标的信息损失的问题。</p>
-<p><img src="/2020/06/18/RT-MDNet/Adaptive RoIAlign.png" alt></p>
+<br>
+<h3><span id="adaptive-roialign">Adaptive RoIAlign</span></h3>
+<p>​    RT-MDnet提出，以解决原始RoIAlign提取特征粗略，和双线性差值仅使用临近格点计算导致大目标的信息损失的问题。</p>
+<p>![](RT-MDNet/Adaptive RoIAlign.png)</p>
 <ul>
 <li>移除MaxPool层，以r=3的空洞卷积得到两倍于原尺寸的conv3。</li>
-<li>双线性差值的带宽由RoI的siaze决定（自适应），与$\frac{w}{w`}$成比例。<ul>
+<li>双线性差值的带宽由RoI的siaze决定（自适应），与$\frac{w}{w`}$成比例。
+<ul>
 <li>$w$：conv3后的RoI宽度</li>
 <li>$w`$：RoIAlign后的RoI宽度</li>
 <li>$[·]$：舍入算子</li>
 </ul>
 </li>
-<li>Adaptive RoIAlign输出7<em>7的map，后接一最大池化层生成3 </em> 3map。</li>
+<li>Adaptive RoIAlign输出7*7的map，后接一最大池化层生成3 * 3map。</li>
 </ul>
 <p>​    feature map放大， 提高了特征质量，避免了跟踪过程中的错误累计。</p>
 <hr>
-<p><br></p>
-<h2><span id="内嵌判别实例的预训练">内嵌判别实例的预训练</span></h2><p>​    MDNet<strong>无法区分</strong>其具有<strong>相似语义信息</strong>的<strong>前景目标</strong>。本文中在预训练阶段引入嵌入损失，并聚合到原MDNet中二分类损失中。</p>
+<br>
+<h2><span id="内嵌判别实例的预训练">内嵌判别实例的预训练</span></h2>
+<p>​    MDNet<strong>无法区分</strong>其具有<strong>相似语义信息</strong>的<strong>前景目标</strong>。本文中在预训练阶段引入嵌入损失，并聚合到原MDNet中二分类损失中。</p>
 <p>​    在共享特征空间中，不同域中的目标嵌入时互相远离。将多个视频中的前景对象嵌入进去。即，使得不同域的目标在特征空间的距离相互更远，loss中嵌入了其他视频中的目标来使相互之间更有判别力。</p>
 <p>$L = L_{cls} + \alpha·L_{inst}$</p>
 <ul>
@@ -290,8 +263,9 @@
 </ul>
 <p><img src="/2020/06/18/RT-MDNet/inst_loss.png" alt></p>
 <hr>
-<p><br></p>
-<h2><span id="参考博客">参考博客</span></h2><p><a href="https://www.cnblogs.com/wangyong/p/8523814.html" target="_blank" rel="noopener" title="RoIPooling、RoIAlign笔记">RoIPooling、RoIAlign笔记</a></p>
+<br>
+<h2><span id="参考博客">参考博客</span></h2>
+<p><a href="https://www.cnblogs.com/wangyong/p/8523814.html" target="_blank" rel="noopener" title="RoIPooling、RoIAlign笔记">RoIPooling、RoIAlign笔记</a></p>
 <p><a href="https://blog.csdn.net/weixin_39467358/article/details/84990609" target="_blank" rel="noopener">RT-MDNet深度跟踪网络</a></p>
 <p><a href="https://blog.csdn.net/sinat_27318881/article/details/83622344" target="_blank" rel="noopener">【小白笔记】目标跟踪 Real-Time MDNet</a></p>
 <p><a href="https://blog.csdn.net/qinhuai1994/article/details/82663107" target="_blank" rel="noopener">【目标跟踪】Real-Time MDNet</a></p>
@@ -337,5 +311,25 @@
 </footer>
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

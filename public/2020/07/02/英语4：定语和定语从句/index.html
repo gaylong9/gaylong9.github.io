@@ -15,6 +15,7 @@
 
 
 <title>语法4：定语和定语从句 | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
 
 
 
@@ -41,44 +42,7 @@
 
     
     
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
+        
     
 
 
@@ -227,89 +191,109 @@
 
         <div class="post-content">
             <p>《刘晓艳语法长难句》第四章笔记</p>
-<p><br></p>
+<br>
 <a id="more"></a>
 <!-- toc -->
 <ul>
-<li><a href="#定语和定语从句">定语和定语从句</a><ul>
-<li><a href="#1-定语">1. 定语</a></li>
-<li><a href="#2-定语的成分">2. 定语的成分</a></li>
-<li><a href="#3-定语的位置">3. 定语的位置</a></li>
-<li><a href="#4-定语从句">4. 定语从句</a></li>
-<li><a href="#5-定语从句的特殊用法">5. 定语从句的特殊用法</a></li>
-<li><a href="#6-区分定语从句和同位语从句">6. 区分定语从句和同位语从句</a></li>
-<li><a href="#7-定语从句的至难点">7. 定语从句的至难点</a></li>
-<li><a href="#8-定语和定语从句的应用">8. 定语和定语从句的应用</a></li>
-<li><a href="#9-总结">9. 总结</a></li>
+<li><a href="#%E5%AE%9A%E8%AF%AD%E5%92%8C%E5%AE%9A%E8%AF%AD%E4%BB%8E%E5%8F%A5">定语和定语从句</a>
+<ul>
+<li><a href="#1-%E5%AE%9A%E8%AF%AD">1. 定语</a></li>
+<li><a href="#2-%E5%AE%9A%E8%AF%AD%E7%9A%84%E6%88%90%E5%88%86">2. 定语的成分</a></li>
+<li><a href="#3-%E5%AE%9A%E8%AF%AD%E7%9A%84%E4%BD%8D%E7%BD%AE">3. 定语的位置</a></li>
+<li><a href="#4-%E5%AE%9A%E8%AF%AD%E4%BB%8E%E5%8F%A5">4. 定语从句</a></li>
+<li><a href="#5-%E5%AE%9A%E8%AF%AD%E4%BB%8E%E5%8F%A5%E7%9A%84%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95">5. 定语从句的特殊用法</a></li>
+<li><a href="#6-%E5%8C%BA%E5%88%86%E5%AE%9A%E8%AF%AD%E4%BB%8E%E5%8F%A5%E5%92%8C%E5%90%8C%E4%BD%8D%E8%AF%AD%E4%BB%8E%E5%8F%A5">6. 区分定语从句和同位语从句</a></li>
+<li><a href="#7-%E5%AE%9A%E8%AF%AD%E4%BB%8E%E5%8F%A5%E7%9A%84%E8%87%B3%E9%9A%BE%E7%82%B9">7. 定语从句的至难点</a></li>
+<li><a href="#8-%E5%AE%9A%E8%AF%AD%E5%92%8C%E5%AE%9A%E8%AF%AD%E4%BB%8E%E5%8F%A5%E7%9A%84%E5%BA%94%E7%94%A8">8. 定语和定语从句的应用</a></li>
+<li><a href="#9-%E6%80%BB%E7%BB%93">9. 总结</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-<p><br></p>
+<br>
 <p>[toc]</p>
-<h1><span id="定语和定语从句">定语和定语从句</span></h1><h2><span id="1-定语">1. 定语</span></h2><p>定语就是修饰名词/短语的成分。</p>
+<h1><span id="定语和定语从句">定语和定语从句</span></h1>
+<h2><span id="1-定语">1. 定语</span></h2>
+<p>定语就是修饰名词/短语的成分。</p>
 <p>eg：</p>
-<p>​    它是一只<strong>善良的</strong>夜莺。</p>
-<p>​    <strong>住在年轻人隔壁的</strong>女孩应该很漂亮。</p>
-<p><br></p>
-<h2><span id="2-定语的成分">2. 定语的成分</span></h2><ol>
-<li><p>形容词（短语）作定语</p>
+<p>​	它是一只<strong>善良的</strong>夜莺。</p>
+<p>​	<strong>住在年轻人隔壁的</strong>女孩应该很漂亮。</p>
+<br>
+<h2><span id="2-定语的成分">2. 定语的成分</span></h2>
 <ol>
-<li><p>那只善良的夜莺最后死了。 </p>
-<p> That <strong>kind</strong> nightingale died at last.</p>
-</li>
-<li><p>这朵非凡的玫瑰花变成了深红色。 </p>
-<p> The <strong>extraordinary</strong> rose turns dark red.</p>
-</li>
-</ol>
-</li>
-<li><p>形容词化的名词（短语）作定语</p>
-<p> 夜莺的歌声能使这朵玫瑰花开放。 </p>
-<p> <strong>The nightingale`s</strong> singing can make the rose bloom. </p>
-<p> The singing <strong>of the nightingale</strong> can make the rose bloom. （常用）</p>
-</li>
-<li><p>介词短语作定语</p>
+<li>
+<p>形容词（短语）作定语</p>
 <ol>
-<li><p>窗外的夜莺听到了年轻人的感叹。</p>
-<p> The nightingale <strong>out of the window</strong> heard the sighs of the young man.</p>
+<li>
+<p>那只善良的夜莺最后死了。</p>
+<p>That <strong>kind</strong> nightingale died at last.</p>
 </li>
-<li><p>我只有和大海的浪花一样白的玫瑰花。</p>
-<p> I only have roses <strong>as white as the foam in the sea</strong>.</p>
+<li>
+<p>这朵非凡的玫瑰花变成了深红色。</p>
+<p>The <strong>extraordinary</strong> rose turns dark red.</p>
 </li>
 </ol>
 </li>
-<li><p>分词、不定式（非谓语）作定语</p>
+<li>
+<p>形容词化的名词（短语）作定语</p>
+<p>夜莺的歌声能使这朵玫瑰花开放。</p>
+<p><strong>The nightingale`s</strong> singing can make the rose bloom.</p>
+<p>The singing <strong>of the nightingale</strong> can make the rose bloom. （常用）</p>
+</li>
+<li>
+<p>介词短语作定语</p>
 <ol>
-<li><p>唱歌的夜莺最终因爱而死。</p>
-<p> In the end, the <strong>singing</strong> nightingale died because of love.</p>
+<li>
+<p>窗外的夜莺听到了年轻人的感叹。</p>
+<p>The nightingale <strong>out of the window</strong> heard the sighs of the young man.</p>
 </li>
-<li><p>单纯的夜莺一定是爱上了那个被女孩欺骗的学生。</p>
-<p> The innocent nightingale must have loved the student <strong>deceived by the girl</strong>.</p>
+<li>
+<p>我只有和大海的浪花一样白的玫瑰花。</p>
+<p>I only have roses <strong>as white as the foam in the sea</strong>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>分词、不定式（非谓语）作定语</p>
+<ol>
+<li>
+<p>唱歌的夜莺最终因爱而死。</p>
+<p>In the end, the <strong>singing</strong> nightingale died because of love.</p>
+</li>
+<li>
+<p>单纯的夜莺一定是爱上了那个被女孩欺骗的学生。</p>
+<p>The innocent nightingale must have loved the student <strong>deceived by the girl</strong>.</p>
 </li>
 </ol>
 </li>
-<li><p>从句作定语</p>
-<p> 夜莺用生命换来的玫瑰花并没有帮到那个学生。</p>
-<p> The rose <strong>Which the nightingale exchanged with her life</strong> failed to help the student.</p>
+<li>
+<p>从句作定语</p>
+<p>夜莺用生命换来的玫瑰花并没有帮到那个学生。</p>
+<p>The rose <strong>Which the nightingale exchanged with her life</strong> failed to help the student.</p>
 </li>
 </ol>
-<p><br></p>
-<h2><span id="3-定语的位置">3. 定语的位置</span></h2><p>不同于汉语的名词前，英语中定语位置“前小后大”。即，定语的位置取决于其长度。另，过去分词作定语，即使一个单词也要置后。</p>
+<br>
+<h2><span id="3-定语的位置">3. 定语的位置</span></h2>
+<p>不同于汉语的名词前，英语中定语位置“前小后大”。即，定语的位置取决于其长度。另，过去分词作定语，即使一个单词也要置后。</p>
 <p>eg: 他是一个被抛弃的男人。He is a man abandoned.</p>
-<p><br></p>
-<h2><span id="4-定语从句">4. 定语从句</span></h2><ol>
-<li><p>构成：先行词（名词（短语）） + 引导词 + 分句</p>
-</li>
-<li><p>引导词：按照先行词分类</p>
+<br>
+<h2><span id="4-定语从句">4. 定语从句</span></h2>
 <ol>
-<li>人：who, whom, whose </li>
+<li>
+<p>构成：先行词（名词（短语）） + 引导词 + 分句</p>
+</li>
+<li>
+<p>引导词：按照先行词分类</p>
+<ol>
+<li>人：who, whom, whose</li>
 <li>物：that, which, whose</li>
 <li>时间：that, which, when</li>
 <li>地点：that, which, where</li>
 <li>原因：that, which, why. 通常情况下that等同于which</li>
 </ol>
 </li>
-<li><p>用例：</p>
+<li>
+<p>用例：</p>
 <ol>
 <li>He is the man <strong>who</strong> loves me.（who从句充当主语或宾语）</li>
 <li>He is the man <strong>who/whom</strong> I love.（whom从句中充当宾语）</li>
@@ -320,43 +304,54 @@
 <li>You had better have some reason <strong>which/that</strong> sounds perfect.（从句缺主语）</li>
 </ol>
 </li>
-<li><p>可见，引导词也可按其本身词性（从句中担当成分）分类：</p>
+<li>
+<p>可见，引导词也可按其本身词性（从句中担当成分）分类：</p>
 <ol>
 <li>代词，从句中充当主语、宾语：who, whom, that, which</li>
 <li>副词，从句中不充当主干：where, when, why</li>
 <li>形容词，从句中充当定语：whose</li>
 </ol>
 </li>
-<li><p>eg：</p>
+<li>
+<p>eg：</p>
 <ol>
-<li><p>那个老妇人在儿子到达的当天去世了。 </p>
-<p> The old lady died on that day when her son arrived.</p>
+<li>
+<p>那个老妇人在儿子到达的当天去世了。</p>
+<p>The old lady died on that day when her son arrived.</p>
 </li>
-<li><p>女孩还是喜欢王子送给她的珠宝。</p>
-<p> The girl prefers the jewelry which/that the prince sent to her.</p>
+<li>
+<p>女孩还是喜欢王子送给她的珠宝。</p>
+<p>The girl prefers the jewelry which/that the prince sent to her.</p>
 </li>
-<li><p>把孩子们放到一个他们能够看到不同的自己的地方是很重要的。</p>
-<p> It`s important to put children into a place where they can see themselves in different circumstances.</p>
+<li>
+<p>把孩子们放到一个他们能够看到不同的自己的地方是很重要的。</p>
+<p>It`s important to put children into a place where they can see themselves in different circumstances.</p>
 </li>
 </ol>
 </li>
 </ol>
-<p><br></p>
-<h2><span id="5-定语从句的特殊用法">5. 定语从句的特殊用法</span></h2><ol>
-<li><p>that引导，若充当宾语，that可省略（呈现出两个名词（短语）直接放在一起）:</p>
+<br>
+<h2><span id="5-定语从句的特殊用法">5. 定语从句的特殊用法</span></h2>
+<ol>
+<li>
+<p>that引导，若充当宾语，that可省略（呈现出两个名词（短语）直接放在一起）:</p>
 <ol>
 <li>I enjoy the movie Zhao Wei directed.</li>
 <li>The potential evolution of today`s technology, and its social consequences, is dazzlingly complicated, and it’s perhaps best left to science-fiction writers and futurologists to explore <strong>the many possibilities we can envisage</strong>. 现代技术的潜在发展和它产生的社会影响是极其复杂的，所以最好把它留给科幻小说作家和未来学家去发掘我们所能想象到的许许多多的可能性。</li>
 </ol>
 </li>
-<li><p>区分限定性定语从句和非限定性定语从句</p>
+<li>
+<p>区分限定性定语从句和非限定性定语从句</p>
 <ol>
-<li><p>eg：<br> A nurse is a person who looks after patients.(限定)</p>
-<p> Tom`s father, who is over sixty, still works hard.（非限定）</p>
-<p> He said he had climbed up the top of the Everest, which I suspect very much.（非限定，对整个句子修饰）</p>
-<p> 他说他曾爬上珠峰顶，我对十分怀疑。</p>
+<li>
+<p>eg：<br>
+A nurse is a person who looks after patients.(限定)</p>
+<p>Tom`s father, who is over sixty, still works hard.（非限定）</p>
+<p>He said he had climbed up the top of the Everest, which I suspect very much.（非限定，对整个句子修饰）</p>
+<p>他说他曾爬上珠峰顶，我对十分怀疑。</p>
 </li>
-<li><p>区别：</p>
+<li>
+<p>区别：</p>
 <ol>
 <li>限定性定语从句：与先行词关系紧密，删除后影响句意、不用逗号、可用that、引导词作宾语可省略、不可以修饰句子、常译为定语</li>
 <li>非限定性定语从句：与先行词关系疏松，起补充说明作用、用逗号、<strong>不可用that</strong>、<strong>引导词作宾语不可省略</strong>、可以修饰句子、<strong>常译为两个句子</strong></li>
@@ -364,72 +359,90 @@
 </li>
 </ol>
 </li>
-<li><p>介词+关系代词 引导的定语从句</p>
-<p> where, when, why在从句中作状语时，可变化为介词+关系代词，非重点，尝试换回寻常副词翻译即可。</p>
+<li>
+<p>介词+关系代词 引导的定语从句</p>
+<p>where, when, why在从句中作状语时，可变化为介词+关系代词，非重点，尝试换回寻常副词翻译即可。</p>
 </li>
-<li><p>the same … as 和 the same … that</p>
-<p> eg：</p>
-<p> Darcy is the same man as I love. 我喜欢的是<strong>像</strong>达西先生<strong>一样</strong>的人。（<strong>主句从句，同类不同物</strong>）</p>
-<p> Darcy is the same man that I love. 我喜欢的男人<strong>正是</strong>达西先生。（<strong>主句从句，指同一物</strong>）</p>
+<li>
+<p>the same … as 和 the same … that</p>
+<p>eg：</p>
+<p>Darcy is the same man as I love. 我喜欢的是<strong>像</strong>达西先生<strong>一样</strong>的人。（<strong>主句从句，同类不同物</strong>）</p>
+<p>Darcy is the same man that I love. 我喜欢的男人<strong>正是</strong>达西先生。（<strong>主句从句，指同一物</strong>）</p>
 </li>
-<li><p>as和which引导的非限定性定语从句</p>
+<li>
+<p>as和which引导的非限定性定语从句</p>
 <ol>
-<li><p>相同点：二者都可以引导非限定性定语从句</p>
+<li>
+<p>相同点：二者都可以引导非限定性定语从句</p>
 </li>
-<li><p>不同点：</p>
+<li>
+<p>不同点：</p>
 <ol>
-<li><p>as引导的从句，在主句中位置随意；which引导的从句，位于主句后：</p>
-<p> <strong>As</strong> we all know, water flows downwards.</p>
-<p> Water flows downwards, <strong>which</strong> is known to us all.</p>
+<li>
+<p>as引导的从句，在主句中位置随意；which引导的从句，位于主句后：</p>
+<p><strong>As</strong> we all know, water flows downwards.</p>
+<p>Water flows downwards, <strong>which</strong> is known to us all.</p>
 </li>
-<li><p>as后的动词是be；which后不限制</p>
-<p> <strong>As is</strong> known to the US, Mark Twain is a great writer.</p>
-<p> Immigrants are quickly fitting into this common culture, <strong>which may</strong> not be altogether elevating but is hardly poisonous. 移民们很快适应了这里的大众文化，它虽然可能不完全引人向上，但至少不会毒害百姓。</p>
+<li>
+<p>as后的动词是be；which后不限制</p>
+<p><strong>As is</strong> known to the US, Mark Twain is a great writer.</p>
+<p>Immigrants are quickly fitting into this common culture, <strong>which may</strong> not be altogether elevating but is hardly poisonous. 移民们很快适应了这里的大众文化，它虽然可能不完全引人向上，但至少不会毒害百姓。</p>
 </li>
 </ol>
 </li>
 </ol>
 </li>
-<li><p>定语从句中引导词which和that的区别</p>
-<p> 都可指物，通常可替换。</p>
-<p> which：</p>
+<li>
+<p>定语从句中引导词which和that的区别</p>
+<p>都可指物，通常可替换。</p>
+<p>which：</p>
 <ol>
 <li>引导非限定性定语从句</li>
-<li><p>放在介词后作宾语（介词+关系代词的引导词 5.3）</p>
+<li>放在介词后作宾语（介词+关系代词的引导词 5.3）</li>
+</ol>
 <p>that：</p>
+<ol>
+<li>
+<p>当先行词是much, little, none, all, few, every(thing), any(thing), no(thing)等时</p>
+<p>eg：I did nothing that might hurt you.</p>
 </li>
-<li><p>当先行词是much, little, none, all, few, every(thing), any(thing), no(thing)等时</p>
-<p> eg：I did nothing that might hurt you.</p>
+<li>
+<p>主句以here, there开头时</p>
+<p>eg: Here is the hotel that you`ve been lokking for.</p>
 </li>
-<li><p>主句以here, there开头时</p>
-<p> eg: Here is the hotel that you`ve been lokking for.</p>
+<li>
+<p>当先行词被the only, the same, the very等限定词修饰时</p>
+<p>eg: This is the first film that has been shown in our school this term.</p>
 </li>
-<li><p>当先行词被the only, the same, the very等限定词修饰时</p>
-<p> eg: This is the first film that has been shown in our school this term.</p>
+<li>
+<p>先行词被any, few, little, no, all, much, some等修饰时</p>
+<p>eg: You can take any seat that is free.</p>
 </li>
-<li><p>先行词被any, few, little, no, all, much, some等修饰时</p>
-<p> eg: You can take any seat that is free.</p>
+<li>
+<p>当先行词被序数词、形容词最高级修饰时</p>
 </li>
-<li><p>当先行词被序数词、形容词最高级修饰时</p>
+<li>
+<p>当先行词是who, which, what或主句以此开头时</p>
+<p>eg: Which is the star that is nearer to the earth?</p>
 </li>
-<li><p>当先行词是who, which, what或主句以此开头时</p>
-<p> eg: Which is the star that is nearer to the earth?</p>
-</li>
-<li><p>当先行词既有人又有物时</p>
-<p> eg: They are talking of the heroines and their deeds that interest them.</p>
+<li>
+<p>当先行词既有人又有物时</p>
+<p>eg: They are talking of the heroines and their deeds that interest them.</p>
 </li>
 </ol>
 </li>
 </ol>
-<p><br></p>
-<h2><span id="6-区分定语从句和同位语从句">6. 区分定语从句和同位语从句</span></h2><p>:one: I had a dream that was definitely sweet.</p>
-<p>:two: ​I had a dream that I would become a rich lady someday.</p>
+<br>
+<h2><span id="6-区分定语从句和同位语从句">6. 区分定语从句和同位语从句</span></h2>
+<p>1️⃣ I had a dream that was definitely sweet.</p>
+<p>2️⃣ ​I had a dream that I would become a rich lady someday.</p>
 <p>1是定语从句。2是同位语从句。</p>
 <p>相同：都是先行词+引导词+分句</p>
 <p>不同：1中that在从句中充当成分，而2中不然。</p>
-<p><br></p>
-<h2><span id="7-定语从句的至难点">7. 定语从句的至难点</span></h2><p>The words used by the speaker may stir up unfavorable reactions in the listener __ interfere with his comprehension; hence, the transmission-reception system breaks down.</p>
-<p>A. who    B. as    C. which    D. what</p>
+<br>
+<h2><span id="7-定语从句的至难点">7. 定语从句的至难点</span></h2>
+<p>The words used by the speaker may stir up unfavorable reactions in the listener __ interfere with his comprehension; hence, the transmission-reception system breaks down.</p>
+<p>A. who	B. as	C. which	D. what</p>
 <p>说话人的语言会激起听者不好的反应，__影响他的判断。</p>
 <p>“他的”指说话人，则空格处指“不好的反应”，即先行词是“reaction”，选C。</p>
 <p><strong>定语从句难点：判断先行词。</strong></p>
@@ -438,64 +451,76 @@
 <p>对于工人来说，它可能意味着作为一名忠实员工的安全、利益和重要感的结束。</p>
 <p>The Greeks assumed that the structure of language had some connection with the process of thought, <strong>which</strong> took root in Europe long before people realized how diverse languages could be. （which指前面整句）</p>
 <p>希腊人认为语言的结构和思维的过程有某种联系，这种观点早在人们认识到语言的多样性之前就在欧洲扎根了。</p>
-<p><br></p>
-<h2><span id="8-定语和定语从句的应用">8. 定语和定语从句的应用</span></h2><ol>
-<li><p>写作</p>
-<p> <strong>作文中出现名词（短语）时，都可以尝试加定语。</strong></p>
-<p> eg：</p>
+<br>
+<h2><span id="8-定语和定语从句的应用">8. 定语和定语从句的应用</span></h2>
 <ol>
-<li><p>养宠物的好处？</p>
-<p> Keeping pets can reduce loneliness.</p>
-<p> :arrow_down:</p>
-<p> Keeping pets which look so cute and lovely can reduce loneliness of some old citizens and children who stay at home alone.</p>
+<li>
+<p>写作</p>
+<p><strong>作文中出现名词（短语）时，都可以尝试加定语。</strong></p>
+<p>eg：</p>
+<ol>
+<li>
+<p>养宠物的好处？</p>
+<p>Keeping pets can reduce loneliness.</p>
+<p>⬇️</p>
+<p>Keeping pets which look so cute and lovely can reduce loneliness of some old citizens and children who stay at home alone.</p>
 </li>
-<li><p>盲目追星的危害？</p>
-<p> Pursuing stars blindly will waste time.</p>
-<p> :arrow_down:</p>
-<p> Pursuing stars looking so handsome or beautiful blindly will waste time of young people who should spend more time and energy on their studies.</p>
+<li>
+<p>盲目追星的危害？</p>
+<p>Pursuing stars blindly will waste time.</p>
+<p>⬇️</p>
+<p>Pursuing stars looking so handsome or beautiful blindly will waste time of young people who should spend more time and energy on their studies.</p>
 </li>
-<li><p>描述图画：<em>文化“火锅”，既美味又营养</em></p>
-<p> In the vivid and simple cartoon, a hot pot which looks not only delicious but also nutrient, cooking while it is smoking, is filled with different cultures including Chinese and western ones such as Buddha, Bi Sheng and Shakespeare.</p>
+<li>
+<p>描述图画：<em>文化“火锅”，既美味又营养</em></p>
+<p>In the vivid and simple cartoon, a hot pot which looks not only delicious but also nutrient, cooking while it is smoking, is filled with different cultures including Chinese and western ones such as Buddha, Bi Sheng and Shakespeare.</p>
 </li>
 </ol>
 </li>
-<li><p>长难句分析</p>
-<p> 找到定语，分离，翻译</p>
+<li>
+<p>长难句分析</p>
+<p>找到定语，分离，翻译</p>
 <ol>
 <li>如何找定语：先找名词（短语），其后不是动词（词组），就大概率是定语（也可能是状语）</li>
-<li><p>定语翻译：定语较短时，翻译到先行词前面；定语较长时，后置，重复先行词或用相应词代替</p>
+<li>定语翻译：定语较短时，翻译到先行词前面；定语较长时，后置，重复先行词或用相应词代替</li>
+</ol>
 <p>eg:</p>
+<ol>
+<li>
+<p>Some of the these causes are completely reasonable results of social needs. Others are reasonable consequences of particular advances in science being to some extent self-accelerating.</p>
+<p>定语1：of social needs</p>
+<p>定语2：of particular advances in science being to some extent self-accelerating</p>
+<p>定语2内含小定语2.1：of particular advances</p>
+<p>2.2：in science</p>
+<p>2.3：being to some extent self-accelerating</p>
+<p><strong>多个定语时，从后向前翻译。</strong></p>
+<p>其中一些原因完全是社会需要的合理结果。其他则是在某种程度上自我加速的科学上的特殊进步的合理结果。</p>
 </li>
-<li><p>Some of the these causes are completely reasonable results of social needs. Others are reasonable consequences of particular advances in science being to some extent self-accelerating.</p>
-<p> 定语1：of social needs</p>
-<p> 定语2：of particular advances in science being to some extent self-accelerating</p>
-<p> 定语2内含小定语2.1：of particular advances</p>
-<p> 2.2：in science</p>
-<p> 2.3：being to some extent self-accelerating</p>
-<p> <strong>多个定语时，从后向前翻译。</strong></p>
-<p> 其中一些原因完全是社会需要的合理结果。其他则是在某种程度上自我加速的科学上的特殊进步的合理结果。</p>
+<li>
+<p>In short, a leader of the new school contends, “the scientific revolution, as we call it, was largely the improvement and invention and use of a series of instruments that expanded the reach of science in innumerable directions.”</p>
+<p>定语1：of the new school</p>
+<p>定语2：of a series of instruments that expanded the reach of science in innumerable directions</p>
+<p>2.1：of a series of instruments</p>
+<p>2.2：that expanded the reach of science in innumerable directions</p>
+<p>插入语：as we call it</p>
+<p>简而言之，新学派的一个领袖认为，“我们所说的科学革命很大程度上是<strong>一系列</strong>工具的改善、发明和使用，<strong>而这些工具在无数个方向上扩大了科学所达到的范围</strong>。”</p>
+<p><strong>（短定语前置，长定语后置同时重复了先行词）</strong></p>
 </li>
-<li><p>In short, a leader of the new school contends, “the scientific revolution, as we call it, was largely the improvement and invention and use of a series of instruments that expanded the reach of science in innumerable directions.”</p>
-<p> 定语1：of the new school</p>
-<p> 定语2：of a series of instruments that expanded the reach of science in innumerable directions</p>
-<p> 2.1：of a series of instruments</p>
-<p> 2.2：that expanded the reach of science in innumerable directions</p>
-<p> 插入语：as we call it</p>
-<p> 简而言之，新学派的一个领袖认为，“我们所说的科学革命很大程度上是<strong>一系列</strong>工具的改善、发明和使用，<strong>而这些工具在无数个方向上扩大了科学所达到的范围</strong>。”</p>
-<p> <strong>（短定语前置，长定语后置同时重复了先行词）</strong></p>
+<li>
+<p>After six months of arguing and final 16 hours of hot parliamentary debates, Australia`s Northern Territory became the first legal authority in the world to allow doctors to take the lives of incurably ill patients who wish to die.</p>
+<p>其中的allow … to do …，为固定搭配，分解成分时不要断开。</p>
+<p>经过六个月的争论和最后16个小时激烈的议会争辩，澳大利亚的北领地成为世界上第一个允许医生根据绝症病人个人意愿来结束其生命的合法政府。</p>
 </li>
-<li><p>After six months of arguing and final 16 hours of hot parliamentary debates, Australia`s Northern Territory became the first legal authority in the world to allow doctors to take the lives of incurably ill patients who wish to die.</p>
-<p> 其中的allow … to do …，为固定搭配，分解成分时不要断开。</p>
-<p> 经过六个月的争论和最后16个小时激烈的议会争辩，澳大利亚的北领地成为世界上第一个允许医生根据绝症病人个人意愿来结束其生命的合法政府。</p>
-</li>
-<li><p>Weather to use tests, other kinds of information, or both in a particular situation depends, therefore, upon the evidence from experience concerning comparative validity and upon such factors as costs and availability.</p>
-<p> 其中，and upon的and，并列连词，新开一句，前面的定语到此终止。</p>
-<p> 因此，是使用测试或其他种类的信息，还是在一种特殊条件下同时使用两者，这取决于和相对有效性有关的来自经验的证据，也取决于诸如成本和可用性等因素。</p>
+<li>
+<p>Weather to use tests, other kinds of information, or both in a particular situation depends, therefore, upon the evidence from experience concerning comparative validity and upon such factors as costs and availability.</p>
+<p>其中，and upon的and，并列连词，新开一句，前面的定语到此终止。</p>
+<p>因此，是使用测试或其他种类的信息，还是在一种特殊条件下同时使用两者，这取决于和相对有效性有关的来自经验的证据，也取决于诸如成本和可用性等因素。</p>
 </li>
 </ol>
 </li>
 </ol>
-<h2><span id="9-总结">9. 总结</span></h2><p>定语从名词（短语）后开始，一般到主句的谓语前结束。</p>
+<h2><span id="9-总结">9. 总结</span></h2>
+<p>定语从名词（短语）后开始，一般到主句的谓语前结束。</p>
 <p>但是如果主句的谓语在定语前出现，定语通常到句末结束。</p>
 <p>大定语中常有很多小定语，每个小定语到下一个名词处结束，翻译时从最后一个小定语向前翻译。</p>
 <p>例外一是名词前后的词是固定搭配，则定语应到固定搭配后结束。</p>
@@ -542,5 +567,25 @@
 </footer>
 
     </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

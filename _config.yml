@@ -158,3 +158,10 @@ markdown:
     permalinkClass: header-anchor
     permalinkSymbol: ¶
 
+
+math: 
+  enable: true
+  engine: mathjax
+
+
+
