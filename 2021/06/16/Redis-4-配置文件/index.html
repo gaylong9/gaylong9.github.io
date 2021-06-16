@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>Redis_4.配置文件 | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Redis_4.配置文件</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 16, 2021&nbsp;&nbsp;16:43:51</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p> </p>
+<a id="more"></a>
+<!-- toc -->
+<ul>
+<li><a href="#1-%E5%A4%87%E4%BB%BD%E6%8C%81%E4%B9%85%E5%8C%96">1. 备份/持久化</a>
+<ul>
+<li><a href="#43-java%E4%BD%BF%E7%94%A8%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F">4.3 Java使用哨兵模式</a></li>
+<li><a href="#44-%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE%E9%A1%B9">4.4 哨兵模式其他配置项</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p> </p>
+<p>.conf文件。</p>
+<h1><span id="1-备份持久化">1. 备份/持久化</span></h1>
+<p>Redis有两种备份方式：</p>
+<ol>
+<li>快照snapshotting：备份当前瞬间在内存中的数据记录</li>
+<li>只追加文件AOF：当执行写命令后，在一定条件下将执行过的写命令依次保存至文件，将来依次执行这些命令以恢复</li>
+</ol>
+<p>快照在数据量大的情况下，保存时可能卡顿，但恢复重启块；AOF备份一般不会造成卡顿，但恢复重启慢，备份文件可能会更大。可以二者同时使用。</p>
+<p> </p>
+<p>以下介绍一些默认配置：</p>
+<ol>
+<li>
+<pre><code> save 900 1
+ save 300 10
+ save 60 10000
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	当900秒执行1个写命令时，用快照备份</span><br><span class="line"></span><br><span class="line">	当300s执行10个写命令时，用快照备份</span><br><span class="line"></span><br><span class="line">	当60s内执行10000个写命令时，用快照备份</span><br><span class="line"></span><br><span class="line">	Redis执行save命令时，禁止写命令。</span><br><span class="line"></span><br><span class="line">2. &#96;stop-writes-on-bgsave-error yes&#96;</span><br><span class="line"></span><br><span class="line">	bgsave是异步保存，使用另一个进程，将Redis数据保存到对应的文件中，不会阻塞客户端写入。默认设置下，若bgsave失败，就停止接受写操作。这是为了提醒用户知道数据保存失败。可以使用其他监控程序，就可改为no了。</span><br><span class="line"></span><br><span class="line">3.</span><br></pre></td></tr></table></figure>
+ rdbchecksum yes
+ dbfilename dump.rdb
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	是否对rdb文件检验。rdb文件是Redis持久化的数据文件。若快照备份，用其保存数据。</span><br><span class="line"></span><br><span class="line">4.</span><br></pre></td></tr></table></figure>
+ appendonly no
+ appendfilename &quot;appendonly.aof&quot;
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	若开启，则在特定时间执行追加命令。</span><br><span class="line"></span><br><span class="line">5. &#96;appendfsync everysec&#96;</span><br><span class="line"></span><br><span class="line">	设置AOF和Redis命令的同步频率。若always，则同步记录，造成缓慢。everysec表示每秒同步一次。no表示由客户端调用命令执行备份，Redis本身不备份。三者是对安全度与性能的取舍，建议默认每秒。</span><br><span class="line"></span><br><span class="line">6. &#96;no-appendfsync-on-rewrite no&#96;</span><br><span class="line"></span><br><span class="line">	指定是否在后台AOF文件重写期间调用fsync。no表示要调用fsync（无论后台是否有子进程在重写）。Redis后台写rdb文件或重写AOF文件期间会存在大量磁盘I&#x2F;O，某些Linux系统中调用fsync可能会阻塞。</span><br><span class="line"></span><br><span class="line">7. &#96;auto-aof-rewrite-percentage 100&#96;</span><br><span class="line"></span><br><span class="line">	重写AOF文件的条件，默认100，表示与上次重写的大小相比，当前AOF文件增长量唱过上次文件大小的100%时，触发后台重写。若设置0，则禁用自动重写。</span><br><span class="line"></span><br><span class="line">8. &#96;auto-aof-rewrite-min-size 64mb&#96;</span><br><span class="line"></span><br><span class="line">	触发重写的AOF文件大小。若AOF文件小于该值，即使增量比满足要求，也不会触发自动重写。</span><br><span class="line"></span><br><span class="line">9. &#96;aof-load-truncated yes&#96;</span><br><span class="line"></span><br><span class="line">	写AOF时，最后一条指令可能存在写错的情况，若yes则会log并继续，否则直接回复失败。</span><br><span class="line"></span><br><span class="line">&amp;nbsp;</span><br><span class="line"></span><br><span class="line"># 2. 内存回收策略</span><br><span class="line"></span><br><span class="line">当内存到达规定的最大值时，允许配置6中策略中的一种进行淘汰键值。</span><br><span class="line"></span><br><span class="line">在&#96;maxmemory-policy&#96;设置回收策略：</span><br><span class="line"></span><br><span class="line">1. &#96;volatile-lru&#96;：最近使用最少的淘汰策略，回收超时的键值对</span><br><span class="line">2. &#96;allkeys-lru&#96;：淘汰最少使用。对所有（不仅是超时）的键值对使用</span><br><span class="line">3. &#96;volatile-random&#96;：随机淘汰超时的键值对</span><br><span class="line">4. &#96;allkeys-random&#96;：随机淘汰所有的键值对（不常用）</span><br><span class="line">5. &#96;volatile-ttl&#96;：删除存活时间最短的键值对</span><br><span class="line">6. &#96;noeviction&#96;：不淘汰，内存已满时，读可正常工作，写将返回错误（默认）</span><br><span class="line"></span><br><span class="line">LRU和TTL只是近似算法，不会精确记录比较时间值。</span><br><span class="line"></span><br><span class="line">配置文件有&#96;max-memeory-samples&#96;参数，默认值3，表示使用LRU或TTL时只在samples个键值对中寻找满足删除条件的键值对。可见，samples越大，删除越准确，但性能降低。</span><br><span class="line"></span><br><span class="line">回收会造成系统缓慢，间隔把握同样重要。</span><br><span class="line"></span><br><span class="line">&amp;nbsp;</span><br><span class="line"></span><br><span class="line"># 3. 复制</span><br><span class="line"></span><br><span class="line">如海量请求一个服务器难以处理，或需要多个服务器容灾等。我们需要读写分离（当然前提是读操作更频繁的情况下），能减小单台服务器压力。</span><br><span class="line"></span><br><span class="line">## 3.1 主从同步基础概念</span><br><span class="line"></span><br><span class="line">多台数据服务器汇总，有一个主服务器，只负责写。其余从服务器，只负责同步主服务器的数据，并负责读操作。主服务器写入数据后立刻将写入数据的命令发送给从服务器，使数据同步。应用程序随机读从服务器。任一服务器受损，整个系统都不受影响，主服务器挂掉只需在从服务器中选出一台当主服务器即可。</span><br><span class="line"></span><br><span class="line">当然，在具体的数据存储软件中，会对以上思路做出微调。</span><br><span class="line"></span><br><span class="line">&amp;nbsp;</span><br><span class="line"></span><br><span class="line">## 3.2 Redis主从同步配置</span><br><span class="line"></span><br><span class="line">主机：配置&#96;dir&#96;：默认“.&#x2F;”；配置&#96;dbfilename&#96;：默认“dump.rdb”；表示默认采用当前目录的dump.rdb文件进行同步。</span><br><span class="line"></span><br><span class="line">从机：配置&#96;slaveof server port&#96;，server代表主机，port代表端口。从机Redis重启后就会同步主机数据了。</span><br><span class="line"></span><br><span class="line">若不想让从机继续复制主机数据，可在从机使用&#96;slaveof no one&#96;命令。</span><br><span class="line"></span><br><span class="line">实际Linux环境中还有一个&#96;bind 127.0.0.1&#96;配置，表示只允许本机访问，改为0.0.0.0，其他服务器就可以访问到了。</span><br><span class="line"></span><br><span class="line">&amp;nbsp;</span><br><span class="line"></span><br><span class="line">## 3.3 Redis主从同步过程</span><br><span class="line"></span><br><span class="line">1. 开启主服务器</span><br><span class="line">2. 从服务器启动，读取同步的配置，发送sync命令给主服务器。主服务器接收到，执行bgsave命令备份数据。主服务器不会拒绝客户端的读写，而是将写命令写入缓冲区。从服务器未收到主服务器的备份快照文件时，会根据配置决定使用现有数据响应请求还是拒绝</span><br><span class="line">3. 主服务器完成bgsave后，向从服务器发送备份文件，从服务器丢弃所有现有数据，载入快照文件</span><br><span class="line">4. 主服务器发送完成，从服务器执行写入命令。此时主服务器把bgsave期间缓冲区的写命令也发给从服务器</span><br><span class="line">5. 缓冲区命令发送完成后，主服务器执行一条写命令，就同时向从服务器发送同步写入命令</span><br><span class="line"></span><br><span class="line">主从同步中，主服务器需要空间备份，故主服务器使用50%~65%的空间。</span><br><span class="line"></span><br><span class="line">多从机同步机制：</span><br><span class="line"></span><br><span class="line">![多从机同步](Redis-4-配置文件&#x2F;多从机同步.png)</span><br><span class="line"></span><br><span class="line">&amp;nbsp;</span><br><span class="line"></span><br><span class="line"># 4. 哨兵模式</span><br><span class="line"></span><br><span class="line">主机宕机后，若使用主从切换技术，则需手动选择从服务器切换为主服务器，较为复杂。当下优先考虑哨兵模式。</span><br><span class="line"></span><br><span class="line">## 4.1 概述</span><br><span class="line"></span><br><span class="line">Redis提供哨兵的命令，其是一个独立的进程，独立运行。哨兵通过发送命令，等待服务器响应，从而监控运行的多个Redis实例。</span><br><span class="line"></span><br><span class="line">哨兵检测到主机宕机，自动将从机切换成主机，然后通过发布订阅模式，通知其他从机，修改配置文件，切换对应主机。</span><br><span class="line"></span><br><span class="line">实际中还需要多哨兵，监控服务器与其他哨兵，以防单哨兵模式下哨兵出问题。此时若主机宕机，哨兵1检测到，系统此时不会立刻进行故障切换，因为只是哨兵1主观认为主机出问题，称为主观下线。当一定量的哨兵认为主机不可用，哨兵之间就会形成一次投票，结果由一个哨兵发起，进行故障切换failover。切换成功后，通过发布订阅，让所有哨兵切换主机。这个过程称为客观下线。</span><br><span class="line"></span><br><span class="line">&amp;nbsp;</span><br><span class="line"></span><br><span class="line">## 4.2 配置</span><br><span class="line"></span><br><span class="line">哨兵配置在sentinel.conf</span><br><span class="line"></span><br><span class="line">&#96;sentinel monitor mymaster 192.168.11.128 6379 2&#96;</span><br><span class="line"></span><br><span class="line">sentinel monitor是配置一个哨兵的主要内容；mymaster是自定义服务名称；随后是映射服务器和端口欧；最后的2代表当存在两个或以上的哨兵投票认可当前主服务器不可用后，才进行故障切换。</span><br><span class="line"></span><br><span class="line">&#96;sentinel auth-pass mymaster pwd&#96;</span><br><span class="line"></span><br><span class="line">此项用于配置服务名称及其密码。</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;cmd</span><br><span class="line">.&#x2F;redis-sentinel ..&#x2F;setinel.conf</span><br><span class="line">.&#x2F;redis-server ..&#x2F;redis.conf</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ol>
+<p>启动哨兵进程和服务器进程。</p>
+<p>启动顺序：主机Redis、从机Redis、哨兵进程</p>
+<p> </p>
+<h2><span id="43-java使用哨兵模式">4.3 Java使用哨兵模式</span></h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 连接池</span></span><br><span class="line">JedisPoolConfig cfg = <span class="keyword">new</span> JedisPoolConfig();</span><br><span class="line">cfg.setMaxTotal(<span class="number">10</span>);</span><br><span class="line">cfg.setMaxIdel(<span class="number">5</span>);</span><br><span class="line">cfg.setMinIdle(<span class="number">5</span>);</span><br><span class="line"><span class="comment">// 哨兵</span></span><br><span class="line">Set&lt;String&gt; sentinels = <span class="keyword">new</span> HashSet&lt;Stirng&gt;(Arrays.asList(</span><br><span class="line">	<span class="string">"192.168.11.128:26379"</span>,</span><br><span class="line">    <span class="string">"192.168.11.129:26379"</span>,</span><br><span class="line">    <span class="string">"192.168.11.130:26379"</span>,</span><br><span class="line">));</span><br><span class="line"><span class="comment">// 创建连接池</span></span><br><span class="line">JedisSentinelPool pool = <span class="keyword">new</span> JedisSentinelPool(<span class="string">"mymaster"</span>, sentinels, cfg, <span class="string">"pwd"</span>);</span><br><span class="line"><span class="comment">// 获取客户端</span></span><br><span class="line">Jedis jedis = pool.getResource();</span><br><span class="line"><span class="comment">// 执行命令</span></span><br><span class="line">jedis.set(<span class="string">"k1"</span>, <span class="string">"v1"</span>);</span><br><span class="line">String v = jedis.get(<span class="string">"k1"</span>);</span><br></pre></td></tr></table></figure>
+<p>哨兵默认超时3min进行投票切换主机。若建立检测后，把主机的Redis服务器关闭，3min后再运行程序，将会观察到主机变化了。</p>
+<p> </p>
+<p>Spring中使用：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    哨兵--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sentinelConfig"</span> <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.connection.RedisSentinelConfiguration"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"master"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.connection.RedisNode"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"mymaster"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sentinels"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.connection.RedisNode"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"host"</span> <span class="attr">value</span>=<span class="string">"192.168.11.128"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"port"</span> <span class="attr">value</span>=<span class="string">"26379"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.connection.RedisNode"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"host"</span> <span class="attr">value</span>=<span class="string">"192.168.11.129"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"port"</span> <span class="attr">value</span>=<span class="string">"26379"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.connection.RedisNode"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"host"</span> <span class="attr">value</span>=<span class="string">"192.168.11.130"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"port"</span> <span class="attr">value</span>=<span class="string">"26379"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--另需在connectionConfig中加入：--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"sentinelConfig"</span> <span class="attr">ref</span>=<span class="string">"sentinelConfig"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>测试代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String retVal = (String) template.execute((RedisOperations ops) -&gt; &#123;</span><br><span class="line">    ops.boundValueOps(<span class="string">"key1"</span>).set(<span class="string">"val1"</span>);</span><br><span class="line">    String value = (String) ops.boundValueOps(<span class="string">"key1"</span>).get();</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p> </p>
+<h2><span id="44-哨兵模式其他配置项">4.4 哨兵模式其他配置项</span></h2>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>port</td>
+<td>整数</td>
+<td>启动哨兵进程端口</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>目录</td>
+<td>进程服务临时文件夹，默认/tmp，要保证有可写权限</td>
+</tr>
+<tr>
+<td>sentinel down-after-millisecounds</td>
+<td>整数</td>
+<td>当Redis服务器ms内无法回答，单个哨兵认为主观下线，默认30000</td>
+</tr>
+<tr>
+<td>sentinel parallel-syncs</td>
+<td>整数</td>
+<td>可以有多少服务同步新主机</td>
+</tr>
+<tr>
+<td>sentinel failover-timeout</td>
+<td>整数ms</td>
+<td>故障切换允许的毫秒数，超过时切换故障失败，默认3min</td>
+</tr>
+<tr>
+<td>sentinel notification-script</td>
+<td>脚本路径</td>
+<td>检测到监控的Redis实例异常时，调用的报警脚本</td>
+</tr>
+</tbody>
+</table>
+<p>sentinel down-after-millisecounds只是一个哨兵认为主机不可用的时间，哨兵记录下来，当主观下线的哨兵达到配置数量时，发起投票，切换主机。</p>
+<p> </p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%90%8E%E7%AB%AF/"># 后端</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/06/13/Redis-3-%E4%B8%BB%E8%A6%81%E6%8A%80%E6%9C%AF/">Redis_3.主要技术</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
