@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>KMP | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">KMP</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 27, 2021&nbsp;&nbsp;16:46:01</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <span id="more"></span>
+<!-- t o c -->
+<p>&nbsp;</p>
+<h1><span id="1-原理">1. 原理</span></h1><h2><span id="直观理解">直观理解</span></h2><p>如一个很好的例子，在aabaabaafa中，寻找aabaaf：</p>
+<p>aabaabaafa</p>
+<p>aabaaf</p>
+<p>则两个指针同步出发，至idx=5时，指向了b和f。</p>
+<p>如果是暴力，此时主串指针退回idx=1，子串指针退回idx=0，复杂度O(n*m)。</p>
+<p>观察可以发现，对于子串，若能一路匹配到f，则说明<strong>在f前的两位，已经匹配成功了aa，恰好子串的开头也是aa，这说明主串指针不用动，子串指针只需回退到idx=2，指向b即可。</strong>因为此时，主串指针前两位，和子串指针前面所有（也是两位），都是aa，可以看作是被自动匹配过了，只需继续比较主串所指的b和子串所指的b是否相等即可。</p>
+<p>对子串指针的移动，可以看作是对子串的移动，上述移动后，两串对应如下：可以看出，只需从b开始比较即可，二者的aa必然相同，不需再次比较</p>
+<p>aabaabaafa</p>
+<p>   aabaaf</p>
+<p>&nbsp;</p>
+<h2><span id="前缀表与next数组">前缀表与next数组</span></h2><p>以上的分析是对两串同时分析，实际上关于如何回退（回退几步）的分析只针对子串即可进行。</p>
+<p>如：对于aabaaf，当指到f时，就已说明主串此时所指的前两位是aa，与子串最前面的aa匹配，可以看作子串的开头aa，与主串f前的aa自动匹配过了，子串只需回退到b继续检测匹配。</p>
+<p>又如：对于aabaaf，若指到b时发现与主串不匹配（如主串是aacaaf），同样不需要回退到最开始；因为此时主串所指的前一位一定是a，与子串开头一样是a，子串指针只需移动到idx=1，指向第二个a，继续比较即可。</p>
+<p>可见，如何回退只对子串即可分析。那么，如何通过对子串的分析得出 当某一位匹配失败时，子串指针如何回退呢？答案是使用前缀表。</p>
+<p>继续使用上例，主串aabaabaafa与子串aabaaf匹配，当idx=5，b与f不匹配时，我们发现当前指针的前面，aabaa，其后缀aa与前缀aa一致，长度为2，这也就是我们得出子串指针回退到idx=2，指向b的原因。</p>
+<p>再看一个例子：</p>
+<p>主串 aaaabcd</p>
+<p>子串 aaaaxyz</p>
+<p>子串指到idx=4，x时不匹配，此时应该回退到哪里呢？考虑指针所指的前半部分aaaa，其后缀aaa与前缀aaa一致，故可看作子串的前缀aaa已和主串b前的aaa自动完成匹配了，只需将子串指针回退到idx=3，用该处的a与主串的b继续匹配。</p>
+<p>综上，可以看出，如何回退只需分析子串，并且第i位如何回退，是根据[0, i-1]得出的。那么回退到哪里呢？<strong>回退到[0, i-1]中，最大长度的相等前缀后缀长度。</strong></p>
+<p>如aabaaf，指到f时不匹配，则分析aabaa，其前缀有a、aa、aab、aaba（前缀不包含最后一位），后缀有a、aa、baa、abaa（后缀不包含首位），可见，两集合中最长相等是aa与aa，长度为2，所以子串指针回退时回退到前缀aa的后一位，即idx=2。</p>
+<p>所以对于子串每一位，都可计算出若该位不匹配，回退到何处。回退位置由[0, i-1]中的最大相等前后缀长度确定。将这些数字记录下来，存入数组，这个数组习惯上命名为next。next[i]代表[0: i]中最大相等前后缀长度。</p>
+<p>有了next数组后，若第i位匹配失败，则<code>j = next[j - 1]</code>，j回退，继续比较。</p>
+<p>每次取i前一位的next值较为奇怪，于是有了将next数组整体右移一位的变体next，回退时<code>j = next[j]</code>即可。不过它的操作是对每个next的值-1，并且后续前缀表计算时也有部分修改，并不好理解，所以按下不提。原生next方便理解记忆，我觉得原生就挺好。</p>
+<p>&nbsp;</p>
+<h2><span id="前缀表如何计算">前缀表如何计算</span></h2><p>难道计算next时，要算出所有前缀和后缀，求交集再寻找最大值吗？那自然太麻烦了。对于KMP算法中的next计算，有两种理解方式，不过代码相同，此处细致说一种：通过一趟遍历，计算出子串中所有子子串的最大相等前后缀长度。（子子串，如aabaaf是子串，那么a、aa、aab、aaba、aabaa、aabaaf是其子子串，这是一个为了理解瞎叫的名字；一趟遍历也正对应这所有的子子串）</p>
+<p>首先初始化next数组：<code>next[0] = 0</code>，因为只有一个字符时，其最大相等前后缀长度是0。</p>
+<p>随后定义两个指针i和j，<code>i = 1, j = 0</code>，它们都指向子串。i代表[0: i]中的某一后缀，j代表[0: i]中的确切前缀[0: j]。这样1和0的初始化，就代表了长度为2的子子串（如上例的aa）中，前缀是idx=0处的a，后缀是idx=1处的a。</p>
+<p>一趟遍历：<code>for(; i &lt; strlen(string); i++)</code></p>
+<p>遍历内：若两字符匹配成功，<code>string[j] == string[i]</code>，代表两指针所代表的前后缀匹配成功，且此前后缀是最长相等前后缀，将<code>next[i] = ++j</code>（+1是因为j是下标，索引，而next内存长度）；若两字符匹配失败，j以next回退<code>j = next[j - 1]</code>，随后继续比较。</p>
+<p>有两个问题：</p>
+<p>为什么说两字符匹配成功时，所代表的的前后缀就是最长相等前后缀呢？考虑aaaa，指针i=1，j=0，一路成功下去，i=3，j=2，此时两字符相等，所代表的是前缀aaa和后缀aaa，是最长相等前后缀。由此可以看出，<strong>当匹配成功时，j也在向后移动，会将匹配成功的长度累计下来，故而成功时是最大长度</strong>。</p>
+<p>为什么两字符匹配失败时，j要以next回退？如前一个问题，j肩负着记录最长匹配前缀的责任，如果j永远直接返回首位，则会丢失记录的前缀信息；而next中正包含着[0: i-1]中最长相等前后缀长度，故用next回退，可以保留[0: i-1]的最长相等前后缀，随后与string[i]的继续比较时，仍能代表最大长度。（这与KMP比较主串与子串的思路类似，所以也有直接将求next数组的过程看作 以子串为主串，以子串的前缀为子串，进行字符串匹配，这就是求next数组的另一种理解方式）</p>
+<p>另：代码中，不管是求next，还是正式的利用next进行两串匹配，都是先判断处理匹配失败的情况，在while循环中将j不断回退，随后才处理匹配成功的情况。因为不成功的情况下，回退可能会使结果变为成功。</p>
+<p>&nbsp;</p>
+<h1><span id="2-代码">2. 代码</span></h1><h2><span id="c">C</span></h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 说明</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getRawNext</span> <span class="params">(<span class="keyword">char</span> * <span class="built_in">string</span>, <span class="keyword">int</span> * next)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    next[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 用前缀匹配模式串</span></span><br><span class="line">    <span class="keyword">for</span> (; i &lt; <span class="built_in">strlen</span>(<span class="built_in">string</span>); i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">string</span>[i] != <span class="built_in">string</span>[j]) <span class="comment">// 匹配失败；next[0]=0，j一路左移至最前时j=next[1-1]=0,继续j=next[0-1]越界，故要求j&gt;0，即匹配串最多右移至头部</span></span><br><span class="line">            j = next[j<span class="number">-1</span>];                      <span class="comment">// 利用前面已构建好next数组，匹配串右移/游标左移</span></span><br><span class="line"><span class="comment">//        if (string[i] == string[j])           // 匹配成功</span></span><br><span class="line"><span class="comment">//            next[i] = ++j;                    // next记录的最长相等值为j+1（j从0开始故+1）</span></span><br><span class="line"><span class="comment">//        else                                  // j一路回退至0，仍不等，则next记为0</span></span><br><span class="line"><span class="comment">//            next[i] = j;</span></span><br><span class="line">        <span class="comment">// 将上面的if else优化一下：</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">string</span>[i] == <span class="built_in">string</span>[j]) j++;	    <span class="comment">// 匹配成功，当前最长前后缀相等长度+1</span></span><br><span class="line">        next[i] = j;	                        <span class="comment">// 更新next数组</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getRightNext</span> <span class="params">(<span class="keyword">char</span> * str, <span class="keyword">int</span> * next)</span> </span>&#123;</span><br><span class="line">    next[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    next[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (; i &lt; <span class="built_in">strlen</span>(str)<span class="number">-1</span>; i++) &#123;    <span class="comment">// 计算结果存入后一位，故len-1</span></span><br><span class="line">        <span class="keyword">while</span> (j&gt;<span class="number">-1</span> &amp;&amp; str[i]!=str[j])</span><br><span class="line">            j = next[j];</span><br><span class="line"><span class="comment">//        if (str[i] == str[j])&#123;    // 匹配成功，next后一位记录最大匹配长度，因j从0开始故+1</span></span><br><span class="line"><span class="comment">//            next[i+1] = ++j;</span></span><br><span class="line"><span class="comment">//        &#125; else &#123;                  // 匹配失败，由while知此时必是匹配串移动到最前，j=-1</span></span><br><span class="line"><span class="comment">//            j = 0;                // 故next后一位存入0</span></span><br><span class="line"><span class="comment">//            next[i+1] = j;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="comment">// 将上面if else优化</span></span><br><span class="line">        next[i+<span class="number">1</span>] = ++j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">// search str2 in str1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">KMP</span> <span class="params">(<span class="keyword">char</span> * str1, <span class="keyword">char</span> * str2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strlen</span>(str2) == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> * next = (<span class="keyword">int</span>*) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * <span class="built_in">strlen</span>(str2));</span><br><span class="line">    getRawNext(str2, next);  <span class="comment">// raw next</span></span><br><span class="line">    <span class="comment">// getRightNext(str2, next);   // right next</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; <span class="built_in">strlen</span>(str1) &amp;&amp; j &lt; <span class="built_in">strlen</span>(str2)) &#123;</span><br><span class="line">        <span class="keyword">while</span> (j&gt;<span class="number">0</span> &amp;&amp; str1[i] != str2[j])</span><br><span class="line">            j = next[j<span class="number">-1</span>];    <span class="comment">// raw next</span></span><br><span class="line">            <span class="comment">// j = next[j];        // right next</span></span><br><span class="line">        <span class="keyword">if</span> (str1[i] == str2[j])</span><br><span class="line">            j++;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(next);</span><br><span class="line">    <span class="keyword">if</span> (j == <span class="built_in">strlen</span>(str2))</span><br><span class="line">        <span class="keyword">return</span> i-(<span class="keyword">int</span>)<span class="built_in">strlen</span>(str2);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<h2><span id="java">Java</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">strStr</span><span class="params">(String haystack, String needle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span>[] str2 = needle.toCharArray();</span><br><span class="line">        <span class="keyword">if</span> (str2.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">char</span>[] str1 = haystack.toCharArray();</span><br><span class="line">        <span class="keyword">int</span>[] next = getRawNext(needle.toCharArray());</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; str1.length &amp;&amp; j &lt; str2.length) &#123;</span><br><span class="line">            <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; str1[i] != str2[j]) &#123;</span><br><span class="line">                j = next[j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (str1[i] == str2[j]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (j == str2.length) &#123;</span><br><span class="line">            <span class="keyword">return</span> i - str2.length;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] getRawNext(<span class="keyword">char</span>[] string) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] next = <span class="keyword">new</span> <span class="keyword">int</span>[string.length];</span><br><span class="line">        next[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>; i &lt; string.length; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; string[i] != string[j]) &#123;</span><br><span class="line">                j = next[j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (string[i] == string[j]) &#123;</span><br><span class="line">                next[i] = ++j;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                next[i] = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%AE%97%E6%B3%95/"># 算法</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/06/13/Redis-3-%E4%B8%BB%E8%A6%81%E6%8A%80%E6%9C%AF/">Redis_3.主要技术</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
