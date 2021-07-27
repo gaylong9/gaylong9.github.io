@@ -234,25 +234,70 @@
             <p>&nbsp;</p>
 <span id="more"></span>
 <!-- toc -->
+<ul>
+<li><a href="#1-线性可分">1. 线性可分</a></li>
+<li><a href="#2-基础定义">2. 基础定义</a></li>
+<li><a href="#3-转为最优化问题">3. 转为最优化问题</a><ul>
+<li><a href="#31-推导">3.1 推导</a></li>
+<li><a href="#32-二次规划问题">3.2 二次规划问题</a></li>
+</ul>
+</li>
+<li><a href="#4-线性不可分情况">4. 线性不可分情况</a><ul>
+<li><a href="#41-简单提升">4.1 简单提升</a></li>
+<li><a href="#42-核函数">4.2 核函数</a><ul>
+<li><a href="#421-背景">4.2.1 背景</a></li>
+<li><a href="#422-核函数">4.2.2 核函数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#5-对偶问题">5. 对偶问题</a><ul>
+<li><a href="#51-定义">5.1 定义</a></li>
+<li><a href="#52-svm转化为对偶问题">5.2 SVM转化为对偶问题</a></li>
+</ul>
+</li>
+<li><a href="#6-流程">6. 流程</a><ul>
+<li><a href="#61-求alpha">6.1 求$\alpha$</a></li>
+<li><a href="#62-求b">6.2 求b</a></li>
+<li><a href="#63-预测">6.3 预测</a></li>
+</ul>
+</li>
+<li><a href="#7-核函数">7. 核函数</a><ul>
+<li><a href="#71-linear-线性内核">7.1 Linear 线性内核</a></li>
+<li><a href="#72-ploy-多项式核">7.2 Ploy 多项式核</a></li>
+<li><a href="#73-rbf-高斯径向基函数和">7.3 Rbf 高斯径向基函数和</a></li>
+<li><a href="#74-tanh-sigmoid核">7.4 Tanh sigmoid核</a></li>
+</ul>
+</li>
+<li><a href="#8-兵王问题">8. 兵王问题</a><ul>
+<li><a href="#81-介绍">8.1 介绍</a></li>
+<li><a href="#82-实际问题中的流程">8.2 实际问题中的流程</a></li>
+</ul>
+</li>
+<li><a href="#9-交叉验证">9. 交叉验证</a></li>
+<li><a href="#10-性能度量">10. 性能度量</a></li>
+<li><a href="#11-多分类问题">11. 多分类问题</a></li>
+</ul>
+<!-- tocstop -->
 <p>&nbsp;</p>
 <p>支持向量机（Support Vector Machine, SVM），监督学习 </p>
 <p>&nbsp;</p>
-<h1 id="1-线性可分"><a href="#1-线性可分" class="headerlink" title="1. 线性可分"></a>1. 线性可分</h1><ol>
+<h1><span id="1-线性可分">1. 线性可分</span></h1><ol>
 <li>线性可分（Linear Separable）与线性不可分（Nonlinear Separable）：特征空间中，分类能否用直线（二维特征空间）/平面（三维特征空间）/超平面（高维特征空间）完成</li>
 <li>线性可分的数学论证（二维空间中）：如有$N$个样本与其标签$\{(X_1,y_1),(X_2,y_2),…,(X_N,y_N)\}$，其中$X_i=[x_{i1}, x_{i2}]^T, y_i=\{+1, -1\}$，若存在$(\omega_1,\omega_2,b)$，有：若$y_i=+1$，则$\omega_1x_{i1}+\omega_2x_{i2}+b&gt;0$，若$y_i=-1$，则$\omega_1x_{i1}+\omega_2x_{i2}+b&lt;0$</li>
 <li>向量形式：若有$X_i=[x_{i1} \ x_{i2}]^T \quad \omega=[\omega_1 \ \omega_2]^T$，对于样本集，线性可分为 $y_i(\omega^T X_i+b)&gt;0$，其中的$\omega,b$可看作超平面的法向量和截距，且法向量指向一侧为正类，另一侧为负类</li>
 <li>若数据集线性可分，则有无数个超平面也可分</li>
 </ol>
 <p>&nbsp;</p>
-<h1 id="2-基础定义"><a href="#2-基础定义" class="headerlink" title="2. 基础定义"></a>2. 基础定义</h1><p>既然线性可分时，有无数超平面可分，那么哪个超平面更好呢？</p>
+<h1><span id="2-基础定义">2. 基础定义</span></h1><p>既然线性可分时，有无数超平面可分，那么哪个超平面更好呢？</p>
 <p>如二分类中，对于一个超平面，将其向两侧平移，至与样本相接。这些与平移后超平面相接触的样本称为<strong>支持向量</strong>，两超平面距离称为<strong>间隔</strong>。<strong>最优的分割超平面，即是间隔最大 且 处于间隔正中间的超平面。</strong></p>
 <p>大间隔的好处：更好的容错能力。</p>
 <p>&nbsp;</p>
-<h1 id="3-转为最优化问题"><a href="#3-转为最优化问题" class="headerlink" title="3. 转为最优化问题"></a>3. 转为最优化问题</h1><p>已知：样本与其标签$\{(X_i,y_i)\}, i=1\sim N$；</p>
+<h1><span id="3-转为最优化问题">3. 转为最优化问题</span></h1><p>已知：样本与其标签$\{(X_i,y_i)\}, i=1\sim N$；</p>
 <p>待求：$(\omega, \ b)$；</p>
 <p>最小化：$\frac{1}{2}||\omega||^{2} = \frac{1}{2}\sum\limits^{m}_{i=1} \omega_i^{2}$ （m是$\omega$的维度，即特征空间的维度）；</p>
 <p>限制条件：$y_i(\omega^T X_i+b) \geq 1,(i=1\sim N)$ ，即有N个样本，N个限制条件。</p>
-<h2 id="3-1-推导"><a href="#3-1-推导" class="headerlink" title="3.1 推导"></a>3.1 推导</h2><p>点$X_0$到超平面$\omega^T x+b=0$的距离公式为$d=\frac{|\omega^T X_0+b|}{||\omega||}$；故间隔$r=2\frac{|\omega^Tx_0+b|}{||\omega||}$，其中$x_0$为支持向量，即最终要求</p>
+<h2><span id="31-推导">3.1 推导</span></h2><p>点$X_0$到超平面$\omega^T x+b=0$的距离公式为$d=\frac{|\omega^T X_0+b|}{||\omega||}$；故间隔$r=2\frac{|\omega^Tx_0+b|}{||\omega||}$，其中$x_0$为支持向量，即最终要求</p>
 <script type="math/tex; mode=display">
 \max_{(\omega,b)} \ 2\frac{|\omega^Tx_0+b|}{||\omega||} \\\\
 限制条件 \ y_i(\omega^T x_i+b)>0</script><p>含义为分类正确的情况下，使间隔最大的$\omega,b$，其中$x_i$代表任意向量（数据点）。</p>
@@ -263,7 +308,7 @@
 \\\\
 限制条件 \ y_i(\omega^T x_i+b)
 = |\omega^T x_i+b| \geq 1</script><p>&nbsp;</p>
-<h2 id="3-2-二次规划问题"><a href="#3-2-二次规划问题" class="headerlink" title="3.2 二次规划问题"></a>3.2 二次规划问题</h2><p>属于凸优化问题中的二次规划问题。</p>
+<h2><span id="32-二次规划问题">3.2 二次规划问题</span></h2><p>属于凸优化问题中的二次规划问题。</p>
 <p>二次规划具有以下特点：</p>
 <ol>
 <li>目标函数是二次项</li>
@@ -271,7 +316,7 @@
 </ol>
 <p>凸优化问题要么无解，要么只有唯一解。</p>
 <p>&nbsp;</p>
-<h1 id="4-线性不可分情况"><a href="#4-线性不可分情况" class="headerlink" title="4. 线性不可分情况"></a>4. 线性不可分情况</h1><h2 id="4-1-简单提升"><a href="#4-1-简单提升" class="headerlink" title="4.1 简单提升"></a>4.1 简单提升</h2><p>在原N个限制条件下无解，可放松限制条件，变为$y_i(\omega^T x_i+b) \geq 1-\delta_i$，其中$\delta_i$称为松弛变量。</p>
+<h1><span id="4-线性不可分情况">4. 线性不可分情况</span></h1><h2><span id="41-简单提升">4.1 简单提升</span></h2><p>在原N个限制条件下无解，可放松限制条件，变为$y_i(\omega^T x_i+b) \geq 1-\delta_i$，其中$\delta_i$称为松弛变量。</p>
 <p>同时松弛变量不应过大，即不能过于宽松，应寻找松弛变量为正，且松弛变量最小的情况，故最终优化问题变为：</p>
 <script type="math/tex; mode=display">
 \min_{(\omega,b)}(\frac{1}{2}||\omega||^2 + C\sum_{i=1}^{N}\delta_i)
@@ -281,7 +326,7 @@
 <p>最小化式子中也可使用$\delta_i^2$。</p>
 <p>仍属于凸优化问题。</p>
 <p>&nbsp;</p>
-<h2 id="4-2-核函数"><a href="#4-2-核函数" class="headerlink" title="4.2 核函数"></a>4.2 核函数</h2><h3 id="4-2-1-背景"><a href="#4-2-1-背景" class="headerlink" title="4.2.1 背景"></a>4.2.1 背景</h3><p>当数据情况更复杂时，简单的线性函数分类已无法满足需要。</p>
+<h2><span id="42-核函数">4.2 核函数</span></h2><h3><span id="421-背景">4.2.1 背景</span></h3><p>当数据情况更复杂时，简单的线性函数分类已无法满足需要。</p>
 <p>不同于其他方法常用的直接生成非线性函数，<strong>SVM将特征空间由底维映射到高维，随后在高位空间中继续用线性超平面分类。</strong></p>
 <p>原理：$M$维空间$N$个样本随机打标签正负1，有$M$趋向无穷时，线性可分概率趋向1。直观看待，维度上升，目标数据$\omega,b$的维度上升，算法模型的自由度上升，自然概率更大。</p>
 <p>例子：异或，在二维空间中，$x_1=(0,0),x_2=(1,1)$为-1类，$x_3=(1,0),x_4=(0,1)$为1类，线性不可分；当采用$\phi(x)=\phi([a,b]^T )=[a^2 ,b^2 ,a,b,ab]^T $映射至五维空间后，则存在$\omega=[-1,-1,-1,-1,6]^T,b=1$解可将升维后的数据分开。</p>
@@ -292,14 +337,14 @@
 限制条件 \ y_i[\omega^T \phi(x_i)+b] \geq 1 - \delta_i \ (i=1\sim N) 且
 \delta_i \geq 0</script><p>自然，式(4)中$\omega$的维度与$\phi(x_i)$的维度相同。</p>
 <p>&nbsp;</p>
-<h3 id="4-2-2-核函数"><a href="#4-2-2-核函数" class="headerlink" title="4.2.2 核函数"></a>4.2.2 核函数</h3><p>$\phi(x)$的具体形式不需确定，若有$K(x_1,x_2)=\phi(x_1)^T\phi(x_2)$，我们仍可知道测试样本类别信息。这里的$K(x_1,x_2)$称为核函数，结果是一个实数。</p>
+<h3><span id="422-核函数">4.2.2 核函数</span></h3><p>$\phi(x)$的具体形式不需确定，若有$K(x_1,x_2)=\phi(x_1)^T\phi(x_2)$，我们仍可知道测试样本类别信息。这里的$K(x_1,x_2)$称为核函数，结果是一个实数。</p>
 <p>核函数$K$和映射函数$\phi$一一对应的充要条件：</p>
 <ol>
 <li>$K(x_1,x_2)=K(x_2,x_1)$ （可交换性）</li>
 <li>$\forall C_i(i=1\sim N),\forall N$有$\sum_{i=1}^{N} \sum_{j=1}^{N} C_iC_jK(X_i,X_j)\geq0$ （半正定性）</li>
 </ol>
 <p>&nbsp;</p>
-<h1 id="5-对偶问题"><a href="#5-对偶问题" class="headerlink" title="5. 对偶问题"></a>5. 对偶问题</h1><h2 id="5-1-定义"><a href="#5-1-定义" class="headerlink" title="5.1 定义"></a>5.1 定义</h2><p>若有原问题：</p>
+<h1><span id="5-对偶问题">5. 对偶问题</span></h1><h2><span id="51-定义">5.1 定义</span></h2><p>若有原问题：</p>
 <script type="math/tex; mode=display">
 \min f(\omega) \\\\
 \begin{aligned}
@@ -328,7 +373,7 @@ s.t. \ \alpha_i \ge 0, i=1\sim K</script><p>可得到定理：若$\omega^{\ast} 
  &\le f(\omega^\ast )
 \end{aligned}</script><p>即，原问题的解总是大于等于对偶问题的解。将差值$f(\omega^{\ast} )-\theta(\alpha^{\ast} ,\beta^{\ast} )$称为对偶差距。由<strong>强对偶定理</strong>（原函数的目标函数是凸函数，限制条件是线性函数，则其对偶差距为零）和以上证明最后一步，可得到<strong>KKT条件</strong>：对于所有$i=1\sim K$，要么$\alpha_i=0$，要么$g_i(\omega^{*})=0$。</p>
 <p>&nbsp;</p>
-<h2 id="5-2-SVM转化为对偶问题"><a href="#5-2-SVM转化为对偶问题" class="headerlink" title="5.2 SVM转化为对偶问题"></a>5.2 SVM转化为对偶问题</h2><p>限制条件中的松弛变量取相反数，改为$\delta_i\le0 \ (i=1\sim N)$，故最小化式子变为$\min (\frac{1}{2}||\omega||^2 -C\sum_{i=1}^{N} \delta_i)$，另一个限制条件变为$y_i[\omega^T \phi(x_i)+b] \geq 1 + \delta_i$。</p>
+<h2><span id="52-svm转化为对偶问题">5.2 SVM转化为对偶问题</span></h2><p>限制条件中的松弛变量取相反数，改为$\delta_i\le0 \ (i=1\sim N)$，故最小化式子变为$\min (\frac{1}{2}||\omega||^2 -C\sum_{i=1}^{N} \delta_i)$，另一个限制条件变为$y_i[\omega^T \phi(x_i)+b] \geq 1 + \delta_i$。</p>
 <p>综上，SVM整理至满足原问题形式：</p>
 <script type="math/tex; mode=display">
 \min (\frac{1}{2}||\omega||^2 -C\sum_{i=1}^{N} \delta_i) 或 (\frac{1}{2}||\omega||^2 +C\sum_{i=1}^{N} \delta_i^2 ) \\\\
@@ -350,10 +395,10 @@ s.t. \ \alpha_i\ge0, \ \beta_i\ge0</script><p>对偶问题是拉格朗日函数�
 = \sum_{i=1}^{N} \alpha_i-\frac{1}{2}\sum_{i=1}^{N} \sum_{j=1}^{N} y_iy_j\alpha_i\alpha_jK(x_i,x_j) \\\\
 s.t. 0\le\alpha_i\le C \\\\
 \sum_{i=1}^{N}\alpha_iy_i=0</script><p>&nbsp;</p>
-<h1 id="6-流程"><a href="#6-流程" class="headerlink" title="6. 流程"></a>6. 流程</h1><h2 id="6-1-求-alpha"><a href="#6-1-求-alpha" class="headerlink" title="6.1 求$\alpha$"></a>6.1 求$\alpha$</h2><p>如最终对偶形式，确定核函数后，该对偶问题是一个二次规划问题，不需遍历之类，可以用二次规划、最优化方法求解。利用数据$\{(x_i,y_i)\}i=1\sim N,y_i=\pm1$，求解最终对偶形式式子，得到结果$\alpha$。</p>
+<h1><span id="6-流程">6. 流程</span></h1><h2><span id="61-求alpha">6.1 求$\alpha$</span></h2><p>如最终对偶形式，确定核函数后，该对偶问题是一个二次规划问题，不需遍历之类，可以用二次规划、最优化方法求解。利用数据$\{(x_i,y_i)\}i=1\sim N,y_i=\pm1$，求解最终对偶形式式子，得到结果$\alpha$。</p>
 <p>可利用$\omega=\sum_{i=1}^{N} \alpha_iy_i\phi(x_i)$求出$\omega$，这里需强调，$\phi(x)$和$\omega$不一定有显式表达。不过不需$\omega$，就可算出$\omega^T x+b$的值。</p>
 <p>&nbsp;</p>
-<h2 id="6-2-求b"><a href="#6-2-求b" class="headerlink" title="6.2 求b"></a>6.2 求b</h2><script type="math/tex; mode=display">
+<h2><span id="62-求b">6.2 求b</span></h2><script type="math/tex; mode=display">
 \omega=\sum_{j=1}^{N} \alpha_jy_j\phi(x_j) \\\\
 \omega^T \phi(x_i)=\sum_{j=1}^{N} \alpha_jy_j\phi(x_j)^T \phi(x_i) \\\\
 =\sum_{j=1}^{N} \alpha_jy_jK(x_j,x_i)</script><p>另由强对偶定理（KKT？）可知，</p>
@@ -369,7 +414,7 @@ b&=\frac{1+\delta_i-y_i\omega^T \phi(x_i)}{y_i} \\\\
 &=\frac{1+0-\sum_{j=1}^{N} \alpha_jy_iy_jK(x_j,x_i)}{y_i}\\\\
 &=\frac{1-\sum_{j=1}^{N} \alpha_jy_iy_jK(x_j,x_i)}{y_i}
 \end{aligned}</script><p>&nbsp;</p>
-<h2 id="6-3-预测"><a href="#6-3-预测" class="headerlink" title="6.3 预测"></a>6.3 预测</h2><script type="math/tex; mode=display">
+<h2><span id="63-预测">6.3 预测</span></h2><script type="math/tex; mode=display">
 \begin{aligned}
 \omega^T \phi(x)+b 
 &=\sum_{j=1}^{N} \alpha_jy_j\phi(x_j)^T \phi(x)+b \\\\
@@ -377,23 +422,23 @@ b&=\frac{1+\delta_i-y_i\omega^T \phi(x_i)}{y_i} \\\\
 \end{aligned}</script><p>根据上式正负号，可将其分类为正负类。</p>
 <p>不知道$\phi(x)$，也可利用核函数求出结果，称为核函数技巧。</p>
 <p>&nbsp;</p>
-<h1 id="7-核函数"><a href="#7-核函数" class="headerlink" title="7. 核函数"></a>7. 核函数</h1><h2 id="7-1-Linear-线性内核"><a href="#7-1-Linear-线性内核" class="headerlink" title="7.1 Linear 线性内核"></a>7.1 Linear 线性内核</h2><p>$K(x,y)=x^T y$</p>
+<h1><span id="7-核函数">7. 核函数</span></h1><h2><span id="71-linear-线性内核">7.1 Linear 线性内核</span></h2><p>$K(x,y)=x^T y$</p>
 <p>不具有实用意义，因使用线性核函数与不使用的结果一致。（无法升维？）</p>
 <p>&nbsp;</p>
-<h2 id="7-2-Ploy-多项式核"><a href="#7-2-Ploy-多项式核" class="headerlink" title="7.2 Ploy 多项式核"></a>7.2 Ploy 多项式核</h2><p>$K(x,y)=(x^T y+1)^d$</p>
+<h2><span id="72-ploy-多项式核">7.2 Ploy 多项式核</span></h2><p>$K(x,y)=(x^T y+1)^d$</p>
 <p>复杂度可调节，$d$越大，升维越高。</p>
 <p>&nbsp;</p>
-<h2 id="7-3-Rbf-高斯径向基函数和"><a href="#7-3-Rbf-高斯径向基函数和" class="headerlink" title="7.3 Rbf 高斯径向基函数和"></a>7.3 Rbf 高斯径向基函数和</h2><p>$K(x,y)=e^{-\frac{||x-y||^2 }{\sigma^2 }} $</p>
+<h2><span id="73-rbf-高斯径向基函数和">7.3 Rbf 高斯径向基函数和</span></h2><p>$K(x,y)=e^{-\frac{||x-y||^2 }{\sigma^2 }} $</p>
 <p>$\sigma$超参数，其对应的升维函数$\phi(x)$维度无限。高斯函数具有诸多优秀性质，故本核函数使用最多。</p>
 <p>&nbsp;</p>
-<h2 id="7-4-Tanh-sigmoid核"><a href="#7-4-Tanh-sigmoid核" class="headerlink" title="7.4 Tanh sigmoid核"></a>7.4 Tanh sigmoid核</h2><p>$K(x,y)=tanh(\beta x^T y+b),\ tanh(x)=\frac{e^x -e^{-x} }{e^x +e^{-x} }$</p>
+<h2><span id="74-tanh-sigmoid核">7.4 Tanh sigmoid核</span></h2><p>$K(x,y)=tanh(\beta x^T y+b),\ tanh(x)=\frac{e^x -e^{-x} }{e^x +e^{-x} }$</p>
 <p>其对应的升维函数$\phi(x)$维度无限。</p>
 <p>&nbsp;</p>
-<h1 id="8-兵王问题"><a href="#8-兵王问题" class="headerlink" title="8. 兵王问题"></a>8. 兵王问题</h1><p>用libsvm和<a target="_blank" rel="noopener" href="https://archive.ics.uci.edu/ml/datasets/Chess+(King-Rook+vs.+King">uci的krk数据集</a>)完成兵王问题的分类。代码发在了<a target="_blank" rel="noopener" href="https://github.com/gaylong9/AILearningProjects">Github</a>。</p>
-<h2 id="8-1-介绍"><a href="#8-1-介绍" class="headerlink" title="8.1 介绍"></a>8.1 介绍</h2><p>残局下，白方一个王，一个兵，黑方仅一个王。在不告知计算机象棋规则的情况下，令其判断是白胜还是逼和（黑方的所有落子点都会被吃）。</p>
+<h1><span id="8-兵王问题">8. 兵王问题</span></h1><p>用libsvm和<a target="_blank" rel="noopener" href="https://archive.ics.uci.edu/ml/datasets/Chess+(King-Rook+vs.+King">uci的krk数据集</a>)完成兵王问题的分类。代码发在了<a target="_blank" rel="noopener" href="https://github.com/gaylong9/AILearningProjects">Github</a>。</p>
+<h2><span id="81-介绍">8.1 介绍</span></h2><p>残局下，白方一个王，一个兵，黑方仅一个王。在不告知计算机象棋规则的情况下，令其判断是白胜还是逼和（黑方的所有落子点都会被吃）。</p>
 <p>数据集中有28056组数据，正样本（和棋）有2796组，负样本（白胜）有25260组。</p>
 <p>&nbsp;</p>
-<h2 id="8-2-实际问题中的流程"><a href="#8-2-实际问题中的流程" class="headerlink" title="8.2 实际问题中的流程"></a>8.2 实际问题中的流程</h2><ol>
+<h2><span id="82-实际问题中的流程">8.2 实际问题中的流程</span></h2><ol>
 <li>数据预处理：取部分样本用于训练，其余样本用于测试，此处取5000样本训练</li>
 <li>训练样本归一化：训练样本上，求出每个维度的均值和方差；在训练和测试样本上同时归一化；$newX=\frac{X-mean(X)}{std(X)}$；训练样本归一化能使输入特征各维度限定在一个固定范围内，减少不同维度的动态范围不同导致的训练误差</li>
 <li>设置参数：<ol>
@@ -409,11 +454,11 @@ b&=\frac{1+\delta_i-y_i\omega^T \phi(x_i)}{y_i} \\\\
 <li>测试</li>
 </ol>
 <p>&nbsp;</p>
-<h1 id="9-交叉验证"><a href="#9-交叉验证" class="headerlink" title="9. 交叉验证"></a>9. 交叉验证</h1><p>如五折交叉验证，将训练数据分为ABCDE五组，轮流四组训练一组评估，将五次评估正确率平均，得到最终正确率。</p>
+<h1><span id="9-交叉验证">9. 交叉验证</span></h1><p>如五折交叉验证，将训练数据分为ABCDE五组，轮流四组训练一组评估，将五次评估正确率平均，得到最终正确率。</p>
 <p>能够在数据量一定的前提下，用更多的数据训练和验证。</p>
 <p>若折数极大，达到最极端的每次仅一个数据评估，就是留一法。在数据量极少时采用此法。</p>
 <p>&nbsp;</p>
-<h1 id="10-性能度量"><a href="#10-性能度量" class="headerlink" title="10. 性能度量"></a>10. 性能度量</h1><p>在不知道先验分布的情况下，单纯用正确率判断系统好坏是没有意义的。</p>
+<h1><span id="10-性能度量">10. 性能度量</span></h1><p>在不知道先验分布的情况下，单纯用正确率判断系统好坏是没有意义的。</p>
 <p>如罕见疾病发病率极低，系统即使全部判为不患病，也能拥有极高的正确率。</p>
 <p>引入混淆矩阵概念：</p>
 <ul>
@@ -432,7 +477,7 @@ b&=\frac{1+\delta_i-y_i\omega^T \phi(x_i)}{y_i} \\\\
 <li>EER（Equal Error Rate）等错误率：连接<code>(0,1)</code>和<code>(1,0)</code>两点，交ROC曲线于一点，交点横坐标即为EER，此处$FP=FN$。越低越好</li>
 </ul>
 <p>&nbsp;</p>
-<h1 id="11-多分类问题"><a href="#11-多分类问题" class="headerlink" title="11. 多分类问题"></a>11. 多分类问题</h1><ol>
+<h1><span id="11-多分类问题">11. 多分类问题</span></h1><ol>
 <li>1类对k-1类<ol>
 <li>若有K类，则构造K个SVM，SVM1判断类1或非类1、SVM2判断类2或非类2、…、SVMK判断类K或非类K。最终得到${\alpha_{i}^{(k)} }_{i=1\sim N}, b^{(k) } ,k=1\sim K$，K组$\alpha,b$。类别判断时$k_{max}=argmax \sum_{i=1}^{N} \alpha_i^{(k)} y_iK(X_i,X)+b^{(k)} ,k=1\sim K$，即找到间隔最大的分类</li>
 <li>问题：样本不平衡，正样本仅一类，负样本K-1类，使模型倾向于负类</li>

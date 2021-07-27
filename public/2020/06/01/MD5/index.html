@@ -234,18 +234,26 @@
             <p>信息安全技术试验</p>
 <span id="more"></span>
 <!-- toc -->
-<p><br/></p>
+<ul>
+<li><a href="#md5">MD5</a><ul>
+<li><a href="#功能">功能</a></li>
+<li><a href="#算法过程">算法过程</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p><br></p>
 <p>[toc]</p>
-<p><br/></p>
-<h1 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h1><p>信息摘要算法 Message-Digest Algorithm 5</p>
-<p><br/></p>
-<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ol>
+<p><br></p>
+<h1><span id="md5">MD5</span></h1><p>信息摘要算法 Message-Digest Algorithm 5</p>
+<p><br></p>
+<h2><span id="功能">功能</span></h2><ol>
 <li>任意长度信息生成128位信息。</li>
 <li>唯一性</li>
 <li>不可逆</li>
 </ol>
-<p><br/></p>
-<h2 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h2><p><img src="MD5/MD5.png" alt="MD5"></p>
+<p><br></p>
+<h2><span id="算法过程">算法过程</span></h2><p><img src="/.com//MD5.png" alt="MD5"></p>
 <p>以512位分组来处理输入的信息，且每一分组又被划分为16个32位子分组，经过了一系列的处理后，算法的输出由四个32位分组组成，将这四个32位分组级联后将生成一个128位散列值。</p>
 <ol>
 <li><p>填充</p>
@@ -263,8 +271,8 @@
 </li>
 <li><p>定义函数</p>
 <p> 定义4种函数FF、GG、HH、II，表示对abcd和某一小组的操作与赋值。</p>
-<p> <img src="MD5/FGHI.png" alt="FGHI"></p>
-<p> <img src="MD5/FFGGHHII.png" alt="FFGGHHII"></p>
+<p> <img src="/.com//FGHI.png" alt="FGHI"></p>
+<p> <img src="/.com//FFGGHHII.png" alt="FFGGHHII"></p>
 </li>
 <li><p>运算</p>
 <p> 进行L次大循环，大循环的输入是上一次大循环的输出与本次大循环所用的大组；输出是ABCD。</p>

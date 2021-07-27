@@ -140,20 +140,23 @@
 </li>
 <li><p>github仓库应配置两个branch：master用于存放blog页面内容；hexo分支用于存放hexo（本地）内容</p>
 </li>
-<li><p><code>hexo d</code>后会自动部署到master分支；hexo分支需手动<code>git add . -f</code>、 <code>git commit</code>、 <code>git push origin hexo</code><del>、<code>git push origin_coding hexo</code>。因为有两个remote，一个github、一个coding，所以push要在origin和origin_coding各做一次。</del></p>
+<li><p><code>hexo d</code>后会自动部署到master分支；hexo分支需手动<code>git add . -f</code>、 <code>git commit</code>、 <code>git push origin hexo</code>（默认处于hexo分支下时不需要注明origin hexo）<del>、<code>git push origin_coding hexo</code>。因为有两个remote，一个github、一个coding，所以push要在origin和origin_coding各做一次。</del></p>
+</li>
+<li><p><code>.git/config</code>中，<code>[remote &quot;origin&quot;]</code>添加以下两句，即可一次 push，两个上传</p>
 <ol>
-<li><code>.git/config</code>中，<code>[remote &quot;origin&quot;]</code>添加以下两句，即可一次 push，两个上传<ol>
 <li><code>pushurl = git@github.com:gaylong9/gaylong9.github.io.git</code></li>
 <li><code>pushurl = git@e.coding.net:gaylong9/gaylong9.git</code></li>
 </ol>
 </li>
+<li><p>后续换机、或异地管理，只需clone仓库即可，当然，随后还需对各类包进行管理，如修改为kramed等对mathjax支持更好的渲染器、图片显示hexo-asset-image、hexo-toc等</p>
+<ol>
+<li>经过尝试，本次（2021-7-27）是先<code>hexo init</code>，再在别处clone仓库，将hexo分支下的内容复制进init出的blog目录，此处注意主题目录的手动恢复；随后即可正常使用</li>
+<li>或可直接clone仓库，随后<code>git checkout --track remotes/origin/hexo</code>切换至hexo分支（此命令会clone下来hexo分支，第一次clone只会clone主分支），手动恢复主题目录后或可直接使用；下次需要时应尝试此法</li>
 </ol>
-</li>
-<li><p>后续换机、或异地管理，只需clone仓库即可</p>
 </li>
 <li><p>文中提到异地管理时，需将<code>.deploy_git</code>删除，否则部署时会将博客部署到master分支，因为此次只是重建，并未涉及到博客复原（异地管理），故未尝试，存疑（两个分支不就是为了部署到master，备份到hexo吗）</p>
 </li>
-<li><p>图片问题：要使用<code>npm install https://github.com/CodeFalling/hexo-asset-image --save</code>命令安装hexo-asset-image插件，否则版本号不对，图片显示有些问题 <a target="_blank" rel="noopener" href="https://blog.csdn.net/Strong997/article/details/97767929">参考博客</a></p>
+<li><p>图片问题：要使用<code>npm install hexo-asset-image --save</code>命令安装hexo-asset-image插件，否则版本号不对，图片显示有些问题 <a target="_blank" rel="noopener" href="https://blog.csdn.net/Strong997/article/details/97767929">参考博客</a></p>
 </li>
 <li><p>换行：<code>&lt;br/&gt;</code></p>
 </li>
@@ -161,10 +164,14 @@
 </li>
 <li><p>本地库与远程库的链接：</p>
 <ol>
-<li>本地已有项目内<code>git init</code>，即会创建.git文件夹，将当前文件夹建为本地仓库。</li>
-<li><code>git remote add origin address</code> 将远程库以origin命名，添加至链接的远程库</li>
-<li><code>git pull origin master</code> 先pull，合并文件</li>
-<li>随后add、commit后<code>git push --set-upstream origin master</code>，初次push，设置推送流。</li>
+<li><p>本地已有项目内<code>git init</code>，即会创建.git文件夹，将当前文件夹建为本地仓库。</p>
+</li>
+<li><p><code>git remote add origin address</code> 将远程库以origin命名，添加至链接的远程库</p>
+</li>
+<li><p><code>git pull origin master</code> 先pull，合并文件</p>
+</li>
+<li><p>随后add、commit后<code>git push --set-upstream origin master</code>，初次push，设置推送流。</p>
+</li>
 </ol>
 </li>
 <li><p><code>scaffolds/post</code>是博客文章模板</p>
@@ -174,6 +181,7 @@
 <li><p>Md中，代码块不能直接放在<code>1.</code>这种序号后，引起hexo编译错误</p>
 </li>
 <li><p>公式：使用mathjax，但<code>hexo-renderer-markdown-it-plus</code>自带Katex，二者同时开启时，会渲染并显示两份 <a target="_blank" rel="noopener" href="https://blog.csdn.net/u014792304/article/details/78687859">参考1 Katex的使用</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/yexiaohhjk/article/details/82526604">参考2 hexo&amp;latex&amp;mathjax</a>  <a target="_blank" rel="noopener" href="https://adaning.github.io/posts/33457.html">参考3 Mathjax问题小总结</a>；当前使用mathjax，<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44191286/article/details/102702479">设置方法</a>，其中js源老旧，改用<code>https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML</code>，<a target="_blank" rel="noopener" href="https://blog.csdn.net/lzs781/article/details/105592503/">参考</a></p>
+<p>   使用kramed也可。当前使用kramed。</p>
 </li>
 </ol>
 

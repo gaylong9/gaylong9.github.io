@@ -193,9 +193,33 @@
             <p>&nbsp;</p>
 <span id="more"></span>
 <!-- toc -->
+<ul>
+<li><a href="#自定义jsp标签">自定义JSP标签</a><ul>
+<li><a href="#1-jsp-tag-api">1. JSP Tag API</a><ul>
+<li><a href="#11-jsptag接口">1.1 JspTag接口</a></li>
+<li><a href="#12-tag接口">1.2 Tag接口</a></li>
+<li><a href="#13-iterationtag接口">1.3 IterationTag接口</a></li>
+<li><a href="#14-bodytag接口">1.4 BodyTag接口</a></li>
+<li><a href="#15-tagsupport类">1.5 TagSupport类</a></li>
+<li><a href="#16-bodytagsupport类">1.6 BodyTagSupport类</a></li>
+</ul>
+</li>
+<li><a href="#2-自定义jsp标签实例">2. 自定义JSP标签实例</a></li>
+<li><a href="#3-访问标签属性">3. 访问标签属性</a><ul>
+<li><a href="#31-创建标签处理类messagetag">3.1 创建标签处理类MessageTag</a></li>
+<li><a href="#32-创建标签库描述文件tld">3.2 创建标签库描述文件TLD</a></li>
+<li><a href="#33-web应用中使用标签">3.3 Web应用中使用标签</a></li>
+</ul>
+</li>
+<li><a href="#4-重复执行标签主体">4. 重复执行标签主体</a></li>
+<li><a href="#5-访问标签主体内容">5. 访问标签主体内容</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
 <p>&nbsp;</p>
 <p>[toc]</p>
-<h1 id="自定义JSP标签"><a href="#自定义JSP标签" class="headerlink" title="自定义JSP标签"></a>自定义JSP标签</h1><ol>
+<h1><span id="自定义jsp标签">自定义JSP标签</span></h1><ol>
 <li>为了便于组织和管理，可以把一组功能相同的标签放在同一个标签库中</li>
 <li>开发包含自定义标签的标签库步骤：<ol>
 <li>创建自定义标签的处理类（Tag Handler Class）</li>
@@ -211,15 +235,15 @@
 </li>
 <li>jar包：Servlet API的类库文件servlet-api.jar 和 JSP API的类库文件jsp-api.jar添加到classpath中</li>
 </ol>
-<h2 id="1-JSP-Tag-API"><a href="#1-JSP-Tag-API" class="headerlink" title="1. JSP Tag API"></a>1. JSP Tag API</h2><ol>
+<h2><span id="1-jsp-tag-api">1. JSP Tag API</span></h2><ol>
 <li><p>容器运行JSP文件时，遇到自定义标签就会调用对应处理类的相关方法，处理类可以继承JSP Tag API中的<code>TagSupport</code>类或<code>BodyTagSupport</code>类</p>
 </li>
 <li><p>JSP Tag API位于javax.servlet.jsp.tagext包中</p>
-<p> <img src="自定义JSP标签/JSP Tag API.png" alt="JSP Tag API"></p>
+<p> <img src="/.com//JSP Tag API.png" alt="JSP Tag API"></p>
 </li>
 </ol>
-<h3 id="1-1-JspTag接口"><a href="#1-1-JspTag接口" class="headerlink" title="1.1 JspTag接口"></a>1.1 JspTag接口</h3><p>所有标签处理类都要实现本接口，只是一个标识接口，没有方法。</p>
-<h3 id="1-2-Tag接口"><a href="#1-2-Tag接口" class="headerlink" title="1.2 Tag接口"></a>1.2 Tag接口</h3><p>传统标签Classic Tag</p>
+<h3><span id="11-jsptag接口">1.1 JspTag接口</span></h3><p>所有标签处理类都要实现本接口，只是一个标识接口，没有方法。</p>
+<h3><span id="12-tag接口">1.2 Tag接口</span></h3><p>传统标签Classic Tag</p>
 <ol>
 <li>传统标签处理类的基本方法：<ol>
 <li>setPageContext(PageContext pc)：容器调用，向当前标签处理对象传递当前PageContext对象</li>
@@ -239,7 +263,7 @@
 </li>
 <li>一个Tag对象创建后就会一直存在，可被容器重复调用；Web应用终止时容器先调用Tag对象的release方法，然后销毁对象</li>
 </ol>
-<h3 id="1-3-IterationTag接口"><a href="#1-3-IterationTag接口" class="headerlink" title="1.3 IterationTag接口"></a>1.3 IterationTag接口</h3><p>继承自Tag接口，增加了重复执行标签主体内容的功能。</p>
+<h3><span id="13-iterationtag接口">1.3 IterationTag接口</span></h3><p>继承自Tag接口，增加了重复执行标签主体内容的功能。</p>
 <ol>
 <li>定义了doAfterBody()方法：容器执行完标签主体内容后，调用此方法；若未执行主体内容则不调用；本方法也返回一个整数值，决定后续流程；Tag.SKIP_BODY不再执行主体内容，Tag.EVAL_BODY_AGAIN重复执行标签主体内容</li>
 <li>容器遇到这种标签，缓冲寻找IterationTag对象，若无则创建并放入缓存；创建后如下流程执行：<ol>
@@ -251,7 +275,7 @@
 </ol>
 </li>
 </ol>
-<h3 id="1-4-BodyTag接口"><a href="#1-4-BodyTag接口" class="headerlink" title="1.4 BodyTag接口"></a>1.4 BodyTag接口</h3><ol>
+<h3><span id="14-bodytag接口">1.4 BodyTag接口</span></h3><ol>
 <li>继承IterationTag接口，增加了直接访问和操纵标签主体内容的功能<ol>
 <li>setBodyContext(BodyContent)：容器通过此方法向BodyTag对象传递一个用于缓存标签主体的执行结果的BodyContent对象</li>
 <li>doInitBody()：容器调用完setBodyContent()方法后，在第一次执行标签主体前，先调用此方法，为执行标签主体做初始化工作</li>
@@ -272,7 +296,7 @@
 </ol>
 </li>
 </ol>
-<h3 id="1-5-TagSupport类"><a href="#1-5-TagSupport类" class="headerlink" title="1.5 TagSupport类"></a>1.5 TagSupport类</h3><p>标签实现类，TagSupport类实现了IterationTag接口，用户自定义标签时可选继承此类。<a href="#4. 重复执行标签主体">如需重复执行标签主体</a></p>
+<h3><span id="15-tagsupport类">1.5 TagSupport类</span></h3><p>标签实现类，TagSupport类实现了IterationTag接口，用户自定义标签时可选继承此类。<a href="#4. 重复执行标签主体">如需重复执行标签主体</a></p>
 <ol>
 <li>主要方法除接口中已说明的外，还有以下三个：<ol>
 <li>setValue(String key, Obj)：在标签处理对象中设置key、value</li>
@@ -289,14 +313,14 @@
 <li>处理标签的方法：用户自定义标签类时主要是复写doStartTag、doEndTag、doAfterBody方法</li>
 <li>用户自定义的标签属性：若标签包含自定义属性 <code>&lt;prefix:mytag name=&quot;Tom&quot; /&gt;</code>，就要在处理类中将name属性作为private成员变量，并提供set get方法</li>
 </ol>
-<h3 id="1-6-BodyTagSupport类"><a href="#1-6-BodyTagSupport类" class="headerlink" title="1.6 BodyTagSupport类"></a>1.6 BodyTagSupport类</h3><p>标签实现类，BodyTagSupport类继承自TagSupport类，并实现了BodyTag接口，用户自定义标签时可选继承此类，可以操纵标签主体内容。<a href="#5. 访问标签主体内容">如需访问标签主体内容</a></p>
+<h3><span id="16-bodytagsupport类">1.6 BodyTagSupport类</span></h3><p>标签实现类，BodyTagSupport类继承自TagSupport类，并实现了BodyTag接口，用户自定义标签时可选继承此类，可以操纵标签主体内容。<a href="#5. 访问标签主体内容">如需访问标签主体内容</a></p>
 <ol>
 <li>有bodyContent成员变量及set get方法，protected，是javax.servlet.jsp.tagext.BodyContent类型，用于缓存标签主体的执行结果</li>
 <li>如果doStartTag方法返回Tag.EVAL_BODY_BUFFERED，那么容器执行标签主体前，先创建一个用于缓存标签主体的执行结果的BodyContent对象，然后调用setBodyContent方法，使得成员变量BodyContent引用BodyContent对象，再调用doInitBody方法；两方法结束后、主体执行后，容器把执行结果缓存到BodyContent对象中</li>
 <li>子类可以直接访问或get到bodyContent成员变量；BodyContent类的getString方法返回字符串形式的标签主体执行结果</li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="2-自定义JSP标签实例"><a href="#2-自定义JSP标签实例" class="headerlink" title="2. 自定义JSP标签实例"></a>2. 自定义JSP标签实例</h2><ol>
+<h2><span id="2-自定义jsp标签实例">2. 自定义JSP标签实例</span></h2><ol>
 <li><p>编写处理类</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloTag</span> <span class="keyword">extends</span> <span class="title">TagSupport</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">doEndTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            pageContext.getOut().print(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> JspTagException(e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> EVAL_PAGE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -323,7 +347,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="3-访问标签属性"><a href="#3-访问标签属性" class="headerlink" title="3. 访问标签属性"></a>3. 访问标签属性</h2><ol>
+<h2><span id="3-访问标签属性">3. 访问标签属性</span></h2><ol>
 <li>如静态文本等内容，多次重复，可用标签替代，便于维护</li>
 <li>步骤<ol>
 <li>JSP中引入标签库 <code>&lt;%@ taglib uri=&quot;/mytaglib&quot; prefix=&quot;mm&quot; %&gt;</code></li>
@@ -333,7 +357,7 @@
 <li>message标签处理类根据key的属性值，从特定资源文件中找到匹配的字符串</li>
 <li>此法甚至能实现一个JSP文件支持多种语言版本</li>
 </ol>
-<h3 id="3-1-创建标签处理类MessageTag"><a href="#3-1-创建标签处理类MessageTag" class="headerlink" title="3.1 创建标签处理类MessageTag"></a>3.1 创建标签处理类MessageTag</h3><ol>
+<h3><span id="31-创建标签处理类messagetag">3.1 创建标签处理类MessageTag</span></h3><ol>
 <li><p>首先需要资源文件，包含要替代的静态文本等，以key-value形式存放；中文资源文件messagesource_ch.properties，英文资源文件messagesouorce_en.properties，存放在WEB-INF下；约定不同页面的静态文本，用key区分</p>
  <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">//</span> <span class="string">messagesource_ch</span></span><br><span class="line"><span class="meta">hello.title</span> = <span class="string">hello页面</span></span><br><span class="line"><span class="meta">hello.hi</span> = <span class="string">你好</span></span><br><span class="line"><span class="meta">login.title</span> = <span class="string">登录页面</span></span><br><span class="line"><span class="meta">login.user</span> = <span class="string">用户名</span></span><br><span class="line"><span class="meta">login.password</span> = <span class="string">密码</span></span><br><span class="line"><span class="meta">login.submit</span> = <span class="string">提交</span></span><br></pre></td></tr></table></figure>
  <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">//</span> <span class="string">messagesource_en</span></span><br><span class="line"><span class="meta">hello.title</span> = <span class="string">helloapp</span></span><br><span class="line"><span class="meta">hello.hi</span> = <span class="string">nice to meet you</span></span><br><span class="line"><span class="meta">login.title</span> = <span class="string">helloapp</span></span><br><span class="line"><span class="meta">login.user</span> = <span class="string">User name</span></span><br><span class="line"><span class="meta">login.password</span> = <span class="string">Password</span></span><br><span class="line"><span class="meta">login.submit</span> = <span class="string">Submit</span></span><br></pre></td></tr></table></figure>
@@ -349,7 +373,7 @@
 <p> Properties对象通过InputStream流装载文件时，是按照ISO-8859-1编码，故需转换。</p>
 </li>
 </ol>
-<h3 id="3-2-创建标签库描述文件TLD"><a href="#3-2-创建标签库描述文件TLD" class="headerlink" title="3.2 创建标签库描述文件TLD"></a>3.2 创建标签库描述文件TLD</h3><p>TLD中元素有三类：<code>&lt;taglib&gt;</code>标签库元素，<code>&lt;tag&gt;</code>标签元素，<code>&lt;attribute&gt;</code>标签属性元素</p>
+<h3><span id="32-创建标签库描述文件tld">3.2 创建标签库描述文件TLD</span></h3><p>TLD中元素有三类：<code>&lt;taglib&gt;</code>标签库元素，<code>&lt;tag&gt;</code>标签元素，<code>&lt;attribute&gt;</code>标签属性元素</p>
 <ol>
 <li>标签库元素<code>&lt;taglib&gt;</code>，设定标签库的相关信息，其子元素：<ol>
 <li>tlib-version：标签库版本</li>
@@ -375,7 +399,7 @@
 </ol>
 <p>创建名为mytaglib.tld的TLD文件</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">taglib</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">tlib-version</span>&gt;</span>1.1<span class="tag">&lt;/<span class="name">tlib-version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">jsp-version</span>&gt;</span>2.4<span class="tag">&lt;/<span class="name">jsp-version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">short-name</span>&gt;</span>mytaglib<span class="tag">&lt;/<span class="name">short-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">uri</span>&gt;</span>/mytaglib<span class="tag">&lt;/<span class="name">uri</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">tag</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>message<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tag-class</span>&gt;</span>mypack.MessageTag<span class="tag">&lt;/<span class="name">tag-class</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">body-content</span>&gt;</span>empty<span class="tag">&lt;/<span class="name">body-content</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">info</span>&gt;</span>produce message by key<span class="tag">&lt;/<span class="name">info</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">attribute</span>&gt;</span></span><br><span class="line">        	<span class="tag">&lt;<span class="name">name</span>&gt;</span>key<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">required</span>&gt;</span>true<span class="tag">&lt;/<span class="name">required</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">attribute</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">taglib</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="3-3-Web应用中使用标签"><a href="#3-3-Web应用中使用标签" class="headerlink" title="3.3 Web应用中使用标签"></a>3.3 Web应用中使用标签</h3><ol>
+<h3><span id="33-web应用中使用标签">3.3 Web应用中使用标签</span></h3><ol>
 <li><p>web.xml中加入<code>&lt;taglib&gt;</code>以引入自定义标签库</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">jsp-config</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">taglib</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">taglib-uri</span>&gt;</span>/mytaglib<span class="tag">&lt;/<span class="name">taglib-uri</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">taglib-location</span>&gt;</span>/WEB-INF/mytaglib.tld<span class="tag">&lt;/<span class="name">taglib-location</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">taglib</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">jsp-config</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -384,7 +408,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="4-重复执行标签主体"><a href="#4-重复执行标签主体" class="headerlink" title="4. 重复执行标签主体"></a>4. 重复执行标签主体</h2><p>如需重复执行操作时，原生方法需要JSP与Java 的for混用，可自定义一个iterate标签来重复执行主体。</p>
+<h2><span id="4-重复执行标签主体">4. 重复执行标签主体</span></h2><p>如需重复执行操作时，原生方法需要JSP与Java 的for混用，可自定义一个iterate标签来重复执行主体。</p>
 <ol>
 <li><p>此类标签有两个属性：</p>
 <ol>
@@ -412,7 +436,7 @@
 <p> &nbsp;</p>
 </li>
 </ol>
-<h2 id="5-访问标签主体内容"><a href="#5-访问标签主体内容" class="headerlink" title="5. 访问标签主体内容"></a>5. 访问标签主体内容</h2><p>操纵标签主体内容，继承BodyTagSupport类，具有重复执行主体内容，访问存放在BodyContent对象中的标签主体的执行结果 的功能。</p>
+<h2><span id="5-访问标签主体内容">5. 访问标签主体内容</span></h2><p>操纵标签主体内容，继承BodyTagSupport类，具有重复执行主体内容，访问存放在BodyContent对象中的标签主体的执行结果 的功能。</p>
 <p>以自定义名为greet的标签为例，其功能是判断请求参数username，若是Monster，则输出”Go away, Monster!”，否则就先缓存count次主体的值，然后输出。</p>
 <p>处理类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreetTag</span> <span class="keyword">extends</span> <span class="title">BodyTagSupport</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> count; <span class="comment">// 循环次数</span></span><br><span class="line">    <span class="keyword">private</span> String username;	<span class="comment">// 本例中的功能，表示请求参数</span></span><br><span class="line">    <span class="comment">// setCount()</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">doStartTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (count &gt; <span class="number">0</span>) </span><br><span class="line">            <span class="keyword">return</span> EVAL_BODY_BUFFERED;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            <span class="keyword">return</span> SKIP_BODY;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBodyContent</span><span class="params">(BodyContent bc)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.setBodyContent(bc);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doInitBody</span><span class="params">()</span> <span class="keyword">throws</span> JspException </span>&#123;</span><br><span class="line">        username = pageContext.getRequest().getParameter(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">doAfterBody</span><span class="params">()</span> <span class="keyword">throws</span> JspException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (count &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            count--;</span><br><span class="line">            <span class="keyword">return</span> EVAL_BODY_AGAIN;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> SKIP_BODY;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">doEndTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException </span>&#123;</span><br><span class="line">        JspWriter out = bodyContent.getEnclosingWriter();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String content = bodyContent.getString();	<span class="comment">//得到主体执行结果</span></span><br><span class="line">            <span class="comment">// 修改执行结果</span></span><br><span class="line">            <span class="keyword">if</span> (username != <span class="keyword">null</span> &amp;&amp; username.equals(<span class="string">&quot;Monster&quot;</span>)) &#123;</span><br><span class="line">                content = <span class="string">&quot;Go away, Monster!&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            out.println(content);	<span class="comment">// 向客户端打印结果</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;e.printStackTrace();&#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> EVAL_PAGE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

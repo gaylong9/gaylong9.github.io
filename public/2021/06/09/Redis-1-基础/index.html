@@ -193,38 +193,53 @@
             <p>&nbsp;</p>
 <span id="more"></span>
 <!-- toc -->
+<ul>
+<li><a href="#1-在java-web中的应用">1. 在Java Web中的应用</a><ul>
+<li><a href="#11-缓存">1.1 缓存</a></li>
+<li><a href="#12-高速读写">1.2 高速读写</a></li>
+</ul>
+</li>
+<li><a href="#2-安装使用">2. 安装使用</a></li>
+<li><a href="#3-java-api">3. Java API</a><ul>
+<li><a href="#31-java中使用redis">3.1 Java中使用Redis</a></li>
+<li><a href="#32-spring中使用redis">3.2 Spring中使用Redis</a></li>
+</ul>
+</li>
+<li><a href="#4-redis的6种数据类型">4. Redis的6种数据类型</a></li>
+</ul>
+<!-- tocstop -->
 <p>&nbsp;</p>
 <p>传统使用数据库存储数据，但由于面向磁盘，读写慢，不适用于高并发场景，故引入NoSQL技术。它也是一种简易的数据库技术，基于内存，提供一定持久化技术，是键值对数据库。Redis和MondoDB是使用最广泛的NoSQL。Redis性能优越，支持每秒十几万次的读写操作，并支持集群、分布式、主从同步等配置，原则上可以无线扩展，而且支持一定的事务能力，能在高并发场景下保证数据安全和一致性。</p>
 <p>Redis优势：ANSI C编写，运行快；基于内存的读写；只有6种数据类型，结构简单，规则少，不像普通数据库要考虑范式、完整性、规范性等。所以一般Redis的速度是普通数据库的几倍到几十倍。故可以把命中率高的数据存在Redis中，提高系统性能。</p>
 <p>&nbsp;</p>
-<h1 id="1-在Java-Web中的应用"><a href="#1-在Java-Web中的应用" class="headerlink" title="1. 在Java Web中的应用"></a>1. 在Java Web中的应用</h1><p>两个主要应用场景：缓存常用数据、高速读写。</p>
-<h2 id="1-1-缓存"><a href="#1-1-缓存" class="headerlink" title="1.1 缓存"></a>1.1 缓存</h2><p>数据库的访问以读为主，比写操作的频率要高得多。但用内存缓存常用数据，由于内存使用代价高（空间小，价格高），需要对缓存的数据进行筛选：</p>
+<h1><span id="1-在java-web中的应用">1. 在Java Web中的应用</span></h1><p>两个主要应用场景：缓存常用数据、高速读写。</p>
+<h2><span id="11-缓存">1.1 缓存</span></h2><p>数据库的访问以读为主，比写操作的频率要高得多。但用内存缓存常用数据，由于内存使用代价高（空间小，价格高），需要对缓存的数据进行筛选：</p>
 <ol>
 <li>该业务数据常用吗？命中率高吗？如不高，就不应写入缓存。</li>
 <li>该数据是读多还是写多？若写多，也不应使用缓存。</li>
 <li>该数据大小如何？对于较大的数据应考虑是否有必要使用缓存。</li>
 </ol>
 <p>经考虑后，就可将数据存入缓存。Redis读写逻辑如下图：</p>
-<p><img src="Redis-1-基础/Redis读操作逻辑.png" alt="Redis缓存逻辑"></p>
-<p><img src="Redis-1-基础/Redis写操作逻辑.png" alt="Redis写操作逻辑"></p>
+<p><img src="/.com//Redis读操作逻辑.png" alt="Redis缓存逻辑"></p>
+<p><img src="/.com//Redis写操作逻辑.png" alt="Redis写操作逻辑"></p>
 <p>&nbsp;</p>
-<h2 id="1-2-高速读写"><a href="#1-2-高速读写" class="headerlink" title="1.2 高速读写"></a>1.2 高速读写</h2><p>如秒杀、抢红包、双十一、春运等场景，一瞬间会有成千上万条请求，数据库无法处理如此场面，易瘫痪崩溃。通常需要异步写入数据库，即先把需要高速读写的数据缓存到Redis，满足条件后，将缓存的数据写入数据库。以下为高速读写时的逻辑：</p>
-<p><img src="Redis-1-基础/Redis高速读写逻辑.png" alt="Redis高速读写逻辑"></p>
+<h2><span id="12-高速读写">1.2 高速读写</span></h2><p>如秒杀、抢红包、双十一、春运等场景，一瞬间会有成千上万条请求，数据库无法处理如此场面，易瘫痪崩溃。通常需要异步写入数据库，即先把需要高速读写的数据缓存到Redis，满足条件后，将缓存的数据写入数据库。以下为高速读写时的逻辑：</p>
+<p><img src="/.com//Redis高速读写逻辑.png" alt="Redis高速读写逻辑"></p>
 <p>请求先在Redis读写，但是缓存的持久化功能不足，满足一定条件后批量一次性存入数据库。这里的“条件”，往往是秒杀商品剩余0个、抢红包金额剩余0等，若不成立，就不操作数据库，成立后才操作数据库。</p>
 <p>当然，实际操作中还要考虑数据的安全、一致性问题，无效请求问题、事务一致性问题等，后续章节讨论。</p>
 <p>&nbsp;</p>
-<h1 id="2-安装使用"><a href="#2-安装使用" class="headerlink" title="2. 安装使用"></a>2. 安装使用</h1><p><a target="_blank" rel="noopener" href="https://github.com/tporadowski/redis/releases">Github下载地址</a></p>
+<h1><span id="2-安装使用">2. 安装使用</span></h1><p><a target="_blank" rel="noopener" href="https://github.com/tporadowski/redis/releases">Github下载地址</a></p>
 <p>下载解压后，cmd输入<code>redis-server.exe redis.windows.conf</code>表示使用该conf文件中的内容运行exe。<code>redis-cli.exe</code>则是自带的客户端程序，可用命令<code>redis-cli.exe -h 127.0.0.1 -p 6379</code>开启，使用<code>set myKey 123</code>和<code>get myKey</code>测试。</p>
 <p>Linux安装此处不再记录。<a target="_blank" rel="noopener" href="https://www.runoob.com/redis/redis-install.html">菜鸟教程</a></p>
 <p>&nbsp;</p>
-<h1 id="3-Java-API"><a href="#3-Java-API" class="headerlink" title="3. Java API"></a>3. Java API</h1><p>Java使用Redis同样支持XML和注解两种方法。本章先使用XML方式。</p>
+<h1><span id="3-java-api">3. Java API</span></h1><p>Java使用Redis同样支持XML和注解两种方法。本章先使用XML方式。</p>
 <p>使用前需要导入Jedis包。</p>
-<h2 id="3-1-Java中使用Redis"><a href="#3-1-Java中使用Redis" class="headerlink" title="3.1 Java中使用Redis"></a>3.1 Java中使用Redis</h2><p>以下是一个简单的测试运行小程序，测试每秒可以写多少次。未优化，一条条发送，效率低下，仅用于测试连接成功。</p>
+<h2><span id="31-java中使用redis">3.1 Java中使用Redis</span></h2><p>以下是一个简单的测试运行小程序，测试每秒可以写多少次。未优化，一条条发送，效率低下，仅用于测试连接成功。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 连接redis</span></span><br><span class="line">Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">&quot;localhost&quot;</span>, <span class="number">6379</span>);</span><br><span class="line"><span class="comment">// 密码</span></span><br><span class="line"><span class="comment">// jedis.auth(&quot;pwd&quot;);</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">if</span> (end - start &gt;= <span class="number">1000</span>) &#123;</span><br><span class="line">            <span class="comment">// 1s内执行次数</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">        jedis.set(<span class="string">&quot;test&quot;</span> + i, i + <span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    jedis.close();</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="string">&quot;redis每秒写了&quot;</span> + i + <span class="string">&quot;次&quot;</span>);</span><br></pre></td></tr></table></figure>
 <p>使用连接池：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">JedisPoolConfig config = <span class="keyword">new</span> JedisPoolConfig();</span><br><span class="line"><span class="comment">// 最大空闲</span></span><br><span class="line">config.setMaxIdle(<span class="number">50</span>);</span><br><span class="line"><span class="comment">// 最大连接数</span></span><br><span class="line">config.setMaxTotal(<span class="number">100</span>);</span><br><span class="line"><span class="comment">// 最大等待时长</span></span><br><span class="line">config.setMaxWaitMillis(<span class="number">20000</span>);</span><br><span class="line"><span class="comment">// 创建池并获取连接</span></span><br><span class="line">JedisPool pool = <span class="keyword">new</span> JedisPool(config, <span class="string">&quot;localhost&quot;</span>);</span><br><span class="line">Jedis jedis = pool.getResource();</span><br><span class="line"><span class="comment">// jedis.auth(&quot;pwd&quot;);</span></span><br></pre></td></tr></table></figure>
 <p>&nbsp;</p>
-<h2 id="3-2-Spring中使用Redis"><a href="#3-2-Spring中使用Redis" class="headerlink" title="3.2 Spring中使用Redis"></a>3.2 Spring中使用Redis</h2><p>原生Redis只支持基于字符串的操作，而Java却以类对象为主。自行转换相当复杂，Spring做了封装与支持，提供了序列化的设计框架和一些序列化的类，可以用它完成序列化与反序列化。故可使用Spring提供的RedisTemplate来使用Redis。</p>
+<h2><span id="32-spring中使用redis">3.2 Spring中使用Redis</span></h2><p>原生Redis只支持基于字符串的操作，而Java却以类对象为主。自行转换相当复杂，Spring做了封装与支持，提供了序列化的设计框架和一些序列化的类，可以用它完成序列化与反序列化。故可使用Spring提供的RedisTemplate来使用Redis。</p>
 <p>在Spring中使用Redis还需要spring-data-redis。（该jar包与Spring版本可能存在不兼容问题）</p>
 <p>首先配置一个PoolConfig：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;poolConfig&quot;</span> <span class="attr">class</span>=<span class="string">&quot;redis.clients.jedis.JedisPoolConfig&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maxIdle&quot;</span> <span class="attr">value</span>=<span class="string">&quot;50&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maxTotal&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maxWaitMillis&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20000&quot;</span>/&gt;</span>                  </span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -234,8 +249,8 @@
 <p>至于序列化，Spring提供了RedisSerializer接口和一些实现类，除了使用已有序列化类，也可自己实现接口。以下是几个已有实现类：</p>
 <ul>
 <li>GenericJackson2JsonRedisSerializer：通用的使用Json2.jar完成</li>
-<li>Jackson2JsonRedisSerializer<T>：使用Json2.jar完成</li>
-<li>JdkSerializationRedisSerializer<T>：使用JDK的序列化器完成</li>
+<li>Jackson2JsonRedisSerializer<t>：使用Json2.jar完成</t></li>
+<li>JdkSerializationRedisSerializer<t>：使用JDK的序列化器完成</t></li>
 <li>OxmSerializer：使用Spring O/X，Object和XML的转换</li>
 <li>StringRedisSerializer：使用字符串进行福利恶化</li>
 <li>GenericToStringSerializer：使用通用的字符串序列化</li>
@@ -249,7 +264,7 @@
 <p>set和get操作使用连接池中的连接，这样不能保证使用同一个连接。可以用SessionCallback或RedisCallback两个接口，后者比较底层，不友好，更多使用前者：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SessionCallback callback = <span class="keyword">new</span> SessionCallback&lt;Role&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  Role <span class="title">execute</span><span class="params">(RedisOperations redisOperations)</span> <span class="keyword">throws</span> DataAccessException </span>&#123;</span><br><span class="line">        redisOperations.boundValueOps(<span class="string">&quot;role_1&quot;</span>).set(role);</span><br><span class="line">        <span class="keyword">return</span> (Role) redisOperations.boundValueOps(<span class="string">&quot;role_1&quot;</span>).get();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Role role1 = (Role) redisTemplate.execute(callback);</span><br></pre></td></tr></table></figure>
 <p>&nbsp;</p>
-<h1 id="4-Redis的6种数据类型"><a href="#4-Redis的6种数据类型" class="headerlink" title="4. Redis的6种数据类型"></a>4. Redis的6种数据类型</h1><p>这些数据类型除了存储，还能进行一些计算，可以对一些规模不大的数据进行快速计算。</p>
+<h1><span id="4-redis的6种数据类型">4. Redis的6种数据类型</span></h1><p>这些数据类型除了存储，还能进行一些计算，可以对一些规模不大的数据进行快速计算。</p>
 <div class="table-container">
 <table>
 <thead>

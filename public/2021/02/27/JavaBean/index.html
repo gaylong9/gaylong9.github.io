@@ -193,16 +193,25 @@
             <p>&nbsp;</p>
 <span id="more"></span>
 <!-- toc -->
+<ul>
+<li><a href="#javabean">JavaBean</a><ul>
+<li><a href="#1-简介">1. 简介</a></li>
+<li><a href="#2-jsp访问javabean">2. JSP访问JavaBean</a></li>
+<li><a href="#3-javabean范围">3. JavaBean范围</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
 <p>&nbsp;</p>
 <p>[toc]</p>
-<h1 id="JavaBean"><a href="#JavaBean" class="headerlink" title="JavaBean"></a>JavaBean</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><ol>
+<h1><span id="javabean">JavaBean</span></h1><h2><span id="1-简介">1. 简介</span></h2><ol>
 <li>可重用、跨平台的软件组织，分为有UI的和没有UI主要负责业务数据或业务处理的。JSP通常访问后种</li>
 <li>JSP与JavaBean搭配的好处：分离HTML和Java，便于编写和维护；二者各司其职，充分利用JavaBean可重用特点，提高开发效率</li>
 <li>JavaBean特性：公共类、有一个不含参的构造方法、属性有get和set方法（且方法名中属性名首字母大写）、如需持久化可实现Serializable接口</li>
 <li>JavaBean存放位置：<code>web-app/WEB-INF/classes/mypack/MyBean.class</code></li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="2-JSP访问JavaBean"><a href="#2-JSP访问JavaBean" class="headerlink" title="2. JSP访问JavaBean"></a>2. JSP访问JavaBean</h2><ol>
+<h2><span id="2-jsp访问javabean">2. JSP访问JavaBean</span></h2><ol>
 <li><p>JSP中可通过代码访问JavaBean，也可通过特定JSP标签访问，后者能减少JSP中的程序代码</p>
 </li>
 <li><p>标签使用：</p>
@@ -241,7 +250,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="3-JavaBean范围"><a href="#3-JavaBean范围" class="headerlink" title="3. JavaBean范围"></a>3. JavaBean范围</h2><ol>
+<h2><span id="3-javabean范围">3. JavaBean范围</span></h2><ol>
 <li>page：<ol>
 <li>从客户请求访问一个JSP文件开始，到这个文件执行结束</li>
 <li>每当客户请求本JSP，标签都会创建一个JavaBean对象，存放到页面范围内</li>

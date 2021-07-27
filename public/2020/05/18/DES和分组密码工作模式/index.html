@@ -234,21 +234,38 @@
             <p>信息安全试验所需。</p>
 <span id="more"></span>
 <!-- toc -->
+<ul>
+<li><a href="#des">DES</a><ul>
+<li><a href="#按表变换">按表变换</a></li>
+<li><a href="#秘钥部分">秘钥部分</a></li>
+<li><a href="#信息部分">信息部分</a></li>
+<li><a href="#解密">解密</a></li>
+</ul>
+</li>
+<li><a href="#分组密码工作模式">分组密码工作模式</a><ul>
+<li><a href="#ecb">ECB</a></li>
+<li><a href="#cbc">CBC</a></li>
+<li><a href="#cfb">CFB</a></li>
+<li><a href="#ofb">OFB</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
 <p>[toc]</p>
-<p><br/></p>
-<h1 id="DES"><a href="#DES" class="headerlink" title="DES"></a>DES</h1><p><img src="DES和分组密码工作模式/DES.png" alt="DES"></p>
-<p><br/></p>
-<h2 id="按表变换"><a href="#按表变换" class="headerlink" title="按表变换"></a>按表变换</h2><p>DES涉及多次依据表格进行位置变换。</p>
-<p><img src="DES和分组密码工作模式/pc_1.png" alt="pc_1"></p>
+<p><br></p>
+<h1><span id="des">DES</span></h1><p><img src="/.com//DES.png" alt="DES"></p>
+<p><br></p>
+<h2><span id="按表变换">按表变换</span></h2><p>DES涉及多次依据表格进行位置变换。</p>
+<p><img src="/.com//pc_1.png" alt="pc_1"></p>
 <p>如此表，第1位的57，表示把原数据的第57位的数字移至第1位。</p>
-<p><br/></p>
+<p><br></p>
 <hr>
-<p><br/></p>
-<h2 id="秘钥部分"><a href="#秘钥部分" class="headerlink" title="秘钥部分"></a>秘钥部分</h2><ol>
+<p><br></p>
+<h2><span id="秘钥部分">秘钥部分</span></h2><ol>
 <li><p>全长64位，但8的倍数位是奇偶校验，不参与实际加密。</p>
 </li>
 <li><p>PC-1变换：64分8组，按照PC-1表进行变换，此步表中没有8*k位置（此步消去奇偶校验位），得到56位秘钥。</p>
-<p> <img src="DES和分组密码工作模式/pc_1.png" alt="pc_1"></p>
+<p> <img src="/.com//pc_1.png" alt="pc_1"></p>
 </li>
 <li><p>拆分：56位秘钥左右均分为$C_0$和$D_0$（各28位）</p>
 </li>
@@ -265,18 +282,18 @@
 <li><p>合并：$ C_iD_i $ </p>
 </li>
 <li><p>PC-2变换：得到子秘钥$ K_i $，此步表中仅48位，即子秘钥仅48位（删除C的第9,18,22,25位以及D的第7,9,15,26比特位）</p>
-<p> <img src="DES和分组密码工作模式/pc_2.png" alt="pc_2"></p>
+<p> <img src="/.com//pc_2.png" alt="pc_2"></p>
 </li>
 </ol>
 <p>总过程：原秘钥（64） -&gt; PC-1（56↓） -&gt; 两侧循环左移（28×2） -&gt; PC-2（48↓） -&gt; 子秘钥$K_i $（48）</p>
-<p><img src="DES和分组密码工作模式/image-20200512205728831.png" alt="image-20200512205728831"></p>
-<p><br/></p>
+<p><img src="/.com//image-20200512205728831.png" alt="image-20200512205728831"></p>
+<p><br></p>
 <hr>
-<p><br/></p>
-<h2 id="信息部分"><a href="#信息部分" class="headerlink" title="信息部分"></a>信息部分</h2><p>DES基于组块，每块64位。</p>
+<p><br></p>
+<h2><span id="信息部分">信息部分</span></h2><p>DES基于组块，每块64位。</p>
 <ol>
 <li><p>初始变换IP（Initial permutation）：右上是IP表，右下是IP逆的表。两表互为逆操作。</p>
-<p> <img src="DES和分组密码工作模式/IP&amp;IP-1.png" alt="IP&amp;IP-1"></p>
+<p> <img src="/.com//IP&amp;IP-1.png" alt="IP&amp;IP-1"></p>
 </li>
 <li><p>分块：64位均分为左右$L_0、 \ R_0$，各32位</p>
 </li>
@@ -285,34 +302,34 @@
  L_i = R_{i-1}
  \\ R_i = L_{i-1} \ XOR \ f(R_{i-1}, \ K_i)</script></li>
 <li><p>$f(R_{i-1}, \ K_{i})$：输入两个32位，输出一个32位</p>
-<p> <img src="DES和分组密码工作模式/f(R,K" alt="f(R,K)">.png)</p>
+<p> <img src="/.com//f(R,K" alt="f(R,K)">.png)</p>
 <ol>
 <li><p>扩展置换E：$R_{i-1}$ 经下表扩展至48位</p>
-<p> <img src="DES和分组密码工作模式/e_bit-selection.png" alt="e_bit-selection"></p>
+<p> <img src="/.com//e_bit-selection.png" alt="e_bit-selection"></p>
 </li>
 <li><p>XOR：扩展所得与子秘钥异或 $E(R_{i-1}) \ XOR \ K_i$ </p>
 </li>
 <li><p>S盒替换：将异或得到的48位结果分成八个6位的块，每一块通过对应的一个S盒产生一个4位的输出。</p>
 <p> 每个S盒都是4×16的矩阵。例如块1：$x_1x_2x_3x_4x_5x_6$，将$x_1x_6$转为10进制作为S盒1的行号，将$x_2x_3x_4x_5$转为10进制作为S盒1的列号，则确定一个数字，转为4位二进制。</p>
 <p> 最终实现每块的6位-&gt;4位，整体的32位。</p>
-<p> <img src="DES和分组密码工作模式/S.png" alt="S"></p>
+<p> <img src="/.com//S.png" alt="S"></p>
 </li>
 <li><p>P置换：将上述所得进行移位变换，得32位</p>
-<p> <img src="DES和分组密码工作模式/P.png" alt="P"></p>
+<p> <img src="/.com//P.png" alt="P"></p>
 </li>
 </ol>
 </li>
 <li><p>16次后，得到$L_{16}, \ R_{16}$，将其倒置得$R_{16}L_{16}(64)$，进行IP逆置换，得到最终密文。</p>
 </li>
 </ol>
-<p><br/></p>
+<p><br></p>
 <hr>
-<p><br/></p>
-<h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><p>仅将秘钥调换使用顺序（$K_{16},K_{15},…,K_1$），其余与加密相同。</p>
-<p><br/></p>
-<p><br/></p>
-<h1 id="分组密码工作模式"><a href="#分组密码工作模式" class="headerlink" title="分组密码工作模式"></a>分组密码工作模式</h1><h2 id="ECB"><a href="#ECB" class="headerlink" title="ECB"></a>ECB</h2><p>电子密码本ECB (electronic codebookmode)</p>
-<p><img src="DES和分组密码工作模式/ECB.jpg" alt="ECB"></p>
+<p><br></p>
+<h2><span id="解密">解密</span></h2><p>仅将秘钥调换使用顺序（$K_{16},K_{15},…,K_1$），其余与加密相同。</p>
+<p><br></p>
+<p><br></p>
+<h1><span id="分组密码工作模式">分组密码工作模式</span></h1><h2><span id="ecb">ECB</span></h2><p>电子密码本ECB (electronic codebookmode)</p>
+<p><img src="/.com//ECB.jpg" alt="ECB"></p>
 <ul>
 <li>最简单的方法：原数据分组后按顺序加密，之后将所得密文按顺序连接即可</li>
 <li>特点<ul>
@@ -322,8 +339,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="CBC"><a href="#CBC" class="headerlink" title="CBC"></a>CBC</h2><p>密码分组链接CBC (cipher blockchaining)</p>
-<p><img src="DES和分组密码工作模式/CBC.jpg" alt="CBC"></p>
+<h2><span id="cbc">CBC</span></h2><p>密码分组链接CBC (cipher blockchaining)</p>
+<p><img src="/.com//CBC.jpg" alt="CBC"></p>
 <ul>
 <li>使加密的各段数据之间有了联系</li>
 <li>解密时先解密再与初始向量/<strong>密文</strong>异或</li>
@@ -337,8 +354,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="CFB"><a href="#CFB" class="headerlink" title="CFB"></a>CFB</h2><p>密码反馈CFB (cipher feedback)</p>
-<p><img src="DES和分组密码工作模式/CFB.jpg" alt="CFB"></p>
+<h2><span id="cfb">CFB</span></h2><p>密码反馈CFB (cipher feedback)</p>
+<p><img src="/.com//CFB.jpg" alt="CFB"></p>
 <p>使用一个与块大小相同的移位寄存器（用IV初始化）。将其加密后，取高n位（K块作用）与明文的n位异或。随后寄存器左移n位，将得到的n位密文补至尾部。解密过程与加密过程相似，以IV开始，对寄存器加密，将结果的高x与密文异或，产生x位平文，再将密文的下面x位移入寄存器。</p>
 <p>特点：</p>
 <ul>
@@ -346,8 +363,8 @@
 <li>隐藏明文模式</li>
 <li>误差传递：一个单元损坏影响多个单元</li>
 </ul>
-<h2 id="OFB"><a href="#OFB" class="headerlink" title="OFB"></a>OFB</h2><p>输出反馈OFB (output feedback)</p>
-<p><img src="DES和分组密码工作模式/OFB.jpg" alt="OFB"></p>
+<h2><span id="ofb">OFB</span></h2><p>输出反馈OFB (output feedback)</p>
+<p><img src="/.com//OFB.jpg" alt="OFB"></p>
 <p>特点：</p>
 <ul>
 <li>流密码</li>

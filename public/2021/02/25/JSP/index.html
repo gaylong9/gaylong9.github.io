@@ -234,9 +234,34 @@
             <p>&nbsp;</p>
 <span id="more"></span>
 <!-- toc -->
+<ul>
+<li><a href="#jsp">JSP</a><ul>
+<li><a href="#1-语法">1. 语法</a><ul>
+<li><a href="#11-jsp指令">1.1 JSP指令</a></li>
+<li><a href="#12-jsp声明">1.2 JSP声明</a></li>
+<li><a href="#13-java程序片段">1.3 Java程序片段</a></li>
+<li><a href="#14-java表达式">1.4 Java表达式</a></li>
+<li><a href="#15-jsp隐含对象">1.5 JSP隐含对象</a></li>
+</ul>
+</li>
+<li><a href="#2-生命周期">2. 生命周期</a></li>
+<li><a href="#3-请求转发">3. 请求转发</a></li>
+<li><a href="#4-包含">4. 包含</a></li>
+<li><a href="#5-jsp异常处理">5. JSP异常处理</a></li>
+<li><a href="#6-jsp发布">6. JSP发布</a></li>
+<li><a href="#7-jsp预编译">7. JSP预编译</a></li>
+<li><a href="#8-pagecontext类">8. PageContext类</a></li>
+<li><a href="#9-webxml配置jsp">9. web.xml配置JSP</a></li>
+<li><a href="#10-注释">10. 注释</a></li>
+<li><a href="#11-四大域对象">11. 四大域对象</a></li>
+<li><a href="#12-发展趋势">12. 发展趋势</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
 <p>&nbsp;</p>
 <p>[toc]</p>
-<h1 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h1><p>Java service page</p>
+<h1><span id="jsp">JSP</span></h1><p>Java service page</p>
 <ol>
 <li>可以嵌套Java代码，动态页面，还能进行排版</li>
 <li>jsp对应一个Servlet：第一次访问jsp时，jsp引擎将jsp翻译为Servlet源文件，编译为Servlet类，存放在tomcat的work目录中，初始化并运行该类</li>
@@ -244,7 +269,7 @@
 <li>JSP对应的Servlet继承了Tomcat提供的HttpJSPBase类，该类实现了HttpJspPage接口，该接口继承了Servlet API中的Servlet接口</li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="1-语法"><a href="#1-语法" class="headerlink" title="1. 语法"></a>1. 语法</h2><h3 id="1-1-JSP指令"><a href="#1-1-JSP指令" class="headerlink" title="1.1 JSP指令"></a>1.1 JSP指令</h3><p><code>&lt;%@ 指令名 属性=值 %&gt;</code> 设置和整个JSP网页相关的属性，常用page、include、taglib三种指令</p>
+<h2><span id="1-语法">1. 语法</span></h2><h3><span id="11-jsp指令">1.1 JSP指令</span></h3><p><code>&lt;%@ 指令名 属性=值 %&gt;</code> 设置和整个JSP网页相关的属性，常用page、include、taglib三种指令</p>
 <ol>
 <li>page指令：<code>&lt;%@ page 属性1=“值1” 属性2=“值2” %&gt;</code><ol>
 <li><code>language = &quot;java&quot;</code> 指定程序代码所用编程语言，目前仅支持Java；多次使用仅第一次生效</li>
@@ -259,21 +284,21 @@
 <li>include指令：<code>&lt;%@ include file=&quot;目标组件绝对/相对URL&quot; %&gt;</code> 包含其他JSP或HTML文件，代码重用，静态包含</li>
 </ol>
 <p>&nbsp;</p>
-<h3 id="1-2-JSP声明"><a href="#1-2-JSP声明" class="headerlink" title="1.2 JSP声明"></a>1.2 JSP声明</h3><p><code>&lt;%! declaration;declaration; ... %&gt;</code></p>
+<h3><span id="12-jsp声明">1.2 JSP声明</span></h3><p><code>&lt;%! declaration;declaration; ... %&gt;</code></p>
 <p>用于声明对应Servlet类的成员变量和方法</p>
 <p>eg：</p>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;%! <span class="keyword">int</span> v1 = <span class="number">0</span>; %&gt;</span><br><span class="line">&lt;%! <span class="keyword">int</span> v2, v3, v4; %&gt;</span><br><span class="line">&lt;%! String v5 = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> v6;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;%! </span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">func</span> <span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    	...</span><br><span class="line">	&#125;    </span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
 <p>此方法声明变量只在当前JSP有效，若希望多个JSP文件都包含这些声明，就要写去一个JSP页面并include。</p>
 <p>&nbsp;</p>
-<h3 id="1-3-Java程序片段"><a href="#1-3-Java程序片段" class="headerlink" title="1.3 Java程序片段"></a>1.3 Java程序片段</h3><p>Scriplet <code>&lt;% ... %&gt;</code>，嵌入Java代码，默认这些代码位于对应Servlet的service代码中。</p>
+<h3><span id="13-java程序片段">1.3 Java程序片段</span></h3><p>Scriplet <code>&lt;% ... %&gt;</code>，嵌入Java代码，默认这些代码位于对应Servlet的service代码中。</p>
 <p>eg：</p>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;% </span><br><span class="line">	String gender = <span class="string">&quot;female&quot;</span>;</span><br><span class="line">	<span class="keyword">if</span> (gender.equals(<span class="string">&quot;female&quot;</span>)) &#123;</span><br><span class="line">%&gt;</span><br><span class="line">She is a girl.	&lt;%-- 模板文本 --%&gt;</span><br><span class="line">&lt;% &#125; <span class="keyword">else</span> &#123; %&gt;</span><br><span class="line">He is a boy.	&lt;%-- 模板文本 --%&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
 <p>JSP翻译、编译为Servlet的过程中，是将各部分转换为对应Java代码，不在<code>&lt;&gt;</code>内的模板文本，会转换为<code>out.print(模板文本)</code>。故编写Scriplet、JSP时，相当于是在拼接一个Servlet代码。</p>
 <p>&nbsp;</p>
-<h3 id="1-4-Java表达式"><a href="#1-4-Java表达式" class="headerlink" title="1.4 Java表达式"></a>1.4 Java表达式</h3><p><code>&lt;%= ... %&gt;</code> 将表达式的值输出到网页，基本数据类型的数字会自动转换为字符串。</p>
+<h3><span id="14-java表达式">1.4 Java表达式</span></h3><p><code>&lt;%= ... %&gt;</code> 将表达式的值输出到网页，基本数据类型的数字会自动转换为字符串。</p>
 <p>除了输出值，也可当做JSP标签属性的值。</p>
 <p>&nbsp;</p>
-<h3 id="1-5-JSP隐含对象"><a href="#1-5-JSP隐含对象" class="headerlink" title="1.5 JSP隐含对象"></a>1.5 JSP隐含对象</h3><p>JSP中，ServletContext、ServletRequest等对象，均有固定的引用变量在引用。JSP中不需进行声明就可以直接使用引用变量。</p>
+<h3><span id="15-jsp隐含对象">1.5 JSP隐含对象</span></h3><p>JSP中，ServletContext、ServletRequest等对象，均有固定的引用变量在引用。JSP中不需进行声明就可以直接使用引用变量。</p>
 <div class="table-container">
 <table>
 <thead>
@@ -325,7 +350,7 @@
 <p>out即为对应Servlet中的JspWriter对象，<code>out.print(...)</code>等价于JSP中<code>&lt;%= ... %&gt;</code>。</p>
 <p>request和response是对应Servlet中方法的参数，其余引用则是方法的局部变量。</p>
 <p>&nbsp;</p>
-<h2 id="2-生命周期"><a href="#2-生命周期" class="headerlink" title="2. 生命周期"></a>2. 生命周期</h2><ol>
+<h2><span id="2-生命周期">2. 生命周期</span></h2><ol>
 <li><p>JSP需要先经容器编译成类才能运行。</p>
 </li>
 <li><p>生命周期：</p>
@@ -352,7 +377,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="3-请求转发"><a href="#3-请求转发" class="headerlink" title="3. 请求转发"></a>3. 请求转发</h2><p><code>&lt;jsp:forward page=&quot;绝对/相对URL&quot; /&gt;</code></p>
+<h2><span id="3-请求转发">3. 请求转发</span></h2><p><code>&lt;jsp:forward page=&quot;绝对/相对URL&quot; /&gt;</code></p>
 <ol>
 <li><p>转发目标组件可以是HTML、JSP、Servlet</p>
 </li>
@@ -365,7 +390,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="4-包含"><a href="#4-包含" class="headerlink" title="4. 包含"></a>4. 包含</h2><p>使用包含指令/标签，引入其他JSP、HTML页面，实现页面的局部变化/局部不变。</p>
+<h2><span id="4-包含">4. 包含</span></h2><p>使用包含指令/标签，引入其他JSP、HTML页面，实现页面的局部变化/局部不变。</p>
 <ol>
 <li>include指令，静态包含：<code>&lt;%@include file=&quot;绝对/相对路径&quot; %&gt;</code> </li>
 <li>include标签，动态包含：<code>&lt;jsp:include page=&quot;file.jsp&quot;/&gt;</code> </li>
@@ -393,7 +418,7 @@
 <li><code>&lt;jsp:include page=&quot; &quot;&gt; &lt;/jsp:include&gt;</code>中也可添加<code>&lt;jsp:param name=&quot;&quot; value=&quot;&quot; /&gt;</code>标签，用于向包含目标组件传递请求参数</li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="5-JSP异常处理"><a href="#5-JSP异常处理" class="headerlink" title="5. JSP异常处理"></a>5. JSP异常处理</h2><ol>
+<h2><span id="5-jsp异常处理">5. JSP异常处理</span></h2><ol>
 <li><p>出现异常时可以 <code>&lt;%@ page errorPage=&quot;errorpage.jsp&quot; %&gt;</code>，将请求转发给专门处理异常的页面</p>
 </li>
 <li><p>应声明本页面是专门异常处理的页面 <code>&lt;%@ page isErrorPage=&quot;true&quot; %&gt;</code></p>
@@ -407,10 +432,10 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="6-JSP发布"><a href="#6-JSP发布" class="headerlink" title="6. JSP发布"></a>6. JSP发布</h2><p>JSP也可在web.xml中进行设置</p>
+<h2><span id="6-jsp发布">6. JSP发布</span></h2><p>JSP也可在web.xml中进行设置</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hi<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">jsp-file</span>&gt;</span>/hello.jsp<span class="tag">&lt;/<span class="name">jsp-file</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>hi<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/hi<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>&nbsp;</p>
-<h2 id="7-JSP预编译"><a href="#7-JSP预编译" class="headerlink" title="7. JSP预编译"></a>7. JSP预编译</h2><p>首次访问JSP时需要容器进行JSP的翻译、编译、初始化、执行等操作，比较耗时，可以采用预编译。</p>
+<h2><span id="7-jsp预编译">7. JSP预编译</span></h2><p>首次访问JSP时需要容器进行JSP的翻译、编译、初始化、执行等操作，比较耗时，可以采用预编译。</p>
 <ol>
 <li><p>JsP规范规定了一个特殊的请求参数<code>jsp_precompile</code>，若为true，则容器仅将该JSP转化为Servlet类并存放，但不运行</p>
 </li>
@@ -431,7 +456,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="8-PageContext类"><a href="#8-PageContext类" class="headerlink" title="8. PageContext类"></a>8. PageContext类</h2><p>JSP API提供了PageContext类，继承自JSPContext，主要在Java程序段、JSP自定义标签的处理类中使用。</p>
+<h2><span id="8-pagecontext类">8. PageContext类</span></h2><p>JSP API提供了PageContext类，继承自JSPContext，主要在Java程序段、JSP自定义标签的处理类中使用。</p>
 <ol>
 <li>类中关于各种范围的静态常量<ol>
 <li><code>PAGE_SCOPE</code> 1，页面范围</li>
@@ -466,7 +491,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="9-web-xml配置JSP"><a href="#9-web-xml配置JSP" class="headerlink" title="9. web.xml配置JSP"></a>9. web.xml配置JSP</h2><p>可用<code>&lt;jsp-config&gt;</code>元素对一组JSP文件配置，包括<code>&lt;taglib&gt;</code>和<code>&lt;jsp-property-group&gt;</code>两个子元素。</p>
+<h2><span id="9-webxml配置jsp">9. web.xml配置JSP</span></h2><p>可用<code>&lt;jsp-config&gt;</code>元素对一组JSP文件配置，包括<code>&lt;taglib&gt;</code>和<code>&lt;jsp-property-group&gt;</code>两个子元素。</p>
 <ol>
 <li><p><code>&lt;taglib&gt;</code></p>
 </li>
@@ -488,12 +513,12 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="10-注释"><a href="#10-注释" class="headerlink" title="10. 注释"></a>10. 注释</h2><ol>
+<h2><span id="10-注释">10. 注释</span></h2><ol>
 <li>显式注释：客户端可以看到。HTML风格：<code>&lt;!-- ... --&gt;</code></li>
 <li>隐式注释：Java风格<code>// /**/</code>、JSP独有<code>&lt;%-- --%&gt;</code></li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="11-四大域对象"><a href="#11-四大域对象" class="headerlink" title="11. 四大域对象"></a>11. 四大域对象</h2><ol>
+<h2><span id="11-四大域对象">11. 四大域对象</span></h2><ol>
 <li>page范围：<code>pageContext</code>，只在页面中保存属性，服务端跳转后无效</li>
 <li>request范围：<code>request</code>，只在一次请求有效，服务器跳转后有效，客户端跳转无效</li>
 <li>session范围：<code>session</code>，只在一次会话范围，跳转也可使用，客户端服务端都可获取，但重开浏览器丢失，因session保存在浏览器中</li>
@@ -506,7 +531,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="12-发展趋势"><a href="#12-发展趋势" class="headerlink" title="12. 发展趋势"></a>12. 发展趋势</h2><p>JSP为了简便编写动态页面而生，但HTML标记和Java程序段大量混合，使得开发维护都十分复杂，故后续产生各种方法将Java分离出去，只留HTML和JSP标签。</p>
+<h2><span id="12-发展趋势">12. 发展趋势</span></h2><p>JSP为了简便编写动态页面而生，但HTML标记和Java程序段大量混合，使得开发维护都十分复杂，故后续产生各种方法将Java分离出去，只留HTML和JSP标签。</p>
 <ol>
 <li>分离Java：<ol>
 <li>Java代码放在JavaBean中，JSP通过专门标签访问JavaBean</li>

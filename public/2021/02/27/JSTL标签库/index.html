@@ -193,16 +193,41 @@
             <p>&nbsp;</p>
 <span id="more"></span>
 <!-- toc -->
+<ul>
+<li><a href="#jstl标签库">JSTL标签库</a><ul>
+<li><a href="#1-使用第三方标签库步骤">1. 使用第三方标签库步骤</a></li>
+<li><a href="#2-jstl标签库简介">2. JSTL标签库简介</a></li>
+<li><a href="#3-core">3. Core</a><ul>
+<li><a href="#31-一般用途标签">3.1 一般用途标签</a></li>
+<li><a href="#32-条件标签">3.2 条件标签</a></li>
+<li><a href="#33-迭代标签">3.3 迭代标签</a></li>
+<li><a href="#34-url相关标签">3.4 URL相关标签</a></li>
+</ul>
+</li>
+<li><a href="#4-i18n">4. I18N</a><ul>
+<li><a href="#41-国际化">4.1 国际化</a></li>
+<li><a href="#42-java对i18n的支持">4.2 Java对I18N的支持</a></li>
+<li><a href="#43-国际化标签">4.3 国际化标签</a></li>
+<li><a href="#44-应用结构与中文资源文件">4.4 应用结构与中文资源文件</a></li>
+<li><a href="#45-格式化标签">4.5 格式化标签</a></li>
+</ul>
+</li>
+<li><a href="#5-sql">5. SQL</a></li>
+<li><a href="#6-functions">6. Functions</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
 <p>&nbsp;</p>
 <p>[toc]</p>
 <p>&nbsp;</p>
-<h1 id="JSTL标签库"><a href="#JSTL标签库" class="headerlink" title="JSTL标签库"></a>JSTL标签库</h1><p>自定义JSP标签用来替代Java程序片段，有些JSP常要使用的功能，如重定向、include、格式化输出、访问数据库、流程控制等。Oracle公司制定了一组标准标签库 JSTL（JavaServer Pages Standard Tag Library）。</p>
+<h1><span id="jstl标签库">JSTL标签库</span></h1><p>自定义JSP标签用来替代Java程序片段，有些JSP常要使用的功能，如重定向、include、格式化输出、访问数据库、流程控制等。Oracle公司制定了一组标准标签库 JSTL（JavaServer Pages Standard Tag Library）。</p>
 <p>&nbsp;</p>
-<h2 id="1-使用第三方标签库步骤"><a href="#1-使用第三方标签库步骤" class="headerlink" title="1. 使用第三方标签库步骤"></a>1. 使用第三方标签库步骤</h2><p>提供标签库的第三方，将所有文件打包为JAR包，包含：标签处理类及相关类的class文件，含有TLD的META-INF目录。</p>
+<h2><span id="1-使用第三方标签库步骤">1. 使用第三方标签库步骤</span></h2><p>提供标签库的第三方，将所有文件打包为JAR包，包含：标签处理类及相关类的class文件，含有TLD的META-INF目录。</p>
 <p>使用方法：把JAR文件复制到<code>&lt;CATALINA_HOME&gt;/lib</code>或<code>webapp/WEB-INF/lib</code>下，JSP中通过taglib声明标签库，uri属性与TLD中的uri一致。</p>
 <p>运行此标签时，容器自动到JAR的META-INF下读取TLD。</p>
 <p>&nbsp;</p>
-<h2 id="2-JSTL标签库简介"><a href="#2-JSTL标签库简介" class="headerlink" title="2. JSTL标签库简介"></a>2. JSTL标签库简介</h2><ol>
+<h2><span id="2-jstl标签库简介">2. JSTL标签库简介</span></h2><ol>
 <li>包含5个标签库，URI和前缀做了约定：<ol>
 <li>Core：c <code>http://java.sun.com/jsp/jstl/core</code>，核心标签库，包括一般标签、条件标签、迭代标签、URL相关标签</li>
 <li>I18N：fmt <code>http://java.sun.com/jsp/jstl/fmt</code>，国际化，日期时间数字格式化</li>
@@ -221,8 +246,8 @@
 <li>在JSP中使用库时，要先taglib引入标签库</li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="3-Core"><a href="#3-Core" class="headerlink" title="3. Core"></a>3. Core</h2><p><code>&lt;%@ taglib uri=&quot;http:/java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot; %&gt;</code></p>
-<h3 id="3-1-一般用途标签"><a href="#3-1-一般用途标签" class="headerlink" title="3.1 一般用途标签"></a>3.1 一般用途标签</h3><p><code>&lt;c:out&gt;</code>：把表达式结果打印到网页</p>
+<h2><span id="3-core">3. Core</span></h2><p><code>&lt;%@ taglib uri=&quot;http:/java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot; %&gt;</code></p>
+<h3><span id="31-一般用途标签">3.1 一般用途标签</span></h3><p><code>&lt;c:out&gt;</code>：把表达式结果打印到网页</p>
 <p><code>&lt;c:set&gt;</code>：设定命名变量（存放在特定范围内的属性）的值，JavaBean的属性的值，Map的Key的值</p>
 <p><code>&lt;c:remove&gt;</code>：删除一个命名变量</p>
 <p><code>&lt;c:catch&gt;</code>：捕获异常，并把异常对象放在页面范围内指定的命名变量中</p>
@@ -250,7 +275,7 @@
 <li><p><code>&lt;c:catch var=&quot;代表异常对象的命名变量的名字&quot;&gt; &lt;% 一段代码 %&gt; &lt;/c:catch&gt;</code> 捕获标签主体内代码的异常，存入页面范围内指定的命名变量中</p>
 </li>
 </ol>
-<h3 id="3-2-条件标签"><a href="#3-2-条件标签" class="headerlink" title="3.2 条件标签"></a>3.2 条件标签</h3><p><code>&lt;c:if&gt;</code> <code>&lt;c:choose&gt;</code> <code>&lt;c:when&gt;</code> <code>&lt;c:otherwise&gt;</code> 替代Java中的if和if-else。</p>
+<h3><span id="32-条件标签">3.2 条件标签</span></h3><p><code>&lt;c:if&gt;</code> <code>&lt;c:choose&gt;</code> <code>&lt;c:when&gt;</code> <code>&lt;c:otherwise&gt;</code> 替代Java中的if和if-else。</p>
 <ol>
 <li><p><code>&lt;c:if&gt;</code></p>
 <ol>
@@ -268,7 +293,7 @@
 </ol>
 </li>
 </ol>
-<h3 id="3-3-迭代标签"><a href="#3-3-迭代标签" class="headerlink" title="3.3 迭代标签"></a>3.3 迭代标签</h3><p><code>&lt;c:forEach&gt;</code> 遍历集合中的对象，能重复执行标签主体</p>
+<h3><span id="33-迭代标签">3.3 迭代标签</span></h3><p><code>&lt;c:forEach&gt;</code> 遍历集合中的对象，能重复执行标签主体</p>
 <p><code>&lt;c:forTokens&gt;</code> 遍历字符串中用特定分割符分割的子串，能重复执行标签主体</p>
 <ol>
 <li><code>&lt;c:forEach&gt;</code><ol>
@@ -286,7 +311,7 @@
 </li>
 <li><code>&lt;c:forTokens var=&quot;代表子串的命名变量的名字&quot; items=&quot;被分割的字符串&quot; delims=&quot;分割符&quot;&gt; 主体 &lt;/c:forTokens&gt;</code> 本标签也有varStatus、begin、end、step属性</li>
 </ol>
-<h3 id="3-4-URL相关标签"><a href="#3-4-URL相关标签" class="headerlink" title="3.4 URL相关标签"></a>3.4 URL相关标签</h3><p><code>&lt;c:import&gt;</code>：包含其他Web资源</p>
+<h3><span id="34-url相关标签">3.4 URL相关标签</span></h3><p><code>&lt;c:import&gt;</code>：包含其他Web资源</p>
 <p><code>&lt;c:url&gt;</code>：按照特定重写规则重构URL</p>
 <p><code>&lt;c:redirect&gt;</code>：重定向</p>
 <ol>
@@ -307,13 +332,13 @@
 <li><code>&lt;c:redirect url=&quot;目标Web资源的URL&quot; /&gt;</code>，重定向，也可使用context属性指向其他Web应用，和<code>&lt;c:param&gt;</code>标签指定参数</li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="4-I18N"><a href="#4-I18N" class="headerlink" title="4. I18N"></a>4. I18N</h2><p>国际化，时间日期数字格式化</p>
+<h2><span id="4-i18n">4. I18N</span></h2><p>国际化，时间日期数字格式化</p>
 <p><code>&lt;%@ taglib prefix=&quot;fmt&quot; uri=&quot;http://java.sun.com/jsp/jstl/fmt&quot; %&gt;</code></p>
-<h3 id="4-1-国际化"><a href="#4-1-国际化" class="headerlink" title="4.1 国际化"></a>4.1 国际化</h3><p>即I18N（Internationalization），指软件设计阶段，就应该使软件具有支持多种语言和地区的功能。如此，添加新语言和国家支持时，不需大量返工，无需修改代码。</p>
+<h3><span id="41-国际化">4.1 国际化</span></h3><p>即I18N（Internationalization），指软件设计阶段，就应该使软件具有支持多种语言和地区的功能。如此，添加新语言和国家支持时，不需大量返工，无需修改代码。</p>
 <p>应将文本、图片等资源抽离出来，储存在外部，根据用户不同，调用不同资源。</p>
 <p>Locale本地，指地理区域。</p>
 <p>&nbsp;</p>
-<h3 id="4-2-Java对I18N的支持"><a href="#4-2-Java对I18N的支持" class="headerlink" title="4.2 Java对I18N的支持"></a>4.2 Java对I18N的支持</h3><p>核心库中提供了一些支持国际化的类和接口。JSTL的I18N标签库依赖于这些类。</p>
+<h3><span id="42-java对i18n的支持">4.2 Java对I18N的支持</span></h3><p>核心库中提供了一些支持国际化的类和接口。JSTL的I18N标签库依赖于这些类。</p>
 <ol>
 <li><p>Locale类：</p>
 <ol>
@@ -355,7 +380,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h3 id="4-3-国际化标签"><a href="#4-3-国际化标签" class="headerlink" title="4.3 国际化标签"></a>4.3 国际化标签</h3><p><code>&lt;fmt:setLocale&gt;</code>：设置Locale，保存到特定范围</p>
+<h3><span id="43-国际化标签">4.3 国际化标签</span></h3><p><code>&lt;fmt:setLocale&gt;</code>：设置Locale，保存到特定范围</p>
 <p><code>&lt;fmt:setBundle&gt;</code>：设置ResourceBundle，保存到特定范围</p>
 <p><code>&lt;fmt:bundle&gt;</code>：设置标签主体使用的ResourceBundle</p>
 <p><code>&lt;fmt:message&gt;</code>：根据属性key返回ResourceBundle中匹配的消息文本</p>
@@ -377,7 +402,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h3 id="4-4-应用结构与中文资源文件"><a href="#4-4-应用结构与中文资源文件" class="headerlink" title="4.4 应用结构与中文资源文件"></a>4.4 应用结构与中文资源文件</h3><p><img src="JSTL标签库/应用目录结构.jpg" alt="应用目录结构"></p>
+<h3><span id="44-应用结构与中文资源文件">4.4 应用结构与中文资源文件</span></h3><p><img src="/.com//应用目录结构.jpg" alt="应用目录结构"></p>
 <p>英文资源文件可直接生成，中文则需如下步骤：</p>
 <ol>
 <li><p>messages_temp.properties，正常编写资源项，如<code>hello.title=主页</code></p>
@@ -387,7 +412,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h3 id="4-5-格式化标签"><a href="#4-5-格式化标签" class="headerlink" title="4.5 格式化标签"></a>4.5 格式化标签</h3><p><code>&lt;fmt:setTimeZone&gt;</code>：设置时区，把时区保存到特定范围</p>
+<h3><span id="45-格式化标签">4.5 格式化标签</span></h3><p><code>&lt;fmt:setTimeZone&gt;</code>：设置时区，把时区保存到特定范围</p>
 <p><code>&lt;fmt:timeZone&gt;</code>：设置标签主体使用的时区</p>
 <p><code>&lt;fmt:formatNumber&gt;</code>：格式化数字</p>
 <p><code>&lt;fmt:parseNumber&gt;</code>：解析被格式化的字符串类型的数字</p>
@@ -450,7 +475,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="5-SQL"><a href="#5-SQL" class="headerlink" title="5. SQL"></a>5. SQL</h2><p>大型Web采用MVC设计模式，访问数据库任务由模型层JavaBean完成。小型Web中访问数据库可以在JSP中执行。JSTL SQL标签用于访问数据库，避免Java代码片段的冗长。</p>
+<h2><span id="5-sql">5. SQL</span></h2><p>大型Web采用MVC设计模式，访问数据库任务由模型层JavaBean完成。小型Web中访问数据库可以在JSP中执行。JSTL SQL标签用于访问数据库，避免Java代码片段的冗长。</p>
 <p><code>&lt;%@ taglib prefix=&quot;sql&quot; uri=&quot;http://java.sun.com/jsp/jstl/sql&quot; %&gt;</code></p>
 <p><code>&lt;sql:setDataSource&gt;</code>：设置数据源</p>
 <p><code>&lt;sql:query&gt;</code>：执行select语句</p>
@@ -532,7 +557,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="6-Functions"><a href="#6-Functions" class="headerlink" title="6. Functions"></a>6. Functions</h2><p>本标签库中提供了常用的EL函数，主要用于处理字符串。</p>
+<h2><span id="6-functions">6. Functions</span></h2><p>本标签库中提供了常用的EL函数，主要用于处理字符串。</p>
 <p><code>&lt;%@ taglib prefix=&quot;fn&quot; uri=&quot;http://java.sun.com/jsp/jstl/functions&quot; %&gt;</code></p>
 <p>另，因为是EL函数，参数传递时，若非直接写出，而是用变量名时，要用命名变量，即要先set进Attribute，可用Java片段或<code>&lt;c:set&gt;</code>标签</p>
 <ol>

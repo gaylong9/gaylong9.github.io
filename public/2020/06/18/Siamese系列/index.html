@@ -233,13 +233,26 @@
         <div class="post-content">
             <span id="more"></span>
 <!-- toc -->
-<p><br/></p>
-<h2 id="Siamese"><a href="#Siamese" class="headerlink" title="Siamese"></a>Siamese</h2><ul>
+<ul>
+<li><a href="#siamese">Siamese</a></li>
+<li><a href="#siamese-network">Siamese Network</a></li>
+<li><a href="#siamfc">SiamFC</a></li>
+<li><a href="#rpn">RPN</a></li>
+<li><a href="#siamrpn">SiamRPN</a></li>
+<li><a href="#dasiamrpn">DaSiamRPN</a></li>
+<li><a href="#siamrpn">SiamRPN++</a><ul>
+<li><a href="#深度交叉相关">深度交叉相关</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<p><br></p>
+<h2><span id="siamese">Siamese</span></h2><ul>
 <li>Siamese和Chinese有点像。Siam是古时候泰国的称呼，中文译作暹罗。Siamese也就是“暹罗”人或“泰国”人。十九世纪泰国出生了一对连体婴儿，当时的医学技术无法使两人分离出来，于是两人顽强地生活了一生，两人均于63岁离开人间。两人的肝至今仍保存在费城的<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=https%3A%2F%2Fwww.baidu.com%2Fs%3Fwd%3D%E9%A9%AC%E7%89%B9%E5%8D%9A%E7%89%A9%E9%A6%86%26tn%3D44039180_cpr%26fenlei%3Dmv6quAkxTZn0IZRqIHckPjm4nH00T1dWnAP9uWcvmhcvrADsnvmk0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHRYnHDvn163">马特博物馆</a>内。从此之后“<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=https%3A%2F%2Fwww.baidu.com%2Fs%3Fwd%3D%E6%9A%B9%E7%BD%97%E5%8F%8C%E8%83%9E%E8%83%8E%26tn%3D44039180_cpr%26fenlei%3Dmv6quAkxTZn0IZRqIHckPjm4nH00T1dWnAP9uWcvmhcvrADsnvmk0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHRYnHDvn163">暹罗双胞胎</a>”（Siamese twins）就成了连体人的代名词</li>
 </ul>
-<p><img src="Siamese系列\Siamese twins.jpg" alt="Siamese twins"></p>
-<p><br/></p>
-<h2 id="Siamese-Network"><a href="#Siamese-Network" class="headerlink" title="Siamese Network"></a>Siamese Network</h2><ul>
+<p><img src="/.com//Siamese twins.jpg" alt="Siamese twins"></p>
+<p><br></p>
+<h2><span id="siamese-network">Siamese Network</span></h2><ul>
 <li>判断两个输入相似性，核心思想是，两个子体网络通过权重共享来实现连体，寻找一个映射函数，能够将输入图像转换到一个特征空间，每幅图像对应一个特征向量，通过一些简单的“距离度量”（比如欧式距离）来表示向量之间的差异，最后通过这个距离来拟合输入图像的相似度差异（语义差异）</li>
 <li>对比损失Contrastive Loss：<ul>
 <li>$d=||a_n-b_n||_2$，代表两个样本特征的欧氏距离，</li>
@@ -251,12 +264,12 @@
 </ul>
 </li>
 </ul>
-<p><img src="Siamese系列/Siamese Net.png" alt="Siamese Net"></p>
-<p><img src="Siamese系列/Siamese Net_loss.png" alt="Siamese Net_loss"></p>
-<p><img src="Siamese系列/Siamese Net_loss1.png" alt="Siamese Net_loss1"></p>
+<p><img src="/.com//Siamese Net.png" alt="Siamese Net"></p>
+<p><img src="/.com//Siamese Net_loss.png" alt="Siamese Net_loss"></p>
+<p><img src="/.com//Siamese Net_loss1.png" alt="Siamese Net_loss1"></p>
 <hr>
-<p><br/></p>
-<h2 id="SiamFC"><a href="#SiamFC" class="headerlink" title="SiamFC"></a>SiamFC</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/nightmare_dimple/article/details/74210147">https://blog.csdn.net/nightmare_dimple/article/details/74210147</a></p>
+<p><br></p>
+<h2><span id="siamfc">SiamFC</span></h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/nightmare_dimple/article/details/74210147">https://blog.csdn.net/nightmare_dimple/article/details/74210147</a></p>
 <ul>
 <li>全卷积孪生网络 fully-convolutional siamese networks for object tracking</li>
 <li>AlexNet</li>
@@ -270,14 +283,14 @@
 </li>
 <li>全卷积网络的优点是待搜索图像不需要与样本图像具有相同尺寸，可以为网络提供更大的搜索图像作为输入，然后在密集网格上计算所有平移窗口的相似度。</li>
 </ul>
-<p><img src="Siamese系列/SiamFC_1.png" alt=""></p>
+<p><img src="/.com//SiamFC_1.png" alt></p>
 <ul>
 <li>搜索图像的确定：跟踪时以上一帧目标位置为中心的搜索图像来计算响应得分图</li>
 <li>正负样本的确定：和目标距离不超过阈值</li>
 <li>在经过卷积神经层提取特征后，SiameseFC使用cross-correlation（交叉相关）作为相似度的度量，计算两个feature map各个位置（区域）上的相似度，得到一个score map（或者说heat map）。最后对这个score map进行插值（这里使用的是双三线性插值），获得和原图像一样的空间分辨率，根据该score map，即可定位到跟踪目标在新一帧（检测图像）中的精确位置。</li>
 <li><strong>训练数据：</strong>从视频的两个帧中提取图像，这两个帧都包含对象并且最多相隔T帧。训练时忽略目标的类别。在不破坏图像的纵横比的情况下对每个图像内的对象的比例进行归一化 。如果得分图中的元素距离中心半径在<img src="https://math.jianshu.com/math?formula=R" alt="R">（根据网络步长<img src="https://math.jianshu.com/math?formula=k" alt="k">决定）以内，就认为是正样本。</li>
 </ul>
-<p><img src="Siamese系列\SiamFC_training_pairs.png" alt=""></p>
+<p><img src="/.com//SiamFC_training_pairs.png" alt></p>
 <ul>
 <li><p>余弦惩罚：在获得score map之后，SiameseFC会在上面应用一个余弦窗，以对那些不正常的较大位移进行惩罚（余弦窗具有边缘抑制的作用，如果目标是一个正常的位移，那么检测热点应该是在heatmap的中心区域附近，如果检测热点跑到heatmap的边缘，则说明目标发生了瞬时的长位移，这很大可能是由检测错误导致的，因此该检测结果需要被抑制和惩罚）。</p>
 </li>
@@ -298,12 +311,12 @@
 <li><p>卷积：卷积以实现相似性度量</p>
 </li>
 </ul>
-<p><img src="Siamese系列/SiamFC_3.jpg" alt=""> </p>
-<p><img src="Siamese系列/SiamFC_2.jpg" alt="SiamFC_2"> </p>
+<p><img src="/.com//SiamFC_3.jpg" alt> </p>
+<p><img src="/.com//SiamFC_2.jpg" alt="SiamFC_2"> </p>
 <ul>
 <li>损失函数：每一个候选子窗口，其实相当于一个样本，而它的得分，输出的就是它是正/负样本的概率。使用逻辑回归来表示的话，这就是一个应用逻辑回归的典型二分类问题，对于得分矩阵中的每一个点u有：其中<em>v</em>是实际输出,<em>y</em>是真实标签{+1，-1}</li>
 </ul>
-<p><img src="Siamese系列/SiamFC_loss.png" alt="SiamFC_loss"></p>
+<p><img src="/.com//SiamFC_loss.png" alt="SiamFC_loss"></p>
 <ul>
 <li><p>定位目标区域/tracking：相似性矩阵，经双三次插值，变为255²矩阵，定位。</p>
 </li>
@@ -318,8 +331,8 @@
 </li>
 </ul>
 <hr>
-<p><br/></p>
-<h2 id="RPN"><a href="#RPN" class="headerlink" title="RPN"></a>RPN</h2><p>Region Proposal Network 区域推荐网络</p>
+<p><br></p>
+<h2><span id="rpn">RPN</span></h2><p>Region Proposal Network 区域推荐网络</p>
 <ul>
 <li><p>本质是 “ 基于滑窗的无类别obejct检测器 ”</p>
 </li>
@@ -331,14 +344,14 @@
 </li>
 <li>在特征的每个位置，考虑多个可能的候选窗口：窗口数=面积数×比例数，称为anchors。下图中3种面积×3种比例，每个位置9个anchors</li>
 </ul>
-<p><img src="Siamese系列\anchors.jpg" alt="anchors"></p>
+<p><img src="/.com//anchors.jpg" alt="anchors"></p>
 <ul>
 <li>计算每个像素（256-d）的k个尺度下的值，得到k个anchor，我们给每个anchor分配一个二进制的标签（前景背景），由其与GT重叠度决定。则标记后输出2×k纬度，表示每个位置有2k个cls（classification）分数；同时每个anchor又与GT对应四个偏移量[x, y, w, h]，代表中心点的坐标、框的宽高，则回归组reg（regression）为4k纬度</li>
 <li>anchor会很多，选取部分正、负anchor训练</li>
 </ul>
 <hr>
-<p><br/></p>
-<h2 id="SiamRPN"><a href="#SiamRPN" class="headerlink" title="SiamRPN"></a>SiamRPN</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fzp95/article/details/80982201">https://blog.csdn.net/fzp95/article/details/80982201</a></p>
+<p><br></p>
+<h2><span id="siamrpn">SiamRPN</span></h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fzp95/article/details/80982201">https://blog.csdn.net/fzp95/article/details/80982201</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a3786b61031c">https://www.jianshu.com/p/a3786b61031c</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/leviopku/article/details/81068487">https://blog.csdn.net/leviopku/article/details/81068487</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/leviopku/article/details/80875368">https://blog.csdn.net/leviopku/article/details/80875368</a></p>
@@ -352,7 +365,7 @@
 <li>anchor box：具有不同规格（大小，长宽比，本文有一种大小，五种长宽比[0.33,0.5,1,2,3]），锚点由卷积过程中卷积核中心确定，每个锚点对应数个锚点框（不同规格）。则检测问题由“哪里有物体”变为“锚点框是否框住物体，框住多少，离得多远”。</li>
 <li>如下图：RPN网络主要用于生成region proposals，首先生成一堆Anchor box，对其进行裁剪过滤后通过softmax判断anchors属于前景(foreground)或者后景(background)，即是物体or不是物体，所以这是一个二分类；同时，另一分支bounding box regression修正anchor box，形成较精确的proposal</li>
 </ul>
-<p><img src="Siamese系列/RPN.jpg" alt="RPN"></p>
+<p><img src="/.com//RPN.jpg" alt="RPN"></p>
 <ul>
 <li>分类组：在RPN的分类分支中，模板图像和检测图像的feature map，都将首先通过一个卷积层，该卷积层主要是对模板图像的feature map进行channel上的升维，令其维度变为检测图像的feature map的维度的2k倍（k为RPN中设定的anchor数）。此后，将模板图像的feature map在channel上按序等分为2k份，作为2k个卷积核，在检测图像的feature map完成卷积操作，得到一个维度为2k的score map。该score map同样在channel上按序等分为k份，得到对应k个anchor的k个维度为2的score map，两个维度分别对应anchor中前景（目标）和后景（背景）的分类分数，是关于目标的置信度。</li>
 <li>回归组： 在RPN的回归分支中，模板图像和检测图像的feature map，都将首先通过一个卷积层，该卷积层主要是对模板图像的feature map进行channel上的升维，令其维度变为检测图像的feature map的维度的4k倍（k为RPN中设定的anchor数）。此后，将模板图像的feature map在channel上按序等分为4k份，作为4k个卷积核，在检测图像的feature map完成卷积操作，得到一个维度为4k的score map。该score map同样在channel上按序等分为k份，得到对应k个anchor的k个维度为4的score map，四个维度分别对应anchor的（x,y,w,h），是关于目标的坐标及尺寸。</li>
@@ -364,23 +377,23 @@
 </ul>
 </li>
 </ul>
-<p><img src="Siamese系列/SiamRPN_net.png" alt=""></p>
+<p><img src="/.com//SiamRPN_net.png" alt></p>
 <ul>
 <li>不同于SiamFC，可对多个多个anchor box判断。</li>
 <li>RPN部分卷积：3×3进一步集中特征，然后多个/一个1×1提高通道数</li>
 <li>分类组：每个点表示正负得分，softmax分类（anchor box和真实目标重叠且IOU大于阈值）</li>
 <li>回归组：每个点表示anchor和ground truth之间的dx,dy,dw,dh（anchor相比于groundtruth的偏移量），通过smooth L1 loss:</li>
 </ul>
-<p><img src="Siamese系列\smooth loss.png" alt="smooth loss"></p>
+<p><img src="/.com//smooth loss.png" alt="smooth loss"></p>
 <ul>
 <li>tracking as one shot detection：对于一个类别，如果只提供一个或者少量训练样本的情况下，如何检测？解决方法就是：让模型学习，得到一个相似性函数，这样的模型输出的值不是类别，而是两幅图像的相似度。</li>
 <li>始终用第一帧当做模板帧，只需进行detection分支，提速。从分类组的奇数层（目标）中，选取最大的K的建议候选框，<strong>后经距离、余弦窗和尺度变化惩罚因子对proposal进行取舍和重新排序，NMS</strong>得到最佳位置。</li>
 <li>若无回归组，则与FC类似，得分图的叠加。</li>
 </ul>
-<p><img src="Siamese系列\SiamRPN_tracking.png" alt="SiamRPN_tracking"></p>
+<p><img src="/.com//SiamRPN_tracking.png" alt="SiamRPN_tracking"></p>
 <hr>
-<p><br/></p>
-<h2 id="DaSiamRPN"><a href="#DaSiamRPN" class="headerlink" title="DaSiamRPN"></a>DaSiamRPN</h2><p>Distractor-aware Siamese Networks for Visual Object Tracking 添加干扰的</p>
+<p><br></p>
+<h2><span id="dasiamrpn">DaSiamRPN</span></h2><p>Distractor-aware Siamese Networks for Visual Object Tracking 添加干扰的</p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/42546692">https://zhuanlan.zhihu.com/p/42546692</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fzp95/article/details/82380261">https://blog.csdn.net/fzp95/article/details/82380261</a></p>
 <ul>
@@ -391,8 +404,8 @@
 </ul>
 </li>
 </ul>
-<p><img src="Siamese系列\SiamRPN_shortcoming2.png" alt="SiamRPN_shortcoming2"></p>
-<p><img src="Siamese系列\SiamRPN_shortcoming1.png" alt="SiamRPN_shortcoming1"></p>
+<p><img src="/.com//SiamRPN_shortcoming2.png" alt="SiamRPN_shortcoming2"></p>
+<p><img src="/.com//SiamRPN_shortcoming1.png" alt="SiamRPN_shortcoming1"></p>
 <ul>
 <li>总结来说就是样本不均衡：<ul>
 <li>正样本种类不够多：添加检测图片数据集，进行数据增益（图片的变换）。增强分辨能力与回归准确性，增强泛化能力</li>
@@ -404,8 +417,8 @@
 <li>long-term跟踪：丢失时增大搜索区域</li>
 </ul>
 <hr>
-<p><br/></p>
-<h2 id="SiamRPN-1"><a href="#SiamRPN-1" class="headerlink" title="SiamRPN++"></a>SiamRPN++</h2><p> Evolution of Siamese Visual Tracking with Very Deep Networks</p>
+<p><br></p>
+<h2><span id="siamrpn">SiamRPN++</span></h2><p> Evolution of Siamese Visual Tracking with Very Deep Networks</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_36669549/article/details/85719585">https://blog.csdn.net/baidu_36669549/article/details/85719585</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56254712">https://zhuanlan.zhihu.com/p/56254712</a></p>
 <p><strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/zjc910997316/article/details/90749967?tdsourcetag=s_pctim_aiomsg">https://blog.csdn.net/zjc910997316/article/details/90749967?tdsourcetag=s_pctim_aiomsg</a></strong></p>
@@ -427,7 +440,7 @@
 <li>问题1：平移不变性之padding影响：边缘的patch会由于padding带来黑边，而靠近中心的patch则不会有。所以网络的预测本身是不满足全卷积性质的，也就是在边缘卷出来的和中心卷出来的内容是不一致的。这就可能导致训练过程中，网络倾向于通过padding的pattern来确定目标在哪，即padding少的位置接近中心，更可能是目标。因此如果一个神经网络使用了padding，且在用于训练的图像里，正样本（目标）都位于图像的中心，那么当该神经网络在检测图像上预测目标时，会由于训练样本中目标的分布特性，学习到对图像中心位置的预测偏好。不管目标移动到图像中的哪一处，网络都只会预测中心区域的位置。这也是利用ResNet加深网络后，跟踪性能不升反降的原因。SiamRPN++利用了padding会让网络学习到位置偏好这个特点，用正样本均匀分布在图像中各个位置的数据作为训练集，让网络对各个位置都学习到一定的偏好（相当于没有偏好），从而使网络的跟踪性能不会随着网络的加深而下降（若预测位置一直固定在一个地方，即相当于失去了跟踪能力）。</li>
 <li>解决1：采样的实现：训练的时候search region会移动，以前是以目标为中心crop 255的图片，现在是以目标周围的某个点为中心，让目标不再是search region的中心。这个只和训练有关，测试还是以上一帧目标位置为中心</li>
 </ul>
-<h3 id="深度交叉相关"><a href="#深度交叉相关" class="headerlink" title="深度交叉相关"></a>深度交叉相关</h3><ul>
+<h3><span id="深度交叉相关">深度交叉相关</span></h3><ul>
 <li>问题2：由于在SiamRPN的回归分支和分类分支上，都对模板图像的feature map进行了channel升维，导致模板图像的feature map的channel维度分别是检测图像的feature map的channel维度的2k倍和4k倍，因此，来自模板图像和检测图像的特征维度不对称（参数量不等），即两组特征并不是从相同的特征提取器中提取出来的，所以若将模板图像和检测图像互换再进行相关操作，必然会输出不同的结果，即失去操作的对称性。这种非对称性会给网络的训练优化带来困难，不利于训练的稳定性和网络的整体性能。</li>
 <li><p>解决2：depthwise cross-correlation 深度交叉相关。</p>
 <ul>
@@ -448,8 +461,8 @@
 </ul>
 </li>
 </ul>
-<p><img src="Siamese系列\SiamRPN++_correlation.png" alt=""></p>
-<p><img src="Siamese系列\SiamRPN++_RPN.png" alt="SiamRPN++_RPN"></p>
+<p><img src="/.com//SiamRPN++_correlation.png" alt></p>
+<p><img src="/.com//SiamRPN++_RPN.png" alt="SiamRPN++_RPN"></p>
 
         </div>
 

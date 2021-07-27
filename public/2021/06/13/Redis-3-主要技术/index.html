@@ -193,8 +193,18 @@
             <p>&nbsp;</p>
 <span id="more"></span>
 <!-- toc -->
+<ul>
+<li><a href="#1-基础事务">1. 基础事务</a></li>
+<li><a href="#2-事务回滚">2. 事务回滚</a></li>
+<li><a href="#3-监控事务">3. 监控事务</a></li>
+<li><a href="#4-流水线">4. 流水线</a></li>
+<li><a href="#5-发布订阅">5. 发布订阅</a></li>
+<li><a href="#6-超时命令">6. 超时命令</a></li>
+<li><a href="#7-使用lua">7. 使用Lua</a></li>
+</ul>
+<!-- tocstop -->
 <p>&nbsp;</p>
-<h1 id="1-基础事务"><a href="#1-基础事务" class="headerlink" title="1. 基础事务"></a>1. 基础事务</h1><p>不同于其他多数NoSQL，Redis提供事务功能，能够在并发情况下保证数据安全性。Redis的事务使用MULTI-EXEC命令组合，确保了事务隔离性、事务中方法序列化顺序执行、事务原子性。</p>
+<h1><span id="1-基础事务">1. 基础事务</span></h1><p>不同于其他多数NoSQL，Redis提供事务功能，能够在并发情况下保证数据安全性。Redis的事务使用MULTI-EXEC命令组合，确保了事务隔离性、事务中方法序列化顺序执行、事务原子性。</p>
 <p>在一个连接中，Redis使用事务会经过开启事务、命令入队列、执行事务三个阶段，故需要SessionCallback接口确保处于一个连接。</p>
 <p>Redis事务命令：</p>
 <div class="table-container">
@@ -239,36 +249,36 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">String value = (String) template.execute((RedisOperations ops)-&gt;&#123;</span><br><span class="line">    <span class="comment">// multi</span></span><br><span class="line">    ops.multi();</span><br><span class="line">    ops.boundValueOps(<span class="string">&quot;key1&quot;</span>).set(<span class="string">&quot;value1&quot;</span>);</span><br><span class="line">    String value1 = (String) ops.boundValueOps(<span class="string">&quot;key1&quot;</span>).get();</span><br><span class="line">    System.out.println(<span class="string">&quot;尚未执行，此时get为null：&quot;</span> + value1);</span><br><span class="line">    <span class="comment">// exec</span></span><br><span class="line">    List results = ops.exec();</span><br><span class="line">    System.out.println(results);</span><br><span class="line">    <span class="keyword">return</span> (String) template.opsForValue().get(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">System.out.println(value);</span><br></pre></td></tr></table></figure>
 <p>multi后，exec前，所有get返回都空。</p>
 <p>&nbsp;</p>
-<h1 id="2-事务回滚"><a href="#2-事务回滚" class="headerlink" title="2. 事务回滚"></a>2. 事务回滚</h1><p>事务中有命令格式正确而数据类型不符的情况时，如对String进行增加，其命令能正常入队，且执行时会报错，但前后的命令都会正常执行。</p>
+<h1><span id="2-事务回滚">2. 事务回滚</span></h1><p>事务中有命令格式正确而数据类型不符的情况时，如对String进行增加，其命令能正常入队，且执行时会报错，但前后的命令都会正常执行。</p>
 <p>若事务中有格式不正确的命令，则在输入（入队前）就会被检测到并报错，后续命令入队虽然显示正常，但exec时报错，事务回滚。</p>
 <p>简易的事务功能是为性能的让步。</p>
 <p>&nbsp;</p>
-<h1 id="3-监控事务"><a href="#3-监控事务" class="headerlink" title="3. 监控事务"></a>3. 监控事务</h1><p>先watch监控某些key，然后multi开启事务；exec时，先检测被监控key，其键值对是否发生了变化（从开始watch，到即将执行事务中命令改变它的值这段时间内，值是否被set），若未改变则正常执行；若被其他线程改变过则回滚事务。不论哪种情况，都会在最后取消监控。</p>
+<h1><span id="3-监控事务">3. 监控事务</span></h1><p>先watch监控某些key，然后multi开启事务；exec时，先检测被监控key，其键值对是否发生了变化（从开始watch，到即将执行事务中命令改变它的值这段时间内，值是否被set），若未改变则正常执行；若被其他线程改变过则回滚事务。不论哪种情况，都会在最后取消监控。</p>
 <p>Redis中的这种机制参考了多线程中的CAS（比较与交换），称为乐观锁，不做提前限制，仅运行前检测一下，若已被其他线程改变过就回滚。</p>
 <p>但只是“参考”，因为Redis不只是做了值检测，其他线程即使是set为原值，也算作发生了变化，故不会产生CAS造成的ABA问题：线程1令X=A，随后开始复杂运算；线程2趁1复杂运算，修改X=B，处理简单业务后改回X=A；线程1结束运算，检测X，发现是A，通过验证，提交事务。但是中途线程2对X的修改，可能造成线程1的运算错误，但这个错误并未被检测到，且被提交了。</p>
 <p>示例：</p>
 <p>线程1：<code>watch key1</code>，并开启线程</p>
-<p><img src="Redis-3-主要技术/watch1.png" alt="watch1"></p>
+<p><img src="/.com//watch1.png" alt="watch1"></p>
 <p>线程2：<code>set key1 value1</code> 修改为原值</p>
-<p><img src="Redis-3-主要技术/watch2.png" alt="watch2"></p>
+<p><img src="/.com//watch2.png" alt="watch2"></p>
 <p>线程1：<code>exec</code> 执行事务失败，回滚</p>
-<p><img src="Redis-3-主要技术/watch3.png" alt="watch3"></p>
+<p><img src="/.com//watch3.png" alt="watch3"></p>
 <p>&nbsp;</p>
-<h1 id="4-流水线"><a href="#4-流水线" class="headerlink" title="4. 流水线"></a>4. 流水线</h1><p>事务中能批量执行命令，速度快，但创建事务需要额外开销，如检测锁、序列化命令等。流水线pipelined（一种通信协议）专门用于批量执行命令，提高性能。同时，流水线也可解决因网络慢、Redis操作快导致的网络造成性能瓶颈。</p>
+<h1><span id="4-流水线">4. 流水线</span></h1><p>事务中能批量执行命令，速度快，但创建事务需要额外开销，如检测锁、序列化命令等。流水线pipelined（一种通信协议）专门用于批量执行命令，提高性能。同时，流水线也可解决因网络慢、Redis操作快导致的网络造成性能瓶颈。</p>
 <p>用Jedis操作性能最好，Spring中应使用Connection，性能略好于使用ops，但connection属于底层接口，使用Bytes。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Jedis (Java api)</span></span><br><span class="line">Jedis jedis = pool.getResource();</span><br><span class="line">Pipeline pipeline = jedis.pipelined();</span><br><span class="line">pipeline.set();</span><br><span class="line">pipeline.get();</span><br><span class="line">pipeline.sync();	<span class="comment">// 只同步</span></span><br><span class="line">List list = pipeline.syncAndReturnAll();	<span class="comment">// 同步且返回结果</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Spring </span></span><br><span class="line">List result = template.executePipelined((RedisConnection connection)-&gt;&#123;</span><br><span class="line">    <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    connection.openPipeline();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">        connection.set((<span class="string">&quot;key&quot;</span> + j).getBytes(), (<span class="string">&quot;value&quot;</span> + j).getBytes());</span><br><span class="line">        connection.get((<span class="string">&quot;key&quot;</span> + j).getBytes());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">    System.out.println(end - start);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//  System.out.println(result);</span></span><br><span class="line"></span><br><span class="line">result = template.executePipelined((RedisOperations ops)-&gt;&#123;</span><br><span class="line">    <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">        ops.opsForValue().set(<span class="string">&quot;keyOps&quot;</span> + j, <span class="string">&quot;valueOps&quot;</span> + j);</span><br><span class="line">        ops.opsForValue().get(<span class="string">&quot;keyOps&quot;</span> + j);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">    System.out.println(end - start);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//	System.out.println(result);</span></span><br></pre></td></tr></table></figure>
 <p>结果若要完整获取，可能数据量过大，占用过多内存，甚至JVM溢出。</p>
 <p>&nbsp;</p>
-<h1 id="5-发布订阅"><a href="#5-发布订阅" class="headerlink" title="5. 发布订阅"></a>5. 发布订阅</h1><p>系统发布信息，并将信息发送给通过各渠道订阅过的用户。如银行卡付费，会收到短信通知。</p>
-<p><img src="Redis-3-主要技术/发布订阅机制.png" alt="发布订阅机制"></p>
+<h1><span id="5-发布订阅">5. 发布订阅</span></h1><p>系统发布信息，并将信息发送给通过各渠道订阅过的用户。如银行卡付费，会收到短信通知。</p>
+<p><img src="/.com//发布订阅机制.png" alt="发布订阅机制"></p>
 <p>Redis中，使用<code>subscribe</code>命令，以当前窗口为客户端，订阅指定的消息渠道；使用<code>publish</code>命令发布消息。</p>
 <p>客户端订阅<code>channel1</code>渠道：</p>
-<p><img src="Redis-3-主要技术/redis-subscribe.png" alt="redis-subscribe"></p>
+<p><img src="/.com//redis-subscribe.png" alt="redis-subscribe"></p>
 <p>客户端2向<code>channel</code>渠道发布消息：</p>
-<p><img src="Redis-3-主要技术/redis-publish.png" alt="redis-publish"></p>
+<p><img src="/.com//redis-publish.png" alt="redis-publish"></p>
 <p>客户端1收到来自订阅的渠道的消息：</p>
-<p><img src="Redis-3-主要技术/redis-subscribe-getmsg.png" alt="redis-subscribe-getmsg"></p>
+<p><img src="/.com//redis-subscribe-getmsg.png" alt="redis-subscribe-getmsg"></p>
 <p>&nbsp;</p>
 <p>在Spring中，订阅者类需要实现<code>MessageListener</code>接口，实现<code>onMessage</code>方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisMessageListener</span> <span class="keyword">implements</span> <span class="title">MessageListener</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> RedisTemplate template;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTemplate</span><span class="params">(RedisTemplate template)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.template = template;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RedisTemplate <span class="title">getTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(Message message, <span class="keyword">byte</span>[] bytes)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取消息</span></span><br><span class="line">        <span class="keyword">byte</span>[] body = message.getBody();</span><br><span class="line">        <span class="comment">// 值序列器转化</span></span><br><span class="line">        String msgBody = (String) template.getValueSerializer().deserialize(body);</span><br><span class="line">        System.out.println(msgBody);</span><br><span class="line">        <span class="comment">// 获取channel</span></span><br><span class="line">        <span class="keyword">byte</span>[] channel = message.getChannel();</span><br><span class="line">        <span class="comment">// 字符串序列化器转换</span></span><br><span class="line">        String channelString = (String) template.getStringSerializer().deserialize(channel);</span><br><span class="line">        System.out.println(channelString);</span><br><span class="line">        <span class="comment">// 渠道名称转换</span></span><br><span class="line">        String byteString = <span class="keyword">new</span> String(bytes);</span><br><span class="line">        System.out.println(byteString);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -278,7 +288,7 @@
 <p>测试代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String channel = <span class="string">&quot;chatChannel&quot;</span>;</span><br><span class="line">template.convertAndSend(channel, <span class="string">&quot;msg!&quot;</span>);</span><br></pre></td></tr></table></figure>
 <p>&nbsp;</p>
-<h1 id="6-超时命令"><a href="#6-超时命令" class="headerlink" title="6. 超时命令"></a>6. 超时命令</h1><p>Redis也是基于内存运行的数据集合，也存在内存垃圾回收和管理问题与机制。</p>
+<h1><span id="6-超时命令">6. 超时命令</span></h1><p>Redis也是基于内存运行的数据集合，也存在内存垃圾回收和管理问题与机制。</p>
 <p>可以通过del命令手动删除一些数据，内存快满的时候也会自动触发回收机制，但回收会引发系统停顿，故应主动选择适当时机进行回收。</p>
 <p>Redis可以给键值对设置超时，以配合垃圾回收（毕竟回收时更需要回收超时的数据）。</p>
 <div class="table-container">
@@ -339,7 +349,7 @@
 </ul>
 <p>定时回收能完全回收所有超时键值对，清理彻底，但遇到大数据可能造成停顿，需要设计者在没有业务时触发定时回收。惰性回收能够指定键值对回收，但要一个莫名其妙的get，甚至有时我们也不知道哪些键值对已经超时。</p>
 <p>&nbsp;</p>
-<h1 id="7-使用Lua"><a href="#7-使用Lua" class="headerlink" title="7. 使用Lua"></a>7. 使用Lua</h1><p>暂不展开。</p>
+<h1><span id="7-使用lua">7. 使用Lua</span></h1><p>暂不展开。</p>
 <p>见《Java EE互联网轻量级框架整合开发 SSM框架和Redis实现》第19章末尾一节。</p>
 <p>&nbsp;</p>
 
@@ -364,8 +374,6 @@
             </div>
         </section>
         <section class="post-nav">
-            
-                <a class="prev" rel="prev" href="/2021/07/26/hello-world/">Hello World</a>
             
             
             <a class="next" rel="next" href="/2021/06/11/Redis-2-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Redis_2.数据结构与常用命令</a>

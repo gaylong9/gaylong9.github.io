@@ -193,10 +193,24 @@
             <p>&nbsp;</p>
 <span id="more"></span>
 <!-- toc -->
+<ul>
+<li><a href="#mybatis核心组件">MyBatis核心组件</a><ul>
+<li><a href="#1-持久层概念与mybatis特点">1. 持久层概念与MyBatis特点</a></li>
+<li><a href="#2-核心组件">2. 核心组件</a></li>
+<li><a href="#3-sqlsessionfactory-工厂接口">3. SqlSessionFactory 工厂接口</a></li>
+<li><a href="#4-sqlsession">4. SqlSession</a></li>
+<li><a href="#5-mapper-映射器">5. Mapper 映射器</a></li>
+<li><a href="#6-两种发送sql方式">6. 两种发送SQL方式</a></li>
+<li><a href="#7-生命周期">7. 生命周期</a></li>
+<li><a href="#8-实例">8. 实例</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
 <p>&nbsp;</p>
 <p>[toc]</p>
-<h1 id="MyBatis核心组件"><a href="#MyBatis核心组件" class="headerlink" title="MyBatis核心组件"></a>MyBatis核心组件</h1><p><a target="_blank" rel="noopener" href="https://github.com/mybatis/mybatis-3">github</a></p>
-<h2 id="1-持久层概念与MyBatis特点"><a href="#1-持久层概念与MyBatis特点" class="headerlink" title="1. 持久层概念与MyBatis特点"></a>1. 持久层概念与MyBatis特点</h2><ol>
+<h1><span id="mybatis核心组件">MyBatis核心组件</span></h1><p><a target="_blank" rel="noopener" href="https://github.com/mybatis/mybatis-3">github</a></p>
+<h2><span id="1-持久层概念与mybatis特点">1. 持久层概念与MyBatis特点</span></h2><ol>
 <li>持久层：将业务数据存到磁盘，具有长期存储能力。一般执行持久任务的都是数据库系统。磁盘空间大且廉价，但速度慢。对于高并发任务可加入Redis等NoSQL。</li>
 <li>MyBatis：Java Web应用可以通过本框架访问数据库。</li>
 <li>MyBatis优点：<ol>
@@ -207,7 +221,7 @@
 </li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="2-核心组件"><a href="#2-核心组件" class="headerlink" title="2. 核心组件"></a>2. 核心组件</h2><p>共有4个核心组件：</p>
+<h2><span id="2-核心组件">2. 核心组件</span></h2><p>共有4个核心组件：</p>
 <ol>
 <li>SqlSessionFactoryBuilder：构造器，根据配置或代码生成SqlSessionFactory，采用的是分步构建的Builder模式（在Java设计模式中有介绍）</li>
 <li>SqlSessionFactory：工厂接口，负责生成SqlSession，使用工厂模式</li>
@@ -216,7 +230,7 @@
 <li>注：SQL Mapper只是对SqlSession的改进，二者都能发送SQL给数据库执行</li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="3-SqlSessionFactory-工厂接口"><a href="#3-SqlSessionFactory-工厂接口" class="headerlink" title="3. SqlSessionFactory 工厂接口"></a>3. SqlSessionFactory 工厂接口</h2><p>要使用MyBatis，首先要用配置或代码生成SqlSessionFactory，用SqlSessionFactoryBuilder完成。它提供了类org.apache.ibatis.session.Configuration作为引导，Builder模式，分步创建过程就在Configuration中完成。即SqlSessionFactoryBuilder和Configuration共同生成工厂接口。</p>
+<h2><span id="3-sqlsessionfactory-工厂接口">3. SqlSessionFactory 工厂接口</span></h2><p>要使用MyBatis，首先要用配置或代码生成SqlSessionFactory，用SqlSessionFactoryBuilder完成。它提供了类org.apache.ibatis.session.Configuration作为引导，Builder模式，分步创建过程就在Configuration中完成。即SqlSessionFactoryBuilder和Configuration共同生成工厂接口。</p>
 <p>虽然代码和xml配置均可生成工厂接口，但xml配置后修改起来更方便。配置完成后，MyBatis读取配置文件，通过Configuration对象构建MyBatis的上下文。</p>
 <p>本接口有两个实现类：SqlSessionManager和DefaultSqlSessionFactory。通常由后者实现，前者适用于多线程。</p>
 <p>每个MyBatis应用都以一个SqlSessionFactory的实例为中心，其唯一作用就是生产MyBatis的核心接口对象SqlSession。因其作用唯一，故常用单例模式。</p>
@@ -237,13 +251,13 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据库连接池信息</span></span><br><span class="line">PooledDataSource dataSource = <span class="keyword">new</span> PooledDataSource();</span><br><span class="line">dataSource.setDriver(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line">dataSource.setUsername(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">dataSource.setPassword(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">dataSource.setUrl(<span class="string">&quot;jdbc:mysql://localhost:3306/ssm&quot;</span>);</span><br><span class="line">dataSource.setDefaultAutoCommit(<span class="keyword">false</span>);</span><br><span class="line"><span class="comment">// MyBatis的JDBC事务方式</span></span><br><span class="line">TransactionFactory transfactory = <span class="keyword">new</span> JdbcTransactionFactory();</span><br><span class="line">Environment environment = <span class="keyword">new</span> Environment(<span class="string">&quot;development&quot;</span>, transfactory, dataSource);</span><br><span class="line"><span class="comment">// 创建Configuration对象</span></span><br><span class="line">Configuration conf = <span class="keyword">new</span> Configuration(environment);</span><br><span class="line"><span class="comment">// 注册MyBatis上下文别名</span></span><br><span class="line">conf.getTypeAliasRegistry().registerAlias(<span class="string">&quot;role&quot;</span>, Role.class);</span><br><span class="line"><span class="comment">// 加入一个映射器</span></span><br><span class="line">conf.addMapper(RoleMapper.class);</span><br><span class="line"><span class="comment">// 使用Builder构建工厂接口</span></span><br><span class="line">SqlSessionFactory factory = <span class="keyword">new</span> <span class="keyword">new</span> SqlSessionFactoryBuilder().build(conf);</span><br><span class="line"><span class="keyword">return</span> factory;</span><br></pre></td></tr></table></figure>
 <p>如果系统修改，需要重新编译代码，本方式并不好。除非有特殊需要，如在配置文件中，需要配置加密过的用户名和密码，需要在生成工厂接口时先解密，才考虑代码构建。</p>
 <p>&nbsp;</p>
-<h2 id="4-SqlSession"><a href="#4-SqlSession" class="headerlink" title="4. SqlSession"></a>4. SqlSession</h2><p>MyBatis中SqlSession是核心接口，有两个实现类，DefaultSqlSession和SqlSessionManager。前者单线程，后者多线程。本接口类似JDBC中的Connection对象，代表一个连接资源的启用。</p>
+<h2><span id="4-sqlsession">4. SqlSession</span></h2><p>MyBatis中SqlSession是核心接口，有两个实现类，DefaultSqlSession和SqlSessionManager。前者单线程，后者多线程。本接口类似JDBC中的Connection对象，代表一个连接资源的启用。</p>
 <p>作用：获取Mapper接口、发送SQL给数据库、控制数据库事务。</p>
 <p>创建：<code>SqlSession sqlSession = sqlSessionFactory.openSession();</code></p>
 <p>用SqlSession控制数据库事务：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SqlSession sqlSession = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">    <span class="comment">// 增删改查</span></span><br><span class="line">    sqlSession.commit();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    sqlSession.rollback();</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (sqlSession != <span class="keyword">null</span>) &#123;</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>&nbsp;</p>
-<h2 id="5-Mapper-映射器"><a href="#5-Mapper-映射器" class="headerlink" title="5. Mapper 映射器"></a>5. Mapper 映射器</h2><p>是MyBatis中最重要、最复杂的组件，由一个接口和对应的XML/注解组成，可用于：描述映射规则；提供SQL语句，并可配置SQL参数类型、返回类型、缓存刷新等；配置缓存；提供动态SQL。</p>
+<h2><span id="5-mapper-映射器">5. Mapper 映射器</span></h2><p>是MyBatis中最重要、最复杂的组件，由一个接口和对应的XML/注解组成，可用于：描述映射规则；提供SQL语句，并可配置SQL参数类型、返回类型、缓存刷新等；配置缓存；提供动态SQL。</p>
 <p>映射器只需接口，不用实现类。MyBatis采用动态代理技术，会为接口生成一个代理对象，故仅接口也能运行。</p>
 <p>使用映射器前首先需要一个POJO，用于映射查询结果。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Role</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> string roleName;</span><br><span class="line">    <span class="comment">// setter getter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -263,7 +277,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">RoleMapper</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Select(&quot;select id, role_name as roleName from t_role where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Role <span class="title">getRole</span><span class="params">(Long id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果两种方式同时实现，则XML优先级更高。但推荐XML方式。</p>
 <p>&nbsp;</p>
-<h2 id="6-两种发送SQL方式"><a href="#6-两种发送SQL方式" class="headerlink" title="6. 两种发送SQL方式"></a>6. 两种发送SQL方式</h2><ol>
+<h2><span id="6-两种发送sql方式">6. 两种发送SQL方式</span></h2><ol>
 <li><p>用SqlSession发送SQL <code>Role role = (Role) sqlSession.selectOne(&quot;xxx.RoleMapper.getRole&quot;, 1L)</code>，这是iBatis时代留下的方式</p>
 </li>
 <li><p>用Mapper接口发送SQL </p>
@@ -274,14 +288,14 @@
 <li>后一个方式更佳</li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="7-生命周期"><a href="#7-生命周期" class="headerlink" title="7. 生命周期"></a>7. 生命周期</h2><ol>
+<h2><span id="7-生命周期">7. 生命周期</span></h2><ol>
 <li>SqlSessionFactoryBuilder：用于创建SqlSessionFactory，故创建成功后就应删除</li>
 <li>SqlSessionFactory：可看作数据库连接池，用于生成SqlSession，故应和MyBatis同样周期。同时为了避免过度消耗数据库连接资源，通常使用单例模式</li>
 <li>SqlSession：相当于一个数据库连接，故应存活在一次业务请求中，处理结束后应关闭</li>
 <li>Mapper：由SqlSession创建的接口，故最多和SqlSession一致，请求结束后就销毁</li>
 </ol>
 <p>&nbsp;</p>
-<h2 id="8-实例"><a href="#8-实例" class="headerlink" title="8. 实例"></a>8. 实例</h2><ol>
+<h2><span id="8-实例">8. 实例</span></h2><ol>
 <li><p>需要的文件：</p>
 <ol>
 <li>Book.java POJO<ol>
