@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>毕设总结 | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <!-- src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"> -->
+        
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">毕设总结</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 22, 2021&nbsp;&nbsp;17:18:51</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>&nbsp;</p>
+<span id="more"></span>
+<!-- toc -->
+<p>&nbsp;</p>
+<h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><ol>
+<li>没有Boolean类型，默认用tinyint(1)替代，故SQL中要用数字1，不用true、false</li>
+<li>MySQL建模，建立关系relationship，<code>识别关系</code>是指一对多时，对于n方必须有一个1方存在，<code>非识别关系</code>则反之，n方可以独立存在</li>
+<li>MySQL建模，建立关系，如1:n，先点击n方，再点击1方</li>
+<li><code>insert into</code> 主键重复会报错；<code>replace into</code>冲突会更新；<code>insert ignore</code> 冲突会忽略新数据</li>
+<li>MYSQL中触发器中不能对本表进行 insert ,update ,delete 操作，以免递归循环触发，对于update 只能用set 进行操作，insert与delete只能借助第二张表才能实现</li>
+</ol>
+<p>&nbsp;</p>
+<h1 id="配置问题"><a href="#配置问题" class="headerlink" title="配置问题"></a>配置问题</h1><ol>
+<li><p>本项目共四个配置文件：</p>
+<ol>
+<li>web.xml是Tomcat服务器的配置文件，其中设置了服务器的设置项，和DispatcherServlet，指明由Spring MVC的DispatcherServlet类担任</li>
+<li>dispatcher-servlet.xml是配合上述DispatcherServlet设置的设置文件，在此可对其进行更详细的设置，如开启注解驱动、声明拦截器、静态资源交由Spring MVC处理、扫描包、视图解析器等</li>
+<li>applicationContext.xml是Spring的配置文件，由于使用Spring-MyBatis项目连接两个框架，故在此设置了数据库相关配置，如数据源、SqlSessionFactory、Mapper扫描、事务管理器、声明式事务注解驱动等</li>
+<li>resources中的mybatis-config.xml就是普通的mybatis配置文件，注意顺序即可，不过此处可以开启SQL打印</li>
+</ol>
+</li>
+<li><p>本项目中mapper文件均放在了src-java下。但IDEA不会自动编译src-java下的xml文件，故会导致找不到mapper文件。解决：maven的pom.xml中，根节点内添加以下代码，表示将xml文件一并编译：（将mapper.xml放在resources会一同编译但mybatis配置文件中如何书写mapper设置？）    </p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>报错<code>java.lang.ClassNotFoundException:org.springframework.web.context.ContextLoaderListener</code>：file-project structure-artifacts，右侧包全部加入WEB-INF/lib下。且新引入包后也应如此操作</p>
+</li>
+<li><p>web.xml报错<code>Servlet should have a mapping</code>：Project Structure界面，Modules&gt;Web&gt;Deployment descriptor，修改正确的位置即可，如果是正确位置则重新再选择一次</p>
+</li>
+<li><p>图片等静态资源获取/加载失败，F12观察到对静态资源的获取返回404：DispatcherServlet对“/”拦截，即所有请求都会被其拦截，Controller有标注的请求会被处理，但静态资源的访问Controller中没有，故404。有两个解决方法，使用默认Servlet处理静态资源访问或使用Spring MVC处理静态资源访问。在Java配置实现时，两方法并未生效（当然大概率是配置错了），故改回xml配置。两种方法均需在web(app)下建立img、css、js包，因WEB-INF下无法直接访问，也就不能访问形式引入资源 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangcaihua/p/12829083.html">参考</a>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/shixin_li/article/details/80576753">参考</a></p>
+<ol>
+<li><p>前者方法只需在dispatcher-servlet.xml中设置<code>&lt;mvc:default-servlet-handler/&gt;</code>，随后在web.xml中给default Servlet配置mapping的pattern<code>&lt;url-pattern&gt;*.jpg&lt;/url-pattern&gt;</code>即可。前者设置简单，但由于要由Spring交还给Servlet，略微影响应能（默认servlet handler或会影响其他部件，不建议用此法）</p>
+</li>
+<li><p>后者要在dispatcher-servlet.xml中配置<code>&lt;mvc:resources mapping=&quot;/img/**&quot; location=&quot;/img/&quot;/&gt;</code>，此配置中mapping表示/img开头的所有请求，location表示img包下的所有文件</p>
+</li>
+<li><p>另有说resources文件夹下的资源文件可以正常获取，但未尝试</p>
+</li>
+</ol>
+</li>
+<li><p>refactor，如重命名已有类，IDEA不会删除原有已编译完的class文件，需要打开out文件夹，手动删除</p>
+</li>
+<li><p>MyBatis打印SQL以调试：在mybatis-config.xml中加入。另需注意，mybatis-config.xml配置项顺序有规定</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;logImpl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;STDOUT_LOGGING&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Spring设置post中文乱码：web.xml设置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置SpringMVC设置编码方式的过滤器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>utf-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>forceRequestEncoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>forceResponseEncoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sql配置的url中加入<code>&amp;allowMultiQueries=true</code>即可在mybatis中写多个sql</p>
+</li>
+<li><p>404捕获：web容器自带（web.xml中配置<code>&lt;error-page&gt;</code>），另也可使用spring Controller实现（具有精度优先匹配，可建立一个接受所有请求的Controller，则未被正常Controller接受的请求就会被它接受，即代表404，不过此法灵活性不高）<a target="_blank" rel="noopener" href="https://blog.csdn.net/qing_mei_xiu/article/details/52574462?utm_source=blogkpcl8">参考</a></p>
+</li>
+<li><p>war exploded包和war包的区别：</p>
+<ol>
+<li>war exploded：是开发中使用的形式，将WEB工程以当前文件夹的位置关系上传到服务器，直接把文件夹、jsp页面 、classes等等移到Tomcat 部署文件夹里面，进行加载部署。因此这种方式支持热部署，一般在开发的时候也是用这种方式。绝对路径（部署位置）是项目代码内target文件夹的路径</li>
+<li>war：是发布模式，先打包war，再发布。将WEB工程以包的形式上传到服务器。绝对路径（部署位置）是tomcat/webapps下的路径</li>
+</ol>
+</li>
+<li><p>IDEA打包war包：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/developer_chan/p/8280865.html">参考</a></p>
+<ol>
+<li>Project Structure-Artifacts-“+”-Web Application:Archive-Empty/for‘xxx war exploded’</li>
+<li>若是选择for已有war exploded，要删除自动生成的WEB-INF包，然后create Manifest在webapp下（不同IDEA版本显示不同，有的是web，不过总之是和WEB-INF同级）</li>
+<li>将Available Elements中的项目名包，右键“Put Into Output Root”，此时war包目录结构下应有META-INF（manifest），WEB-INF（classes、lib、web.xml）</li>
+<li>apply后，build project，build Artifacts中的war，至此war打包完毕，生成路径在1中指定，默认在代码out包中</li>
+</ol>
+</li>
+<li><p>Tomcat运行war包：将war包放在Tomcat的webapps下，然后运行bin-startup.bat，会自动解包并启动服务。待服务器启动后，即可输入localhost:8080/war包名 访问。此时进入webapps下，也能看到解压后的项目文件夹。</p>
+</li>
+<li><p>MySQL备份：自带mysqldump工具，具体使用方法网上查阅，<a target="_blank" rel="noopener" href="https://blog.csdn.net/helloxiaozhe/article/details/77680255">参考1</a>，<a target="_blank" rel="noopener" href="https://www.cnblogs.com/markLogZhu/p/11398028.html">参考2</a></p>
+<ol>
+<li>备份一个数据库，如毕设所用的college_job <code>mysqldump -uroot -p --databases college_job &gt; D://college_job.sql</code></li>
+<li>还原 <code>mysql -uroot -p &lt; D://college_job.sql</code></li>
+</ol>
+</li>
+</ol>
+<p>&nbsp;</p>
+<h1 id="SSM配置"><a href="#SSM配置" class="headerlink" title="SSM配置"></a>SSM配置</h1><p>（1）web.xml是Tomcat服务器所用的配置文件。在此配置了欢迎页属性welcome-file-list，指定登陆页面文件作为欢迎页，如此便可在输入地址时只输入到项目名称，就可显示登陆页面，无需在地址中后缀特别的字段以表示要访问登陆页面。</p>
+<p>（2）web.xml中设置了一个作用于所有请求的过滤器filter，它采用Spring MVC框架中的CharacterEncodingFilter类作为过滤器类，能将请求的编码方式过滤，改为支持中文的编码方式。在此设置之后，所有页面就无需设置，简单方便。</p>
+<p>（3）web.xml中设置了错误页面error-page，404页面就是在此设置，为404错误绑定了专属页面。当发生404错误时，就会以该页面返回显示。</p>
+<p>（4）web.xml中设置了最重要的Servlet——DispatcherServlet，使用的是Spring MVC中的DispatcherServlet类，作用于所有请求。如此便可实现所有请求首先由该类捕获，然后分发给对应的控制器处理。</p>
+<p>（5）dispatcher-servlet.xml是配合上述DispatcherServlet的一个配置文件，其中对DispatcherServlet进行了更详细的配置。在此指明了本系统Spring框架开启注解驱动，如此，在代码中就可以使用注解方便地进行设置。</p>
+<p>（6）dispatcher-servlet.xml中配置了拦截器interceptors，其作用是声明拦截器类，和类要拦截的请求。本系统用此方法实现了权限分隔。在用户使用系统时，每次发起新的请求，被控制器捕获前都会先经过拦截器处理，判断当前用户是否有权限进行接下来的操作。若当前会话内尚无登陆用户信息，就跳转到登陆页面；若当前用户并无进行操作的权限，就跳转至该用户主页，不进行接下来的操作；若用户拥有权限，操作与用户身份匹配，就正常进行后续操作。</p>
+<p>（7）dispatcher-servlet.xml中配置使用Spring MVC处理静态资源访问。如CSS、JavaScript、图片等静态资源，都是单独开启一次访问请求获取，但所有请求已被DispatcherServlet和控制器获取，并无针对静态资源的方法。这就会导致静态资源的获取404。配置resources，指定URL与后端静态资源文件存放路径，就可使针对这些静态资源的访问改由Spring MVC处理，便能正常返回给前端。</p>
+<p>（8）dispatcher-servlet.xml中配置视图解析器Bean，使用Spring MVC的InternalResourceViewResolver类。配置项中的前缀可用于指定页面所在包，后缀可指定页面文件格式。配置后即可实现在控制器中指定视图时，直接写出视图文件名即可，系统会自动加上配置过的前后缀寻找到视图文件绑定数据并返回。</p>
+<p>（9）applicationContext.xml是Spring框架所需的配置文件，本系统使用Spring-MyBatis项目作为Spring与MyBatis的桥梁，使MyBatis能在Spring环境下运行。在此配置文件中指明了数据库相关的设置，如数据源、事务管理器、声明注解驱动等。</p>
+<p>（10）applicationContext.xml中设置数据源URL时，本系统开启了allowMultiQueries，声明MyBatis和MySQL支持一个方法执行多条SQL语句。</p>
+<p>&nbsp;</p>
+<h1 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h1><ol>
+<li><p>页面中图片写法：<code>&lt;img src=&quot;&lt;%=request.getContextPath()%&gt;/img/login_bg.jpg&quot;/&gt;</code> 若用“../../img/xxx.jpg”，则请求实际为<code>http://localhost:8080/img/login_bg.jpg</code>，没有项目名</p>
+</li>
+<li><p>多个JSP有包含include时，对主页面设置css即可，其中包含子页面的元素设置</p>
+</li>
+<li><p>即使是被包含的jsp，也应加入<code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;</code></p>
+</li>
+<li><p>webjars，使用jQuery时遇到，本项目中xml静态资源配置为</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--&lt;mvc:resources mapping=&quot;/webjars/**&quot; location=&quot;classpath:/META-INF/resources/webjars/&quot;/&gt;--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">mapping</span>=<span class="string">&quot;/webjars/**&quot;</span> <span class="attr">location</span>=<span class="string">&quot;/webjars/&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p> jsp引用为 <code>&lt;script src=&quot;&lt;%=request.getContextPath()%&gt;/webjars/jquery/3.6.0/dist/jquery.js&quot;&gt;&lt;/script&gt;</code></p>
+</li>
+<li><blockquote>
+<p>在使用form表单的时候,一旦点击提交触发submit事件，一般会使得页面跳转，页面间的跳转等行为的控制权往往在后端，后端会控制页面的跳转及数据传递，但是在某些时候不希望页面跳转，或者说想要将控制权放在前端，通过js来操作页面的跳转或者数据变化。一般这种异步的操作，我们都会想到ajax方式，因此在实现了功能后就整理了这篇文章，通过ajax方法实现form表单的提交并进行后续的异步操作。<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Renyi-Fan/p/9327008.html">参考</a></p>
+</blockquote>
+<p> form表单域ajax的post本身就是有所区别，对于页面的影响一个依赖后端、一个依赖前端。ajax中post后后端返回数据会被success函数接收，一般用于写入局部页面，以实现不刷新整个页面也能改变局部的效果。此外success的设置<a target="_blank" rel="noopener" href="https://www.runoob.com/jquery/ajax-post.html">参考</a></p>
+</li>
+<li><p>Controller的参数中也可加入HttpServletRequest，自动传入，可用其进行Servlet API的操作。只是spring中不推荐使用。</p>
+</li>
+<li><p>清除session的attribute：参数<code>SessionStatus sessionStatus, WebRequest request</code>，并</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sessionStatus.setComplete();</span><br><span class="line">request.removeAttribute(<span class="string">&quot;user&quot;</span>, WebRequest.SCOPE_SESSION);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTML 5中的input date类型，以<code>-</code>分隔，而Spring MVC动态绑定注入参数需要<code>/</code>分隔，故需格式化器，在POJO的属性上<code>@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</code>，或在Controller的参数中对Date类型参数声明此注解<code>@DateTimeFormat(iso=ISO.DATE)</code></p>
+</li>
+<li><p>HTML的input date，格式是yyyy-MM-dd；传入后台若要获取需要util.Date，不能用sql.Date <a target="_blank" rel="noopener" href="https://blog.csdn.net/c17315377559/article/details/89601363">参考说明</a></p>
+</li>
+<li><p>Java中util.Date不能直接sql插入库中，需要转为sql.Date，但若使用过<code>@DateTimeFormat</code>转换也可用在sql</p>
+</li>
+<li><p>js Date，表示月份的参数介于0到11之间。也就是说，如果希望把月设置为8月，则参数应该是7</p>
+</li>
+<li><p>jQuery，select-option（下拉选择），要拿到选中的option的值，直接<code>$(&quot;#select-id&quot;).val()</code>即可，得到的是option的value属性的值</p>
+</li>
+<li><p>jquery中属性选择器若要使用变量选择时 <code>$(&quot;input[id=&#39;&quot; + applyId + &quot;&#39;]&quot;)</code></p>
+</li>
+<li><p>jQuery post上传，data如要JSON则<code>JSON.stringify(param)</code>且指定<code>contentType: &quot;application/json&quot;</code>，如传简单参数只需<code>data: &#123;applyId: applyId&#125;</code>，甚至此处可加入多个参数，和普通post一样能被Controller接收</p>
+</li>
+<li><p>jQuery post回传，dataType指定回传内容格式，如<code>“json”</code>，此时后台要使用<code>new ModelAndView(new MappingJackson2JsonView());</code>，并如<code>mv.addObject(&quot;res&quot;, res)</code>为回传的json添加参数，前端拿到后在success的函数中<code>(data)&#123;data.res&#125;</code>即可访问</p>
+</li>
+<li><p>MyBatis映射器中，<code>&lt;</code> <code>&amp;</code>会被识别为xml文件的标识，故需要转义，另外 &gt; ` “  虽不非法但也应转义书写</p>
+<p>| 1实体引用 | 符号 |<br>| :———-: | :—: |<br>|   \&lt;   |  &lt;   |<br>|   \&gt;   |  &gt;   |<br>|  \&amp;   |  &amp;   |<br>| \&amp; apos;  |  ‘   |<br>| \&amp; quot;  |  “   |</p>
+</li>
+<li><p>MyBatis-动态SQL-foreach-collection属性：若方法仅传入一个列表，则不论参数名字，此属性填入<code>list</code>；若仅传入一个数组，则不论参数名字，此属性填入<code>array</code>；若列表/数组被装进map，则填入key，不需<code>#&#123;&#125;</code>包围。<a target="_blank" rel="noopener" href="https://www.cnblogs.com/fangyu19900812/p/6046209.html">参考</a></p>
+</li>
+<li><p>EL表达式访问对象属性时（SSM中其他类似用法同样），是调用<code>getXxx()</code>方法，故不一定需要对象有该属性，在getter中通过现有属性推出也可</p>
+</li>
+<li><p>form onsubmit属性值务必前缀return，即<code>onsubmit=&quot;return func()&quot;</code>，否则函数执行但仍会提交</p>
+</li>
+</ol>
+<p>&nbsp;</p>
+<h1 id="Tricks"><a href="#Tricks" class="headerlink" title="Tricks"></a>Tricks</h1><ol>
+<li>table背景黑，td背景白，则可实现网格划分</li>
+<li>form要附带其他信息一并请求，可用input，css中设置display为none</li>
+</ol>
+<p>&nbsp;</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%90%8E%E7%AB%AF/"># 后端</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/06/03/ML%E6%A6%82%E8%BF%B0/">ML概述</a>
+            
+            
+            <a class="next" rel="next" href="/2021/04/11/Log4J/">Log4J</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

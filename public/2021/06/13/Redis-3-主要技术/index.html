@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>Redis_3.主要技术 | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Redis_3.主要技术</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 13, 2021&nbsp;&nbsp;16:21:31</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>&nbsp;</p>
+<span id="more"></span>
+<!-- toc -->
+<p>&nbsp;</p>
+<h1 id="1-基础事务"><a href="#1-基础事务" class="headerlink" title="1. 基础事务"></a>1. 基础事务</h1><p>不同于其他多数NoSQL，Redis提供事务功能，能够在并发情况下保证数据安全性。Redis的事务使用MULTI-EXEC命令组合，确保了事务隔离性、事务中方法序列化顺序执行、事务原子性。</p>
+<p>在一个连接中，Redis使用事务会经过开启事务、命令入队列、执行事务三个阶段，故需要SessionCallback接口确保处于一个连接。</p>
+<p>Redis事务命令：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>multi</td>
+<td>开启事务，之后命令入队列而不会立即执行</td>
+<td>事务生存期间，所有关于数据结构的命令都会入队</td>
+</tr>
+<tr>
+<td>watch key1</td>
+<td>监听某些key（数据结构），当被监听key在事务执行前被修改，事务会回滚</td>
+<td>使用乐观锁</td>
+</tr>
+<tr>
+<td>unwatch key1</td>
+<td>取消监听</td>
+<td></td>
+</tr>
+<tr>
+<td>exec</td>
+<td>执行事务，先检测监听key，若没有被修改，就执行，否则回滚</td>
+<td></td>
+</tr>
+<tr>
+<td>discard</td>
+<td>回滚事务（取消队中事务，撤销当前multi状态）</td>
+<td>回滚，不能再用exec提交</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>multi开启事务-命令入队-exec执行，exec后执行队中命令时，其他客户端就不能再插入任何命令了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">String value = (String) template.execute((RedisOperations ops)-&gt;&#123;</span><br><span class="line">    <span class="comment">// multi</span></span><br><span class="line">    ops.multi();</span><br><span class="line">    ops.boundValueOps(<span class="string">&quot;key1&quot;</span>).set(<span class="string">&quot;value1&quot;</span>);</span><br><span class="line">    String value1 = (String) ops.boundValueOps(<span class="string">&quot;key1&quot;</span>).get();</span><br><span class="line">    System.out.println(<span class="string">&quot;尚未执行，此时get为null：&quot;</span> + value1);</span><br><span class="line">    <span class="comment">// exec</span></span><br><span class="line">    List results = ops.exec();</span><br><span class="line">    System.out.println(results);</span><br><span class="line">    <span class="keyword">return</span> (String) template.opsForValue().get(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">System.out.println(value);</span><br></pre></td></tr></table></figure>
+<p>multi后，exec前，所有get返回都空。</p>
+<p>&nbsp;</p>
+<h1 id="2-事务回滚"><a href="#2-事务回滚" class="headerlink" title="2. 事务回滚"></a>2. 事务回滚</h1><p>事务中有命令格式正确而数据类型不符的情况时，如对String进行增加，其命令能正常入队，且执行时会报错，但前后的命令都会正常执行。</p>
+<p>若事务中有格式不正确的命令，则在输入（入队前）就会被检测到并报错，后续命令入队虽然显示正常，但exec时报错，事务回滚。</p>
+<p>简易的事务功能是为性能的让步。</p>
+<p>&nbsp;</p>
+<h1 id="3-监控事务"><a href="#3-监控事务" class="headerlink" title="3. 监控事务"></a>3. 监控事务</h1><p>先watch监控某些key，然后multi开启事务；exec时，先检测被监控key，其键值对是否发生了变化（从开始watch，到即将执行事务中命令改变它的值这段时间内，值是否被set），若未改变则正常执行；若被其他线程改变过则回滚事务。不论哪种情况，都会在最后取消监控。</p>
+<p>Redis中的这种机制参考了多线程中的CAS（比较与交换），称为乐观锁，不做提前限制，仅运行前检测一下，若已被其他线程改变过就回滚。</p>
+<p>但只是“参考”，因为Redis不只是做了值检测，其他线程即使是set为原值，也算作发生了变化，故不会产生CAS造成的ABA问题：线程1令X=A，随后开始复杂运算；线程2趁1复杂运算，修改X=B，处理简单业务后改回X=A；线程1结束运算，检测X，发现是A，通过验证，提交事务。但是中途线程2对X的修改，可能造成线程1的运算错误，但这个错误并未被检测到，且被提交了。</p>
+<p>示例：</p>
+<p>线程1：<code>watch key1</code>，并开启线程</p>
+<p><img src="Redis-3-主要技术/watch1.png" alt="watch1"></p>
+<p>线程2：<code>set key1 value1</code> 修改为原值</p>
+<p><img src="Redis-3-主要技术/watch2.png" alt="watch2"></p>
+<p>线程1：<code>exec</code> 执行事务失败，回滚</p>
+<p><img src="Redis-3-主要技术/watch3.png" alt="watch3"></p>
+<p>&nbsp;</p>
+<h1 id="4-流水线"><a href="#4-流水线" class="headerlink" title="4. 流水线"></a>4. 流水线</h1><p>事务中能批量执行命令，速度快，但创建事务需要额外开销，如检测锁、序列化命令等。流水线pipelined（一种通信协议）专门用于批量执行命令，提高性能。同时，流水线也可解决因网络慢、Redis操作快导致的网络造成性能瓶颈。</p>
+<p>用Jedis操作性能最好，Spring中应使用Connection，性能略好于使用ops，但connection属于底层接口，使用Bytes。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Jedis (Java api)</span></span><br><span class="line">Jedis jedis = pool.getResource();</span><br><span class="line">Pipeline pipeline = jedis.pipelined();</span><br><span class="line">pipeline.set();</span><br><span class="line">pipeline.get();</span><br><span class="line">pipeline.sync();	<span class="comment">// 只同步</span></span><br><span class="line">List list = pipeline.syncAndReturnAll();	<span class="comment">// 同步且返回结果</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Spring </span></span><br><span class="line">List result = template.executePipelined((RedisConnection connection)-&gt;&#123;</span><br><span class="line">    <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    connection.openPipeline();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">        connection.set((<span class="string">&quot;key&quot;</span> + j).getBytes(), (<span class="string">&quot;value&quot;</span> + j).getBytes());</span><br><span class="line">        connection.get((<span class="string">&quot;key&quot;</span> + j).getBytes());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">    System.out.println(end - start);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//  System.out.println(result);</span></span><br><span class="line"></span><br><span class="line">result = template.executePipelined((RedisOperations ops)-&gt;&#123;</span><br><span class="line">    <span class="keyword">long</span> start = System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> j = i + <span class="number">1</span>;</span><br><span class="line">        ops.opsForValue().set(<span class="string">&quot;keyOps&quot;</span> + j, <span class="string">&quot;valueOps&quot;</span> + j);</span><br><span class="line">        ops.opsForValue().get(<span class="string">&quot;keyOps&quot;</span> + j);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> end = System.currentTimeMillis();</span><br><span class="line">    System.out.println(end - start);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//	System.out.println(result);</span></span><br></pre></td></tr></table></figure>
+<p>结果若要完整获取，可能数据量过大，占用过多内存，甚至JVM溢出。</p>
+<p>&nbsp;</p>
+<h1 id="5-发布订阅"><a href="#5-发布订阅" class="headerlink" title="5. 发布订阅"></a>5. 发布订阅</h1><p>系统发布信息，并将信息发送给通过各渠道订阅过的用户。如银行卡付费，会收到短信通知。</p>
+<p><img src="Redis-3-主要技术/发布订阅机制.png" alt="发布订阅机制"></p>
+<p>Redis中，使用<code>subscribe</code>命令，以当前窗口为客户端，订阅指定的消息渠道；使用<code>publish</code>命令发布消息。</p>
+<p>客户端订阅<code>channel1</code>渠道：</p>
+<p><img src="Redis-3-主要技术/redis-subscribe.png" alt="redis-subscribe"></p>
+<p>客户端2向<code>channel</code>渠道发布消息：</p>
+<p><img src="Redis-3-主要技术/redis-publish.png" alt="redis-publish"></p>
+<p>客户端1收到来自订阅的渠道的消息：</p>
+<p><img src="Redis-3-主要技术/redis-subscribe-getmsg.png" alt="redis-subscribe-getmsg"></p>
+<p>&nbsp;</p>
+<p>在Spring中，订阅者类需要实现<code>MessageListener</code>接口，实现<code>onMessage</code>方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisMessageListener</span> <span class="keyword">implements</span> <span class="title">MessageListener</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> RedisTemplate template;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTemplate</span><span class="params">(RedisTemplate template)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.template = template;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RedisTemplate <span class="title">getTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(Message message, <span class="keyword">byte</span>[] bytes)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取消息</span></span><br><span class="line">        <span class="keyword">byte</span>[] body = message.getBody();</span><br><span class="line">        <span class="comment">// 值序列器转化</span></span><br><span class="line">        String msgBody = (String) template.getValueSerializer().deserialize(body);</span><br><span class="line">        System.out.println(msgBody);</span><br><span class="line">        <span class="comment">// 获取channel</span></span><br><span class="line">        <span class="keyword">byte</span>[] channel = message.getChannel();</span><br><span class="line">        <span class="comment">// 字符串序列化器转换</span></span><br><span class="line">        String channelString = (String) template.getStringSerializer().deserialize(channel);</span><br><span class="line">        System.out.println(channelString);</span><br><span class="line">        <span class="comment">// 渠道名称转换</span></span><br><span class="line">        String byteString = <span class="keyword">new</span> String(bytes);</span><br><span class="line">        System.out.println(byteString);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;redisMsgListener&quot;</span> <span class="attr">class</span>=<span class="string">&quot;Redis.RedisMessageListener&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;template&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;redisTemplate&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>消息渠道（容器）类在Spring中已有<code>RedisMessageListenerContainer</code>：配置了线程池，会持续生存以等待消息进入；配置了id为RedisMsgListener的Bean对渠道chatChannel监听</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;topicContainer&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.data.redis.listener.RedisMessageListenerContainer&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">destroy-method</span>=<span class="string">&quot;destroy&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        连接工厂--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connectionFactory&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;connectionFactory&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        连接池，线程池生存，才能继续监听--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;taskExecutor&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;poolSize&quot;</span> <span class="attr">value</span>=<span class="string">&quot;3&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        消息监听map--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;messageListeners&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key-ref</span>=<span class="string">&quot;redisMsgListener&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--                    监听类--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.data.redis.listener.ChannelTopic&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">&quot;chatChannel&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">entry</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>测试代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String channel = <span class="string">&quot;chatChannel&quot;</span>;</span><br><span class="line">template.convertAndSend(channel, <span class="string">&quot;msg!&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<h1 id="6-超时命令"><a href="#6-超时命令" class="headerlink" title="6. 超时命令"></a>6. 超时命令</h1><p>Redis也是基于内存运行的数据集合，也存在内存垃圾回收和管理问题与机制。</p>
+<p>可以通过del命令手动删除一些数据，内存快满的时候也会自动触发回收机制，但回收会引发系统停顿，故应主动选择适当时机进行回收。</p>
+<p>Redis可以给键值对设置超时，以配合垃圾回收（毕竟回收时更需要回收超时的数据）。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>persist key</td>
+<td>持久化key，取消超时时间</td>
+<td></td>
+</tr>
+<tr>
+<td>ttl key</td>
+<td>查看key的超时时间</td>
+<td>s，-1表示没有超时时间，-2表示不存在key或已超时</td>
+</tr>
+<tr>
+<td>expire key secounds</td>
+<td>设置超时时间戳</td>
+<td>s</td>
+</tr>
+<tr>
+<td>expireat key timestamp</td>
+<td>设置超时时间点</td>
+<td>uninx时间戳确定</td>
+</tr>
+<tr>
+<td>pptl key ms</td>
+<td>查看key的超时时间戳</td>
+<td>ms</td>
+</tr>
+<tr>
+<td>pexpire key</td>
+<td>设置键值超时的时间</td>
+<td>ms</td>
+</tr>
+<tr>
+<td>pexpireat key stamptimes</td>
+<td>设置超时时间点</td>
+<td>ms，uninx时间戳</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">template.execute((RedisOperations ops)-&gt;&#123;</span><br><span class="line">    ops.boundValueOps(<span class="string">&quot;key1&quot;</span>).set(<span class="string">&quot;value1&quot;</span>);</span><br><span class="line">    String keyValue = (String) ops.boundValueOps(<span class="string">&quot;key1&quot;</span>).get();</span><br><span class="line">    Long expSecond = ops.getExpire(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">    System.out.println(expSecond);</span><br><span class="line">    <span class="keyword">boolean</span> b = <span class="keyword">false</span>;</span><br><span class="line">    b = ops.expire(<span class="string">&quot;key1&quot;</span>, <span class="number">120L</span>, TimeUnit.SECONDS);</span><br><span class="line">    b = ops.persist(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">    Long l = <span class="number">0L</span>;</span><br><span class="line">    l = ops.getExpire(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">    Long now = System.currentTimeMillis();</span><br><span class="line">    Date date = <span class="keyword">new</span> Date();</span><br><span class="line">    date.setTime(now + <span class="number">120000</span>);</span><br><span class="line">    ops.expireAt(<span class="string">&quot;key&quot;</span>, date);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<p><strong>Redis的key超时后不会被自动回收，只会标识哪些键值对超时了。</strong>好处是巨大数据超时不会立刻回收造成停顿；坏处是浪费空间。</p>
+<p>Redis有定时回收和惰性回收两种回收方式：</p>
+<ul>
+<li>定时回收指在确定的某个时间出发一段代码，回收超时键值对</li>
+<li>惰性回收则是当一个超时的key，又被get时，将其清除</li>
+</ul>
+<p>定时回收能完全回收所有超时键值对，清理彻底，但遇到大数据可能造成停顿，需要设计者在没有业务时触发定时回收。惰性回收能够指定键值对回收，但要一个莫名其妙的get，甚至有时我们也不知道哪些键值对已经超时。</p>
+<p>&nbsp;</p>
+<h1 id="7-使用Lua"><a href="#7-使用Lua" class="headerlink" title="7. 使用Lua"></a>7. 使用Lua</h1><p>暂不展开。</p>
+<p>见《Java EE互联网轻量级框架整合开发 SSM框架和Redis实现》第19章末尾一节。</p>
+<p>&nbsp;</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%90%8E%E7%AB%AF/"># 后端</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/07/26/hello-world/">Hello World</a>
+            
+            
+            <a class="next" rel="next" href="/2021/06/11/Redis-2-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Redis_2.数据结构与常用命令</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

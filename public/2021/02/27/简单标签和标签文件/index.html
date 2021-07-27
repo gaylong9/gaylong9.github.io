@@ -46,7 +46,7 @@
     
 
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 <body>
     <div class="wrapper">
         <header>
@@ -190,55 +190,25 @@
         </header>
 
         <div class="post-content">
-            <p> </p>
-<a id="more"></a>
+            <p>&nbsp;</p>
+<span id="more"></span>
 <!-- toc -->
-<ul>
-<li><a href="#%E7%AE%80%E5%8D%95%E6%A0%87%E7%AD%BE%E5%92%8C%E6%A0%87%E7%AD%BE%E6%96%87%E4%BB%B6">简单标签和标签文件</a>
-<ul>
-<li><a href="#1-%E5%AE%9E%E7%8E%B0simpletag%E6%8E%A5%E5%8F%A3">1. 实现SimpleTag接口</a>
-<ul>
-<li><a href="#11-%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95">1.1 接口定义方法</a></li>
-<li><a href="#12-%E6%8E%A5%E5%8F%A3%E6%B5%81%E7%A8%8B">1.2 接口流程</a></li>
-<li><a href="#13-%E6%99%AE%E9%80%9A%E7%9A%84%E7%AE%80%E5%8D%95%E6%A0%87%E7%AD%BE">1.3 普通的简单标签</a></li>
-<li><a href="#14-%E5%B8%A6%E5%B1%9E%E6%80%A7%E5%92%8C%E6%A0%87%E7%AD%BE%E4%B8%BB%E4%BD%93%E7%9A%84%E7%AE%80%E5%8D%95%E6%A0%87%E7%AD%BE">1.4 带属性和标签主体的简单标签</a></li>
-<li><a href="#15-%E5%B8%A6%E5%8A%A8%E6%80%81%E5%B1%9E%E6%80%A7%E7%9A%84%E7%AE%80%E5%8D%95%E6%A0%87%E7%AD%BE">1.5 带动态属性的简单标签</a></li>
-</ul>
-</li>
-<li><a href="#2-%E4%BD%BF%E7%94%A8%E6%A0%87%E7%AD%BE%E6%96%87%E4%BB%B6">2. 使用标签文件</a>
-<ul>
-<li><a href="#21-%E6%A0%87%E7%AD%BE%E6%96%87%E4%BB%B6%E9%9A%90%E5%90%AB%E5%AF%B9%E8%B1%A1">2.1 标签文件隐含对象</a></li>
-<li><a href="#22-%E6%A0%87%E7%AD%BE%E6%96%87%E4%BB%B6%E7%9A%84%E6%8C%87%E4%BB%A4">2.2 标签文件的指令</a></li>
-<li><a href="#23-jspinvoke%E5%92%8Cjspdobody%E5%8A%A8%E4%BD%9C%E5%85%83%E7%B4%A0">2.3 &lt;jsp:invoke&gt;和&lt;jsp:doBody&gt;动作元素</a></li>
-<li><a href="#24-%E5%B8%A6%E5%B1%9E%E6%80%A7%E5%92%8C%E6%A0%87%E7%AD%BE%E4%B8%BB%E4%BD%93%E7%9A%84%E6%A0%87%E7%AD%BE%E6%96%87%E4%BB%B6">2.4 带属性和标签主体的标签文件</a></li>
-<li><a href="#25-%E4%BD%BF%E7%94%A8jspfragment%E7%9A%84%E6%A0%87%E7%AD%BE%E6%96%87%E4%BB%B6">2.5 使用JspFragment的标签文件</a></li>
-<li><a href="#26-%E5%B8%A6%E5%8F%98%E9%87%8F%E7%9A%84%E6%A0%87%E7%AD%BE%E6%96%87%E4%BB%B6">2.6 带变量的标签文件</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-<p> </p>
+<p>&nbsp;</p>
 <p>[toc]</p>
-<p> </p>
-<h1><span id="简单标签和标签文件">简单标签和标签文件</span></h1>
-<p>传统自定义标签的方法较为复杂，需要考虑处理类中doStartTag()和doEndTag()的返回值。JSP2中引入了新的标签扩展机制，称为“简单标签扩展”。</p>
+<p>&nbsp;</p>
+<h1 id="简单标签和标签文件"><a href="#简单标签和标签文件" class="headerlink" title="简单标签和标签文件"></a>简单标签和标签文件</h1><p>传统自定义标签的方法较为复杂，需要考虑处理类中doStartTag()和doEndTag()的返回值。JSP2中引入了新的标签扩展机制，称为“简单标签扩展”。</p>
 <p>可以通过定义实现<code>javax.servlet.jsp.tagext.SimpleTag</code>接口的标签处理类，</p>
 <p>或使用标签文件.tag或.tagx来定义标签。</p>
-<p> </p>
-<h2><span id="1-实现simpletag接口">1. 实现SimpleTag接口</span></h2>
-<p><code>javax.servlet.jsp.tagext.SimpleTag</code>接口，包中已有SimpleTagSupport类实现了接口，开发时只需继承该类，复写doTag()方法即可。</p>
-<h3><span id="11-接口定义方法">1.1 接口定义方法</span></h3>
-<ol>
+<p>&nbsp;</p>
+<h2 id="1-实现SimpleTag接口"><a href="#1-实现SimpleTag接口" class="headerlink" title="1. 实现SimpleTag接口"></a>1. 实现SimpleTag接口</h2><p><code>javax.servlet.jsp.tagext.SimpleTag</code>接口，包中已有SimpleTagSupport类实现了接口，开发时只需继承该类，复写doTag()方法即可。</p>
+<h3 id="1-1-接口定义方法"><a href="#1-1-接口定义方法" class="headerlink" title="1.1 接口定义方法"></a>1.1 接口定义方法</h3><ol>
 <li><code>void setJspContext(JspContext pc)</code>：容器调用，向SimpleTag对象传递当前JSPContext对象。JspContext类是PageContext类的父类。其中包含了对各种范围内属性的存取方法</li>
 <li><code>void setParent(JspTag parent)</code>：容器调用，向SimpleTag对象传递父标签的JSPTag对象</li>
 <li><code>JspTag getParent()</code>：返回父标签的JspTag对象</li>
 <li><code>void setJspBody(JspFragment jspBody)</code>：容器调用，向SimpleTag对象传递标签主体，参数表示主体，封装了一段JSP代码</li>
 <li><code>void doTag()</code>：负责具体标签处理过程，没有返回值</li>
 </ol>
-<h3><span id="12-接口流程">1.2 接口流程</span></h3>
-<p>SimpleTag对象由容器负责创建。当容器执行JSP文件时，遇到自定义的简单标签时，都会创建一个SimpleTag对象。标签处理完毕，就销毁该对象。而传统自定义标签，会缓存处理类实例以重用。</p>
+<h3 id="1-2-接口流程"><a href="#1-2-接口流程" class="headerlink" title="1.2 接口流程"></a>1.2 接口流程</h3><p>SimpleTag对象由容器负责创建。当容器执行JSP文件时，遇到自定义的简单标签时，都会创建一个SimpleTag对象。标签处理完毕，就销毁该对象。而传统自定义标签，会缓存处理类实例以重用。</p>
 <p>流程：</p>
 <ol>
 <li>容器调用SimpleTag对象的setJspContext()和setParent()方法，把当前JSP页面的JspContext对象，以及父标签处理对象传给当前SimpleTag对象。如无父标签，则null</li>
@@ -246,76 +216,66 @@
 <li>如有标签主体，容器调用setJSPBody()方法，设置主体</li>
 <li>容器调用doTag()方法，完成处理标签的具体逻辑</li>
 </ol>
-<p> </p>
-<h3><span id="13-普通的简单标签">1.3 普通的简单标签</span></h3>
-<p>&lt;hello&gt;标签，输出&quot;This is my first tag!&quot;。</p>
+<p>&nbsp;</p>
+<h3 id="1-3-普通的简单标签"><a href="#1-3-普通的简单标签" class="headerlink" title="1.3 普通的简单标签"></a>1.3 普通的简单标签</h3><p>\<hello>标签，输出”This is my first tag!”。</p>
 <p>简单标签处理类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloTag</span> <span class="keyword">extends</span> <span class="title">SimpleTagSupport</span> </span>&#123;       </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException, IOException </span>&#123;    </span><br><span class="line">    getJspContext().getOut().write(<span class="string">"This is my first tag!"</span>);     </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloTag</span> <span class="keyword">extends</span> <span class="title">SimpleTagSupport</span> </span>&#123;       </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException, IOException </span>&#123;    </span><br><span class="line">    getJspContext().getOut().write(<span class="string">&quot;This is my first tag!&quot;</span>);     </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用该标签的JSP例子：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib prefix=<span class="string">"mm"</span> uri=<span class="string">"/mytaglib"</span> %&gt;</span><br><span class="line">...</span><br><span class="line">&lt;p&gt;&lt;b&gt;My first tag prints&lt;/b&gt;: &lt;mm:hello/&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib prefix=<span class="string">&quot;mm&quot;</span> uri=<span class="string">&quot;/mytaglib&quot;</span> %&gt;</span><br><span class="line">...</span><br><span class="line">&lt;p&gt;&lt;b&gt;My first tag prints&lt;/b&gt;: &lt;mm:hello/&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>运行步骤：</p>
 <ol>
-<li>
-<p>编译HelloTag.java，编译时把&lt;CATALINA_HOME&gt;/lib/jsp-api.jar放下classpath中，把编译生成类文件放在web-app/WEB-INF/classes/mypack/HelloTag.class</p>
+<li><p>编译HelloTag.java，编译时把<CATALINA_HOME>/lib/jsp-api.jar放下classpath中，把编译生成类文件放在web-app/WEB-INF/classes/mypack/HelloTag.class</p>
 </li>
-<li>
-<p>在web-app/WEB-INF/mytag.tld中添加标签描述符</p>
+<li><p>在web-app/WEB-INF/mytag.tld中添加标签描述符</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tag</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>prints hello<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tag-class</span>&gt;</span>mypack.HelloTag<span class="tag">&lt;/<span class="name">tag-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body-content</span>&gt;</span>empty<span class="tag">&lt;/<span class="name">body-content</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>注：简单标签的&lt;body-content&gt;元素，可选值empty、scriptless、tagdependent，由于不能包含Java片段，所以没有jsp选项</p>
+<p> 注：简单标签的\<body-content>元素，可选值empty、scriptless、tagdependent，由于不能包含Java片段，所以没有jsp选项</p>
 </li>
-<li>
-<p>在web-app/WEB-INF/web.xml中加入mytaglib标签库</p>
+<li><p>在web-app/WEB-INF/web.xml中加入mytaglib标签库</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">taglib</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">taglib-uri</span>&gt;</span>/mytaglib<span class="tag">&lt;/<span class="name">taglib-uri</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">taglib-location</span>&gt;</span>/WEB-INF/mytaglib.tld<span class="tag">&lt;/<span class="name">taglib-location</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">taglib</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p> </p>
+<p> &nbsp;</p>
 </li>
 </ol>
-<h3><span id="14-带属性和标签主体的简单标签">1.4 带属性和标签主体的简单标签</span></h3>
-<p>&lt;welcome&gt;标签，将属性username和主体一同输出。</p>
+<h3 id="1-4-带属性和标签主体的简单标签"><a href="#1-4-带属性和标签主体的简单标签" class="headerlink" title="1.4 带属性和标签主体的简单标签"></a>1.4 带属性和标签主体的简单标签</h3><p>\<welcome>标签，将属性username和主体一同输出。</p>
 <p>处理类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WelcomeTag</span> <span class="keyword">extends</span> <span class="title">SimpleTagSupport</span> </span>&#123;  </span><br><span class="line">     </span><br><span class="line">  <span class="keyword">private</span> String username;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.username=username;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException, IOException </span>&#123;    </span><br><span class="line">    getJspContext().getOut().print(username+<span class="string">","</span>);    </span><br><span class="line"></span><br><span class="line">    JspFragment jspBody=getJspBody();</span><br><span class="line">    <span class="comment">// 将主体的执行结果输出到当前输出流中</span></span><br><span class="line">    jspBody.invoke(<span class="keyword">null</span>);  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WelcomeTag</span> <span class="keyword">extends</span> <span class="title">SimpleTagSupport</span> </span>&#123;  </span><br><span class="line">     </span><br><span class="line">  <span class="keyword">private</span> String username;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.username=username;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException, IOException </span>&#123;    </span><br><span class="line">    getJspContext().getOut().print(username+<span class="string">&quot;,&quot;</span>);    </span><br><span class="line"></span><br><span class="line">    JspFragment jspBody=getJspBody();</span><br><span class="line">    <span class="comment">// 将主体的执行结果输出到当前输出流中</span></span><br><span class="line">    jspBody.invoke(<span class="keyword">null</span>);  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;	</span><br></pre></td></tr></table></figure>
 <p>注：JspFragment对象，代表一段JSP代码，其invoke(Writer)方法负责执行所封装的JSP代码，并通过参数输出结果；若参数null，则输出到当前输出流</p>
 <p>使用标签：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;mm:welcome username=<span class="string">"$&#123;param.username&#125;"</span>&gt;</span><br><span class="line">    Welcome to my website.</span><br><span class="line">&lt;/mm:welcome&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;mm:welcome username=<span class="string">&quot;$&#123;param.username&#125;&quot;</span>&gt;</span><br><span class="line">    Welcome to my website.</span><br><span class="line">&lt;/mm:welcome&gt;</span><br></pre></td></tr></table></figure>
 <p>web-app/WEB-INF/mytag.tld：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tag</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>welcome<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>welcome<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tag-class</span>&gt;</span>mypack.WelcomeTag<span class="tag">&lt;/<span class="name">tag-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body-content</span>&gt;</span>tagdependent<span class="tag">&lt;/<span class="name">body-content</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attribute</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>username<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">required</span>&gt;</span>true<span class="tag">&lt;/<span class="name">required</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rtexprvalue</span>&gt;</span>true<span class="tag">&lt;/<span class="name">rtexprvalue</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">attribute</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p> </p>
-<h3><span id="15-带动态属性的简单标签">1.5 带动态属性的简单标签</span></h3>
-<p>&lt;max&gt;标签，负责找出属性中最大值，存入page范围。</p>
+<p>&nbsp;</p>
+<h3 id="1-5-带动态属性的简单标签"><a href="#1-5-带动态属性的简单标签" class="headerlink" title="1.5 带动态属性的简单标签"></a>1.5 带动态属性的简单标签</h3><p>\<max>标签，负责找出属性中最大值，存入page范围。</p>
 <p>动态属性：数目不固定的属性。</p>
 <p>处理类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaxTag</span> <span class="keyword">extends</span> <span class="title">SimpleTagSupport</span> <span class="keyword">implements</span> <span class="title">DynamicAttributes</span></span>&#123;  </span><br><span class="line">     </span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;String&gt; al=<span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDynamicAttribute</span><span class="params">(String uri,String localeName,Object value)</span><span class="keyword">throws</span> JspException</span>&#123;</span><br><span class="line">	<span class="comment">// 所有属性保存到ArrayList中</span></span><br><span class="line">    al.add((String)value);</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException, IOException </span>&#123;    </span><br><span class="line">    JspContext context=getJspContext();    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> max=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;al.size();i++)&#123;</span><br><span class="line">      <span class="keyword">int</span> num=Integer.parseInt(al.get(i));</span><br><span class="line">      max= num &gt; max ? num : max;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// max保存到page</span></span><br><span class="line">    context.setAttribute(<span class="string">"max"</span>,<span class="keyword">new</span> Integer(max));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaxTag</span> <span class="keyword">extends</span> <span class="title">SimpleTagSupport</span> <span class="keyword">implements</span> <span class="title">DynamicAttributes</span></span>&#123;  </span><br><span class="line">     </span><br><span class="line">  <span class="keyword">private</span> ArrayList&lt;String&gt; al=<span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDynamicAttribute</span><span class="params">(String uri,String localeName,Object value)</span><span class="keyword">throws</span> JspException</span>&#123;</span><br><span class="line">	<span class="comment">// 所有属性保存到ArrayList中</span></span><br><span class="line">    al.add((String)value);</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doTag</span><span class="params">()</span> <span class="keyword">throws</span> JspException, IOException </span>&#123;    </span><br><span class="line">    JspContext context=getJspContext();    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> max=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;al.size();i++)&#123;</span><br><span class="line">      <span class="keyword">int</span> num=Integer.parseInt(al.get(i));</span><br><span class="line">      max= num &gt; max ? num : max;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// max保存到page</span></span><br><span class="line">    context.setAttribute(<span class="string">&quot;max&quot;</span>,<span class="keyword">new</span> Integer(max));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注：实现了javax.servlet.jsp.tagext.DynamicAttributes接口，定义了setDynaminAttribute()方法；容器反复调用此方法向SImpleTag对象传递动态属性。</p>
 <p>使用标签：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;mm:max num1=<span class="string">"100"</span> num2=<span class="string">"200"</span> num3=<span class="string">"300"</span>/&gt;</span><br><span class="line">MAX: $&#123;max&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;mm:max num1=<span class="string">&quot;100&quot;</span> num2=<span class="string">&quot;200&quot;</span> num3=<span class="string">&quot;300&quot;</span>/&gt;</span><br><span class="line">MAX: $&#123;max&#125;</span><br></pre></td></tr></table></figure>
 <p>web-app/WEB-INF/mytag.tld：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tag</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span>max<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>max<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tag-class</span>&gt;</span>mypack.MaxTag<span class="tag">&lt;/<span class="name">tag-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body-content</span>&gt;</span>empty<span class="tag">&lt;/<span class="name">body-content</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dynaminc-attributes</span>&gt;</span>true<span class="tag">&lt;/<span class="name">dynaminc-attributes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tag</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p> </p>
-<h2><span id="2-使用标签文件">2. 使用标签文件</span></h2>
-<ol>
+<p>&nbsp;</p>
+<h2 id="2-使用标签文件"><a href="#2-使用标签文件" class="headerlink" title="2. 使用标签文件"></a>2. 使用标签文件</h2><ol>
 <li>标签文件使用JSP编写，可以不包含Java。拓展名通常为.tag，若使用XML语言则为.tagx</li>
 <li>标签名字就是文件名字</li>
-<li>标签文件和JSP的区别仅在于：
-<ol>
+<li>标签文件和JSP的区别仅在于：<ol>
 <li>JSP中page指令在标签文件中不能使用</li>
 <li>标签文件中增加了tag指令、attribute指令和variable指令</li>
-<li>&lt;jsp:invoke&gt;和&lt;jsp:doBody&gt;两个标准动作元素只能在标签文件中使用</li>
+<li>\<jsp:invoke>和\<jsp:doBody>两个标准动作元素只能在标签文件中使用</li>
 </ol>
 </li>
 <li>使用时标签文件可统一放在webapp/WEB-INF/tags目录下</li>
 <li>标签文件的自定义标签方法，无需TLD，只需在使用的JSP页面中声明即可 <code>&lt;%@ taglib prefix=&quot;mm&quot; tagdir=&quot;/WEB-INF/tags&quot; %&gt;</code></li>
-<li>容器自动为tags和子目录配置隐含TLD，包含以下元素：
-<ol>
-<li>&lt;tlib-version&gt;：1.1</li>
-<li>&lt;short-name&gt;：路径名设定，WEB-INF/tags，则为tags；WEB-INF/tags/a/b/c，则为a-b-c</li>
-<li>为该目录中每个标签文件配置&lt;tag-file&gt;元素，子元素&lt;name&gt;设置文件名，&lt;path&gt;设置标签文件路径，路径以/WEB-INF开始</li>
+<li>容器自动为tags和子目录配置隐含TLD，包含以下元素：<ol>
+<li>\<tlib-version>：1.1</li>
+<li>\<short-name>：路径名设定，WEB-INF/tags，则为tags；WEB-INF/tags/a/b/c，则为a-b-c</li>
+<li>为该目录中每个标签文件配置\<tag-file>元素，子元素\<name>设置文件名，\<path>设置标签文件路径，路径以/WEB-INF开始</li>
 </ol>
 </li>
-<li>标签文件打包JAR时，放在META-INF/tags下，并提供TLD，&lt;path&gt;以/META-INF开始</li>
-<li>容器遇到标签时，解析并编译.tag标签文件，在&lt;CATA_LINA&gt;/work/Catalina/localhost/webapp/org/apache/jsp/tag/web下生成处理类name_tag类，即实际上标签文件仍是简单标签处理类，只是由容器翻译</li>
+<li>标签文件打包JAR时，放在META-INF/tags下，并提供TLD，\<path>以/META-INF开始</li>
+<li>容器遇到标签时，解析并编译.tag标签文件，在<CATA_LINA>/work/Catalina/localhost/webapp/org/apache/jsp/tag/web下生成处理类name_tag类，即实际上标签文件仍是简单标签处理类，只是由容器翻译</li>
 </ol>
-<p> </p>
-<h3><span id="21-标签文件隐含对象">2.1 标签文件隐含对象</span></h3>
-<p>request（HttpServletRequest）：存于request范围</p>
+<p>&nbsp;</p>
+<h3 id="2-1-标签文件隐含对象"><a href="#2-1-标签文件隐含对象" class="headerlink" title="2.1 标签文件隐含对象"></a>2.1 标签文件隐含对象</h3><p>request（HttpServletRequest）：存于request范围</p>
 <p>response（HTTPServletResponse）：存于page</p>
 <p>jspContext（JspContext）：page</p>
 <p>application（ServletContext）：application</p>
@@ -323,12 +283,10 @@
 <p>config（ServletConfig）：page</p>
 <p>session（HttpSession）：session</p>
 <p>与JSP相比，标签文件不存在page和exception隐含对象，存在jspContext对象，是JSP中的pageContext的父类。</p>
-<p> </p>
-<h3><span id="22-标签文件的指令">2.2 标签文件的指令</span></h3>
-<p>包含taglib。include、tag。attribute、variable五种指令，后三种是特有。</p>
+<p>&nbsp;</p>
+<h3 id="2-2-标签文件的指令"><a href="#2-2-标签文件的指令" class="headerlink" title="2.2 标签文件的指令"></a>2.2 标签文件的指令</h3><p>包含taglib。include、tag。attribute、variable五种指令，后三种是特有。</p>
 <ol>
-<li>tag指令：与JSP中的page指令类似，设置整个标签文件的一些属性
-<ol>
+<li>tag指令：与JSP中的page指令类似，设置整个标签文件的一些属性<ol>
 <li>display-name：为标签指定一个简短名字，默认不含扩展名的文件名</li>
 <li>body-content：指定标签主体格式，可选empty、scriptless、tagdependent，默认scriptless</li>
 <li>dynamic-attributes：指定动态属性名，容器翻译为简单标签处理类时，类中创建Map对象，存放动态属性的名字和值，属性名key，属性值value</li>
@@ -342,8 +300,7 @@
 <li>isELIgnored；是否忽略EL表达式，默认false，会解析EL表达式</li>
 </ol>
 </li>
-<li>attribute指令：类似TLD中&lt;attribute&gt;元素，声明自定义标签的属性，指令包含以下属性
-<ol>
+<li>attribute指令：类似TLD中\<attribute>元素，声明自定义标签的属性，指令包含以下属性<ol>
 <li>name：对于本指令是必需，指定指令所代表的属性名字</li>
 <li>required：本属性是否必需，默认false</li>
 <li>fragment：本属性是否是JspFragment对象，默认false；若true，则无需设置rtexpvalue和type属性，此时二者默认为true和JspFragment</li>
@@ -352,8 +309,7 @@
 <li>description</li>
 </ol>
 </li>
-<li>variable指令：类似于TLD中的&lt;variable&gt;元素，设置标签为JSP页面提供变量
-<ol>
+<li>variable指令：类似于TLD中的\<variable>元素，设置标签为JSP页面提供变量<ol>
 <li>name-given：指定变量名字</li>
 <li>name-from-attribute：用标签的某个属性的值作为变量名称</li>
 <li>alias：定义一个本地范围的属性保存这个变量的值，当name-from-attribute时必须alias</li>
@@ -364,11 +320,9 @@
 </ol>
 </li>
 </ol>
-<p> </p>
-<h3><span id="23-ltjspinvokegt和ltjspdobodygt动作元素">2.3 &lt;jsp:invoke&gt;和&lt;jsp:doBody&gt;动作元素</span></h3>
-<ol>
-<li>&lt;jsp:invoke&gt;用于执行标签的JspFragment类型的属性所包含的JSP代码，并把执行结果输出到当前JspWriter对象中，或保存到指定的命名变量中
-<ol>
+<p>&nbsp;</p>
+<h3 id="2-3-和-动作元素"><a href="#2-3-和-动作元素" class="headerlink" title="2.3 \和\动作元素"></a>2.3 \<jsp:invoke>和\<jsp:doBody>动作元素</h3><ol>
+<li>\<jsp:invoke>用于执行标签的JspFragment类型的属性所包含的JSP代码，并把执行结果输出到当前JspWriter对象中，或保存到指定的命名变量中<ol>
 <li>fragment：必需属性，指定类型为JspFragment的属性名称</li>
 <li>var：指定一个命名变量名字，保存JspFragment对象执行结果</li>
 <li>varReader：制定一个Reader类型的命名变量，保存了JspFragment执行结果</li>
@@ -376,37 +330,33 @@
 <li>scope：为var或varReader指定存放范围</li>
 </ol>
 </li>
-<li>&lt;jsp:doBody&gt;用于执行标签主体，并把结果输出到当前JspWriter对象中，或保存到指定命名变量中，有var、varReader、socpe属性</li>
+<li>\<jsp:doBody>用于执行标签主体，并把结果输出到当前JspWriter对象中，或保存到指定命名变量中，有var、varReader、socpe属性</li>
 </ol>
-<p> </p>
-<h3><span id="24-带属性和标签主体的标签文件">2.4 带属性和标签主体的标签文件</span></h3>
-<p>本例简单的display.tag，定义了一个表格模板，包含color、bgcolor、title属性，都是String类型，在标签文件中可以通过${color}的形式访问属性。</p>
+<p>&nbsp;</p>
+<h3 id="2-4-带属性和标签主体的标签文件"><a href="#2-4-带属性和标签主体的标签文件" class="headerlink" title="2.4 带属性和标签主体的标签文件"></a>2.4 带属性和标签主体的标签文件</h3><p>本例简单的display.tag，定义了一个表格模板，包含color、bgcolor、title属性，都是String类型，在标签文件中可以通过${color}的形式访问属性。</p>
 <p>标签文件 display.tag：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ attribute name=<span class="string">"color"</span> %&gt;</span><br><span class="line">&lt;%@ attribute name=<span class="string">"bgcolor"</span> %&gt;</span><br><span class="line">&lt;%@ attribute name=<span class="string">"title"</span> %&gt;</span><br><span class="line">&lt;table border=<span class="string">"0"</span> bgcolor=<span class="string">"$&#123;color&#125;"</span>&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;$&#123;title&#125;&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td bgcolor=<span class="string">"$&#123;bgcolor&#125;"</span>&gt;</span><br><span class="line">            &lt;jsp:doBody/&gt;</span><br><span class="line">        &lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ attribute name=<span class="string">&quot;color&quot;</span> %&gt;</span><br><span class="line">&lt;%@ attribute name=<span class="string">&quot;bgcolor&quot;</span> %&gt;</span><br><span class="line">&lt;%@ attribute name=<span class="string">&quot;title&quot;</span> %&gt;</span><br><span class="line">&lt;table border=<span class="string">&quot;0&quot;</span> bgcolor=<span class="string">&quot;$&#123;color&#125;&quot;</span>&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;$&#123;title&#125;&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td bgcolor=<span class="string">&quot;$&#123;bgcolor&#125;&quot;</span>&gt;</span><br><span class="line">            &lt;jsp:doBody/&gt;</span><br><span class="line">        &lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
 <p>使用标签：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;tags:display color=<span class="string">"#ff000"</span> bgcolor=<span class="string">"#ffc0c0"</span> title=<span class="string">"Travel"</span>&gt;</span><br><span class="line">    Travel Headline.</span><br><span class="line">&lt;/tags:display&gt;</span><br></pre></td></tr></table></figure>
-<p> </p>
-<h3><span id="25-使用jspfragment的标签文件">2.5 使用JspFragment的标签文件</span></h3>
-<p>本例welcome.tag，根据属性username，输出不同文字。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;tags:display color=<span class="string">&quot;#ff000&quot;</span> bgcolor=<span class="string">&quot;#ffc0c0&quot;</span> title=<span class="string">&quot;Travel&quot;</span>&gt;</span><br><span class="line">    Travel Headline.</span><br><span class="line">&lt;/tags:display&gt;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<h3 id="2-5-使用JspFragment的标签文件"><a href="#2-5-使用JspFragment的标签文件" class="headerlink" title="2.5 使用JspFragment的标签文件"></a>2.5 使用JspFragment的标签文件</h3><p>本例welcome.tag，根据属性username，输出不同文字。</p>
 <p>标签文件：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ tag pageEncoding=<span class="string">"GB2312"</span> %&gt;</span><br><span class="line">&lt;%@ taglib uri=<span class="string">"http://java.sun.com/jsp/jstl/core"</span> prefix=<span class="string">"c"</span> %&gt;</span><br><span class="line">&lt;%@ attribute name=<span class="string">"username"</span>  required=<span class="string">"true"</span>  fragment=<span class="string">"true"</span> %&gt;</span><br><span class="line"></span><br><span class="line">&lt;jsp:invoke fragment=<span class="string">"username"</span> <span class="keyword">var</span>=<span class="string">"user"</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;c:choose&gt;</span><br><span class="line">  &lt;c:when test=<span class="string">"$&#123;empty user&#125;"</span>&gt; </span><br><span class="line">    My friend,</span><br><span class="line">  &lt;/c:when&gt;</span><br><span class="line">  &lt;c:otherwise&gt;</span><br><span class="line">    $&#123;user&#125;,</span><br><span class="line">  &lt;/c:otherwise&gt; </span><br><span class="line">&lt;/c:choose&gt;</span><br><span class="line"></span><br><span class="line">&lt;jsp:doBody/&gt;</span><br></pre></td></tr></table></figure>
-<p>通过&lt;jsp:invoke&gt;执行JspFragment类型的username属性，并把结果存放在命名变量user中。然后根据user，输出不同文字。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ tag pageEncoding=<span class="string">&quot;GB2312&quot;</span> %&gt;</span><br><span class="line">&lt;%@ taglib uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> prefix=<span class="string">&quot;c&quot;</span> %&gt;</span><br><span class="line">&lt;%@ attribute name=<span class="string">&quot;username&quot;</span>  required=<span class="string">&quot;true&quot;</span>  fragment=<span class="string">&quot;true&quot;</span> %&gt;</span><br><span class="line"></span><br><span class="line">&lt;jsp:invoke fragment=<span class="string">&quot;username&quot;</span> <span class="keyword">var</span>=<span class="string">&quot;user&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;c:choose&gt;</span><br><span class="line">  &lt;c:when test=<span class="string">&quot;$&#123;empty user&#125;&quot;</span>&gt; </span><br><span class="line">    My friend,</span><br><span class="line">  &lt;/c:when&gt;</span><br><span class="line">  &lt;c:otherwise&gt;</span><br><span class="line">    $&#123;user&#125;,</span><br><span class="line">  &lt;/c:otherwise&gt; </span><br><span class="line">&lt;/c:choose&gt;</span><br><span class="line"></span><br><span class="line">&lt;jsp:doBody/&gt;  </span><br></pre></td></tr></table></figure>
+<p>通过\<jsp:invoke>执行JspFragment类型的username属性，并把结果存放在命名变量user中。然后根据user，输出不同文字。</p>
 <p>使用标签：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;mm:welcome&gt;</span><br><span class="line">  &lt;jsp:attribute name=<span class="string">"username"</span>&gt;</span><br><span class="line">    $&#123;param.username&#125;</span><br><span class="line">  &lt;/jsp:attribute&gt; </span><br><span class="line">  &lt;jsp:body&gt;</span><br><span class="line">    Welcome to my website.</span><br><span class="line">  &lt;/jsp:body&gt;</span><br><span class="line">&lt;/mm:welcome&gt;</span><br></pre></td></tr></table></figure>
-<p>因为属性username是Fragment类型，就需要&lt;jsp:attribute&gt;设定；同时，标签若嵌入了&lt;jsp:attribute&gt;，就要用&lt;jsp:body&gt;设置标签主体。</p>
-<p> </p>
-<h3><span id="26-带变量的标签文件">2.6 带变量的标签文件</span></h3>
-<p>JSP页面和标签之间交互数据方法：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;mm:welcome&gt;</span><br><span class="line">  &lt;jsp:attribute name=<span class="string">&quot;username&quot;</span>&gt;</span><br><span class="line">    $&#123;param.username&#125;</span><br><span class="line">  &lt;/jsp:attribute&gt; </span><br><span class="line">  &lt;jsp:body&gt;</span><br><span class="line">    Welcome to my website.</span><br><span class="line">  &lt;/jsp:body&gt;</span><br><span class="line">&lt;/mm:welcome&gt;</span><br></pre></td></tr></table></figure>
+<p>因为属性username是Fragment类型，就需要\<jsp:attribute>设定；同时，标签若嵌入了\<jsp:attribute>，就要用\<jsp:body>设置标签主体。</p>
+<p>&nbsp;</p>
+<h3 id="2-6-带变量的标签文件"><a href="#2-6-带变量的标签文件" class="headerlink" title="2.6 带变量的标签文件"></a>2.6 带变量的标签文件</h3><p>JSP页面和标签之间交互数据方法：</p>
 <pre><code>1. 共享数据放在特点范围内
 2. 在JSP页面中设置标签的属性，实现JSP向标签的数据传递
 3. 在标签中定义变量，实现标签向JSP页面的数据传递
-</code></pre>
-<p>简单标签文件的variable指令用于定义标签变量。</p>
+</code></pre><p>简单标签文件的variable指令用于定义标签变量。</p>
 <p>本例precode.tag，具有一个code变量</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;%<span class="meta">@attribute</span> name=<span class="string">"preserve"</span> fragment=<span class="string">"true"</span> %&gt; </span><br><span class="line">&lt;%<span class="meta">@variable</span> name-given=<span class="string">"code"</span> scope=<span class="string">"NESTED"</span> %&gt;  </span><br><span class="line"></span><br><span class="line">&lt;jsp:doBody <span class="keyword">var</span>=<span class="string">"code"</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;table border=<span class="string">"1"</span>&gt;&lt;tr&gt;&lt;td&gt;</span><br><span class="line">&lt;pre&gt;&lt;jsp:invoke fragment="preserve"/&gt;&lt;/pre&gt;</span><br><span class="line">&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</span><br></pre></td></tr></table></figure>
-<p>把标签主体的结果存放在code中，&lt;jsp:invoke&gt;执行preserve包含的JSP代码，把结果输出到当前JspWriter中。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;%<span class="meta">@attribute</span> name=<span class="string">&quot;preserve&quot;</span> fragment=<span class="string">&quot;true&quot;</span> %&gt; </span><br><span class="line">&lt;%<span class="meta">@variable</span> name-given=<span class="string">&quot;code&quot;</span> scope=<span class="string">&quot;NESTED&quot;</span> %&gt;  </span><br><span class="line"></span><br><span class="line">&lt;jsp:doBody <span class="keyword">var</span>=<span class="string">&quot;code&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;table border=<span class="string">&quot;1&quot;</span>&gt;&lt;tr&gt;&lt;td&gt;</span><br><span class="line">&lt;pre&gt;&lt;jsp:invoke fragment=<span class="string">&quot;preserve&quot;</span>/&gt;&lt;/pre&gt;</span><br><span class="line">&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; </span><br></pre></td></tr></table></figure>
+<p>把标签主体的结果存放在code中，\<jsp:invoke>执行preserve包含的JSP代码，把结果输出到当前JspWriter中。</p>
 <p>使用标签：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;mm:precode&gt;</span><br><span class="line">&lt;jsp:attribute name=<span class="string">"preserve"</span>&gt;  </span><br><span class="line">  &lt;b&gt;$&#123;code&#125;&lt;/b&gt;    </span><br><span class="line">&lt;/jsp:attribute&gt;  </span><br><span class="line"></span><br><span class="line">&lt;jsp:body&gt;  </span><br><span class="line">  $&#123;fn:toUpperCase(<span class="string">"  Tomcat  "</span>)&#125;</span><br><span class="line">&lt;/jsp:body&gt;  </span><br><span class="line">&lt;/mm:precode&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;mm:precode&gt;</span><br><span class="line">&lt;jsp:attribute name=<span class="string">&quot;preserve&quot;</span>&gt;  </span><br><span class="line">  &lt;b&gt;$&#123;code&#125;&lt;/b&gt;    </span><br><span class="line">&lt;/jsp:attribute&gt;  </span><br><span class="line"></span><br><span class="line">&lt;jsp:body&gt;  </span><br><span class="line">  $&#123;fn:toUpperCase(<span class="string">&quot;  Tomcat  &quot;</span>)&#125;</span><br><span class="line">&lt;/jsp:body&gt;  </span><br><span class="line">&lt;/mm:precode&gt;</span><br></pre></td></tr></table></figure>
 <p>标签doBody，将TOMCAT存入code变量；然后invoke执行preserve属性包含的JSP代码，输出code的值，最终页面输出TOMCAT。</p>
 
         </div>
@@ -450,25 +400,5 @@
 </footer>
 
     </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 </html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>Log4J | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Log4J</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 11, 2021&nbsp;&nbsp;11:44:50</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>&nbsp;</p>
+<span id="more"></span>
+<!-- toc -->
+<p>&nbsp;</p>
+<p>Log4J是Apache的一个开源项目，日志操作软件包。能够制定日志信息输出格式和目的地。通过配置文件灵活配置，不需修改程序代码。</p>
+<p>&nbsp;</p>
+<h1 id="1-Log4J简介"><a href="#1-Log4J简介" class="headerlink" title="1. Log4J简介"></a>1. Log4J简介</h1><ol>
+<li>目的：监视变量变化情况、跟踪代码运行轨迹、调试器</li>
+<li>构成组件：<ol>
+<li>Logger：生成日志，能对日志信息分类筛选</li>
+<li>Appender：输出目的地</li>
+<li>Layout：输出格式</li>
+<li>每个Logger可以对应多个Appender，每个Appender对应一个Layout</li>
+<li>输出到console时用PatternLayout布局；输出到文件时用XMLLayout布局</li>
+</ol>
+</li>
+</ol>
+<h2 id="1-1-Logger组件"><a href="#1-1-Logger组件" class="headerlink" title="1.1 Logger组件"></a>1.1 Logger组件</h2><p>核心组件，日志记录器，对日志信息分类筛选，决定信息是被输出还是被忽略。</p>
+<ol>
+<li><p><code>org.apache.logging.log4j.Logger</code>，提供的方法：</p>
+<ol>
+<li>打印各种级别的日志：大于等于指定级别的日志被输出<ol>
+<li>trace(Object msg)</li>
+<li>debug(Object msg)</li>
+<li>info(Object msg)</li>
+<li>warn(Object msg)</li>
+<li>error(Object msg)</li>
+<li>fatal(Object msg)</li>
+</ol>
+</li>
+<li>打印日志通用方法：<ol>
+<li>log(Level, Object msg)</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p><code>org.apache.logging.log4j.LogManager</code>提供了获得Logger实例的静态方法：</p>
+<ol>
+<li>getRootLogger() 返回根对象</li>
+<li>getLogger(String name) 返回特定对象</li>
+</ol>
+</li>
+<li><p>可以在XML配置文件中配置Logger组件，如下例配置了helloappLogger：</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;helloappLogger&quot;</span> <span class="attr">level</span>=<span class="string">&quot;warn&quot;</span> <span class="attr">additivity</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;console&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Logger</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>继承性：</p>
+<ol>
+<li><p>rootLogger是所有Logger组件的祖先</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Root</span> <span class="attr">level</span>=<span class="string">&quot;info&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;console&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件中即可指定继承关系：本例中childLogger就是helloappLogger的子类</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;helloappLogger.childLogger&quot;</span> <span class="attr">level</span>=<span class="string">&quot;INFO&quot;</span> <span class="attr">additivity</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;console&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Logger</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>继承特点：</p>
+<ol>
+<li>子类没有配置日志级别就继承父类级别</li>
+<li>默认继承父类所有Appender，除非指明additivity为false，默认true</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>&nbsp;</p>
+<h2 id="1-2-Appender组件"><a href="#1-2-Appender组件" class="headerlink" title="1.2 Appender组件"></a>1.2 Appender组件</h2><p>决定日志输出目的地，当前支持以下地址：</p>
+<ul>
+<li>Console 控制台</li>
+<li>File 文件</li>
+<li>Remote socket server 远程套接字服务器</li>
+<li>NT的事件记录器</li>
+<li>Remote UNIX Syslog daemon 远程UNIX Syslog守护进程</li>
+</ul>
+<p>一个Logger可以对应多个Appender：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;helloappLogger&quot;</span> <span class="attr">level</span>=<span class="string">&quot;warn&quot;</span> <span class="attr">additivity</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;console&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;file&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Logger</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<h2 id="1-3-Layout组件"><a href="#1-3-Layout组件" class="headerlink" title="1.3 Layout组件"></a>1.3 Layout组件</h2><p>决定日志输出格式，有以下类型：</p>
+<ul>
+<li>org.apache.log4j.PatternLayout 灵活地指定布局模式</li>
+<li>HTMLLayout 以HTML形式布局</li>
+<li>XMLLayout 以XML形式布局</li>
+<li>SerializedLayout 可序列化的信息</li>
+</ul>
+<p>其中PatternLayout，依照Conversion Pattern转换模式定义输出格式，可以通过预定义符号指定内容和格式：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%r</td>
+<td>自程序开始运行到输出当前日志所消耗的毫秒数</td>
+</tr>
+<tr>
+<td>%t</td>
+<td>输出当前日志的线程名</td>
+</tr>
+<tr>
+<td>%level</td>
+<td>日志级别</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>当前日志的日期和时间</td>
+</tr>
+<tr>
+<td>%logger</td>
+<td>当前日志的Logger的名字</td>
+</tr>
+<tr>
+<td>%msg%n</td>
+<td>日志信息的内容</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>eg：为file的Appender配置PatternLayout布局：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">File</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> <span class="attr">fileName</span>=<span class="string">&quot;app.log&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">File</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<h1 id="2-Log4J基本使用方法"><a href="#2-Log4J基本使用方法" class="headerlink" title="2. Log4J基本使用方法"></a>2. Log4J基本使用方法</h1><h2 id="2-1-创建Log4J配置文件"><a href="#2-1-创建Log4J配置文件" class="headerlink" title="2.1 创建Log4J配置文件"></a>2.1 创建Log4J配置文件</h2><p>支持代码或XML配置。XML配置文件默认名log4j2.xml，默认路径classpath根路径：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Configuration</span> <span class="attr">status</span>=<span class="string">&quot;WARN&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Appenders</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Console</span> <span class="attr">name</span>=<span class="string">&quot;console&quot;</span> <span class="attr">target</span>=<span class="string">&quot;SYSTEM_OUT&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Console</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">File</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> <span class="attr">fileName</span>=<span class="string">&quot;app.log&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">File</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Appenders</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">Loggers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Root</span> <span class="attr">level</span>=<span class="string">&quot;info&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;console&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Root</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;helloappLogger&quot;</span> <span class="attr">level</span>=<span class="string">&quot;warn&quot;</span> <span class="attr">additivity</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;console&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;file&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Logger</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;helloappLogger.childLogger&quot;</span> <span class="attr">level</span>=<span class="string">&quot;INFO&quot;</span> <span class="attr">additivity</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">    		<span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;console&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Logger</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Loggers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+<h2 id="2-2-程序中使用Log4J"><a href="#2-2-程序中使用Log4J" class="headerlink" title="2.2 程序中使用Log4J"></a>2.2 程序中使用Log4J</h2><p><a target="_blank" rel="noopener" href="https://logging.apache.org/log4j">JAR下载地址</a> 主要是core和api两个包。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Logger rootLogger = LoggerManager.getRootLogger();</span><br><span class="line">Logger helloappLogger = LoggerManager.getLogger(<span class="string">&quot;helloappLogger&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> childLogger = LoggerManager.getLogger(<span class="string">&quot;helloappLogger.childLogger&quot;</span>);</span><br><span class="line">helloappLogger.warn(<span class="string">&quot;xxx&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>若不存在指定名字的Logger，则创建并返回，所有属性继承父类。</p>
+<p>若不存在配置文件，则均采用默认配置：WARN、console、SYSTEM_OUT、<code>%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n</code> 。</p>
+<p>&nbsp;</p>
+<h1 id="3-在Web应用中使用Log4J"><a href="#3-在Web应用中使用Log4J" class="headerlink" title="3. 在Web应用中使用Log4J"></a>3. 在Web应用中使用Log4J</h1><p>加入JAR包、在WEB-INF/classes下创建配置文件后即可在组件中使用。</p>
+<p>若将配置文件放在其他位置，还需在web.xml中通过<code>&lt;context-param&gt;</code>配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>log4jConfiguration<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>/WEB-INF/conf/log4j2.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>JSP使用时先引入包 <code>&lt;%@ page import=&quot;org.apache.logging.log4j.*&quot; %&gt;</code>，随后就可在<code>&lt;% ... %&gt;</code>中取得Logger对象输出日志。</p>
+<p>&nbsp;</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%90%8E%E7%AB%AF/"># 后端</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/05/22/%E6%AF%95%E8%AE%BE%E6%80%BB%E7%BB%93/">毕设总结</a>
+            
+            
+            <a class="next" rel="next" href="/2021/04/06/SpringMVC-2-%E6%B7%B1%E5%85%A5%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91/">SpringMVC-2-深入组件开发</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

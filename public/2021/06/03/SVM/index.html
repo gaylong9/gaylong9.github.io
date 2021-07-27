@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="gaylong9">
+
+
+
+    <meta name="description" content="年更博客 自娱自乐">
+
+
+
+<title>SVM | gaylong9`s blog</title>
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <!-- src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"> -->
+        
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">gaylong9&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">gaylong9&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">SVM</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">gaylong9</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 03, 2021&nbsp;&nbsp;10:16:57</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>&nbsp;</p>
+<span id="more"></span>
+<!-- toc -->
+<p>&nbsp;</p>
+<p>支持向量机（Support Vector Machine, SVM），监督学习 </p>
+<p>&nbsp;</p>
+<h1 id="1-线性可分"><a href="#1-线性可分" class="headerlink" title="1. 线性可分"></a>1. 线性可分</h1><ol>
+<li>线性可分（Linear Separable）与线性不可分（Nonlinear Separable）：特征空间中，分类能否用直线（二维特征空间）/平面（三维特征空间）/超平面（高维特征空间）完成</li>
+<li>线性可分的数学论证（二维空间中）：如有$N$个样本与其标签$\{(X_1,y_1),(X_2,y_2),…,(X_N,y_N)\}$，其中$X_i=[x_{i1}, x_{i2}]^T, y_i=\{+1, -1\}$，若存在$(\omega_1,\omega_2,b)$，有：若$y_i=+1$，则$\omega_1x_{i1}+\omega_2x_{i2}+b&gt;0$，若$y_i=-1$，则$\omega_1x_{i1}+\omega_2x_{i2}+b&lt;0$</li>
+<li>向量形式：若有$X_i=[x_{i1} \ x_{i2}]^T \quad \omega=[\omega_1 \ \omega_2]^T$，对于样本集，线性可分为 $y_i(\omega^T X_i+b)&gt;0$，其中的$\omega,b$可看作超平面的法向量和截距，且法向量指向一侧为正类，另一侧为负类</li>
+<li>若数据集线性可分，则有无数个超平面也可分</li>
+</ol>
+<p>&nbsp;</p>
+<h1 id="2-基础定义"><a href="#2-基础定义" class="headerlink" title="2. 基础定义"></a>2. 基础定义</h1><p>既然线性可分时，有无数超平面可分，那么哪个超平面更好呢？</p>
+<p>如二分类中，对于一个超平面，将其向两侧平移，至与样本相接。这些与平移后超平面相接触的样本称为<strong>支持向量</strong>，两超平面距离称为<strong>间隔</strong>。<strong>最优的分割超平面，即是间隔最大 且 处于间隔正中间的超平面。</strong></p>
+<p>大间隔的好处：更好的容错能力。</p>
+<p>&nbsp;</p>
+<h1 id="3-转为最优化问题"><a href="#3-转为最优化问题" class="headerlink" title="3. 转为最优化问题"></a>3. 转为最优化问题</h1><p>已知：样本与其标签$\{(X_i,y_i)\}, i=1\sim N$；</p>
+<p>待求：$(\omega, \ b)$；</p>
+<p>最小化：$\frac{1}{2}||\omega||^{2} = \frac{1}{2}\sum\limits^{m}_{i=1} \omega_i^{2}$ （m是$\omega$的维度，即特征空间的维度）；</p>
+<p>限制条件：$y_i(\omega^T X_i+b) \geq 1,(i=1\sim N)$ ，即有N个样本，N个限制条件。</p>
+<h2 id="3-1-推导"><a href="#3-1-推导" class="headerlink" title="3.1 推导"></a>3.1 推导</h2><p>点$X_0$到超平面$\omega^T x+b=0$的距离公式为$d=\frac{|\omega^T X_0+b|}{||\omega||}$；故间隔$r=2\frac{|\omega^Tx_0+b|}{||\omega||}$，其中$x_0$为支持向量，即最终要求</p>
+<script type="math/tex; mode=display">
+\max_{(\omega,b)} \ 2\frac{|\omega^Tx_0+b|}{||\omega||} \\\\
+限制条件 \ y_i(\omega^T x_i+b)>0</script><p>含义为分类正确的情况下，使间隔最大的$\omega,b$，其中$x_i$代表任意向量（数据点）。</p>
+<p>另有$\omega^{T} x+b=0$与$a\omega^T x+ab=0(a\neq0)$表示同一超平面，即同一个向量（点）带入这两个超平面式子后，结果不同，同比放缩$a$倍。这说明对于支持向量$x_0$，$|\omega^T x_0+b|$的值是随着$\omega,b$的变化而变化的，且$\omega,b$的变化不影响其代表的超平面，所以就可以令$|\omega^T x_0+b|=1$。此时上式变为</p>
+<script type="math/tex; mode=display">
+\max_{(\omega,b)} \ \frac{2}{||\omega||} = \min_{(\omega,b)}||\omega||  = 
+\min_{(\omega,b)}\frac{1}{2}||\omega||^2 
+\\\\
+限制条件 \ y_i(\omega^T x_i+b)
+= |\omega^T x_i+b| \geq 1</script><p>&nbsp;</p>
+<h2 id="3-2-二次规划问题"><a href="#3-2-二次规划问题" class="headerlink" title="3.2 二次规划问题"></a>3.2 二次规划问题</h2><p>属于凸优化问题中的二次规划问题。</p>
+<p>二次规划具有以下特点：</p>
+<ol>
+<li>目标函数是二次项</li>
+<li>限制条件是一次项</li>
+</ol>
+<p>凸优化问题要么无解，要么只有唯一解。</p>
+<p>&nbsp;</p>
+<h1 id="4-线性不可分情况"><a href="#4-线性不可分情况" class="headerlink" title="4. 线性不可分情况"></a>4. 线性不可分情况</h1><h2 id="4-1-简单提升"><a href="#4-1-简单提升" class="headerlink" title="4.1 简单提升"></a>4.1 简单提升</h2><p>在原N个限制条件下无解，可放松限制条件，变为$y_i(\omega^T x_i+b) \geq 1-\delta_i$，其中$\delta_i$称为松弛变量。</p>
+<p>同时松弛变量不应过大，即不能过于宽松，应寻找松弛变量为正，且松弛变量最小的情况，故最终优化问题变为：</p>
+<script type="math/tex; mode=display">
+\min_{(\omega,b)}(\frac{1}{2}||\omega||^2 + C\sum_{i=1}^{N}\delta_i)
+\\\\
+限制条件 \ y_i(\omega^T x_i+b) \geq 1 - \delta_i \ (i=1\sim N) 且
+\delta_i \geq 0</script><p>其中$C$是为了平衡最小化式子中的二者，人为设置，超参数。此处可设置较高，以迫使松弛变量尽量小。</p>
+<p>最小化式子中也可使用$\delta_i^2$。</p>
+<p>仍属于凸优化问题。</p>
+<p>&nbsp;</p>
+<h2 id="4-2-核函数"><a href="#4-2-核函数" class="headerlink" title="4.2 核函数"></a>4.2 核函数</h2><h3 id="4-2-1-背景"><a href="#4-2-1-背景" class="headerlink" title="4.2.1 背景"></a>4.2.1 背景</h3><p>当数据情况更复杂时，简单的线性函数分类已无法满足需要。</p>
+<p>不同于其他方法常用的直接生成非线性函数，<strong>SVM将特征空间由底维映射到高维，随后在高位空间中继续用线性超平面分类。</strong></p>
+<p>原理：$M$维空间$N$个样本随机打标签正负1，有$M$趋向无穷时，线性可分概率趋向1。直观看待，维度上升，目标数据$\omega,b$的维度上升，算法模型的自由度上升，自然概率更大。</p>
+<p>例子：异或，在二维空间中，$x_1=(0,0),x_2=(1,1)$为-1类，$x_3=(1,0),x_4=(0,1)$为1类，线性不可分；当采用$\phi(x)=\phi([a,b]^T )=[a^2 ,b^2 ,a,b,ab]^T $映射至五维空间后，则存在$\omega=[-1,-1,-1,-1,6]^T,b=1$解可将升维后的数据分开。</p>
+<p>引入映射函数后，最优化问题变为：</p>
+<script type="math/tex; mode=display">
+\min_{(\omega,b)}(\frac{1}{2}||\omega||^2 + C\sum_{i=1}^{N}\delta_i)
+\\\\
+限制条件 \ y_i[\omega^T \phi(x_i)+b] \geq 1 - \delta_i \ (i=1\sim N) 且
+\delta_i \geq 0</script><p>自然，式(4)中$\omega$的维度与$\phi(x_i)$的维度相同。</p>
+<p>&nbsp;</p>
+<h3 id="4-2-2-核函数"><a href="#4-2-2-核函数" class="headerlink" title="4.2.2 核函数"></a>4.2.2 核函数</h3><p>$\phi(x)$的具体形式不需确定，若有$K(x_1,x_2)=\phi(x_1)^T\phi(x_2)$，我们仍可知道测试样本类别信息。这里的$K(x_1,x_2)$称为核函数，结果是一个实数。</p>
+<p>核函数$K$和映射函数$\phi$一一对应的充要条件：</p>
+<ol>
+<li>$K(x_1,x_2)=K(x_2,x_1)$ （可交换性）</li>
+<li>$\forall C_i(i=1\sim N),\forall N$有$\sum_{i=1}^{N} \sum_{j=1}^{N} C_iC_jK(X_i,X_j)\geq0$ （半正定性）</li>
+</ol>
+<p>&nbsp;</p>
+<h1 id="5-对偶问题"><a href="#5-对偶问题" class="headerlink" title="5. 对偶问题"></a>5. 对偶问题</h1><h2 id="5-1-定义"><a href="#5-1-定义" class="headerlink" title="5.1 定义"></a>5.1 定义</h2><p>若有原问题：</p>
+<script type="math/tex; mode=display">
+\min f(\omega) \\\\
+\begin{aligned}
+s.t. g_i(\omega) &\le 0 \quad i=1\sim K \\\\
+h_i(\omega) &= 0 \quad i=1\sim M)
+\end{aligned}</script><p>定义一个拉格朗日函数：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\omega,\alpha,\beta) &= f(\omega) + \sum_{i=1}^{K} \alpha_ig_i(\omega)+\sum_{i=1}^{M} \beta_ih_i(\omega) \\\\
+&= f(\omega)+\alpha^T g(\omega)+\beta^T h(\omega) \\\\
+其中 \alpha &= [\alpha_1,...,\alpha_K]^T \\\\
+\beta &= [\beta_1,...,\beta_M]^T \\\\
+g(\omega) &= [g_1(\omega),...,g_K(\omega)]^T \\\\
+h(\omega) &= [h_1(\omega),...,h_M(\omega)]^T \\\\
+\end{aligned}</script><p>则其<strong>对偶问题</strong>为：</p>
+<script type="math/tex; mode=display">
+\max \ \theta(\alpha,\beta) \\\\
+其中\theta(\alpha,\beta) = \min \ L(\omega, \alpha, \beta) \ in\ 定义域内的所有\omega \\\\
+s.t. \ \alpha_i \ge 0, i=1\sim K</script><p>可得到定理：若$\omega^{\ast} $是原问题的解，$(\alpha^{\ast} ,\beta^{\ast} )$是对偶问题的解，则有$f(\omega^{\ast} )\ge \theta(\alpha^{\ast} ,\beta^{\ast} )$。</p>
+<p>证明：（最后一步由原问题与对偶问题的限制条件得到）</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\theta(\alpha^\ast ,\beta^\ast ) &= \inf \ L(\omega, \alpha^\ast ,\beta^\ast ) \\\\
+ &\le L(\omega^\ast , \alpha^\ast ,\beta^\ast )\\\\
+ &= f(\omega^\ast )+\alpha^{\ast T} g(\omega^\ast  )+\beta^{\ast  T} h(\omega^\ast ) \\\\
+ &\le f(\omega^\ast )
+\end{aligned}</script><p>即，原问题的解总是大于等于对偶问题的解。将差值$f(\omega^{\ast} )-\theta(\alpha^{\ast} ,\beta^{\ast} )$称为对偶差距。由<strong>强对偶定理</strong>（原函数的目标函数是凸函数，限制条件是线性函数，则其对偶差距为零）和以上证明最后一步，可得到<strong>KKT条件</strong>：对于所有$i=1\sim K$，要么$\alpha_i=0$，要么$g_i(\omega^{*})=0$。</p>
+<p>&nbsp;</p>
+<h2 id="5-2-SVM转化为对偶问题"><a href="#5-2-SVM转化为对偶问题" class="headerlink" title="5.2 SVM转化为对偶问题"></a>5.2 SVM转化为对偶问题</h2><p>限制条件中的松弛变量取相反数，改为$\delta_i\le0 \ (i=1\sim N)$，故最小化式子变为$\min (\frac{1}{2}||\omega||^2 -C\sum_{i=1}^{N} \delta_i)$，另一个限制条件变为$y_i[\omega^T \phi(x_i)+b] \geq 1 + \delta_i$。</p>
+<p>综上，SVM整理至满足原问题形式：</p>
+<script type="math/tex; mode=display">
+\min (\frac{1}{2}||\omega||^2 -C\sum_{i=1}^{N} \delta_i) 或 (\frac{1}{2}||\omega||^2 +C\sum_{i=1}^{N} \delta_i^2 ) \\\\
+s.t. \ \delta_i\le 0 \\\\
+1+\delta_i-y_i\omega^T \phi(x_i)-y_ib \le 0 \ (i=1\sim N)</script><p>至此，求解函数为凸，限制条件为线性，故满足强对偶定理，可通过求解对偶问题来求解原问题。</p>
+<p>另需注意，上节原问题一般形式中所求参数用$\omega$表示，本节SVM中所求参数为$(\omega,b,\delta)$，即此三参数的组合对应一般形式中的$\omega$；且限制条件中，无$h(\omega)$，此处两类限制条件共同组成$g(\omega)$。</p>
+<p>以下给出对偶问题形式：因$g(\omega)$由两部分组成，故还是引入了$\beta_i$，应与一般形式中的$\beta_i$区分。</p>
+<script type="math/tex; mode=display">
+\max \theta(\alpha,\beta)=\inf_{（\omega,\delta,b）}\{\frac{1}{2}||\omega||^2 -C\sum_{i=1}^{N} \delta_i+\sum_{i=1}^{N} \beta_i\delta_i+\sum_{i=1}^{N} \alpha_i[1+\delta_i-y_i\omega^T \phi(x_i)-y_ib] \} \\\\
+s.t. \ \alpha_i\ge0, \ \beta_i\ge0</script><p>对偶问题是拉格朗日函数的极值问题，偏导置零，得到：（$\omega$使用向量求导规则，其余两式使用常规自变量求导规则）</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial \theta}{\partial \omega}=\omega-\sum_{i=1}^{N}\alpha_iy_i\phi(x_i) = 0 &\rightarrow \omega=\sum_{i=1}^{N}\alpha_iy_i\phi(x_i) \\\\
+\frac{\partial \theta}{\partial \delta_i}=-C+\alpha_i+\beta_i = 0 &\rightarrow \alpha_i+\beta_i=C \\\\
+\frac{\partial \theta}{\partial b}=-\sum_{i=1}^{N}\alpha_iy_i = 0 &\rightarrow \sum_{i=1}^{N}\alpha_iy_i = 0
+\end{aligned}</script><p>代回上式，得到最终对偶形式：（TODO：此处$\omega$的代入不懂）</p>
+<script type="math/tex; mode=display">
+\max \theta(\alpha)=\sum_{i=1}^{N} \alpha_i-\frac{1}{2}\sum_{i=1}^{N} \sum_{j=1}^{N} y_iy_j\alpha_i\alpha_j\phi(x_i)^T \phi(x_j) \\\\
+= \sum_{i=1}^{N} \alpha_i-\frac{1}{2}\sum_{i=1}^{N} \sum_{j=1}^{N} y_iy_j\alpha_i\alpha_jK(x_i,x_j) \\\\
+s.t. 0\le\alpha_i\le C \\\\
+\sum_{i=1}^{N}\alpha_iy_i=0</script><p>&nbsp;</p>
+<h1 id="6-流程"><a href="#6-流程" class="headerlink" title="6. 流程"></a>6. 流程</h1><h2 id="6-1-求-alpha"><a href="#6-1-求-alpha" class="headerlink" title="6.1 求$\alpha$"></a>6.1 求$\alpha$</h2><p>如最终对偶形式，确定核函数后，该对偶问题是一个二次规划问题，不需遍历之类，可以用二次规划、最优化方法求解。利用数据$\{(x_i,y_i)\}i=1\sim N,y_i=\pm1$，求解最终对偶形式式子，得到结果$\alpha$。</p>
+<p>可利用$\omega=\sum_{i=1}^{N} \alpha_iy_i\phi(x_i)$求出$\omega$，这里需强调，$\phi(x)$和$\omega$不一定有显式表达。不过不需$\omega$，就可算出$\omega^T x+b$的值。</p>
+<p>&nbsp;</p>
+<h2 id="6-2-求b"><a href="#6-2-求b" class="headerlink" title="6.2 求b"></a>6.2 求b</h2><script type="math/tex; mode=display">
+\omega=\sum_{j=1}^{N} \alpha_jy_j\phi(x_j) \\\\
+\omega^T \phi(x_i)=\sum_{j=1}^{N} \alpha_jy_j\phi(x_j)^T \phi(x_i) \\\\
+=\sum_{j=1}^{N} \alpha_jy_jK(x_j,x_i)</script><p>另由强对偶定理（KKT？）可知，</p>
+<script type="math/tex; mode=display">
+\alpha_i[1+\delta_i-y_i\omega^T \phi(x_i)-y_ib]=0\\\\
+\beta_i\delta_i=0 \rightarrow (C-\alpha_i)\delta_i=0</script><p>故若$\alpha_i\ne0$且$\alpha_i\ne C$，则必有</p>
+<script type="math/tex; mode=display">
+\delta_i=0 \\\\
+1+\delta_i-y_i\omega^T\phi(x_i)-y_ib=0</script><p>故对任一$0&lt;\alpha_i&lt;C$，可算出b：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+b&=\frac{1+\delta_i-y_i\omega^T \phi(x_i)}{y_i} \\\\
+&=\frac{1+0-\sum_{j=1}^{N} \alpha_jy_iy_jK(x_j,x_i)}{y_i}\\\\
+&=\frac{1-\sum_{j=1}^{N} \alpha_jy_iy_jK(x_j,x_i)}{y_i}
+\end{aligned}</script><p>&nbsp;</p>
+<h2 id="6-3-预测"><a href="#6-3-预测" class="headerlink" title="6.3 预测"></a>6.3 预测</h2><script type="math/tex; mode=display">
+\begin{aligned}
+\omega^T \phi(x)+b 
+&=\sum_{j=1}^{N} \alpha_jy_j\phi(x_j)^T \phi(x)+b \\\\
+&=\sum_{j=1}^{N} \alpha_jy_jK(x_j,x)+b
+\end{aligned}</script><p>根据上式正负号，可将其分类为正负类。</p>
+<p>不知道$\phi(x)$，也可利用核函数求出结果，称为核函数技巧。</p>
+<p>&nbsp;</p>
+<h1 id="7-核函数"><a href="#7-核函数" class="headerlink" title="7. 核函数"></a>7. 核函数</h1><h2 id="7-1-Linear-线性内核"><a href="#7-1-Linear-线性内核" class="headerlink" title="7.1 Linear 线性内核"></a>7.1 Linear 线性内核</h2><p>$K(x,y)=x^T y$</p>
+<p>不具有实用意义，因使用线性核函数与不使用的结果一致。（无法升维？）</p>
+<p>&nbsp;</p>
+<h2 id="7-2-Ploy-多项式核"><a href="#7-2-Ploy-多项式核" class="headerlink" title="7.2 Ploy 多项式核"></a>7.2 Ploy 多项式核</h2><p>$K(x,y)=(x^T y+1)^d$</p>
+<p>复杂度可调节，$d$越大，升维越高。</p>
+<p>&nbsp;</p>
+<h2 id="7-3-Rbf-高斯径向基函数和"><a href="#7-3-Rbf-高斯径向基函数和" class="headerlink" title="7.3 Rbf 高斯径向基函数和"></a>7.3 Rbf 高斯径向基函数和</h2><p>$K(x,y)=e^{-\frac{||x-y||^2 }{\sigma^2 }} $</p>
+<p>$\sigma$超参数，其对应的升维函数$\phi(x)$维度无限。高斯函数具有诸多优秀性质，故本核函数使用最多。</p>
+<p>&nbsp;</p>
+<h2 id="7-4-Tanh-sigmoid核"><a href="#7-4-Tanh-sigmoid核" class="headerlink" title="7.4 Tanh sigmoid核"></a>7.4 Tanh sigmoid核</h2><p>$K(x,y)=tanh(\beta x^T y+b),\ tanh(x)=\frac{e^x -e^{-x} }{e^x +e^{-x} }$</p>
+<p>其对应的升维函数$\phi(x)$维度无限。</p>
+<p>&nbsp;</p>
+<h1 id="8-兵王问题"><a href="#8-兵王问题" class="headerlink" title="8. 兵王问题"></a>8. 兵王问题</h1><p>用libsvm和<a target="_blank" rel="noopener" href="https://archive.ics.uci.edu/ml/datasets/Chess+(King-Rook+vs.+King">uci的krk数据集</a>)完成兵王问题的分类。代码发在了<a target="_blank" rel="noopener" href="https://github.com/gaylong9/AILearningProjects">Github</a>。</p>
+<h2 id="8-1-介绍"><a href="#8-1-介绍" class="headerlink" title="8.1 介绍"></a>8.1 介绍</h2><p>残局下，白方一个王，一个兵，黑方仅一个王。在不告知计算机象棋规则的情况下，令其判断是白胜还是逼和（黑方的所有落子点都会被吃）。</p>
+<p>数据集中有28056组数据，正样本（和棋）有2796组，负样本（白胜）有25260组。</p>
+<p>&nbsp;</p>
+<h2 id="8-2-实际问题中的流程"><a href="#8-2-实际问题中的流程" class="headerlink" title="8.2 实际问题中的流程"></a>8.2 实际问题中的流程</h2><ol>
+<li>数据预处理：取部分样本用于训练，其余样本用于测试，此处取5000样本训练</li>
+<li>训练样本归一化：训练样本上，求出每个维度的均值和方差；在训练和测试样本上同时归一化；$newX=\frac{X-mean(X)}{std(X)}$；训练样本归一化能使输入特征各维度限定在一个固定范围内，减少不同维度的动态范围不同导致的训练误差</li>
+<li>设置参数：<ol>
+<li>-s：SVM的不同形式，兵王问题是典型二分类，<code>-s 0</code>默认即可</li>
+<li>-t：核函数，<code>0123</code>对应上述四种核函数；<code>4</code>是自定义核：SVM中是利用核函数算出所有$K(x_i,x_j)$的值，随后代入式子求解，自定义核即手动输入$K(x_i,x_j)$值的矩阵</li>
+<li>-c：原问题中参数<code>C</code>，可在$2^{-5}\sim 2^{15}$内搜索</li>
+<li>-g：gamma值，对应核函数中不同超参数的值，可在$2^{-15}\sim 2^3$范围内搜索。具体核函数形式以及gamma可在libsvm中-t部分查看</li>
+<li>-v：交叉验证折数</li>
+</ol>
+</li>
+<li>指定<code>C</code>和<code>Gamma</code>的搜索范围，随后交叉验证找出最佳的<code>C</code>和<code>Gamma</code></li>
+<li>用最佳的<code>C</code>和<code>Gamma</code>，和完整5000个训练样本，训练最终模型</li>
+<li>测试</li>
+</ol>
+<p>&nbsp;</p>
+<h1 id="9-交叉验证"><a href="#9-交叉验证" class="headerlink" title="9. 交叉验证"></a>9. 交叉验证</h1><p>如五折交叉验证，将训练数据分为ABCDE五组，轮流四组训练一组评估，将五次评估正确率平均，得到最终正确率。</p>
+<p>能够在数据量一定的前提下，用更多的数据训练和验证。</p>
+<p>若折数极大，达到最极端的每次仅一个数据评估，就是留一法。在数据量极少时采用此法。</p>
+<p>&nbsp;</p>
+<h1 id="10-性能度量"><a href="#10-性能度量" class="headerlink" title="10. 性能度量"></a>10. 性能度量</h1><p>在不知道先验分布的情况下，单纯用正确率判断系统好坏是没有意义的。</p>
+<p>如罕见疾病发病率极低，系统即使全部判为不患病，也能拥有极高的正确率。</p>
+<p>引入混淆矩阵概念：</p>
+<ul>
+<li>True Positive（TP）：正样本预测为正的数量或概率</li>
+<li>False Negative（FN）：正样本预测为负的数量或概率</li>
+<li>False Positive（FP）：负样本预测为正的数量或概率</li>
+<li>True Negative（TN）：负样本预测为负的数量或概率</li>
+</ul>
+<p>正确率 $ACC=\frac{TP+TN}{TP+FN+FP+TN}$</p>
+<p>概率形式下，是以实际正负做归一化，使$TP+FN=1,FP+TN=1$。另有重要性质：若$TP$增加，则$FP$也会增加。故有$FN\downarrow \iff TP\uparrow\iff FP\uparrow \iff TN\downarrow $。</p>
+<p>ROC曲线：$FP$为横坐标，$TP$为纵坐标。</p>
+<p>绘制ROC：对每个测试样本计算判别式$\omega^T\phi(x)+b$的值，并升序排列；把每个值当作分类时的阈值（判别值&gt;阈值则为正样本），计算此时的TP和FP，保存下来，连成曲线。</p>
+<p>越靠近左上的曲线，性能越好。故有以下性能标准：</p>
+<ul>
+<li>AUC（Area Under Curve）：曲线与横轴包围面积，越大越好，代表一个概率值，当随机挑选一个正样本以及一个负样本，当前的分类算法根据计算得到的Score值将这个正样本排在负样本前面的（判别值更高？）概率就是AUC值</li>
+<li>EER（Equal Error Rate）等错误率：连接<code>(0,1)</code>和<code>(1,0)</code>两点，交ROC曲线于一点，交点横坐标即为EER，此处$FP=FN$。越低越好</li>
+</ul>
+<p>&nbsp;</p>
+<h1 id="11-多分类问题"><a href="#11-多分类问题" class="headerlink" title="11. 多分类问题"></a>11. 多分类问题</h1><ol>
+<li>1类对k-1类<ol>
+<li>若有K类，则构造K个SVM，SVM1判断类1或非类1、SVM2判断类2或非类2、…、SVMK判断类K或非类K。最终得到${\alpha_{i}^{(k)} }_{i=1\sim N}, b^{(k) } ,k=1\sim K$，K组$\alpha,b$。类别判断时$k_{max}=argmax \sum_{i=1}^{N} \alpha_i^{(k)} y_iK(X_i,X)+b^{(k)} ,k=1\sim K$，即找到间隔最大的分类</li>
+<li>问题：样本不平衡，正样本仅一类，负样本K-1类，使模型倾向于负类</li>
+</ol>
+</li>
+<li>1类对另一类<ol>
+<li>若3类，构造3个SVM，分别是类1vs类2、类1vs类3、类2vs类3。对于测试样本，分别输入各个SVM，得到3个标签，最后用标签投票</li>
+<li>平票：使用各自分数$\sum_{i=1}^{N}\alpha_iy_iK(X_i,X)+b$，如SVM1（类1vs类2）得分0.5，代表该SVM对类1分数0.5，对类2分数-0.5</li>
+<li>解决了训练样本不平衡问题，但要训练$K(K-1)/2$个模型，耗时</li>
+</ol>
+</li>
+<li>树状分类<ol>
+<li>如8分类，只需7个分类器：1234vs5678、12vs34、56vs78、1vs2、3vs4、5vs6、7vs8</li>
+<li>但需要每个分类器区分的两类差别是显著的（如1234vs5678，要求1234和5678两大类有足够的差别）；聚类（决策树）可协助完成大分类</li>
+</ol>
+</li>
+</ol>
+<p>&nbsp;</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/AI/"># AI</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/06/09/Redis-1-%E5%9F%BA%E7%A1%80/">Redis_1.基础</a>
+            
+            
+            <a class="next" rel="next" href="/2021/06/03/ML%E6%A6%82%E8%BF%B0/">ML概述</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© gaylong9 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
